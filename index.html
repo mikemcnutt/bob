@@ -2494,11 +2494,20 @@ empower business success. </p>
     </div>
 
 <script>
-document.addEventListener("scroll", () => {
-    const scrollPosition = window.scrollY;
-    document.body.style.backgroundPosition = `center ${-scrollPosition / 2}px`;
-});
+document.addEventListener("DOMContentLoaded", () => {
+    const applyParallax = (element) => {
+        document.addEventListener("scroll", () => {
+            const scrollPosition = window.scrollY;
+            element.style.backgroundPosition = `center ${scrollPosition * -0.5}px`;
+        });
+    };
 
+    const page1 = document.getElementById("home");
+    const page2 = document.getElementById("agenda");
+   
+    if (page1) applyParallax(page1);
+    if (page2) applyParallax(page2);
+ });
 </script>
 
 	<script>
