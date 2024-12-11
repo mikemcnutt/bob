@@ -27,7 +27,14 @@
             height: 100%;
             box-sizing: border-box;
         }
+body {
+    overflow: auto;
+    scrollbar-width: none; 
+}
 
+body::-webkit-scrollbar {
+    display: none; 
+}
         #navbar {
             position: fixed;
             top: 0;
