@@ -2493,7 +2493,13 @@ empower business success. </p>
         </div>
     </div>
 
+<script>
+document.addEventListener("scroll", () => {
+    const scrollPosition = window.scrollY;
+    document.body.style.backgroundPosition = `center ${-scrollPosition / 2}px`;
+});
 
+</script>
 
 	<script>
 document.addEventListener("DOMContentLoaded", () => {
