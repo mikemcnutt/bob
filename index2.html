@@ -658,7 +658,7 @@ body::-webkit-scrollbar {
   font: 18px/60px sans-serif;
   text-align: center;
   text-transform: uppercase;
-  background: #0054b4;
+  background: #0d0a0b;
   
   -webkit-animation: main 250ms;
   -moz-animation: main 250ms;
@@ -676,7 +676,7 @@ body::-webkit-scrollbar {
   bottom: -20px;
   z-index: -1;
   border: 20px solid transparent;
-  border-right-color: #0054b4;
+  border-right-color: #0d0a0b;
   
   -webkit-animation: edge 500ms;
   -moz-animation: edge 500ms;
@@ -688,7 +688,7 @@ body::-webkit-scrollbar {
   left: auto;
   right: -20px;
   border-right-color: transparent;
-  border-left-color: #0054b4;
+  border-left-color: #0d0a0b;
 }
 
 .sponsorribbonlarge i:nth-child(3), .sponsorribbonlarge i:last-child {
@@ -696,7 +696,7 @@ body::-webkit-scrollbar {
   bottom: -20px;
   left: -40px;
   z-index: -2;
-  border: 30px solid #0054b4;
+  border: 30px solid #0d0a0b;
   border-left-color: transparent;
   
   -webkit-animation: back 600ms;
@@ -1340,105 +1340,7 @@ body::-webkit-scrollbar {
     vertical-align: middle;
     margin-top: -5px; 
 }
-@media (max-width: 420px) {
-    body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin: 0;
-        width: 100%;
-    }
 
-    #speakers {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-        width: 100%;
-    }
- #speakers .contentleft {
-        position: relative;
-        height: 300px;
-        width: 59%;
-        left: 20%; 
-        padding: 20px 40px 20px 40px;
-        opacity: 0;
-        transition: 0.5s;
-        visibility: hidden;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-    }
-
-    #speakers .cardleft:hover .contentleft {
-        transition-delay: 0.5s;
-        opacity: 1;
-        visibility: visible;
-        left: 0%; 
-        overflow-y: scroll;
-        scroll-snap-type: y mandatory;
-        scroll-snap-align: center;
-        overflow-x: hidden;
-        text-align: left;
-        z-index: 500;
-		width:100%;
-    }
-   #speakers .card, .cardleft, .cardright {
-        width: 85%;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: relative;
-        overflow: hidden;
-        transition: height 0.5s ease;
-    }
-
-  #speakers  .card:hover, .cardleft:hover, .cardright:hover {
-        height: calc(350px + 300px);
-    }
-
- #speakers   .card img, .cardleft img, .cardright img {
-        width: 100%;
-        height: auto;
-        bottom: 0;
-        left: 0; 
-        transform: none; 
-        z-index: 2;
-        transition: transform 0.5s ease;
-    }
-
-  #speakers  .cardleft:hover img, .cardright:hover img {
-     width: 100%;
-        height: auto;
-        left: 0; 
-		        position: absolute;
-        bottom: 0;
-    }
-
-  #speakers  .content, .contentleft, .contentright {
-        width: 100%;
-        text-align: center;
-        padding: 20px;
-        box-sizing: border-box;
-        z-index: 1;
-    }
-
-  #speakers  .contentleft {
-        margin: 0 auto;
-    }
-
-  #speakers  .card-description {
-        text-align: center;
-        margin-top: 10px;
-    }
-
-  #speakers  .header-row {
-        text-align: center;
-        margin: 20px 0;
-        font-size: 1.2em;
-    }
-}
 	    
 .career-fair-section {
     width: 100%;
