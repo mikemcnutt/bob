@@ -7,6 +7,7 @@
 	<style>
 	     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
+
 .header-row {
     width: 100%;
     text-align: center;
@@ -70,55 +71,160 @@
 	display: inline-block;
 	text-decoration: none;
 }
-.cardright {
-    border-radius: 20px;
-    border: 5px solid black;
-    position: relative;
-    width: 500px;
-    height: 350px;
-    background: linear-gradient(45deg, #009fc2, #0d0a0b);
-    transition: 0.5s;
-}
+        .cardright {
+            border-radius: 20px;
+			border: 5px solid black;
+            position: relative;
+            width: 500px;
+            height: 350px;
+            background: linear-gradient(45deg, #009fc2, #0d0a0b);
+            transition: 0.5s;
+        }
 
-.cardright img {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 350px;
-    transition: 0.5s;
-}
+        .cardright img {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 350px;
+            transition: 0.5s;
+            }
 
-.cardright:hover img {
-    left: 83%;
-    height: 400px;
-}
+        .cardright:hover img {
+            left: 83%;
+            height: 400px;
+        }
 
-.cardleft {
-    border-radius: 20px;
-    border: 5px solid black;
-    position: relative;
-    width: 500px;
-    height: 350px;
-    background: linear-gradient(45deg, #009fc2, #0d0a0b);
-    transition: 0.5s;
-}
+        .cardleft {
+            border-radius: 20px;
+	        border: 5px solid black;
+            position: relative;
+            width: 500px;
+            height: 350px;
+           background: linear-gradient(45deg, #009fc2, #0d0a0b);
+            transition: 0.5s;
+        }
 
-.cardleft img {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 350px;
-    transition: 0.5s;
-}
+        .cardleft img {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 350px;
+            transition: 0.5s;
+            }
 
-.cardleft:hover img {
-    left: 17%;
-    height: 400px;
-}
+        .cardleft:hover img {
+            left: 17%;
+            height: 400px;
+        }
 
+   #speakers    .contentleft {
+            position: relative;
+            height: 300px;
+            width: 59%;
+            left: 60%;
+			color:white;
+			font-size:.8em;
+            padding: 20px 40px 20px 40px;
+            opacity: 0;
+            transition: 0.5s;
+            visibility: hidden;
+			scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+
+     #speakers    .cardleft:hover .contentleft {
+            transition-delay: 0.5s;
+            opacity: 1;
+            visibility: visible;
+            left: 45%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-snap-align: center;
+            overflow-x: hidden;
+            text-align: left;
+            z-index: 500;
+			}
+
+        .contentright {
+            position: relative;
+            height: 300px;
+            width: 59%;
+            left: 20%;
+			color:white;
+			font-size:.8em;
+            padding: 20px 40px 20px 40px;
+            opacity: 0;
+			transition: 0.5s;
+            visibility: hidden;
+			    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+        }
+
+        .cardright:hover .contentright {
+            transition-delay: 0.5s;
+            opacity: 1;
+            visibility: visible;
+            left: 0%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-snap-align: center;
+            overflow-x: hidden;
+            text-align: justify;
+            z-index: 500;
+        }
+		
+.linkedin {
+    width: 20px;
+    height: auto; 
+    object-fit: contain;
+    vertical-align: middle;
+    margin-top: -5px; 
+}
 @media (max-width: 420px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        width: 100%;
+    }
+
+    #speakers {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+    }
+ #speakers .contentleft {
+        position: relative;
+        height: 300px;
+        width: 59%;
+        left: 20%; /* Align with .contentright */
+        padding: 20px 40px 20px 40px;
+        opacity: 0;
+        transition: 0.5s;
+        visibility: hidden;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    #speakers .cardleft:hover .contentleft {
+        transition-delay: 0.5s;
+        opacity: 1;
+        visibility: visible;
+        left: 0%; /* Align with .contentright on hover */
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        scroll-snap-align: center;
+        overflow-x: hidden;
+        text-align: left;
+        z-index: 500;
+		width:100%;
+    }
     .card, .cardleft, .cardright {
         width: 85%;
         margin: 0 auto;
@@ -130,7 +236,7 @@
         transition: height 0.5s ease;
     }
 
-    .card.expanded, .cardleft.expanded, .cardright.expanded {
+    .card:hover, .cardleft:hover, .cardright:hover {
         height: calc(350px + 300px);
     }
 
@@ -138,10 +244,18 @@
         width: 100%;
         height: auto;
         bottom: 0;
-        left: 0;
-        transform: none;
+        left: 0; /* Ensure image is aligned to the left */
+        transform: none; /* Reset any transformations */
         z-index: 2;
         transition: transform 0.5s ease;
+    }
+
+    .cardleft:hover img, .cardright:hover img {
+     width: 100%;
+        height: auto;
+        left: 0; /* Keep the image fixed at the left */
+		        position: absolute;
+        bottom: 0;
     }
 
     .content, .contentleft, .contentright {
@@ -167,6 +281,10 @@
         font-size: 1.2em;
     }
 }
+
+
+
+
 	</style>
 </head>
 <body>
@@ -262,14 +380,7 @@ empower business success. </p>
 	
 	
 	
-		<script>
-		// Toggle card expansion on click
-		document.querySelectorAll('#speakers .card').forEach(card => {
-			card.addEventListener('click', () => {
-				card.classList.toggle('expanded'); // Add or remove the 'expanded' class
-			});
-		});
-	</script>
+	
 	
 	<script>
     // Apply to elements in .committeecontainer
