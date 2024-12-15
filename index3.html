@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html>
 <head>
@@ -82,8 +81,8 @@
 	opacity: 1;
 	visibility: visible;
 	left: 0;
-	    scrollbar-width: none; 
-    -ms-overflow-style: none; 
+	    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For Internet Explorer and Edge */
 }
  
 .content h2
@@ -242,7 +241,7 @@
         position: relative;
         height: 300px;
         width: 59%;
-        left: 20%; 
+        left: 20%; /* Align with .contentright */
         padding: 20px 40px 20px 40px;
         opacity: 0;
         transition: 0.5s;
@@ -255,7 +254,7 @@
         transition-delay: 0.5s;
         opacity: 1;
         visibility: visible;
-        left: 0%; 
+        left: 0%; /* Align with .contentright on hover */
         overflow-y: scroll;
         scroll-snap-type: y mandatory;
         scroll-snap-align: center;
@@ -280,19 +279,20 @@
     }
 
     .card img, .cardleft img, .cardright img {
-        width:100%;
+        width: 100%;
         height: auto;
         bottom: 0;
-        left: 0; 
-        transform: none; 
+        left: 0; /* Ensure image is aligned to the left */
+        transform: none; /* Reset any transformations */
         z-index: 2;
-       
+        transition: transform 0.5s ease;
     }
 
     .cardleft:hover img, .cardright:hover img {
-     
-        left: 0; 
-	position: absolute;
+     width: 100%;
+        height: auto;
+        left: 0; /* Keep the image fixed at the left */
+		        position: absolute;
         bottom: 0;
     }
 
@@ -340,7 +340,7 @@
  <p>Jennifer is currently employed at Sterling Health in Mt. Sterling and enrolled in Western Kentucky University working towards a bachelor’s degree in organizational leadership. </p>
 				
 			</div>
-			<img src="images/jennifercarpenter.png" alt="image of Jennifer Carpenter"></div><div class="card-description" style="text-align: center;"><h2>Jennifer Carpenter <a href="https://www.linkedin.com/in/jennifer-carpenter-79a85b92/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
+			<img src="images/JenniferCarpenter.png" alt="image of Jennifer Carpenter"></div><div class="card-description" style="text-align: center;"><h2>Jennifer Carpenter <a href="https://www.linkedin.com/in/jennifer-carpenter-79a85b92/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
 		</div>
 		<div class="card-container"><div class="card-container" style="display: flex; flex-direction: column; align-items: center;"><div class="cardright">
 			<div class="contentright">
@@ -350,7 +350,7 @@ professional service firms, construction and engineering operations, diverse man
 background, and business acumen fuel her unrelenting drive for solving complex business challenges and guiding organizations through the effective adoption of new and emerging technologies to empower business success. </p>
 				
 			</div>
-			<img src="images/polinanikolova.png" alt="image of Polina Nikolova"></div><div class="card-description" style="text-align: center;"><h2>Polina Nikolova <a href="https://www.linkedin.com/in/polina-nikolova/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
+			<img src="images/PolinaNikolova.png" alt="image of Polina Nikolova"></div><div class="card-description" style="text-align: center;"><h2>Polina Nikolova <a href="https://www.linkedin.com/in/polina-nikolova/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
 			
 		</div>
 		<div class="card-container"><div class="card-container" style="display: flex; flex-direction: column; align-items: center;"><div class="cardright">
@@ -359,7 +359,7 @@ background, and business acumen fuel her unrelenting drive for solving complex b
 			    <p>Mackenzie Hanes, originally from Mayfield, Kentucky, came to Central Kentucky to attend the University of Louisville and subsequently became a happy transplant in Frankfort. Mackenzie serves as the Executive Director of the Tech Association of the Bluegrass (TAB), an organization dedicated to building the tech ecosystem in Central Kentucky. Mackenzie is also the Program Director for Awesome Inc U which provides computer science education in high schools and intensive training for career changers looking to get their start in tech as well as partnership manager for the Innovation Hub, Awesome Center for Entrepreneurship. Mackenzie is focused on serving the established and growing tech community in Central Kentucky as she coaches non-traditional tech talent and connects regional and global tech leaders to the future of the Bluegrass. </p>
 				
 			</div>
-			<img src="images/mackenziehanes.png" alt="image of Mackenzie Hanes"></div><div class="card-description" style="text-align: center;"><h2>Mackenzie Hanes <a href="https://www.linkedin.com/in/mackenziehanes/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
+			<img src="images/MackenzieHanes.png" alt="image of Mackenzie Hanes"></div><div class="card-description" style="text-align: center;"><h2>Mackenzie Hanes <a href="https://www.linkedin.com/in/mackenziehanes/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
 		</div>
 	<div class="header-row"><img src="images/breakoutspeakers2.png" alt="banner with the words Breakout Speakers"></div>
 			<div class="card-container"><div class="card-container"><div class="cardleft">
@@ -368,7 +368,7 @@ background, and business acumen fuel her unrelenting drive for solving complex b
 				<p>Mackenzie Hanes, originally from Mayfield, Kentucky, came to Central Kentucky to attend the University of Louisville and subsequently became a happy transplant in Frankfort. Mackenzie serves as the Executive Director of the Tech Association of the Bluegrass (TAB), an organization dedicated to building the tech ecosystem in Central Kentucky. Mackenzie is also the Program Director for Awesome Inc U which provides computer science education in high schools and intensive training for career changers looking to get their start in tech as well as partnership manager for the Innovation Hub, Awesome Center for Entrepreneurship. Mackenzie is focused on serving the established and growing tech community in Central Kentucky as she coaches non-traditional tech talent and connects regional and global tech leaders to the future of the Bluegrass. </p>
 				
 			</div>
-			<img src="images/mackenziehanes.png" alt="image of Mackenzie Hanes"></div><div class="card-description" style="text-align: center;"><h2>Mackenzie Hanes<a href="https://www.linkedin.com/in/mackenziehanes/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
+			<img src="images/MackenzieHanes.png" alt="image of Mackenzie Hanes"></div><div class="card-description" style="text-align: center;"><h2>Mackenzie Hanes<a href="https://www.linkedin.com/in/mackenziehanes/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
 		</div>
 			<div class="card-container"><div class="card-container" style="display: flex; flex-direction: column; align-items: center;"><div class="cardright">
 			<div class="contentright">
@@ -382,7 +382,7 @@ and guiding organizations through the effective adoption of new and emerging tec
 empower business success. </p>
 				
 			</div>
-			<img src="images/polinanikolova.png" alt="image of Polina Nikolova"></div><div class="card-description" style="text-align: center;"><h2>Polina Nikolova <a href="https://www.linkedin.com/in/polina-nikolova/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
+			<img src="images/PolinaNikolova.png" alt="image of Polina Nikolova"></div><div class="card-description" style="text-align: center;"><h2>Polina Nikolova <a href="https://www.linkedin.com/in/polina-nikolova/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
 		</div>
 			<div class="card-container"><div class="card-container"><div class="cardleft">
 			<div class="contentleft">
@@ -396,7 +396,7 @@ and guiding organizations through the effective adoption of new and emerging tec
 empower business success. </p>
 				
 			</div>
-			<img src="images/polinanikolova.png" alt="image of Polina Nikolova"></div><div class="card-description" style="text-align: center;"><h2>Polina Nikolova <a href="https://www.linkedin.com/in/polina-nikolova/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
+			<img src="images/PolinaNikolova.png" alt="image of Polina Nikolova"></div><div class="card-description" style="text-align: center;"><h2>Polina Nikolova <a href="https://www.linkedin.com/in/polina-nikolova/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
 		</div>
 			<div class="card-container"><div class="card-container" style="display: flex; flex-direction: column; align-items: center;"><div class="cardright">
 			<div class="contentright">
@@ -409,7 +409,7 @@ background, and business acumen fuel her unrelenting drive for solving complex b
 and guiding organizations through the effective adoption of new and emerging technologies to
 empower business success. </p>
 			</div>
-			<img src="images/polinanikolova.png" alt="image of Polina Nikolova"></div><div class="card-description" style="text-align: center;"><h2>Polina Nikolova <a href="https://www.linkedin.com/in/polina-nikolova/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
+			<img src="images/PolinaNikolova.png" alt="image of Polina Nikolova"></div><div class="card-description" style="text-align: center;"><h2>Polina Nikolova <a href="https://www.linkedin.com/in/polina-nikolova/" target="_blank" rel="noopener noreferrer" style="z-index: 10; position: relative;"><img src="images/circle-linkedin-512.webp" alt="LinkedIn" width="20" height="20" class="linkedin"></a></h2></div></div>
 		</div>
 	</div>
 	
@@ -421,14 +421,20 @@ empower business success. </p>
 	
 	
 	<script>
-    
+    // Apply to elements in .committeecontainer
+    document.querySelectorAll('.committeecontainer .card').forEach(card => {
+        const content = card.querySelector('.content');
+        card.addEventListener('mouseleave', () => {
+            content.scrollTop = 0; // Reset scroll position to top
+        });
+    });
 
-  
+    // Apply to elements in #speakers
     document.querySelectorAll('#speakers .card').forEach(card => {
         const content = card.querySelector('.contentleft, .contentright');
         if (content) {
             card.addEventListener('mouseleave', () => {
-                content.scrollTop = 0; 
+                content.scrollTop = 0; // Reset scroll position to top
             });
         }
     });
