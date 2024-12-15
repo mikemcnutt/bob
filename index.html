@@ -2462,16 +2462,24 @@ empower business success. </p>
             HERIZON: Embarking on Careers in Technology
         </div>
     </div>
-   <script>
-     document.querySelectorAll('.committeecontainer .card').forEach(card => {
-    const content = card.querySelector('.content');
-
-    card.addEventListener('mouseleave', () => {
-        content.scrollTop = 0; // Reset scroll position to top
+<script>
+        document.querySelectorAll('.committeecontainer .card').forEach(card => {
+        const content = card.querySelector('.content');
+        card.addEventListener('mouseleave', () => {
+            content.scrollTop = 0; 
+        });
     });
-});
 
-   </script>	   
+        document.querySelectorAll('#speakers .card').forEach(card => {
+        const content = card.querySelector('.contentleft, .contentright');
+        if (content) {
+            card.addEventListener('mouseleave', () => {
+                content.scrollTop = 0; 
+            });
+        }
+    });
+</script>
+
 
 
 	<script>
