@@ -1341,22 +1341,23 @@ body::-webkit-scrollbar {
     margin-top: -5px; 
 }
 
-@media (max-width: 420px) {
-    
+@media (max-width: 500px) {
+   
 
     #speakers {
         display: flex;
         flex-direction: column;
         align-items: center;
+		   justify-content: center;
+        margin: 0;
         gap: 20px;
-	margin: 0;
-        width: 90%;
+        width: 100%;
     }
  #speakers .contentleft {
         position: relative;
         height: 300px;
         width: 59%;
-        left: 20%; 
+        left: 20%; /* Align with .contentright */
         padding: 20px 40px 20px 40px;
         opacity: 0;
         transition: 0.5s;
@@ -1369,7 +1370,7 @@ body::-webkit-scrollbar {
         transition-delay: 0.5s;
         opacity: 1;
         visibility: visible;
-        left: 0%; 
+        left: 0%; /* Align with .contentright on hover */
         overflow-y: scroll;
         scroll-snap-type: y mandatory;
         scroll-snap-align: center;
@@ -1378,7 +1379,7 @@ body::-webkit-scrollbar {
         z-index: 500;
 		width:100%;
     }
-   #speakers .card, .cardleft, .cardright {
+   #speakers  .card, .cardleft, .cardright {
         width: 85%;
         margin: 0 auto;
         display: flex;
@@ -1387,31 +1388,32 @@ body::-webkit-scrollbar {
         position: relative;
         overflow: hidden;
         transition: height 0.5s ease;
+		 overflow: visible;
     }
 
-  #speakers  .card:hover, .cardleft:hover, .cardright:hover {
+  #speakers   .card:hover, .cardleft:hover, .cardright:hover {
         height: calc(350px + 300px);
     }
 
- #speakers   .card img, .cardleft img, .cardright img {
+    #speakers .card img, .cardleft img, .cardright img {
         width: 100%;
         height: auto;
         bottom: 0;
-        left: 0; 
-        transform: none; 
+        left: 0; /* Ensure image is aligned to the left */
+        transform: none; /* Reset any transformations */
         z-index: 2;
         transition: transform 0.5s ease;
     }
 
-  #speakers  .cardleft:hover img, .cardright:hover img {
+  #speakers   .cardleft:hover img, .cardright:hover img {
      width: 100%;
         height: auto;
-        left: 0; 
+        left: 0; /* Keep the image fixed at the left */
 		        position: absolute;
         bottom: 0;
     }
 
-  #speakers  .content, .contentleft, .contentright {
+    #speakers .content, .contentleft, .contentright {
         width: 100%;
         text-align: center;
         padding: 20px;
@@ -1419,21 +1421,22 @@ body::-webkit-scrollbar {
         z-index: 1;
     }
 
-  #speakers  .contentleft {
+    #speakers .contentleft {
         margin: 0 auto;
     }
 
-  #speakers  .card-description {
+   #speakers  .card-description {
         text-align: center;
         margin-top: 10px;
     }
 
-  #speakers  .header-row {
+  #speakers   .header-row {
         text-align: center;
         margin: 20px 0;
         font-size: 1.2em;
     }
 }
+
 
 	    
 	    
