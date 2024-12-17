@@ -785,7 +785,7 @@ body::-webkit-scrollbar {
         width: 90%;
 	    scroll-margin-top: 75px;
     }
- #speakers .contentleft {
+ #speakers .contentleft,  #speakers .contentright {
         position: relative;
 	  box-sizing: border-box;
         height: 300px;
@@ -797,8 +797,7 @@ body::-webkit-scrollbar {
         visibility: hidden;
         scrollbar-width: none;
         -ms-overflow-style: none;
-	     overflow-y: auto;
-    overflow-x: hidden;
+	    overflow: hidden;
     }
 
     #speakers .cardleft:hover .contentleft {
