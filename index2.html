@@ -785,7 +785,33 @@ body::-webkit-scrollbar {
     scroll-margin-top: 75px;
 }
 
-#speakers .contentleft,
+#speakers .card, 
+#speakers .cardleft, 
+#speakers .cardright {
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers items horizontally */
+    justify-content: center; /* Centers items vertically */
+    position: relative;
+    overflow: hidden;
+    height: 350px; /* Set a fixed height for cards */
+}
+
+#speakers .card img, 
+#speakers .cardleft img, 
+#speakers .cardright img {
+    width: auto; /* Maintain aspect ratio */
+    height: 100%; /* Fit within the card height */
+    max-width: 100%; /* Prevent overflow */
+    object-fit: contain; /* Keep the entire image visible */
+    margin: 0 auto; /* Horizontal centering */
+    position: relative; /* Remove unnecessary absolute positioning */
+    transition: none; /* Disable hover animations */
+}
+
+#speakers .contentleft, 
 #speakers .contentright {
     position: relative;
     box-sizing: border-box;
@@ -794,64 +820,36 @@ body::-webkit-scrollbar {
     left: 20%;
     padding: 20px;
     opacity: 0;
-    transition: opacity 0.5s, left 0.5s;
+    transition: 0.5s;
     visibility: hidden;
-    scrollbar-width: none; /* Firefox */
-    overflow: hidden; /* Default state */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    overflow: hidden;
 }
 
 #speakers .cardleft:hover .contentleft,
 #speakers .cardright:hover .contentright {
+    transition-delay: 0.5s;
     opacity: 1;
     visibility: visible;
-    left: 0%;
-    overflow-y: auto; /* Enable scrolling on hover */
-    transition-delay: 0.2s;
+    left: 0%; 
+    overflow-y: scroll;
     scroll-snap-type: y mandatory;
     scroll-snap-align: center;
+    overflow-x: hidden;
+    text-align: left;
+    z-index: 4;
+    width: 100%;
 }
 
-#speakers .content,
-#speakers .contentleft,
+#speakers .content, 
+#speakers .contentleft, 
 #speakers .contentright {
     width: 100%;
     text-align: center;
     padding: 20px;
-}
-
-.contentleft::-webkit-scrollbar,
-.contentright::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Chrome, Safari, Opera */
-}
-
-#speakers .card,
-#speakers .cardleft,
-#speakers .cardright {
-    width: 85%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    transition: height 0.5s ease;
-}
-
-#speakers .card:hover,
-#speakers .cardleft:hover,
-#speakers .cardright:hover {
-    height: calc(350px + 300px);
-}
-
-#speakers .card img,
-#speakers .cardleft img,
-#speakers .cardright img {
-    width: 100%;
-    height: auto;
-    bottom: 0;
-    left: 0;
-    position: absolute; /* Prevent misalignment */
-    transition: transform 0.5s ease;
+    box-sizing: border-box;
+    z-index: 1;
 }
 
 #speakers .card-description {
@@ -864,6 +862,30 @@ body::-webkit-scrollbar {
     margin: 20px 0;
     font-size: 1.2em;
 }
+
+/* Hide scrollbar on mobile for contentleft and contentright */
+.contentleft::-webkit-scrollbar,
+.contentright::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+.contentleft,
+.contentright {
+    scrollbar-width: none; /* Firefox */
+    height: 300px; /* Explicit height */
+    overflow-y: auto; /* Allow scrolling but prevent sudden reflow */
+    margin: 0;
+    box-sizing: border-box;
+    padding-right: 5px; /* Adjust for scrollbar width */
+    transition: all 0.5s ease;
+}
+
+.cardleft:hover .contentleft,
+.cardright:hover .contentright {
+    overflow-y: scroll;
+    transition-delay: 0.2s;
+}
+
 
 }
 
