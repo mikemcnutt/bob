@@ -862,6 +862,16 @@ body::-webkit-scrollbar {
         margin: 20px 0;
         font-size: 1.2em;
     }
+	.contentleft::-webkit-scrollbar,
+.contentright::-webkit-scrollbar {
+    display: none; 
+}
+
+.contentleft,
+.contentright {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
 }
 
 	    
