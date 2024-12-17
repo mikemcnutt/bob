@@ -870,8 +870,12 @@ body::-webkit-scrollbar {
 
 .contentleft,
 .contentright {
-    -ms-overflow-style: none;  /* IE and Edge */
+    
     scrollbar-width: none;  /* Firefox */
+	   height: 300px; /* Explicit height */
+    overflow-y: auto; /* Allow scrolling but prevent sudden reflow */
+    margin: 0; /* Remove unnecessary margins */
+    box-sizing: border-box; /* Prevent content overflow */
 }
 
 /* Default state: prevent jump */
