@@ -773,17 +773,7 @@ body::-webkit-scrollbar {
 }
 
 @media screen and (max-width: 500px) {
-   #speakers .contentleft,
-#speakers .contentright {
-    position: relative;
-    height: 300px; /* Fixed height prevents layout reflow */
-    overflow-y: auto;
-    overflow-x: hidden;
-    box-sizing: border-box; /* Ensures padding doesn't alter dimensions */
-    margin: 0;
-    padding: 20px;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
-}
+
 
     #speakers {
         display: flex;
@@ -797,15 +787,18 @@ body::-webkit-scrollbar {
     }
  #speakers .contentleft {
         position: relative;
+	  box-sizing: border-box;
         height: 300px;
         width: 59%;
         left: 20%; /* Align with .contentright */
-        padding: 20px 40px 20px 40px;
+        padding: 20px 20px 20px 20px;
         opacity: 0;
         transition: 0.5s;
         visibility: hidden;
         scrollbar-width: none;
         -ms-overflow-style: none;
+	     overflow-y: auto;
+    overflow-x: hidden;
     }
 
     #speakers .cardleft:hover .contentleft {
