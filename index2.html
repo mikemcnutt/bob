@@ -862,15 +862,18 @@ body::-webkit-scrollbar {
         margin: 20px 0;
         font-size: 1.2em;
     }
-	.contentleft::-webkit-scrollbar,
-.contentright::-webkit-scrollbar {
-    display: none; 
-}
-
+/* Default state: prevent jump */
 .contentleft,
 .contentright {
-    -ms-overflow-style: none;  
-    scrollbar-width: none;  
+    overflow-y: hidden;
+    transition: all 0.5s ease;
+}
+
+/* Hover state */
+.cardleft:hover .contentleft,
+.cardright:hover .contentright {
+    overflow-y: scroll; /* Allow scrolling */
+    transition-delay: 0.2s; /* Prevent instant jumps */
 }
 }
 
