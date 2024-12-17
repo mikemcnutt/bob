@@ -829,10 +829,12 @@ body::-webkit-scrollbar {
     width: 85%;
     margin: 0 auto;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: flex-end; /* Align content at the bottom */
+    align-items: center; /* Center horizontally */
     position: relative;
     overflow: hidden;
+    height: 350px; /* Default height */
     transition: height 0.5s ease;
 }
 
@@ -845,12 +847,11 @@ body::-webkit-scrollbar {
 #speakers .card img,
 #speakers .cardleft img,
 #speakers .cardright img {
-    width: 100%;
-    height: auto;
-    bottom: 0;
-    left: 0;
-    position: absolute; /* Prevent misalignment */
-    transition: transform 0.5s ease;
+    width: 100%; /* Maintain image width */
+    height: auto; /* Preserve aspect ratio */
+    position: relative; /* Keep within the normal flow */
+    margin-top: auto; /* Push image to bottom */
+    display: block; /* Ensure image alignment */
 }
 
 #speakers .card-description {
@@ -862,7 +863,7 @@ body::-webkit-scrollbar {
     text-align: center;
     margin: 20px 0;
     font-size: 1.2em;
-} 
+}
 
 }
 
