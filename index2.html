@@ -591,299 +591,7 @@ body::-webkit-scrollbar {
             text-align: left;
         }
 
-		#speakers
-{
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: flex-start;
-	max-width: 1100px;
-	margin: 0 auto;
-	gap: 40px;
-	scroll-margin-top: 75px;
-	 
-    min-height: 100vh;
-}
 
-		
-#speakers .header-row {
-    width: 100%;
-    text-align: center;
-    margin: 20px 0;
-    font-size: 1.5em;
-    font-weight: bold;
-    color: #333;
-	}
-	
-#speakers .header-row img {
-    width: 100%; 
-    max-width: 490px; 
-    height: auto; 
-    display: block; 
-    margin: 0 auto; 
-}
-	
-
-#speakers .content
-{
-	position: relative;
-	width: 50%;
-	left: 20%;
-	padding: 20px 20px 20px 40px;
-	opacity: 0;
-	transition: 0.5s;
-	visibility: hidden;
-}
- 
-#speakers .content h2
-{
-	color: #fff;
-	text-transform: uppercase;
-	font-size: 1.2em;
-	line-height: 1em;
-}
-#speakers .content p
-{
-	color: #fff;
-
-}
-#speakers .content a
-{
-	position: relative;
-	color: #fff;
-	padding: 10px 20px;
-	background: #fff;
-	color: #111;
-	font-weight: 700;
-	margin-top: 10px;
-	display: inline-block;
-	text-decoration: none;
-}
-   #speakers     .cardright {
-            border-radius: 20px;
-			border: 5px solid black;
-            position: relative;
-            width: 500px;
-            height: 350px;
-            background: linear-gradient(45deg, #0d0a0b, #0054b4);
-            transition: 0.5s;
-        }
-
-   #speakers     .cardright img {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 350px;
-            transition: 0.5s;
-            }
-
-  #speakers      .cardright:hover img {
-            left: 83%;
-            height: 400px;
-        }
-
- #speakers       .cardleft {
-            border-radius: 20px;
-	        border: 5px solid black;
-            position: relative;
-            width: 500px;
-            height: 350px;
- background: linear-gradient(45deg, #0d0a0b, #0054b4);
-            transition: 0.5s;
-        }
-
-  #speakers      .cardleft img {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 350px;
-            transition: 0.5s;
-            }
-
- #speakers       .cardleft:hover img {
-            left: 17%;
-            height: 400px;
-        }
-
-   #speakers    .contentleft {
-            position: relative;
-            height: 300px;
-            width: 46%;
-            left: 60%;
-			color:white;
-			font-size:.8em;
-            padding: 20px 40px 20px 40px;
-            opacity: 0;
-            transition: 0.5s;
-            visibility: hidden;
-			scrollbar-width: none; 
-            -ms-overflow-style: none;
-        }
-
-     #speakers    .cardleft:hover .contentleft {
-            transition-delay: 0.5s;
-            opacity: 1;
-            visibility: visible;
-            left: 45%;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scroll-snap-align: center;
-            overflow-x: hidden;
-            text-align: left;
-            z-index: 500;
-			}
-
-   #speakers    .contentright {
-            position: relative;
-            height: 300px;
-            width: 46%;
-            left: 20%;
-			color:white;
-			font-size:.8em;
-            padding: 20px 40px 20px 40px;
-            opacity: 0;
-			transition: 0.5s;
-            visibility: hidden;
-			    scrollbar-width: none; 
-    -ms-overflow-style: none; 
-        }
-
- #speakers       .cardright:hover .contentright {
-            transition-delay: 0.5s;
-            opacity: 1;
-            visibility: visible;
-            left: 0%;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-            scroll-snap-align: center;
-            overflow-x: hidden;
-            text-align: justify;
-            z-index: 500;
-        }
-		
-#speakers .linkedin {
-    width: 20px;
-    height: auto; 
-    object-fit: contain;
-    vertical-align: middle;
-    margin-top: -5px; 
-}
-
-@media screen and (max-width: 500px) {
- #speakers {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    gap: 20px;
-    width: 90%;
-    scroll-margin-top: 75px;
-}
-
-#speakers .contentleft,
-#speakers .contentright {
-    position: relative;
-    box-sizing: border-box;
-    height: 300px;
-    width: 59%;
-    left: 20%;
-    padding: 20px;
-    opacity: 0;
-	top:10%;
-    transition: opacity 0.5s, left 0.5s;
-    visibility: hidden;
-    scrollbar-width: none; 
-    overflow: hidden; 
-}
-
-#speakers .cardleft:hover .contentleft,
-#speakers .cardright:hover .contentright {
-    opacity: 1;
-    visibility: visible;
-    left: 0%;
-    position:relative;
-    top:10px;	
-    overflow-y: auto; 
-    transition-delay: 0.2s;
-    scroll-snap-type: y mandatory;
-    scroll-snap-align: center;
-    height: auto; 
-    transform: none;
-	
-}
-
-#speakers .content,
-#speakers .contentleft,
-#speakers .contentright {
-    width: 100%;
-    text-align: center;
-    padding: 0 20px;
-	position: relative;
-	max-height: 300px;
-    scrollbar-width: none; 
-    -ms-overflow-style: none; 
-    box-sizing: border-box;
-    overflow-y: scroll; 
-}
-
-.contentleft::-webkit-scrollbar,
-.contentright::-webkit-scrollbar {
-    display: none; 
-}
-
-#speakers .card,
-#speakers .cardleft,
-#speakers .cardright {
-    width: 85%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column; 
-    justify-content: flex-start; 
-    align-items: center; 
-    position: relative;
-    overflow: hidden;
-    height: 350px; 
-    transition: height 0.5s ease;
-}
-
-#speakers .card:hover,
-#speakers .cardleft:hover,
-#speakers .cardright:hover {
-    height: calc(350px + 300px);
-	left: 0%;
-}
-   #speakers .card img,#speakers .cardleft img,#speakers .cardright img {
-        width: 100%;
-        height: auto;
-        bottom: 0;
-        left: 0; 
-        transform: none; 
-        z-index: 2;
-        transition: transform 0.5s ease;
-    }
-
-  #speakers   .cardleft:hover img,#speakers .cardright:hover img {
-     width: 100%;
-        height: auto;
-        left: 0; 
-		position: absolute;
-        bottom: 0;
-    }
-
-#speakers .card-description {
-    text-align: center;
-    margin-top: 10px;
-}
-
-#speakers .header-row {
-    text-align: center;
-    margin: 20px 0;
-    font-size: 1.2em;
-}
-}
 
 	    
 		       #sponsors {
@@ -1463,7 +1171,299 @@ body::-webkit-scrollbar {
             word-spacing: 5px;
         }
 
-	    
+	    		#speakers
+{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+	max-width: 1100px;
+	margin: 0 auto;
+	gap: 40px;
+	scroll-margin-top: 75px;
+	 
+    min-height: 100vh;
+}
+
+		
+#speakers .header-row {
+    width: 100%;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+	}
+	
+#speakers .header-row img {
+    width: 100%; 
+    max-width: 490px; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto; 
+}
+	
+
+#speakers .content
+{
+	position: relative;
+	width: 50%;
+	left: 20%;
+	padding: 20px 20px 20px 40px;
+	opacity: 0;
+	transition: 0.5s;
+	visibility: hidden;
+}
+ 
+#speakers .content h2
+{
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 1.2em;
+	line-height: 1em;
+}
+#speakers .content p
+{
+	color: #fff;
+
+}
+#speakers .content a
+{
+	position: relative;
+	color: #fff;
+	padding: 10px 20px;
+	background: #fff;
+	color: #111;
+	font-weight: 700;
+	margin-top: 10px;
+	display: inline-block;
+	text-decoration: none;
+}
+   #speakers     .cardright {
+            border-radius: 20px;
+			border: 5px solid black;
+            position: relative;
+            width: 500px;
+            height: 350px;
+            background: linear-gradient(45deg, #0d0a0b, #0054b4);
+            transition: 0.5s;
+        }
+
+   #speakers     .cardright img {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 350px;
+            transition: 0.5s;
+            }
+
+  #speakers      .cardright:hover img {
+            left: 83%;
+            height: 400px;
+        }
+
+ #speakers       .cardleft {
+            border-radius: 20px;
+	        border: 5px solid black;
+            position: relative;
+            width: 500px;
+            height: 350px;
+ background: linear-gradient(45deg, #0d0a0b, #0054b4);
+            transition: 0.5s;
+        }
+
+  #speakers      .cardleft img {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 350px;
+            transition: 0.5s;
+            }
+
+ #speakers       .cardleft:hover img {
+            left: 17%;
+            height: 400px;
+        }
+
+   #speakers    .contentleft {
+            position: relative;
+            height: 300px;
+            width: 46%;
+            left: 60%;
+			color:white;
+			font-size:.8em;
+            padding: 20px 40px 20px 40px;
+            opacity: 0;
+            transition: 0.5s;
+            visibility: hidden;
+			scrollbar-width: none; 
+            -ms-overflow-style: none;
+        }
+
+     #speakers    .cardleft:hover .contentleft {
+            transition-delay: 0.5s;
+            opacity: 1;
+            visibility: visible;
+            left: 45%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-snap-align: center;
+            overflow-x: hidden;
+            text-align: left;
+            z-index: 500;
+			}
+
+   #speakers    .contentright {
+            position: relative;
+            height: 300px;
+            width: 46%;
+            left: 20%;
+			color:white;
+			font-size:.8em;
+            padding: 20px 40px 20px 40px;
+            opacity: 0;
+			transition: 0.5s;
+            visibility: hidden;
+			    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+        }
+
+ #speakers       .cardright:hover .contentright {
+            transition-delay: 0.5s;
+            opacity: 1;
+            visibility: visible;
+            left: 0%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-snap-align: center;
+            overflow-x: hidden;
+            text-align: justify;
+            z-index: 500;
+        }
+		
+#speakers .linkedin {
+    width: 20px;
+    height: auto; 
+    object-fit: contain;
+    vertical-align: middle;
+    margin-top: -5px; 
+}
+
+@media screen and (max-width: 500px) {
+ #speakers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 20px;
+    width: 90%;
+    scroll-margin-top: 75px;
+}
+
+#speakers .contentleft,
+#speakers .contentright {
+    position: relative;
+    box-sizing: border-box;
+    height: 300px;
+    width: 59%;
+    left: 20%;
+    padding: 20px;
+    opacity: 0;
+	top:10%;
+    transition: opacity 0.5s, left 0.5s;
+    visibility: hidden;
+    scrollbar-width: none; 
+    overflow: hidden; 
+}
+
+#speakers .cardleft:hover .contentleft,
+#speakers .cardright:hover .contentright {
+    opacity: 1;
+    visibility: visible;
+    left: 0%;
+    position:relative;
+    top:10px;	
+    overflow-y: auto; 
+    transition-delay: 0.2s;
+    scroll-snap-type: y mandatory;
+    scroll-snap-align: center;
+    height: auto; 
+    transform: none;
+	
+}
+
+#speakers .content,
+#speakers .contentleft,
+#speakers .contentright {
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+	position: relative;
+	max-height: 300px;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+    box-sizing: border-box;
+    overflow-y: scroll; 
+}
+
+.contentleft::-webkit-scrollbar,
+.contentright::-webkit-scrollbar {
+    display: none; 
+}
+
+#speakers .card,
+#speakers .cardleft,
+#speakers .cardright {
+    width: 85%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: center; 
+    position: relative;
+    overflow: hidden;
+    height: 350px; 
+    transition: height 0.5s ease;
+}
+
+#speakers .card:hover,
+#speakers .cardleft:hover,
+#speakers .cardright:hover {
+    height: calc(350px + 300px);
+	left: 0%;
+}
+   #speakers .card img,#speakers .cardleft img,#speakers .cardright img {
+        width: 100%;
+        height: auto;
+        bottom: 0;
+        left: 0; 
+        transform: none; 
+        z-index: 2;
+        transition: transform 0.5s ease;
+    }
+
+  #speakers   .cardleft:hover img,#speakers .cardright:hover img {
+     width: 100%;
+        height: auto;
+        left: 0; 
+		position: absolute;
+        bottom: 0;
+    }
+
+#speakers .card-description {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#speakers .header-row {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 1.2em;
+}
+}
 	    
 .career-fair-section {
     width: 100%;
