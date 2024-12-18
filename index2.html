@@ -264,6 +264,26 @@ body::-webkit-scrollbar {
 
 
 
+#home .content {
+    position: relative;
+    z-index: 2; /* Ensure content is above the background */
+}
+
+#home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+
         .glass-box {
   background-color: lightblue;
   backdrop-filter: blur(5px) saturate(200%);
@@ -2396,6 +2416,52 @@ empower business success. </p>
         </div>
     </div>
 <script>
+$(document).ready(function () {
+    // Check if the user is on an iOS device
+    const isiOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+    // Dynamically set background images for each section
+    $('section').each(function () {
+        const $section = $(this);
+        const bgImage = $section.data('background'); // Get the background image from the data attribute
+
+        // Apply the background image
+        $section.css({
+            'background-image': `url(${bgImage})`,
+            'background-size': 'cover',
+            'background-position': 'center',
+        });
+
+        // Apply iOS-specific fallback
+        if (isiOS) {
+            $section.css('background-attachment', 'scroll'); // Remove fixed attachment for iOS
+        }
+    });
+
+    // Parallax scrolling effect
+    $(window).on('scroll', function () {
+        const scrollTop = $(this).scrollTop();
+
+        $('section').each(function () {
+            const $section = $(this);
+            const offset = $section.offset().top;
+            const height = $section.outerHeight();
+
+            // Check if the section is in the viewport
+            if (scrollTop > offset - window.innerHeight && scrollTop < offset + height) {
+                const parallaxSpeed = 0.5; // Adjust this value for speed (lower is slower)
+                const yPos = (scrollTop - offset) * parallaxSpeed;
+
+                // Apply parallax transform
+                $section.css('background-position', `center ${yPos}px`);
+            }
+        });
+    });
+});
+
+</script>
+	
+	<script>
         document.querySelectorAll('.committeecontainer .card').forEach(card => {
         const content = card.querySelector('.content');
         card.addEventListener('mouseleave', () => {
