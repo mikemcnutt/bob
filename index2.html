@@ -795,8 +795,8 @@ body::-webkit-scrollbar {
 	top:10%;
     transition: opacity 0.5s, left 0.5s;
     visibility: hidden;
-    scrollbar-width: none; /* Firefox */
-    overflow: hidden; /* Default state */
+    scrollbar-width: none; 
+    overflow: hidden; 
 }
 
 #speakers .cardleft:hover .contentleft,
@@ -806,11 +806,11 @@ body::-webkit-scrollbar {
     left: 0%;
     position:relative;
     top:10px;	
-    overflow-y: auto; /* Enable scrolling on hover */
+    overflow-y: auto; 
     transition-delay: 0.2s;
     scroll-snap-type: y mandatory;
     scroll-snap-align: center;
-    height: auto; /* Keep height fixed */
+    height: auto; 
     transform: none;
 	
 }
@@ -820,14 +820,18 @@ body::-webkit-scrollbar {
 #speakers .contentright {
     width: 100%;
     text-align: center;
-    padding: 20px;
+    padding: 0 20px;
 	position: relative;
-	top:10px;
+	max-height: 300px;
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
+    box-sizing: border-box;
+    overflow-y: scroll; 
 }
 
 .contentleft::-webkit-scrollbar,
 .contentright::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Chrome, Safari, Opera */
+    display: none; 
 }
 
 #speakers .card,
@@ -836,12 +840,12 @@ body::-webkit-scrollbar {
     width: 85%;
     margin: 0 auto;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    justify-content: flex-start; /* Align content at the bottom */
-    align-items: center; /* Center horizontally */
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: center; 
     position: relative;
     overflow: hidden;
-    height: 350px; /* Default height */
+    height: 350px; 
     transition: height 0.5s ease;
 }
 
@@ -855,8 +859,8 @@ body::-webkit-scrollbar {
         width: 100%;
         height: auto;
         bottom: 0;
-        left: 0; /* Ensure image is aligned to the left */
-        transform: none; /* Reset any transformations */
+        left: 0; 
+        transform: none; 
         z-index: 2;
         transition: transform 0.5s ease;
     }
@@ -864,8 +868,8 @@ body::-webkit-scrollbar {
   #speakers   .cardleft:hover img,#speakers .cardright:hover img {
      width: 100%;
         height: auto;
-        left: 0; /* Keep the image fixed at the left */
-		        position: absolute;
+        left: 0; 
+		position: absolute;
         bottom: 0;
     }
 
@@ -879,7 +883,6 @@ body::-webkit-scrollbar {
     margin: 20px 0;
     font-size: 1.2em;
 }
-
 }
 
 	    
