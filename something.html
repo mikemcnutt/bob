@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-Page Parallax Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        /* Parallax Background */
+        #page1 {
+            background: url('images/1.jpg') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            height: 100vh;
+        }
+
+        /* Ensure parallax works on Apple devices */
+        @supports (-webkit-overflow-scrolling: touch) {
+            #page1 {
+                background-attachment: scroll;
+                position: relative;
+                perspective: 1px;
+                transform-style: preserve-3d;
+            }
+        }
+
+        #page1 h1 {
+            color: white;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Second page styling */
+        #page2 {
+            background-color: lightyellow;
+            color: black;
+            padding: 50px 20px;
+        }
+
+        #page2 p {
+            max-width: 100px;
+            margin: 0 auto 20px;
+            line-height: 1.6;
+            font-size: 1em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #page1 h1 {
+                font-size: 2em;
+            }
+
+            #page2 p {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #page1 h1 {
+                font-size: 1.5em;
+            }
+
+            #page2 p {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Page 1 -->
+    <section id="page1">
+        <h1>Welcome to the Parallax Website</h1>
+    </section>
+
+    <!-- Page 2 -->
+    <section id="page2">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque.</p>
+        <p>Phasellus a libero et sapien vehicula condimentum vitae non nulla.</p>
+        <p>Curabitur tempus ligula et convallis rhoncus. Nam ac tincidunt ligula.</p>
+        <p>Mauris sit amet metus vel magna aliquam euismod quis at ligula.</p>
+        <p>Donec bibendum nulla ut diam faucibus, sed bibendum turpis viverra.</p>
+    </section>
+
+</body>
+</html>
