@@ -257,7 +257,8 @@ body::-webkit-scrollbar {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-size: cover;
+                background-attachment: fixed;
+            height: 100vh;
     width: 98vw;
     overflow: hidden;
 }
@@ -1670,7 +1671,14 @@ body::-webkit-scrollbar {
             background-color: black;
             padding: 10px 0;
         }
-		
+		      @supports (-webkit-overflow-scrolling: touch) {
+            #home {
+                background-attachment: scroll;
+                position: relative;
+                perspective: 1px;
+                transform-style: preserve-3d;
+            }
+        }
 	@media (max-width: 768px) {
     .glass-box {
         font-size: 0.8em; /* Smaller font for mobile screens */
