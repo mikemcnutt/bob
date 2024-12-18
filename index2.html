@@ -253,25 +253,13 @@ body::-webkit-scrollbar {
 
 
 #home {
-    position: relative;
-    min-height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-
-    /* Default background properties */
-    background-size: cover;
+    background: url('images/1.jpg') no-repeat center center;
     background-position: center;
     background-repeat: no-repeat;
-}
-
-/* Add fixed behavior for #home */
-#home {
-    background-attachment: fixed;
-}
-
-/* Apply dynamic background via attributes */
-	    #home[data-background] {
-    background-image: attr(data-background url('images/1.jpg')); /* Fallback for most browsers */
+    background-size: cover;
+    background-size: cover;
+    width: 98vw;
+    overflow: hidden;
 }
 
 
@@ -1858,7 +1846,7 @@ li:last-child {
         </div>
     </div>
 
-    <section id="home" data-background="images/1.jpg">
+    <section id="home">
 	  
 		   <div class="glass-box">
  
