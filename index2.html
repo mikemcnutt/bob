@@ -243,7 +243,7 @@ body::-webkit-scrollbar {
             font-size: 2em;
         }
 
-        #home, #about, #sponsors, #agenda, #speakers, #career, r {
+        #home, #about, #sponsors, #agenda, #speakers, #, r {
             min-height: 100vh;
 			
 			}
@@ -1523,10 +1523,7 @@ font-family: cursive;
     height: 100vh;
     overflow: hidden;
 }
-@supports (-webkit-appearance: none) {
-    #career {
-        scroll-margin-top: 200px; 
-    }
+
 #career .image-container {
     display: flex;
     flex-wrap: wrap; 
@@ -2546,5 +2543,20 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
     </script>
+<script>document.addEventListener("DOMContentLoaded", function () {
+    // Detect if the browser is Chrome
+    const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+
+    if (isChrome) {
+        // Adjust scroll-margin-top specifically for Chrome
+        const careerSection = document.querySelector("#career");
+        if (careerSection) {
+            careerSection.style.scrollMarginTop = "200px"; // Adjust this value as needed for Chrome
+        }
+    }
+});
+</script>
+
+	
 </body>
 </html>
