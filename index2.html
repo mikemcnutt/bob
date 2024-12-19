@@ -320,6 +320,12 @@ body::-webkit-scrollbar {
             animation-delay: 5s;
 		visibility: hidden;
         }
+.tagline {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
 
         @keyframes stroke {
             0% {
@@ -346,7 +352,16 @@ body::-webkit-scrollbar {
 		     visibility: visible;
             }
         }
+#herizon-svg {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
 
+#herizon-svg.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
  
 		#herizon-svg text {
     animation: none; 
@@ -2412,8 +2427,34 @@ empower business success. </p>
             HERIZON: Embarking on Careers in Technology
         </div>
     </div>
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+    const svgElement = document.getElementById("herizon-svg");
+    const taglineElement = document.getElementById("tagline");
 
-	
+  
+    const observer = new IntersectionObserver(
+        (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add the 'animate' class when the element is in view
+                    entry.target.classList.add("animate");
+                    // Stop observing the element
+                    observer.unobserve(entry.target);
+                }
+            });
+        },
+        {
+            root: null, 
+            threshold: 0.1 
+        }
+    );
+
+    
+    observer.observe(svgElement);
+    observer.observe(taglineElement);
+});
+</script>
 	<script>
         document.querySelectorAll('.committeecontainer .card').forEach(card => {
         const content = card.querySelector('.content');
