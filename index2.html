@@ -346,15 +346,15 @@ body::-webkit-scrollbar {
 
  
 		#herizon-svg text {
-    animation: none; /* Prevents animation from starting immediately */
+    animation: none; 
 }
 
 #herizon-svg.animate text {
-    animation: stroke 5s alternate; /* Re-enable animation when class is added */
+    animation: stroke 5s alternate; 
 }
 #tagline.animate {
-    opacity: 1; /* Fully visible */
-    transform: translateY(0); /* Moves to its original position */
+    opacity: 1; 
+    transform: translateY(0); 
 }
 		#about2mobile {
 		display: none
@@ -388,7 +388,7 @@ body::-webkit-scrollbar {
         }
 		
 		.fade {
-            opacity: 0; /* Initially hidden */
+            opacity: 0; 
             transform: translateY(20px); 
             transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
         }
@@ -419,7 +419,7 @@ body::-webkit-scrollbar {
     height: 100%;
     background: conic-gradient(45deg, #1a2f3f, #7094ce);
     z-index: -1;
-    border-radius: inherit; /* Matches ribbon shape */
+    border-radius: inherit; 
 }
 
 .aboutlist {
@@ -761,7 +761,6 @@ body::-webkit-scrollbar {
     animation: ribbonAnimation 0.5s ease; 
 }
 
-/* Define the keyframes for the animation */
 @keyframes ribbonAnimation {
     0% { transform: scale(0.9); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
@@ -1080,8 +1079,6 @@ body::-webkit-scrollbar {
             -ms-transform-origin: 0 0;
             transform-origin: 0 0;
         }
-
-        /* animations */
 
         @-webkit-keyframes main {
             0% { -webkit-transform: scaleX(0); }
@@ -1692,7 +1689,7 @@ body::-webkit-scrollbar {
         }
 	@media (max-width: 768px) {
     .glass-box {
-        font-size: 0.8em; /* Smaller font for mobile screens */
+        font-size: 0.8em; 
         padding: 15px;
         max-width: 95%;
     }
@@ -1700,7 +1697,7 @@ body::-webkit-scrollbar {
 
 @media (min-width: 769px) and (max-width: 1024px) {
     .glass-box {
-        font-size: 0.9em; /* Slightly smaller font for tablets */
+        font-size: 0.9em; 
         padding: 20px;
         max-width: 80%;
     }
@@ -2444,22 +2441,21 @@ document.addEventListener("DOMContentLoaded", () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     if (entry.target === svgElement) {
-                        svgElement.classList.add("animate"); // Start SVG animation
+                        svgElement.classList.add("animate"); 
                     } else if (entry.target === taglineElement) {
-                        taglineElement.classList.add("animate"); // Start tagline animation
+                        taglineElement.classList.add("animate"); 
                     }
-                    observer.unobserve(entry.target); // Stop observing the element
+                    observer.unobserve(entry.target); 
                 }
             });
         },
         {
-            root: null, // Observe within the viewport
-            threshold: 0.1, // Trigger when 10% of the element is visible
+            root: null, 
+            threshold: 0.1, 
         }
     );
 
-    // Observe both the SVG and the tagline
-    observer.observe(svgElement);
+        observer.observe(svgElement);
     observer.observe(taglineElement);
 });
 
