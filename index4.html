@@ -10,6 +10,8 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Serif+Text:ital@0;1&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+	
     <style>
    
 * {
@@ -2427,87 +2429,7 @@ empower business success. </p>
             HERIZON: Embarking on Careers in Technology
         </div>
     </div>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    // Handle SVG and tagline animations using IntersectionObserver
-    const animateElements = [document.getElementById("herizon-svg"), document.getElementById("tagline")];
-    const observer = new IntersectionObserver(
-        (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("animate");
-                    observer.unobserve(entry.target);
-                }
-            });
-        },
-        { root: null, threshold: 0.1 }
-    );
-    animateElements.forEach(target => {
-        if (target) observer.observe(target);
-    });
-
-    // Handle hamburger menu toggle and overlay
-    const hamburgerMenu = document.getElementById("hamburger-menu");
-    const overlay = document.getElementById("overlay");
-    const overlayLinks = document.querySelectorAll('.overlay-content a');
-
-    if (hamburgerMenu && overlay) {
-        hamburgerMenu.addEventListener("click", () => {
-            hamburgerMenu.classList.toggle("active");
-            overlay.classList.toggle("active");
-        });
-
-        overlayLinks.forEach(link => {
-            link.addEventListener("click", () => {
-                hamburgerMenu.classList.remove("active");
-                overlay.classList.remove("active");
-            });
-        });
-    }
-
-    // Handle fade-in animations on scroll
-    const faders = document.querySelectorAll('.fade');
-    const appearOptions = { threshold: 0.1, rootMargin: "0px 0px -100px 0px" };
-
-    const appearOnScroll = new IntersectionObserver((entries, appearOnScroll) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("fade-in");
-                appearOnScroll.unobserve(entry.target);
-            }
-        });
-    }, appearOptions);
-
-    faders.forEach(fader => {
-        if (fader) appearOnScroll.observe(fader);
-    });
-
-    // Reset scroll position for committee and speaker cards
-    const resetScrollOnLeave = (selector) => {
-        document.querySelectorAll(selector).forEach(card => {
-            const content = card.querySelector('.content, .contentleft, .contentright');
-            if (content) {
-                card.addEventListener('mouseleave', () => {
-                    content.scrollTop = 0;
-                });
-            }
-        });
-    };
-
-    resetScrollOnLeave('.committeecontainer .card');
-    resetScrollOnLeave('#speakers .card');
-
-    // Adjust scroll-margin-top for Chrome browser
-    const isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-    if (isChrome) {
-        const careerSection = document.querySelector("#career");
-        if (careerSection) {
-            careerSection.style.scrollMarginTop = "65px";
-        }
-    }
-});
-
-</script>
+<script src="scripts/script.js"></script>
 
 	
 </body>
