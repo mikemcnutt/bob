@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Weekly Schedule</title>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+		main {
+			   font-family: Arial, sans-serif;
+            background: linear-gradient(#001E80, white);
+          border: 1px solid black;
+            border-radius:25px;
+            padding: 20px;
+       
+		}
+         table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border: 1px solid black;
+            border-spacing: 0;
+             }
+
+        caption {
+            color: white;
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+			
+            margin-bottom: 20px;
+            font-family: "BioRhyme", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  
+		}
+      caption img {
+      height: 45px;
+      margin-left: 10px;
+      filter: drop-shadow(6px 6px 10px rgba(255, 255, 255, 0.8));
+        vertical-align: middle;
+    }
+   
+
+
+        th {
+            background-color: #001E80;
+            color: #FFFFFF;
+            padding: 15px;
+            text-align: left;
+        }
+
+        tr:nth-child(even) {
+            background-color: white;
+			color:#1B1B3A;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #80C6FF;
+				color:#1B1B3A;
+        }
+
+  
+
+        tr:hover {
+				color: white;
+            background-color: #001E80;
+		
+        }
+		      td {
+            
+            padding: 15px;
+            text-align: left;
+        }
+
+
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+                width: 100%;
+            }
+
+            caption {
+                display: block;
+                text-align: center;
+            }
+
+            thead tr {
+                display: none;
+            }
+
+            tr {
+                margin-bottom: 15px;
+            }
+
+            td {
+                text-align: right;
+                padding-left: 50%;
+                position: relative;
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                min-height: 60px;
+            }
+
+            td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-left: 15px;
+                font-weight: bold;
+                text-align: left;
+                color: #00467f;
+            }
+
+            .break-row-cell {
+                text-align: center;
+                font-size: 1.2em;
+                padding: 15px;
+                position: relative;
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                background-color: #f9f9f9;
+            }
+
+            .break-row-cell::before {
+                content: '';
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <p><strong>Weekly Assignments include a mixture of:</strong><br>
+    <ul>
+        <li>eBook Reading, Videos, Critical Thinking Tasks/Discussion, Training, Exams, and Projects</li>
+        <li>Assignments in Blackboard</li>
+        <li>Assignments in TestOut</li>
+        <li>Assignments must be submitted by 11:59 PM ET on the specified due date to receive credit, otherwise a zero will be assigned unless prior permission for a late submission has been arranged with the instructor.</li>	
+    </ul>
+    </p>
+  <main>
+    <table>
+    	 <caption>Tentative Weekly Schedule<img src="/bbcswebdav/xid-469657693_4" alt="Technology Information Logo" /></caption>
+       <thead> 
+            <tr>
+                <th scope="col" width="15%">Week</th>
+                <th scope="col" width="30%">Blackboard Assignments&nbsp;</th>
+                <th scope="col" width="30%">TestOut Assignments</th>
+                <th scope="col" width="15%">Due Dates</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Week">Week 1</td>
+                <td data-label="Blackboard Assignments">Read/review "Start Here" module<br>Syllabus Quiz</td>
+                <td data-label="TestOut Assignments">1.1-1.2 (Online Essentials)</td>
+                <td data-label="Due Dates">&nbsp;1/20</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 2</td>
+                <td data-label="Blackboard Assignments">Collaborate Live Session &amp; Collaboration Quiz</td>
+                <td data-label="TestOut Assignments">1.3-1.5 (Online Essentials)  &nbsp;<br>Pre-Test (Office Pro Certification Practice Exam)</td>
+                <td data-label="Due Dates">&nbsp;1/27</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 3</td>
+                <td data-label="Blackboard Assignments">&nbsp;</td>
+                <td data-label="TestOut Assignments">8.1-8.5: (Microsoft Outlook)</td>
+                <td data-label="Due Dates">&nbsp;2/3</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 4</td>
+                <td data-label="Blackboard Assignments">Teams Live Session &amp; Teams Quiz</td>
+                <td data-label="TestOut Assignments">2.1-2.2 (Computer Essentials)</td>
+                <td data-label="Due Dates">&nbsp;2/10</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 5</td>
+                <td data-label="Blackboard Assignments">&nbsp;</td>
+                <td data-label="TestOut Assignments">2.3-2.6 (Computer Essentials)</td>
+                <td data-label="Due Dates">&nbsp;2/17</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 6</td>
+                <td data-label="Blackboard Assignments">Discussion Board - The Dark Side of Social Media</td>
+                <td data-label="TestOut Assignments">2.7-3.5 (Common Office Features)</td>
+                <td data-label="Due Dates">&nbsp;2/24</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 7</td>
+                <td data-label="Blackboard Assignments">&nbsp;</td>
+                <td data-label="TestOut Assignments">4.1-4.6 (Microsoft Word)</td>
+                <td data-label="Due Dates">&nbsp;3/3</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 8</td>
+                <td data-label="Blackboard Assignments">Virtual Q&amp;A - Teams&nbsp;<br>QEP Assignment&nbsp;<br>Word Survey</td>
+                <td data-label="TestOut Assignments">4.7-4.12&nbsp;(Microsoft Word)</td>
+                <td data-label="Due Dates">&nbsp;3/10</td>
+            </tr>
+              <tr>
+                <td data-label="Week">Fall Break</td>
+                <td data-label="Blackboard Assignments">&nbsp;</td>
+                <td data-label="TestOut Assignments">&nbsp;</td>
+                <td data-label="Due Dates">&nbsp;3/10-3/14</td>
+            </tr>
+                <td data-label="Week">Week 9</td>
+                <td data-label="Blackboard Assignments">&nbsp;</td>
+                <td data-label="TestOut Assignments">5.1-5.5 (Microsoft Excel)</td>
+                <td data-label="Due Dates">&nbsp;3/24</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 10</td>
+                <td data-label="Blackboard Assignments">Virtual Q&amp;A - Teams&nbsp;<br>Excel Survey</td>
+                <td data-label="TestOut Assignments">5.6-5.10: (Microsoft Excel)</td>
+                <td data-label="Due Dates">&nbsp;3/31</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 11</td>
+                <td data-label="Blackboard Assignments">&nbsp;</td>
+                <td data-label="TestOut Assignments">6.1-6.5&nbsp;(Microsoft PowerPoint)</td>
+                <td data-label="Due Dates">&nbsp;4/7</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 12</td>
+                <td data-label="Blackboard Assignments">Discussion Board: AI<br>PowerPoint Survey</td>
+                <td data-label="TestOut Assignments">6.6-6.10&nbsp;(Microsoft PowerPoint)</td>
+                <td data-label="Due Dates">&nbsp;4/14</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 13</td>
+                <td data-label="Blackboard Assignments">&nbsp;</td>
+                <td data-label="TestOut Assignments">7.1-7.4 (Microsoft Access)</td>
+                <td data-label="Due Dates">&nbsp;4/21</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 14</td>
+                <td data-label="Blackboard Assignments">Access Survey</td>
+                <td data-label="TestOut Assignments">7.5-7.7 (Microsoft Access)</td>
+                <td data-label="Due Dates">&nbsp;4/28</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 15</td>
+                <td data-label="Blackboard Assignments">&nbsp;</td>
+                <td data-label="TestOut Assignments">&nbsp;Review, FINAL EXAM AVAILABLE</td>
+                <td data-label="Due Dates">&nbsp;</td>
+            </tr>
+            <tr>
+                <td data-label="Week">Week 16</td>
+                <td data-label="Blackboard Assignments">&nbsp;</td>
+                <td data-label="TestOut Assignments">&nbsp;Final Exam - Due Date: Tuesday, 12/10/2024</td>
+                <td data-label="Due Dates">&nbsp;5/6</td>
+            </tr>
+        </tbody>
+    </table>
+  </main>
+</body>
+</html>
