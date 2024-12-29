@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <Title>Module Overview</title>
+<style>
+
+@import url(https://fonts.googleapis.com/css?family=Crete+Round);
+
+body{
+height:500px;
+}
+		main {
+			   font-family: Arial, sans-serif;
+            background: linear-gradient(#020024, #090979,#9b98c3, white);
+          border: 1px solid black;
+            border-radius:25px;
+            padding: 20px;
+       
+		}
+	      h1 img {
+      height: 85px;
+      margin-left: 10px;
+      filter: drop-shadow(6px 6px 10px rgba(255, 255, 255, 0.8));
+        vertical-align: middle;
+    }		
+	
+h1, h2 {
+  font-family: 'Crete Round', serif;
+  padding:11px;
+    line-height: 1.1;
+}
+
+a{
+  color: #cd0e2c;
+  text-decoration: none;
+}
+.tablinks {
+  background:#e7a614;
+}
+.tablinks {
+
+  justify-content: center;
+  line-height: 1;
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 0px;
+  width: 190px;
+  height: 40px;
+  font-weight: bold;
+  border: 2px double #333333;
+  transition: .3s;
+  box-shadow: 5px 5px 0px 0px rgba(51, 51, 51, 1);
+  background-color: #e7a614;
+	;
+}
+.tablinks:hover {
+
+  box-shadow: 0 0 #333;
+  color: #000;
+  background-color: #3bb3e5;
+}
+.tablinks:active {
+	position:relative;
+	top:1px;
+}
+
+.tab button {
+  
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+.content{
+ 
+  background:#7DF9FF;
+  width: 80%;
+  max-width: 960px;
+  min-height: 400px;
+  margin: 2em auto;
+  padding: .250em .250em 3.250em 1.250em;
+  border-radius: .313em;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.5);
+  line-height: 1.4em;
+  color: black;
+font-size: 1rem;
+}
+.tabcontent {
+     display:none;
+}
+#logo {
+  float: right;
+  display:inline-block;
+  vertical-align:middle;
+  margin:20px:
+  
+}
+.ribbon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position:relative;
+  padding: 0 0.5em;
+height:50px;
+  margin: 0 0 0 -0.625em;
+  line-height: 1.1em;
+  border-radius: 0 0.156em 0.156em 0;
+  background: #3F00FF;
+  box-shadow: -1px 2px 3px rgba(0,0,0,0.5);
+  color:lightblue;
+  z-index:100;
+}
+
+.ribbon:before, .ribbon:after{
+  position:absolute;
+  content: '';
+  display: block;
+}
+
+.ribbon:before{
+  width: 0.469em;
+  height: 100%;
+  padding: 0 0 0.438em;
+  top:0;
+  left: -0.469em;
+  background:inherit;
+  border-radius: 0.313em 0 0 0.313em;
+}
+
+.ribbon:after{
+  width: 0.313em;
+  height: 0.313em;
+  background: rgba(0,0,0,0.35);
+  bottom: -0.313em;
+  left: -0.313em;
+  border-radius: 0.313em 0 0 0.313em;
+  box-shadow: inset -1px 2px 2px rgba(0,0,0,0.3);
+}
+#video{
+    aspect-ratio: 16 / 9;
+  width: 100%;
+    border-radius: 0.313em 0 0 0.313em;
+  box-shadow: inset -1px 2px 2px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 600px) {
+  
+  body{
+    font-size:0.875em;
+  }
+  
+  .ribbon{
+    line-height: 1.143em;
+    padding: 0.5em;
+    height:120px;
+  }
+  
+  .ribbon:before, .ribbon:after{
+    font-size: 0.714em;
+  }
+
+}
+</style>
+</head>
+<body><main>
+<div class="content">
+<p></p>
+  <h1 class="ribbon">Module Overview <img src="https://elearning.kctcs.edu/bbcswebdav/xid-469657693_4" alt="image of KCTCS mascot Pathfinder" /></h1>
+  <p>A website provides several creative opportunities to capture the attention of your audience. Many websites use multimedia (digital media such as audio, video, and animation) to enrich the user experience and provide interactivity. For example, websites include videos to share news updates, promote products and services, or demonstrate how to use a product. Videos add visual appeal and can pack a huge amount of information into a few seconds. According to a recent study by Forrester Research, consumers prefer videos to text, find them more memorable, and stay on websites that include videos longer than websites that do not.</p>
+  <p>Audio on webpages can set a mood or tone and further entice a user to make a purchase. Audio can also provide information more quickly or effectively than text, such as a guided tour that describes the features of a product or testimonials from customers that support a product or service.</p>
+  <p>In this chapter, you will learn how to use HTML 5 to embed audio and video on an HTML webpage. You will learn how to use the audio element and its attributes to add audio to a webpage. Similarly, you will learn how to use the video element and its attributes to add a video to webpage. You will also learn about the various audio and video file formats and which formats to use for the web. Finally, you will learn how to make videos accessible.</p>
+   <h1 class="ribbon">Why it Matters</h1>
+<p>Multimedia elements such as audio, video, and animation play a pivotal role in enhancing the user experience on websites. They not only enrich content but also add interactivity, capturing and retaining the attention of visitors more effectively than text alone. Videos, in particular, have become increasingly popular for sharing news updates, promoting products and services, and providing instructional content. Research shows that consumers prefer videos over text, finding them more memorable and engaging.</p>
+<p>Similarly, audio can set the mood or tone of a webpage, further enticing users and conveying information quickly and effectively. Whether it's providing guided tours of products or featuring customer testimonials, audio adds another layer of engagement and enhances user interaction.</p>
+  <h1 class="ribbon"> Module Activities</h1>
+       <ul>
+    <li>Chapter 9 Reading</li> 
+    <li>Chapter 9 - Lab 2</li> 
+    </ul>
+  <h1 class="ribbon">Demonstrate Competencies</h1>
+
+     <ul>
+    <li>Describe the benefits and limitations of multimedia in websites</li> 
+    <li>Identify audio formats</li> 
+    <li>Identify video formats</li> 
+    <li>Describe a plug-in</li> 
+    <li>Understand codecs</li> 
+    <li>Understand and create audio elements</li> 
+    <li>Understand and create video elements</li> 
+    <li>Identify common audio attributes</li> 
+    <li>Identify common video attributes</li> 
+    <li>Understand the source element</li> 
+    <li>Test audio elements</li>   
+    <li>Test video elements</li> 
+    <li>Make videos accessible</li> 
+    </ul>
+
+   
+
+</div>
+<div><p>&nbsp;</p></div></main>
+</body>
+</html>
