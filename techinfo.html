@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="EN">
+<head>
+    <title>Technology Information</title>
+    <style>
+        * {
+        margin:0;
+        padding:0;
+        }
+       
+     
+       body {
+        font-family: sans-serif;
+        height:700px;
+         
+       }  
+
+#mobile {
+     display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+
+}
+#desktop {
+   display:none;
+}
+  .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+.mobilebutton {
+    display: block;
+  background-color: #00467f;
+  color: white;
+  height:50px;
+  width: 300px;
+  border: 1;
+  outline: none;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  padding:2px;
+
+}
+
+
+/* Create an active/current "tab button" class */
+.mobilebutton.active {
+  background-color: #e7a614 ;
+  
+}
+  li {
+    list-style-type:none;
+  }
+   #first, #second, #third, #fourth, #fifth, #sixth, #seventh, #eigth, #ninth {
+ 
+  width: 80%;
+  max-width: 960px;
+  min-height: 3.750em; 
+  margin: 2em auto;
+  padding: .50em .250em .250em 1.250em;
+     border:5px solid #e7a614;
+    outline:5px solid #00467f;
+ border-radius: 0.313em;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.5);
+  line-height: 1.4em;
+  color: black;
+font-size: 1rem;
+display:none;
+}
+  @media only screen and (min-width: 600px) {
+ #mobile {
+   display:none;
+
+}
+#desktop {
+     display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+      
+
+	  a {
+        text-decoration: none;
+       }
+       span.label{
+        color:white;
+        position:relative;
+        display: inline-block;
+        top:10%;
+        -webkit-transform:translateY(-50%);
+                transform:translateY(-50%);
+       }
+       nav {
+        background-color: white;
+        margin-top: 0px;
+        height: 100px;
+        text-align: center;
+       }
+       nav ul {
+        position:relative;
+        display: inline-block;
+        top:50%;
+        -webkit-transform:translateY(-50%);
+                transform:translateY(-50%);    
+        height:50%;    
+       }
+       nav ul:before, nav ul:after {
+        content: "";
+        position: absolute;
+        display:block;
+        border:25px solid #053c7a;
+               }
+        nav ul:before {
+        -webkit-transform:translateX(-100%);
+                transform:translateX(-100%);
+        border-right-width: 100%;
+        border-left-color: transparent;
+       }       
+       nav ul:after {
+        right:0;
+        -webkit-transform:translateX(100%);
+                transform:translateX(100%);
+        border-right-color: transparent;
+        border-left-width: 100%;        
+       }
+       nav ul li {
+        display: block;
+        float: left;
+        width: 100px;
+        height: 100%;
+        background-color:#00467f;
+        border-right: 1px dotted #005cb8;
+        
+       }
+       nav ul li:first child {
+        border-left: 1px dotted #005cb8;
+       }
+       nav ul li a {
+        display: inline-block;
+        width: 100%;
+        height: 50px;
+       }
+       nav ul li:hover {
+        border-color: transparent;
+        -webkit-transition:-webkit-transform 200ms;
+        transition: -webkit-transform 200ms;
+        transition: transform 200ms;
+        transition: transform 200ms, -webkit-transform 200ms;
+        -webkit-transform:scale(1.25) translateY(20px);
+                transform:scale(1.25) translateY(20px);
+        position: relative;    
+        z-index: 1;    
+       }
+       nav ul li:hover a{
+        background-color: #00467f;
+        -webkit-transition:background-color 200ms;
+        transition: background-color 200ms;
+       }
+       nav ul li:hover a::before{
+        content:'' ;
+        display: block;
+        height: 300%;
+        width: 100%;
+        position:absolute;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+       }
+       nav ul li::before, nav ul li::after {
+        -webkit-transform: translateY(100%);
+        transform: translateY(-100%);
+        content: '';
+        position: absolute;
+        display: block;
+        border-style: solid;
+        border-width: 0;
+        opacity: 0;
+        -webkit-transition: border-width 200ms ease;
+        transition: border-width 200ms ease;
+       }
+       nav ul li::before {
+        left: 0;
+       }
+       nav ul li::after{
+        right:0;
+       }
+       nav ul li:hover::before {
+         border-color: transparent #e7a614 transparent transparent;
+         border-width: 15px 10px 0 0;
+         opacity: 1;
+       } 
+       nav ul li:hover::after {
+        border-color: transparent transparent transparent #e7a614;
+         border-width: 15px 0 0 10px;
+         opacity: 1;
+         position: absolute;
+         top: 0;
+       }
+       #tabcontent {
+       display:none;
+       }
+  #first, #second, #third, #fourth, #fifth, #sixth, #seventh, #eigth, #ninth {
+ 
+  width: 80%;
+  max-width: 960px;
+  min-height: 3.750em; 
+  margin: 2em auto;
+  padding: .50em .250em .250em 1.250em;
+     border:5px solid #e7a614;
+    outline:5px solid #00467f;
+ border-radius: 0.313em;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.5);
+  line-height: 1.4em;
+  color: black;
+font-size: 1rem;
+display:none;
+}
+ .topheader {
+   text-align:center;
+ }
+
+  button {
+    min-height: 3.750em; 
+  border:0;
+  background-color:#053c7a ;
+  color:white;
+  padding:1px;
+  }
+      }
+    </style></head>
+    <body>
+
+  <div id="desktop">
+    <h1 class="topheader" >Technology Information</h1>
+   <p>Click on an option below to display the associated information.</p>
+       <nav><ul>
+        <li><button class="tablinks label" id="defaultOpen" onclick="openCity(event, 'first')">Technology Information</button></li>
+        <li> <button class="tablinks label" onclick="openCity(event, 'second')">On-Campus Technology Access</button></li>
+        <li>  <button class="tablinks label"  onclick="openCity(event, 'third')">Technology <br>Support&nbsp;</button></li>
+       </ul></nav>
+ </div>
+   <div id="mobile">
+   <p>Click on an option below to display the associated information.</p>
+ <nav><ul>
+        <li><button class="tablinks label mobilebutton" id="defaultOpen" onclick="openCity(event, 'first')">Technology Information</button></li>
+        <li> <button class="tablinks label mobilebutton" onclick="openCity(event, 'second')">On-Campus Technology Access</button></li>
+        <li>  <button class="tablinks label mobilebutton"  onclick="openCity(event, 'third')">Technology <br>Support&nbsp;</button></li>
+       </ul></nav>
+  </div>
+  
+<div id="first" class="tabcontent">
+  <h2>Technology Information</h2><br>
+    <p>There are a wide variety of technical related issues that may arise in any course. While your instructor can provide a certain level of technical support, there may be items that are beyond their expertise or control. Review the following guides to help prevent and troubleshoot common technology related issues. Reference back to these guides at any point in the semester that you run into unexpected issues. </p>
+   <br><ul>
+     <li><a href="https://rise.articulate.com/share/QJnR-aqFPuWIAsFl0yKvW6F0VEzqlzRz#/" target="_blank">General Troubleshooting Tips</a></li>
+     <li><a href="https://rise.articulate.com/share/0ZIPrZMPxc43bPa34GjTTb1E_HcdWR-L#/" target="_blank">Installing Microsoft Office</a></li>
+     <li><a href="https://rise.articulate.com/share/oV4ePZADpm2HqH_r6QaPqFRLY5likOVE#/" target="_blank">Installing Recommended Internet Browsers</a></li>
+     <li><a href="https://rise.articulate.com/share/z3akzkystEbAYtO_R_JujvuWqlhAmE7F#/" target="_blank">Installing & Using the Blackboard App</a></li>
+     <li><a href="https://rise.articulate.com/share/d98O2lnLTC1-30RdpEpOQow_bBw6fpCs#/" target="_blank">Checking for Updates</a></li>
+     <li><a href="https://rise.articulate.com/share/jQ1PiBkrMhnPMlz4uGC-s7LdlR0dGK3y#/" target="_blank">Checking Device Minimum Requirements</a></li>
+     <li><a href="https://alt-5beddfe10b70f.blackboard.com/bbcswebdav/institution/KOOL_Training/Micro%20Courses/Foundational%20Computer%20Skills%20for%20Online%20Learning/content/index.html?one_hash=5BDB36844E0985151DFD8F684AEC4BFC&f_hash=486452756EB2A6393EC57613046CAF21#/" target="_blank">Foundational Computer Skills for Online Learning</a></li>
+    </ul>  
+  <br>  <img src="https://elearning.kctcs.edu/bbcswebdav/xid-417632195_2" alt="decorative banner featuring MCTC mascot Pathfinder" width="98%">
+	
+</div>
+
+
+<div id="second" class="tabcontent">
+    <h2>On-Campus Technology Access</h2><br>
+  <p>Technology issues can be frustrating! If at any point during the course you are having technology or internet related issues, we want you to know that you can come to campus!</p>
+	<br><h2>Computer Labs</h2><br>
+	<p>Students are welcome to work on homework or access their online classes in any of our open computers labs. Generally, open computer labs are available during normal college operating hours but may vary throughout the semester. Please check with the <a href="https://libguides.maysville.kctcs.edu/c.php?g=1145624&p=9302291" target="_blank">Library Staff</a> for <a href="https://libguides.maysville.kctcs.edu/aboutus" target="_blank">specific hours and availability</a>. </p>
+	<br><ul>
+	<li><strong>Licking Valley Campus</strong>: L-105 (Library/Academic Commons) </li>
+	<li><strong>Maysville Campus: A-273</strong> (Library/Academic Commons)</li>
+	<li><strong>Montgomery Campus</strong>: Room 211 (Library/Student Success Center) </li>
+	<li><strong>Rowan Campus</strong>: Room 225 (Library/Academic Commons)</li>
+	</ul><br>
+	<h2>Printing</h2><br>
+	<p>Each semester you will receive $15 on your printing account. Your balance will be available the second week of classes. If you do not use all of the funds in your print account that amount is carried over from fall to spring to summer. All print accounts will be reset to $15 at the beginning of the next school year. If you use all of your print account funds, you can add to your account at the <a href="https://maysville.kctcs.edu/affording-college/paying-for-college/business-office.aspx" target="_blank">Business Office</a> or <a href="https://libguides.maysville.kctcs.edu/c.php?g=1145624&p=9302291" target="_blank">Library</a>. New students will receive an email with their print code (also called a PIN).</p>
+	<br><h2>Internet / WiFi Access</h2>
+	<br><p>In order to connect to KCTCS wireless, select KCTCS-Guest from the selection menu on your wireless device. No password is required. You can also connect to KCTCS wireless from the MCTC parking lots closest to a campus building.</p>
+	<br><img src="https://elearning.kctcs.edu/bbcswebdav/xid-417624682_2" alt="image of computing devices with Pathfinder logo on the screen" width="65%">
+
+  
+</div>
+
+<div id="third" class="tabcontent">
+<h2>Technology Support</h2><br>
+      <p>If you've tried all the common troubleshooting tips above, then you may need to reach out to the experts! Information and contact information for Technology Support options are provided below. </p>
+      <br><img src="https://elearning.kctcs.edu/bbcswebdav/xid-420493321_2" width="80%" alt="image that says Go KCTCS! Student Service Cent">
+     <br> <h3>GoKCTCS Technical Support</h3><br>
+      <p>If you need technical support for using or accessing Blackboard or any other KCTCS system or resource, there is one central access point where you reach out for support: <a href="https://help.maysville.kctcs.edu/shp/kctcs-maysville/home" target="_blank">GoKCTCS</a>.</p>
+      <br> <p>The GoKCTCS site provides you with direct contact information for calling, chatting or emailing a request for assistance. <strong>This service is available 24 hours a day, every day of the year</strong>.</p>
+     <br> <h3>Maysville Information Technology Resources</h3>
+     <br> <p>MCTC's IT Services strive to provide the most up-to-date information and assistance to students!</p>
+     <br> <p>You can find help related to the following needs on the <a href="https://maysville.kctcs.edu/current-students/it-resources-student.aspx" target="_blank">Student Information Technology Resources webpage</a>:</p>
+    <br>  <p><a href="mailto:maysville-helpdesk@kctcs.edu">Contact MCTC's IT Services</a> for additional IT related needs.</p>
+	 <br> <h3>Blackboard Help & Chat</h3>
+	<br>  <p>Are you having issues with Blackboard? For Blackboard assistance, you can access the <a href="https://help.blackboard.com/Learn/Student/Ultra" target="_blank">Blackboard Help Guides</a> or <strong>Live Chat Help</strong>. The chat feature is available from any page in Blackboard by clicking the help icon, which can be found at the bottom right of any page in Ultra.</p>
+	<br>  <img src="https://elearning.kctcs.edu/bbcswebdav/xid-417624681_2" class="center" alt="image displaying how to use Blackboard chat">
+	 <br> <h3>Publisher Support</h3>
+	<br>  <p>If you are having difficulty accessing a publisher's content, follow these steps:</p>
+	 <br> <ol>
+	  <li>1. First, let your instructor know you are having difficulty and that you are seeking support from the publisher. This not only lets your instructor know why they aren't seeing any work from you, but may also make them aware of an issue with their course.</li>
+	 	<br>  <li>2. Try testing your access in another browser. Usually Chrome and Firefox are the most reliable browsers. You may also wish to test your access via the Blackboard app on your mobile device.</li>
+	 	<br>  <li>3.Contact the publisher if the problem persists. You will receive the most accurate assistance when you contact the publisher directly for technical assistance. Many publishers offer a help desk chat feature which can provide you with instant support. <strong>Be prepared to supply important information about the course when you contact support (e.g., instructor name, course name, access code, error received, browser being used)</strong>.</li>
+	  </ol>
+	  
+	<br> 
+  <h3>Contacting Publisher Support</h3><br>
+  <p><a href="https://techcheck.cengage.com/" target="_blank">Cengage Product Check</a> - Check here to make sure MindTap is functioning properly<br><br>
+   <p><a href="https://cengageorg.my.site.com/Service/s/login/?language=en_US" target="_blank">Cengage Technical Support</a> - How to contact Cengage if you are having issues with MindTap<br><br>
+ <p><a href="https://help.cengage.com/student/mindtap/index.html" target="_blank">Getting Started with MindTap</a> - Information about getting started with MindTap<br><br>
+   <p>The first time you access Cengage/ Mindtap, you may need to set up an account unless you have taken another class that used Cengage. The video below provides the steps.</p><br> 
+   <p>Please note that you will be clicking on the MindTap link I provide in the Course Content (Week 01 has links) instead of looking for the blue wheel as they describe in the video. Once you click the MindTap link, the steps will be the same. <strong>Please use your KCTCS email address when prompted for an email.</strong></p><br> 
+   <p>After accessing Cengage once, you will not be asked to enter your login at any other time.</p><br> 
+ <iframe src="https://www.youtube.com/embed/0u_PD9-9_mc?si=85sfoo0Nz7cpPeky" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  <br><br> 
+	  <h3>Assistive Technologies</h3><br>
+	  <p>Should you have trouble accessing any of the applications used within this course with your assistive technologies, then please refer to the <a href="https://kctcs.edu/current-students/academic-resources/student-accessibility-resource-guide.pdf" target="_blank">Student Accessibility Resource Guide</a>. Whether you need access to campus or local resources, help using assistive technologies, or assistance with Blackboard, Microsoft, Apple, or Publisher applications this resource guide will point you in the right direction.</p>
+	 <br> <p>For additional help, please visit <a href="https://maysville.kctcs.edu/about/student-life/student-support-services/accessibility-services.aspx" target="_blank">MCTC Accessibility Services</a> or contact a member of our <a href="https://maysville.kctcs.edu/current-students/student-resources/success-coaches.aspx" target="_blank">Student Success Team</a>. </p>
+	<br>  <img src="https://elearning.kctcs.edu/bbcswebdav/xid-417632195_2" alt="decorative banner featuring MCTC mascot Pathfinder" width="98%">
+	  </div>
+ 
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+
+
+</script>
+    </body>
+    </html>
