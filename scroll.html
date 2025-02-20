@@ -1,1 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ephesis&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            background-color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+      .mobile-wrapper {
+        display:none;
+      }
+        .accordion {
+            max-width: 650px;
+            width: 100%;
+            min-height: 900px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .accordion-header,
+        .accordion-footer {
+            background-size: cover;
+            background-position: center;
+            height: 95px;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 6s ease;
+        }
+        .accordion-header {
+            background-image: url('https://elearning.kctcs.edu/bbcswebdav/xid-464745873_4');
+            z-index: 3;
+            position: relative;
+        }
+        .accordion-footer {
+            background-image: url('https://elearning.kctcs.edu/bbcswebdav/xid-464745871_4');
+            margin-left: 3px;
+            margin-top: -67px;
+            z-index: 6;
+            position: relative;
+            transition: margin-top 6s ease;
+        }
+        .accordion-content {
+            background-image: url('https://elearning.kctcs.edu/bbcswebdav/xid-464745872_4');
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: repeat-y;
+            padding: 20px;
+            flex-grow: 1;
+            position: relative;
+            z-index: 5;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 6s ease;
+            font-family: 'Lobster Two', sans-serif;
+            top: -24px;
+        }
+        .accordion-content.open {
+            max-height: 500px;
+        }
+        .accordion-footer.open {
+            margin-top: -106px;
+        }
+        .content-container {
+            width: 75%;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .content-container h2,
+        .content-container p,
+        .content-container li {
+            display: none;
+        }
+        .content-container h2 {
+            text-align: center;
+              font-family: "Ephesis", serif;
+  font-weight: 800;
+  font-style: normal;
+        }
+
+.mobile-wrapper {
+    display: none;
+    width: 90%;
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+    
+@keyframes dropDown {
+    0% {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        max-height: 2000px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-content {
+    animation: dropDown 1s ease-out forwards;
+}
+
+@media (max-width: 633px) {
+    #fullintro {
+        display: none;
+    }
+    
+    .accordion {
+        display: none;
+    }
+    
+    .mobile-wrapper {
+        display: block;
+        position: relative;
+        width: 90%;
+        max-width: 600px;
+        margin: 30px auto;
+        background-color: #e2cd9e;
+        font-family: serif;
+        color: #333;
+        overflow: hidden; 
+    }
+    
+    .mobile-contents {
+        display: block;
+        padding: 25px 15px;
+        font-family: 'Lobster Two', sans-serif;
+        animation: dropDown 1s ease-out forwards;
+    }
+    
+    /* Fix the pseudo-elements */
+    .mobile-wrapper::before,
+    .mobile-wrapper::after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: auto;
+        position: absolute;
+    }
+}
+    </style>
+</head>
+<body>
+
+<h1>Module Header</h1>
+<p id="fullintro">Click on the top of the scroll to read its content. 633px media query needed.</p>
+
+<div class="accordion">
+    <div class="accordion-header" id="accordion-header" tabindex="0" role="button" aria-expanded="false" aria-controls="accordion-content"></div>
+    <div class="accordion-content" id="accordion-content" role="region" aria-labelledby="accordion-header" aria-hidden="true">
+        <div class="content-container">
+            <h2>Module Overview</h2>
+            <p>In this module we will be going through Chapter 4.1 - 4.5 which covers IP addressing, APIPA and alternate addressing, DHCP, DHCP Relay, and DNS.</p>
+            <h2>Demonstrate Competency</h2>
+            <ul>
+                <li>IP Addressing</li>
+                <li>APIPA and Alternate Addressing</li>
+                <li>DHCP</li>
+                <li>DHCP Relay</li>
+                <li>DNS</li>
+            </ul>
+            <h2>Module Activities</h2>
+            <p>Complete sections 4.1 - 4.5 in TestOut.</p>
+        </div>
+    </div>
+    <div class="accordion-footer" id="accordion-footer"></div>
+</div>
+
+<div class="mobile-wrapper">
+  <div class="mobile-contents">
+         <h2>Module Overview</h2>
+            <p>In this module we will be going through Chapter 4.1 - 4.5 which covers IP addressing, APIPA and alternate addressing, DHCP, DHCP Relay, and DNS.</p>
+            <h2>Demonstrate Competency</h2>
+            <ul>
+                <li>IP Addressing</li>
+                <li>APIPA and Alternate Addressing</li>
+                <li>DHCP</li>
+                <li>DHCP Relay</li>
+                <li>DNS</li>
+            </ul>
+            <h2>Module Activities</h2>
+            <p>Complete sections 4.1 - 4.5 in TestOut.</p>
+  </div>
+</div>
+ 
+
+
+  
+<script>
+    $(document).ready(function() {
+        $('#accordion-header').click(function() {
+            const content = $('#accordion-content');
+            const footer = $('#accordion-footer');
+            const isOpen = content.hasClass('open');
+
+            content.toggleClass('open', !isOpen);
+            footer.toggleClass('open', !isOpen);
+
+            // Update ARIA attributes
+            $(this).attr('aria-expanded', !isOpen);
+            content.attr('aria-hidden', isOpen);
+
+            if (!isOpen) {
+                let delay = 500;
+                $('.content-container h2, .content-container p, .content-container li').each(function() {
+                    $(this).delay(delay).fadeIn(500);
+                    delay += 500;
+                });
+                $('.content-container h2:first').focus(); 
+            } else {
+                $('.content-container h2, .content-container p, .content-container li').hide();
+            }
+        });
+
+        $('#accordion-header').keydown(function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                $(this).click();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
 
