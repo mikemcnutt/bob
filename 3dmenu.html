@@ -19,7 +19,7 @@
             justify-content: center;
             align-items: flex-start;
             height: 100vh;
-            background: white; /* Webpage background set to white */
+            background: white; 
         }
 .page-title {
     text-align: center;
@@ -27,21 +27,20 @@
     color: #00467f;
     margin-bottom: 20px;
 }
-        /* Content Wrapper - Wider */
+      
         .container {
             display: flex;
-            flex-direction: row-reverse; /* Swaps position of content and buttons */
+            flex-direction: row-reverse; 
             align-items: center;
-            gap: 50px; /* Increased gap so buttons move more to the right */
-            background: white; /* Inside the border remains white */
+            gap: 50px; 
+            background: white; 
             padding: 15px;
-            border: 5px solid #00467f; /* Blue border around the entire content */
+            border: 5px solid #00467f; 
             border-radius: 15px;
-            width: 900px; /* Increased width */
+            width: 900px; 
         }
 
-        /* Image above buttons */
-        .logo {
+                .logo {
             display: flex;
             justify-content: center;
             margin-bottom: 40px;
@@ -51,7 +50,6 @@
             height: 60px;
         }
 
-        /* Button Menu */
         .menu-container {
             display: flex;
             flex-direction: column;
@@ -81,7 +79,6 @@
             transform: translate(40px, 40px);
         }
 
-        /* Left side effect */
        .menu-container  ul li::before {
             content: '';
             position: absolute;
@@ -99,8 +96,7 @@
             background: #e7a614;
         }
 
-        /* Top side effect - Reduced Font Size */
-        .menu-container ul li::after {
+       .menu-container ul li::after {
             content: attr(data-text);
             position: absolute;
             top: -40px;
@@ -112,7 +108,7 @@
             padding-left: 20px;
             color: rgba(0,0,0,0.15);
             font-weight: 600;
-            font-size: 1.2em; /* Reduced font size so text fits on one line */
+            font-size: 1.2em; 
             background: #00467f;
             transform-origin: bottom;
             transform: skewX(45deg);
@@ -136,8 +132,7 @@
             color: #212121;
         }
 
-        /* Image inside buttons (on the left, properly aligned) */
-        .menu-container ul li a span {
+       .menu-container ul li a span {
             position: absolute;
             top: 25%;
             left: -40px;
@@ -154,7 +149,6 @@
             height: auto;
         }
 
-        /* Dynamic Content Section */
         .content-container {
             width: 600px;
             min-height: 400px;
@@ -231,7 +225,6 @@
         contentDiv.innerHTML = content[contentType];
     }
 
-    // Ensure "Module Overview" is loaded when the page loads
     window.onload = function () {
         loadContent('module-overview');
     };
@@ -241,12 +234,12 @@
 <body>
 
     <div class="container" role="main">
-        <!-- Dynamic Content Section -->
+       
         <div id="content-container" class="content-container">
      
         </div>
 
-        <!-- Menu with Logo -->
+        
         <div class="menu-container" role="navigation">
             <div class="logo">
                 <img src="https://elearning.kctcs.edu/bbcswebdav/xid-469657693_4" alt="">
