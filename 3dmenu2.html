@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Isometric Menu with Right-Aligned Buttons</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Oswald:400,700');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh;
+            background: white; 
+        }
+.page-title {
+    text-align: center;
+    font-size: 28px;
+    color: #00467f;
+    margin-bottom: 20px;
+}
+      
+        .container {
+            display: flex;
+            flex-direction: row-reverse; 
+            align-items: center;
+            gap: 50px; 
+            background: white; 
+            padding: 15px;
+            border: 5px solid #00467f; 
+            border-radius: 15px;
+            width: 900px; 
+        }
+
+                .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: -80px;
+			margin-left: 35px;
+        }
+
+        .menu-container ul {
+            position: relative;
+            transform: skewY(-15deg);
+        }
+
+        .menu-container ul li {
+            position: relative;
+            list-style: none;
+            width: 260px;
+            padding: 15px;
+            background: #00467f;
+            z-index: calc(1 * var(--i));
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        .menu-container ul li:hover {
+            background: #e7a614;
+            transform: translate(40px, 40px);
+        }
+
+       .menu-container  ul li::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -40px;
+            width: 40px;
+            height: 100%;
+            background: #00355f;
+            transform-origin: right;
+            transform: skewY(45deg);
+            transition: 0.5s;
+        }
+
+        .menu-container ul li:hover::before {
+            background: #e7a614;
+        }
+
+       .menu-container ul li::after {
+            content: attr(data-text);
+            position: absolute;
+            top: -40px;
+            left: 0;
+            width: calc(100% - 20px);
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            color: rgba(0,0,0,0.15);
+            font-weight: 600;
+            font-size: 1.2em; 
+            background: #00467f;
+            transform-origin: bottom;
+            transform: skewX(45deg);
+            transition: 0.5s;
+        }
+
+        .menu-container ul li:hover::after {
+            background: #e7a614;
+        }
+
+        .menu-container ul li a {
+            text-decoration: none;
+            color: #fff;
+            display: block;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+        }
+
+        .menu-container ul li:hover a {
+            color: #212121;
+        }
+
+       .menu-container ul li a span {
+            position: absolute;
+            top: 25%;
+            left: -40px;
+            transform: translateY(-75%) skewY(45deg);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .menu-container ul li a span img {
+            width: 30px;
+            height: auto;
+        }
+
+        .content-container {
+            width: 600px;
+            min-height: 400px;
+            background: white;
+            border: 3px solid #00467f;
+            border-radius: 10px;
+            padding: 10px;
+            color: black;
+        }
+
+        .content-container h2 {
+            color: #00467f;
+        }
+		
+		      .content-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+
+        .content-list li {
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: black;
+        }
+		
+		a:focus, button:focus, li:focus {
+    outline: 3px solid #e7a614; 
+}
+
+    </style>
+<script>
+    function loadContent(contentType) {
+        let contentDiv = document.getElementById('content-container');
+
+        let content = {
+            "module-overview": `
+                <h2>Module Overview</h2>
+                <p>A website provides several creative opportunities to capture the attention of your audience. Many websites use multimedia (digital media such as audio, video, and animation) to enrich the user experience and provide interactivity. For example, websites include videos to share news updates, promote products and services, or demonstrate how to use a product. Videos add visual appeal and can pack a huge amount of information into a few seconds. According to a recent study by Forrester Research, consumers prefer videos to text, find them more memorable, and stay on websites that include videos longer than websites that do not.</p><br>
+                <p>Audio on webpages can set a mood or tone and further entice a user to make a purchase. Audio can also provide information more quickly or effectively than text, such as a guided tour that describes the features of a product or testimonials from customers that support a product or service.</p><br>
+                <p>In this chapter, you will learn how to use HTML 5 to embed audio and video on an HTML webpage. You will learn how to use the audio element and its attributes to add audio to a webpage. Similarly, you will learn how to use the video element and its attributes to add a video to webpage. You will also learn about the various audio and video file formats and which formats to use for the web. Finally, you will learn how to make videos accessible.</p>
+            `,
+            "why-it-matters": `
+                <h2>Why It Matters</h2>
+                <p>Multimedia elements such as audio, video, and animation play a pivotal role in enhancing the user experience on websites. They not only enrich content but also add interactivity, capturing and retaining the attention of visitors more effectively than text alone. Videos, in particular, have become increasingly popular for sharing news updates, promoting products and services, and providing instructional content. Research shows that consumers prefer videos over text, finding them more memorable and engaging.</p><br>
+                <p>Similarly, audio can set the mood or tone of a webpage, further enticing users and conveying information quickly and effectively. Whether it's providing guided tours of products or featuring customer testimonials, audio adds another layer of engagement and enhances user interaction.</p>
+            `,
+            "module-activities": `
+                <h2>Module Activities</h2>
+                <ul class="content-list">
+                    <li>Chapter 9 Reading</li> 
+                    <li>Chapter 9 - Lab 2</li> 
+                </ul>
+            `,
+            "demonstrate-competency": `
+                <h2>Demonstrate Competency</h2>
+                <ul class="content-list">
+                    <li>Describe the benefits and limitations of multimedia in websites</li> 
+                    <li>Identify audio formats</li> 
+                    <li>Identify video formats</li> 
+                    <li>Describe a plug-in</li> 
+                    <li>Understand codecs</li> 
+                    <li>Understand and create audio elements</li> 
+                    <li>Understand and create video elements</li> 
+                    <li>Identify common audio attributes</li> 
+                    <li>Identify common video attributes</li> 
+                    <li>Understand the source element</li> 
+                    <li>Test audio elements</li>   
+                    <li>Test video elements</li> 
+                    <li>Make videos accessible</li> 
+                </ul>
+            `
+        };
+
+        contentDiv.innerHTML = content[contentType];
+    }
+
+    window.onload = function () {
+        loadContent('module-overview');
+    };
+</script>
+
+</head>
+<body>
+
+    <div class="container" role="main">
+       
+        <div id="content-container" class="content-container">
+     
+        </div>
+
+        
+        <div class="menu-container" role="navigation">
+            <div class="logo">
+                <img src="https://elearning.kctcs.edu/bbcswebdav/xid-469657693_4" alt="">
+            </div>
+            <ul  role="menu">
+                <li  role="menuitem" style="--i:4;" data-text="Module Overview">
+                    <button onclick="loadContent('module-overview')"  aria-label="Learn more about the module overview">
+                        <span></span> Module Overview
+                    
+                </li>
+<li role="menuitem" style="--i:3;" data-text="Why It Matters">
+    <button onclick="loadContent('why-it-matters')" aria-label="Learn more about Why It Matters">
+        <span></span> Why It Matters
+    </button>
+</li>
+                <li  role="menuitem" style="--i:2;" data-text="Module Activities">
+                    <button  onclick="loadContent('module-activities')" aria-label="Learn more about the module activities">
+                        <span><img src="https://elearning.kctcs.edu/bbcswebdav/xid-469657693_4" alt="" height="10"></span> Module Activities
+                    
+                </li>
+                <li  role="menuitem" style="--i:1;" data-text="Demonstrate Competency" >
+                    <button onclick="loadContent('demonstrate-competency')" aria-label="Learn more about how to demonstrate competency">
+                        <span></span> Demonstrate Competency
+                    
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
