@@ -118,6 +118,30 @@
         .menu-container ul li:hover::after {
             background: #e7a614;
         }
+.menu-container ul li a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: 0.5s;
+}
+
+.menu-container ul li a:hover {
+    color: #212121;
+}
+
+.menu-container ul li a span {
+    position: absolute;
+    top: 25%;
+    left: -40px;
+    transform: translateY(-75%) skewY(45deg);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
         .menu-container ul li a {
             text-decoration: none;
@@ -144,7 +168,7 @@
             align-items: center;
         }
 
-        .menu-container ul li a span img {
+        .menu-container ul li button span img {
             width: 30px;
             height: auto;
         }
