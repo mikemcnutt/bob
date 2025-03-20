@@ -17,7 +17,7 @@
         body {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             height: 100vh;
             background: white; /* Webpage background set to white */
         }
@@ -179,6 +179,11 @@
             font-size: 16px;
             color: black;
         }
+		
+		a:focus, button:focus, li:focus {
+    outline: 3px solid #e7a614; 
+}
+
     </style>
 <script>
     function loadContent(contentType) {
@@ -246,23 +251,23 @@
             <div class="logo">
                 <img src="https://elearning.kctcs.edu/bbcswebdav/xid-469657693_4" alt="Logo">
             </div>
-            <ul>
-                <li style="--i:4;" data-text="Module Overview" onclick="loadContent('module-overview')">
+            <ul  role="menu">
+                <li  role="menuitem" style="--i:4;" data-text="Module Overview" onclick="loadContent('module-overview')">
                     <a href="javascript:void(0);">
                         <span><img src="https://elearning.kctcs.edu/bbcswebdav/xid-469657693_4" alt="Module Overview"></span> Module Overview
                     </a>
                 </li>
-                <li style="--i:3;" data-text="Why It Matters" onclick="loadContent('why-it-matters')">
+                <li  role="menuitem" style="--i:3;" data-text="Why It Matters" onclick="loadContent('why-it-matters')">
                     <a href="javascript:void(0);">
                         <span><img src="https://elearning.kctcs.edu/bbcswebdav/xid-469657693_4" alt="Why It Matters"></span> Why It Matters
                     </a>
                 </li>
-                <li style="--i:2;" data-text="Module Activities" onclick="loadContent('module-activities')">
+                <li  role="menuitem" style="--i:2;" data-text="Module Activities" onclick="loadContent('module-activities')">
                     <a href="javascript:void(0);">
                         <span><img src="https://elearning.kctcs.edu/bbcswebdav/xid-469657693_4" alt="Module Activities"></span> Module Activities
                     </a>
                 </li>
-                <li style="--i:1;" data-text="Demonstrate Competency" onclick="loadContent('demonstrate-competency')">
+                <li  role="menuitem" style="--i:1;" data-text="Demonstrate Competency" onclick="loadContent('demonstrate-competency')">
                     <a href="javascript:void(0);">
                         <span><img src="https://elearning.kctcs.edu/bbcswebdav/xid-469657693_4" alt="Demonstrate Competency"></span> Demonstrate Competency
                     </a>
