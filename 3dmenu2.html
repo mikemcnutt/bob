@@ -118,6 +118,62 @@
         .menu-container ul li:hover::after {
             background: #e7a614;
         }
+
+	    .menu-container ul li button {
+    background: #00467f;
+    color: white;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    cursor: pointer;
+    text-align: left;
+    display: block;
+}
+
+.menu-container ul li button:hover {
+    background: #e7a614;
+    color: #212121;
+}
+
+.menu-container ul li button span {
+    position: absolute;
+    top: 25%;
+    left: -40px;
+    transform: translateY(-75%) skewY(45deg);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-container ul li button::after {
+    content: attr(data-text);
+    position: absolute;
+    top: -40px;
+    left: 0;
+    width: calc(100% - 20px);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    color: rgba(0,0,0,0.15);
+    font-weight: 600;
+    font-size: 1.2em;
+    background: #00467f;
+    transform-origin: bottom;
+    transform: skewX(45deg);
+    transition: 0.5s;
+}
+
+.menu-container ul li button:hover::after {
+    background: #e7a614;
+}
+
 .menu-container ul li a {
     text-decoration: none;
     color: #fff;
