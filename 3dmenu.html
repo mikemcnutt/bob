@@ -172,7 +172,12 @@
       color: black;
     }
 
-  
+  .page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
   </style>
 <script>
     function loadContent(contentType) {
@@ -224,6 +229,8 @@
   </script>
 </head>
 <body> 
+    <div class="page-wrapper">
+  <h1 class="page-title">Sample Text</h1>
 <div aria-label="Main content" class="container" role="main">
    
 <div class="content-container" id="content-container"></div>
@@ -245,6 +252,8 @@
 <span><i class="fa fa-arrows menu-icon"></i></span> Demonstrate Competency
         </li>
 </ul>
+</div>
+</div>
 </div>
 </div>
 <script>
