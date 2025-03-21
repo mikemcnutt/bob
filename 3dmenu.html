@@ -1,282 +1,155 @@
-<!DOCTYPE html>
 
+Skip to main content
+My Path
+
+    Institution Page
+    James McNutt
+    Activity
+    Courses
+    Organizations
+    Calendar
+
+Messages
+Grades
+
+    Tools
+    Admin
+    Sign Out
+
+    Privacy
+    Terms
+    Accessibility
+
+Courses
+MYC_4246_CIT_155_90Z1_47781
+
+    Skip to main content
+    Skip to course information
+
+CIT 155: Web Page Development (4246_90Z1)
+Course Settings
+OpenCourse status Open
+
+Course Content
+CIT 155: Web Page Development (4244_90Z1)
+Important Documents: Course Overview - Syllabus, Assignment Calendar, Instructor, Grades, Technology Requirements, etc.
+This module focuses on what is good website design. Color theory, effective design and design consistency are some of the topics covered in this module.
+This module covers Internet Protocols, web browsers, the use of graphics and typography, accessibility basic HTML elements.
+This module will deal with website file management, determining the elements to use when setting the structure of a webpage, adding static content to a webpage template, the use of heading elements, the benefits of validating web documents and creating a home page from an HTML template.
+This module deals with the use of images throughout a website to enhance visual appeal and provide visitors with additional information about a product or service. We will also cover types of hyperlinks such as relative links, absolute links, bookmark links, email links, and telephone links. We will also work with the different types of lists available for use in an HTML document.
+This module will cover the importance of separating design from content. We will explore the use of Cascading Style Sheets (CSS), the difference between inline, embedded, and external styles and their order of precedence. We will also learn the difference between a selector, property, and value.
+Prior to the era of mobile devices, websites were almost exclusively accessed by desktop computers. However, the use of mobile devices to connect to the Internet has been rising since 2010. In this module we discuss the web development approach called responsive design. We will learn about the design principles of a mobile website, the use of viewports and mobile friendly navigation.
+In this module we will expand on the use of viewports and learn about creating viewports for tablet versions of websites. We will explore the design principles of a tablet website, create a media query to target tablet viewports and also create media queries to target larger desktop viewports.
+Course Faculty
+
+    James McNutt
+
+    Instructor
+
+Details & Actions
+
+Roster
+
+View everyone in your course
+Progress Tracking
+
+Turned on
+Course Image
+
+Edit display settings
+Class Collaborate
+Attendance
+
+Mark attendance
+Books & Tools
+
+View course & institution tools
+
+    Question Banks
+
+    Manage banks
+
+CIT 155: Web Page Development (4246_90Z1)
+Module Overview
+⌄
+⌄
+⌄
+⌄
+⌄
+⌄
+⌄
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Module Overview</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 <style>
-    @import url('https://fonts.googleapis.com/css?family=Oswald:400,700');
+  @import url('https://fonts.googleapis.com/css?family=Oswald:400,700');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Oswald', sans-serif;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Oswald', sans-serif;
+  }
 
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      height: 100vh;
-      background: white;
-    }
-    
-    h1 {
-      color:#00467f;    
-    }
-    
-    .container {
-      display: flex;
-      flex-direction: row-reverse;
-      align-items: center;
-      gap: 50px;
-      background-image: linear-gradient(#00467f, #ffffff);
-      padding: 15px;
-      border: 5px solid #00467f;
-      border-radius: 15px;
-      width: 900px;
-    }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 700px;
+    background: white;
+  }
 
-    .logo {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 40px;
-      margin-left:-200px;
-      filter: drop-shadow(6px 6px 10px rgba(255, 255, 255, 0.8));
-    }
+  h1 {
+    color:#00467f;
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
-    .logo img {
-      height: 60px;
-    }
+  .container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 50px;
 
-    .menu-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: -80px;
-      margin-left: 35px;
-    }
 
-    .menu-container ul {
-      position: relative;
-      transform: skewY(-15deg);
-    }
-
-    .menu-container ul li {
-  color: white;
-      position: relative;
-      list-style: none;
-      width: 260px;
-      padding: 15px;
-      background: #00467f;
-      z-index: calc(1 * var(--i));
-      transition: 0.5s;
-      cursor: pointer;
-    }
-
-    .menu-container ul li:hover {
-      background: #3bb3e5;
-      transform: translate(40px, 40px);
-    }
-
-    .menu-container ul li::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -40px;
-      width: 40px;
-      height: 100%;
-      background: #00355f;
-      transform-origin: right;
-      transform: skewY(45deg);
-      transition: 0.5s;
-    }
-
-    .menu-container ul li:hover::before {
-      background: #3bb3e5;
-    }
-
-    .menu-container ul li::after {
-      content: attr(data-text);
-      position: absolute;
-      top: -40px;
-      left: 0;
-      width: calc(100% - 20px);
-      height: 40px;
-      display: flex;
-      align-items: center;
-      padding-left: 20px;
-      color: rgba(0,0,0,0.15);
-      font-weight: 600;
-      font-size: 1.2em;
-      background: #00467f;
-      transform-origin: bottom;
-      transform: skewX(45deg);
-      transition: 0.5s;
-    }
-
-    .menu-container ul li:hover::after {
-      background: #3bb3e5;
-    }
-
-    .menu-container ul li:hover {
-      color: #00467f;
-    }
-
-    .menu-container ul li span {
-      position: absolute;
-      top: 25%;
-      left: -40px;
-      transform: translateY(-75%) skewY(45deg);
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .menu-container ul li span i {
-      font-size: 18px;
-      transition: 0.3s ease;
-    }
-
-    .menu-icon {
-      color: white;
-    }
-
-    .menu-container ul li:hover .menu-icon {
-      color: #00467f;
-    }
-
-    .content-container {
-      width: 600px;
-      min-height: 400px;
-      background: white;
-      border: 3px solid #00467f;
-      border-radius: 10px;
-      padding: 10px;
-      color: black;
-    }
-
-    .content-container h2 {
-      color: #00467f;
-    }
-
-    .content-list {
-      margin-top: 10px;
-      padding-left: 20px;
-    }
-
-    .content-list li {
-      margin-bottom: 8px;
-      font-size: 16px;
-      color: black;
-    }
-
-  .page-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-  </style>
-<script>
-    function loadContent(contentType) {
-      let contentDiv = document.getElementById('content-container');
-      let content = {
-        "module-overview": `
-          <h2>Module Overview</h2>
-          <p>A website provides several creative opportunities to capture the attention of your audience. Many websites use multimedia (digital media such as audio, video, and animation) to enrich the user experience and provide interactivity. For example, websites include videos to share news updates, promote products and services, or demonstrate how to use a product. Videos add visual appeal and can pack a huge amount of information into a few seconds. According to a recent study by Forrester Research, consumers prefer videos to text, find them more memorable, and stay on websites that include videos longer than websites that do not.</p><br>
-          <p>Audio on webpages can set a mood or tone and further entice a user to make a purchase. Audio can also provide information more quickly or effectively than text, such as a guided tour that describes the features of a product or testimonials from customers that support a product or service.</p><br>
-          <p>In this chapter, you will learn how to use HTML 5 to embed audio and video on an HTML webpage. You will learn how to use the audio element and its attributes to add audio to a webpage. Similarly, you will learn how to use the video element and its attributes to add a video to webpage. You will also learn about the various audio and video file formats and which formats to use for the web. Finally, you will learn how to make videos accessible.</p>
-        `,
-        "why-it-matters": `
-          <h2>Why It Matters</h2>
-          <p>Multimedia elements such as audio, video, and animation play a pivotal role in enhancing the user experience on websites. They not only enrich content but also add interactivity, capturing and retaining the attention of visitors more effectively than text alone. Videos, in particular, have become increasingly popular for sharing news updates, promoting products and services, and providing instructional content. Research shows that consumers prefer videos over text, finding them more memorable and engaging.</p><br>
-          <p>Similarly, audio can set the mood or tone of a webpage, further enticing users and conveying information quickly and effectively. Whether it's providing guided tours of products or featuring customer testimonials, audio adds another layer of engagement and enhances user interaction.</p>
-        `,
-        "module-activities": `
-          <h2>Module Activities</h2>
-          <ul class="content-list">
-            <li>Chapter 9 Reading</li>
-            <li>Chapter 9 - Lab 2</li>
-          </ul>
-        `,
-        "demonstrate-competency": `
-          <h2>Demonstrate Competency</h2>
-          <ul class="content-list">
-            <li>Describe the benefits and limitations of multimedia in websites</li>
-            <li>Identify audio formats</li>
-            <li>Identify video formats</li>
-            <li>Describe a plug-in</li>
-            <li>Understand codecs</li>
-            <li>Understand and create audio elements</li>
-            <li>Understand and create video elements</li>
-            <li>Identify common audio attributes</li>
-            <li>Identify common video attributes</li>
-            <li>Understand the source element</li>
-            <li>Test audio elements</li>
-            <li>Test video elements</li>
-            <li>Make videos accessible</li>
-          </ul>
-        `
-      };
-      contentDiv.innerHTML = content[contentType];
-    }
-
-    window.onload = function () {
-      loadContent('module-overview');
-    };
-  </script>
-</head>
-<body> 
-    <div class="page-wrapper">
-  <h1 class="page-title">Module 10 - Integrating Audio and Video</h1>
-<div aria-label="Main content" class="container" role="main">
-   
-<div class="content-container" id="content-container"></div>
-<div aria-label="Module navigation menu" class="menu-container" role="navigation">
-<div class="logo">
-<img alt="" src="https://elearning.kctcs.edu/bbcswebdav/xid-469657693_4"/>
-</div>
-<ul role="menu">
-<li aria-label="Learn more about the module overview" data-text="Module Overview" onclick="loadContent('module-overview')" onkeydown="if(event.key === 'Enter' || event.key === ' ') loadContent('module-overview')" role="menuitem" style="--i:4;" tabindex="0">
-<span><i class="fa fa-arrows menu-icon"></i></span> Module Overview
-        </li>
-<li aria-label="Learn more about why it matters" data-text="Why It Matters" onclick="loadContent('why-it-matters')" onkeydown="if(event.key === 'Enter' || event.key === ' ') loadContent('why-it-matters')" role="menuitem" style="--i:3;" tabindex="0">
-<span><i class="fa fa-arrows menu-icon"></i></span> Why It Matters
-        </li>
-<li aria-label="Learn more about the module activities" data-text="Module Activities" onclick="loadContent('module-activities')" onkeydown="if(event.key === 'Enter' || event.key === ' ') loadContent('module-activities')" role="menuitem" style="--i:2;" tabindex="0">
-<span><i class="fa fa-arrows menu-icon"></i></span> Module Activities
-        </li>
-<li aria-label="Learn more about how to demonstrate competency" data-text="Demonstrate Competency" onclick="loadContent('demonstrate-competency')" onkeydown="if(event.key === 'Enter' || event.key === ' ') loadContent('demonstrate-competency')" role="menuitem" style="--i:1;" tabindex="0">
-<span><i class="fa fa-arrows menu-icon"></i></span> Demonstrate Competency
-        </li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-<script>
-    document.querySelectorAll('.menu-container ul li').forEach(item => {
-      item.addEventListener('mouseenter', () => {
-        const icon = item.querySelector('.menu-icon');
-        if (icon) {
-          icon.classList.remove('fa-arrows');
-          icon.classList.add('fa-arrows-alt');
-        }
-      });
-      item.addEventListener('mouseleave', () => {
-        const icon = item.querySelector('.menu-icon');
-        if (icon) {
-          icon.classList.remove('fa-arrows-alt');
-          icon.classList.add('fa-arrows');
-        }
-      });
-    });
-  </script>
-</body>
-</html>
+Courses loaded successfully
