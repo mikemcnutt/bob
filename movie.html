@@ -19,17 +19,30 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 20px;
+      padding-top: 40px;
+      padding-left: 10px;
+      padding-right: 10px;
     }
 
     h1 {
       color: #00ffff;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: normal;
+    }
+
+    li {
+      font-weight: normal;
     }
 
     .marquee-wrapper {
-      width: 860px;
-      height: 150px;
+      width: 100%;
+      max-width: 860px;
+      min-height: 150px;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -39,11 +52,12 @@
       border-radius: 12px;
       background: #111;
       margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
     .movie-title {
-      flex: 1;
-      margin: 0 10px;
+      flex: 1 1 45%;
+      margin: 10px;
       text-align: center;
       background: rgba(0, 0, 0, 0.6);
       color: #00ffff;
@@ -62,11 +76,14 @@
 
     .background {
       position: relative;
-      width: 860px;
+      width: 100%;
+      max-width: 860px;
       height: 643px;
       background: url("background.png") no-repeat center center;
       background-size: cover;
       overflow: hidden;
+      margin-left: 10px;
+      margin-right: 10px;
     }
 
     .overlay {
@@ -118,6 +135,37 @@
       color: #000;
       font-family: sans-serif;
     }
+
+    .static-content {
+      display: none;
+      width: 100%;
+      max-width: 860px;
+      background: white;
+      color: black;
+      padding: 20px;
+      border: 5px solid #00ffff;
+      border-radius: 12px;
+      font-family: sans-serif;
+      margin-top: 20px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .marquee-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .background {
+        display: none;
+      }
+
+      .static-content {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body>
@@ -155,44 +203,56 @@
     </div>
   </div>
 
+  <div class="static-content" id="mobile-content">
+    <p>Welcome! Click on a title above to display its description here.</p>
+  </div>
+
   <script>
     const texts = {
       overview: `
-        <p>Most modern websites include some form of interactivity. Interactivity is commonly integrated within a website using CSS and JavaScript.</p>
-        <p>An effective way to create interesting and useful webpages is to include dynamic content to make the webpage interactive.</p>
-        <p>One way to engage and interact with customers on a webpage is to use JavaScript code to display messages.</p>
-        <p>This module will explore how to integrate animation using CSS and JavaScript, as well as how to build JavaScript functions.</p>
-        <p>We will also be taking Test 3, covering chapters 7 through 9 of the textbook.</p>
+        <h2>Module Overview</h2><br>
+        <p>Modern websites use a variety of techniques to help make their pages more stylish. This week I have added several videos going over some advanced techniques to demonstrate this. </p><br>
+        <p>This video collection has two videos of me demonstrating how to animate both divs and list items to add interactivity to a web page. You'll learn more about the use of backgrounds in both divs and webpages. We will also explore using JavaScript to allow users to choose their own CSS style on a webpage. You'll learn how to use CSS to set up an accordion, which is a tool often used on FAQ pages. We will look at how to apply CSS filters to images. We will explore using dropdown menus for navigation bars. You will learn how to cause divs to expand on hover. We will also cover how to use Google fonts on a webpage. </p><br>
+        <p>We will also be taking Test 4 this module which covers the material from the chapters 10, 11 and 12 of the book. The test consists of 25 multiple choice questions and has no time limit. There is only 1 attempt allowed. </p>
       `,
       matters: `
-        <p>Interactivity is a cornerstone of modern website design, enhancing user engagement and enriching the browsing experience.</p>
-        <p>By leveraging CSS and JavaScript, developers can infuse websites with dynamic content and interactive elements.</p>
-        <p>Animations add visual interest and encourage exploration.</p>
-        <p>This chapter teaches how to use CSS transforms, keyframes, and external JavaScript files to enrich interactivity.</p>
-        <p>Mastering these techniques enables developers to craft compelling, user-centered web experiences.</p>
+        <h2>Why It Matters</h2><br>
+        <p>In the ever-evolving landscape of web design, staying abreast of advanced techniques is essential to creating visually stunning and engaging websites. This video collection offers invaluable insights into leveraging various techniques to enhance the style and interactivity of web pages.</p><br>
+        <p>From animating divs and list items to utilizing backgrounds creatively, you'll learn how to infuse interactivity into your web pages effectively. Exploring JavaScript's capabilities in enabling user-driven CSS styles adds a dynamic dimension to website customization. The tutorial on setting up accordions with CSS provides a practical tool for organizing content, particularly useful for FAQ pages.</p><br>
+        <p>Delving into CSS filters for image manipulation and implementing dropdown menus for navigation bars enriches user experiences by offering visual appeal and improved navigation. Additionally, mastering techniques to cause divs to expand on hover adds an interactive element that captivates users' attention.</p><br>
+        <p>Lastly, incorporating Google fonts elevates typography choices, enhancing website aesthetics and readability. By mastering these advanced techniques, you'll be equipped to create modern and stylish websites that leave a lasting impression on your audience, setting your web projects apart from the competition.</p>
       `,
       activities: `
-        <p>Chapter 10 Reading and Videos</p>
-        <p>Chapter 10 - Lab 2</p>
-        <p>Test 3 - This test covers the material from chapters 7-9.</p>
-        <p>Test questions may be multiple choice, true/false, or short answer.</p>
-        <p>Bonus: Extend Your Knowledge - Using jQuery</p>
+        <h2>Module Activities</h2><br>
+        <ul>
+          <li>Test 4 - This test covers the material from chapters 10-12. Test questions may be in the form of fill in the blank, multiple answer, multiple choice, short answer and/or true/false.</li>
+          <li>Watch CSS Videos</li>
+          <li>Barebones Website Assignment</li>
+        </ul>
       `,
       competency: `
-        <p>Use the CSS transform property</p>
-        <p>Create animations with CSS keyframes</p>
-        <p>Understand JavaScript and describe JavaScript code</p>
-        <p>Understand and use the script element</p>
-        <p>Create JavaScript functions and respond to events</p>
+        <h2>Demonstrate Competency</h2><br>
+        <ul>
+          <li>Div animation</li>
+          <li>Div and body backgrounds</li>
+          <li>Using JavaScript to change stylesheets</li>
+          <li>CSS Accordions</li>
+          <li>CSS filters on images</li>
+          <li>Creating dropdown menus</li>
+          <li>Expanding divs on hover</li>
+          <li>Using Google fonts on a webpage</li>
+        </ul>
       `
     };
 
     function loadText(key) {
       const container = document.getElementById('text-content');
+      const mobile = document.getElementById('mobile-content');
       container.innerHTML = texts[key];
       container.classList.remove('animate');
       void container.offsetWidth;
       container.classList.add('animate');
+      mobile.innerHTML = texts[key];
     }
   </script>
 </body>
