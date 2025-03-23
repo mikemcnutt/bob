@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Movie Marquee with Dynamic Overlay</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #000;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+    }
+
+    .marquee-wrapper {
+      width: 860px;
+      height: 150px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 20px;
+      box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+      border: 5px solid #00ffff;
+      border-radius: 12px;
+      background: #111;
+      margin-bottom: 20px;
+    }
+
+    .movie-title {
+      flex: 1;
+      margin: 0 10px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      color: #00ffff;
+      border: 2px solid #00ffff;
+      padding: 10px;
+      font-size: 1.2em;
+      text-shadow: 0 0 8px #00ffff;
+      border-radius: 8px;
+      transition: transform 0.3s ease, background 0.3s ease;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .movie-title:hover {
+      transform: scale(1.05);
+      background: rgba(0, 255, 255, 0.15);
+    }
+
+    .movie-title:focus {
+      outline: 3px solid #e7a614;
+    }
+
+    .background {
+      position: relative;
+      width: 860px;
+      height: 643px;
+      background: url("background.png") no-repeat center center;
+      background-size: cover;
+      overflow: hidden;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 320px;
+      overflow: hidden;
+      pointer-events: auto;
+      max-width: 570px;
+    }
+
+    .scrolling-wrapper {
+      position: relative;
+      height: 100%;
+    }
+
+    .scrolling-text {
+      position: absolute;
+      top: 0;
+      animation: scroll-up 30s linear forwards;
+    }
+
+    .overlay:hover .scrolling-text {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll-up {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-100%);
+      }
+    }
+
+    .scrolling-text p {
+      margin-bottom: 1em;
+      font-size: 16px;
+      line-height: 1.5;
+      color: black;
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <nav class="marquee-wrapper" role="navigation" aria-label="Module Navigation">
+    <button class="movie-title" onclick="loadText('overview')" aria-label="Module Overview">Module Overview</button>
+    <button class="movie-title" onclick="loadText('matters')" aria-label="Why It Matters">Why It Matters</button>
+    <button class="movie-title" onclick="loadText('activities')" aria-label="Module Activities">Module Activities</button>
+    <button class="movie-title" onclick="loadText('competency')" aria-label="Demonstrate Competency">Demonstrate Competency</button>
+  </nav>
+
+  <main class="background" role="main" aria-live="polite">
+    <div class="overlay">
+      <div class="scrolling-wrapper">
+        <div class="scrolling-text" id="text-content">
+          <p>Welcome! Click on a title above to display its description here.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const texts = {
+      overview: `
+        <p>Most modern websites include some form of interactivity. Interactivity is commonly integrated within a website using CSS and JavaScript.</p>
+        <p>An effective way to create interesting and useful webpages is to include dynamic content to make the webpage interactive.</p>
+        <p>One way to engage and interact with customers on a webpage is to use JavaScript code to display messages.</p>
+        <p>This module will explore how to integrate animation using CSS and JavaScript, as well as how to build JavaScript functions.</p>
+        <p>We will also be taking Test 3, covering chapters 7 through 9 of the textbook.</p>
+      `,
+      matters: `
+        <p>Interactivity is a cornerstone of modern website design, enhancing user engagement and enriching the browsing experience.</p>
+        <p>By leveraging CSS and JavaScript, developers can infuse websites with dynamic content and interactive elements.</p>
+        <p>Animations add visual interest and encourage exploration.</p>
+        <p>This chapter teaches how to use CSS transforms, keyframes, and external JavaScript files to enrich interactivity.</p>
+        <p>Mastering these techniques enables developers to craft compelling, user-centered web experiences.</p>
+      `,
+      activities: `
+        <p>Chapter 10 Reading and Videos</p>
+        <p>Chapter 10 - Lab 2</p>
+        <p>Test 3 - This test covers the material from chapters 7-9.</p>
+        <p>Test questions may be multiple choice, true/false, or short answer.</p>
+        <p>Bonus: Extend Your Knowledge - Using jQuery</p>
+      `,
+      competency: `
+        <p>Use the CSS transform property</p>
+        <p>Create animations with CSS keyframes</p>
+        <p>Understand JavaScript and describe JavaScript code</p>
+        <p>Understand and use the script element</p>
+        <p>Create JavaScript functions and respond to events</p>
+      `
+    };
+
+    function loadText(key) {
+      const container = document.getElementById('text-content');
+      container.innerHTML = texts[key];
+      container.style.animation = 'none';
+      void container.offsetWidth;
+      container.style.animation = 'scroll-up 30s linear forwards';
+    }
+  </script>
+</body>
+</html>
