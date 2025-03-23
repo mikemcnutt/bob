@@ -22,6 +22,11 @@
       padding-top: 20px;
     }
 
+    h1 {
+      color: #00ffff;
+      margin-bottom: 20px;
+    }
+
     .marquee-wrapper {
       width: 860px;
       height: 150px;
@@ -47,17 +52,12 @@
       font-size: 1.2em;
       text-shadow: 0 0 8px #00ffff;
       border-radius: 8px;
-      transition: transform 0.3s ease, background 0.3s ease;
+      transition: transform 0.3s ease;
       cursor: pointer;
     }
 
     .movie-title:hover {
       transform: scale(1.05);
-      background: rgba(0, 255, 255, 0.15);
-    }
-
-    .movie-title:focus {
-      outline: 3px solid #e7a614;
     }
 
     .background {
@@ -118,6 +118,7 @@
   </style>
 </head>
 <body>
+  <h1 id="main-title">Module 14 - Advanced CSS</h1>
   <div class="marquee-wrapper" role="navigation" aria-label="Module Navigation">
     <div class="movie-title" role="button" tabindex="0" aria-label="Module Overview"
          onclick="loadText('overview')"
@@ -141,7 +142,7 @@
     </div>
   </div>
 
-  <div class="background" role="region" aria-live="polite">
+  <div class="background" role="region" aria-labelledby="main-title" aria-live="polite">
     <div class="overlay">
       <div class="scrolling-wrapper">
         <div class="scrolling-text" id="text-content">
@@ -187,7 +188,7 @@
       const container = document.getElementById('text-content');
       container.innerHTML = texts[key];
       container.classList.remove('animate');
-      void container.offsetWidth; // Force reflow
+      void container.offsetWidth;
       container.classList.add('animate');
     }
   </script>
