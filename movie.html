@@ -49,7 +49,6 @@
       border-radius: 8px;
       transition: transform 0.3s ease, background 0.3s ease;
       cursor: pointer;
-      font-family: inherit;
     }
 
     .movie-title:hover {
@@ -90,10 +89,13 @@
     .scrolling-text {
       position: absolute;
       top: 0;
+    }
+
+    .scrolling-text.animate {
       animation: scroll-up 30s linear forwards;
     }
 
-    .overlay:hover .scrolling-text {
+    .overlay:hover .scrolling-text.animate {
       animation-play-state: paused;
     }
 
@@ -116,14 +118,30 @@
   </style>
 </head>
 <body>
-  <nav class="marquee-wrapper" role="navigation" aria-label="Module Navigation">
-    <button class="movie-title" onclick="loadText('overview')" aria-label="Module Overview">Module Overview</button>
-    <button class="movie-title" onclick="loadText('matters')" aria-label="Why It Matters">Why It Matters</button>
-    <button class="movie-title" onclick="loadText('activities')" aria-label="Module Activities">Module Activities</button>
-    <button class="movie-title" onclick="loadText('competency')" aria-label="Demonstrate Competency">Demonstrate Competency</button>
-  </nav>
+  <div class="marquee-wrapper" role="navigation" aria-label="Module Navigation">
+    <div class="movie-title" role="button" tabindex="0" aria-label="Module Overview"
+         onclick="loadText('overview')"
+         onkeydown="if(event.key === 'Enter' || event.key === ' ') loadText('overview')">
+      Module Overview
+    </div>
+    <div class="movie-title" role="button" tabindex="0" aria-label="Why It Matters"
+         onclick="loadText('matters')"
+         onkeydown="if(event.key === 'Enter' || event.key === ' ') loadText('matters')">
+      Why It Matters
+    </div>
+    <div class="movie-title" role="button" tabindex="0" aria-label="Module Activities"
+         onclick="loadText('activities')"
+         onkeydown="if(event.key === 'Enter' || event.key === ' ') loadText('activities')">
+      Module Activities
+    </div>
+    <div class="movie-title" role="button" tabindex="0" aria-label="Demonstrate Competency"
+         onclick="loadText('competency')"
+         onkeydown="if(event.key === 'Enter' || event.key === ' ') loadText('competency')">
+      Demonstrate Competency
+    </div>
+  </div>
 
-  <main class="background" role="main" aria-live="polite">
+  <div class="background" role="region" aria-live="polite">
     <div class="overlay">
       <div class="scrolling-wrapper">
         <div class="scrolling-text" id="text-content">
@@ -131,7 +149,7 @@
         </div>
       </div>
     </div>
-  </main>
+  </div>
 
   <script>
     const texts = {
@@ -168,9 +186,9 @@
     function loadText(key) {
       const container = document.getElementById('text-content');
       container.innerHTML = texts[key];
-      container.style.animation = 'none';
-      void container.offsetWidth;
-      container.style.animation = 'scroll-up 30s linear forwards';
+      container.classList.remove('animate');
+      void container.offsetWidth; // Force reflow
+      container.classList.add('animate');
     }
   </script>
 </body>
