@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3D Exploding Vertical Menu</title>
+  <title>Module Overview</title>
   <style>
     :root {
-      --button-width: 200px;
+      --button-width: 250px;
       --button-height: 60px;
     }
 
@@ -31,7 +31,7 @@
       flex-wrap: wrap;
       justify-content: center;
       width: 100%;
-      max-width:850px;
+      max-width: 900px;
     }
 
     .menu {
@@ -86,11 +86,11 @@
     .layer[data-z="2"] { background: #0074c1; z-index: 1; --z: 2; transform: translateZ(0); }
 
     .button-stack[aria-expanded="true"] .layer {
-      transform: translateZ(calc(var(--z) * 25px));
+      transform: translateZ(calc(var(--z) * 12.5px));
     }
 
     .content {
-      width: 300px;
+      width: 600px;
       min-height: 200px;
       background: white;
       padding: 20px;
@@ -134,35 +134,57 @@
       </div>
 
       <div class="button-stack" aria-expanded="false" data-id="btn4" onclick="selectButton('btn4')" role="button" tabindex="0" aria-pressed="false">
-        <div class="layer" tabindex="-1" aria-hidden="true" data-z="0">Demonstrate Comptency</div>
-        <div class="layer" tabindex="-1" aria-hidden="true" data-z="1">Demonstrate Comptency</div>
-        <div class="layer" tabindex="-1" aria-hidden="true" data-z="2">Demonstrate Comptency</div>
+        <div class="layer" tabindex="-1" aria-hidden="true" data-z="0">Demonstrate Competency</div>
+        <div class="layer" tabindex="-1" aria-hidden="true" data-z="1">Demonstrate Competency</div>
+        <div class="layer" tabindex="-1" aria-hidden="true" data-z="2">Demonstrate Competency</div>
       </div>
     </nav>
 
     <section class="content" id="content" aria-live="polite">
-      <h2>Overview</h2>
-      <p>This is an introduction to the module and its objectives.</p>
+      <h2>Module Overview</h2>
+      <p>Most modern websites include some form of interactivity. Interactivity is commonly integrated within a website using CSS and JavaScript, a web programming language used to enhance a website and create interactivity. An effective way to create interesting and useful webpages is to include dynamic content to make the webpage interactive. One way to engage and interact with customers on a webpage is to use JavaScript code to display messages.</p>
+      <p>In this chapter, you will explore how to integrate animation on a webpage using CSS and JavaScript. You will learn how to use the CSS transform property to make elements move on a webpage. You will also use CSS to create an animation using keyframes. Next, you will learn how to create an external JavaScript file and write several functions. Finally, you will learn how to reference the external JavaScript file within an HTML webpage.</p>
+      <p>We will also be taking Test 3 this module which covers the material from the chapters 7, 8 and 9 of the book. The test consists of 25 multiple choice questions and has no time limit. There is only 1 attempt allowed. </p>
     </section>
   </div>
 
   <script>
     const contents = {
       btn1: {
-        title: "Overview",
-        text: "Most modern websites include some form of interactivity. Interactivity is commonly integrated within a website using CSS and JavaScript, a web programming language used to enhance a website and create interactivity. An effective way to create interesting and useful webpages is to include dynamic content to make the webpage interactive. One way to engage and interact with customers on a webpage is to use JavaScript code to display messages."
+        title: "Module Overview",
+        text: `<p>Most modern websites include some form of interactivity. Interactivity is commonly integrated within a website using CSS and JavaScript, a web programming language used to enhance a website and create interactivity. An effective way to create interesting and useful webpages is to include dynamic content to make the webpage interactive. One way to engage and interact with customers on a webpage is to use JavaScript code to display messages.</p>
+        <p>In this chapter, you will explore how to integrate animation on a webpage using CSS and JavaScript. You will learn how to use the CSS transform property to make elements move on a webpage. You will also use CSS to create an animation using keyframes. Next, you will learn how to create an external JavaScript file and write several functions. Finally, you will learn how to reference the external JavaScript file within an HTML webpage.</p>
+        <p>We will also be taking Test 3 this module which covers the material from the chapters 7, 8 and 9 of the book. The test consists of 25 multiple choice questions and has no time limit. There is only 1 attempt allowed. </p>`
       },
       btn2: {
-        title: "Goals",
-        text: "List of learning outcomes and goals for the module."
+        title: "Why It Matters",
+        text: `<p>Interactivity is a cornerstone of modern website design, enhancing user engagement and enriching the browsing experience. By leveraging CSS and JavaScript, web developers can infuse websites with dynamic content and interactive elements, fostering deeper connections with visitors. Incorporating animation adds visual interest and liveliness to webpages, capturing attention and encouraging exploration.</p>
+        <p>In this chapter, you'll discover techniques for integrating animation using CSS and JavaScript. You'll learn how to use CSS transform properties to animate webpage elements, creating captivating visual effects. Additionally, you'll explore CSS keyframes to craft complex animations with precise control. By creating external JavaScript files and writing functions, you'll enhance website interactivity and functionality, enabling seamless user interactions.</p>
+        <p>Mastering these techniques empowers you to create compelling and interactive web experiences that keep visitors engaged and entertained. Whether you're animating elements or adding dynamic functionality, CSS and JavaScript are powerful tools for elevating website design and delivering memorable user experiences.</p>`
       },
       btn3: {
-        title: "Activities",
-        text: "Details about tasks, readings, or videos assigned."
+        title: "Module Activities",
+        text: `<ul>
+          <li>Chapter 10 Reading</li>
+          <li>Chapter 10 - Lab 2</li>
+          <li>Test 3 - This test covers the material from chapters 7-9. Test questions may be in the form of fill in the blank, multiple answer, multiple choice, short answer and/or true/false.</li>
+          <li>C10 Extend Your Knowledge: Using jQuery</li>
+        </ul>`
       },
       btn4: {
-        title: "Summary",
-        text: "A wrap-up of the module content and final takeaways."
+        title: "Demonstrate Competency",
+        text: `<ul>
+          <li>Use the CSS transform property</li>
+          <li>Create animations with CSS keyframes</li>
+          <li>Understand JavaScript</li>
+          <li>Describe JavaScript code</li>
+          <li>Understand and use the script element</li>
+          <li>Understand where JavaScript code may be written</li>
+          <li>Create an external JavaScript file</li>
+          <li>Create JavaScript functions</li>
+          <li>Understand events</li>
+          <li>Use an onclick event handler</li>
+        </ul>`
       }
     };
 
@@ -175,12 +197,12 @@
 
       const content = contents[id];
       const panel = document.getElementById('content');
-      panel.innerHTML = `<h2>${content.title}</h2><p>${content.text}</p>`;
+      panel.innerHTML = `<h2>${content.title}</h2>${content.text}`;
     }
 
     window.onload = () => {
       const panel = document.getElementById('content');
-      panel.innerHTML = `<h2>${contents['btn1'].title}</h2><p>${contents['btn1'].text}</p>`;
+      panel.innerHTML = `<h2>${contents['btn1'].title}</h2>${contents['btn1'].text}`;
     };
   </script>
 </body>
