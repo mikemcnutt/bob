@@ -92,13 +92,19 @@
       left: 50%;
       transform: translateX(-50%);
       width: 80%;
-      height: 320px;
-      overflow: hidden;
+      height: 270px;
+      overflow-y: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
       pointer-events: auto;
       max-width: 570px;
       background: transparent;
       border-radius: 8px;
       padding: 10px;
+    }
+
+    .overlay::-webkit-scrollbar {
+      display: none;
     }
 
     .scrolling-wrapper {
@@ -107,25 +113,7 @@
     }
 
     .scrolling-text {
-      position: absolute;
-      top: 0;
-    }
-
-    .scrolling-text.animate {
-      animation: scroll-up 30s linear forwards;
-    }
-
-    .overlay:hover .scrolling-text.animate {
-      animation-play-state: paused;
-    }
-
-    @keyframes scroll-up {
-      0% {
-        transform: translateY(0);
-      }
-      100% {
-        transform: translateY(-100%);
-      }
+      position: relative;
     }
 
     .scrolling-text p {
@@ -171,40 +159,24 @@
 <body>
   <h1 id="main-title">Module 14 - Advanced CSS</h1>
   <div class="marquee-wrapper" role="navigation" aria-label="Module Navigation">
-    <div class="movie-title" role="button" tabindex="0" aria-label="Module Overview"
-         onclick="loadText('overview')"
-         onkeydown="if(event.key === 'Enter' || event.key === ' ') loadText('overview')">
-      Module Overview
-    </div>
-    <div class="movie-title" role="button" tabindex="0" aria-label="Why It Matters"
-         onclick="loadText('matters')"
-         onkeydown="if(event.key === 'Enter' || event.key === ' ') loadText('matters')">
-      Why It Matters
-    </div>
-    <div class="movie-title" role="button" tabindex="0" aria-label="Module Activities"
-         onclick="loadText('activities')"
-         onkeydown="if(event.key === 'Enter' || event.key === ' ') loadText('activities')">
-      Module Activities
-    </div>
-    <div class="movie-title" role="button" tabindex="0" aria-label="Demonstrate Competency"
-         onclick="loadText('competency')"
-         onkeydown="if(event.key === 'Enter' || event.key === ' ') loadText('competency')">
-      Demonstrate Competency
-    </div>
+    <div class="movie-title" role="button" tabindex="0" aria-label="Module Overview" onclick="loadText('overview')" onkeydown="if(event.key === 'Enter' || event.key === ' ') loadText('overview')">Module Overview</div>
+    <div class="movie-title" role="button" tabindex="0" aria-label="Why It Matters" onclick="loadText('matters')" onkeydown="if(event.key === 'Enter' || event.key === ' ') loadText('matters')">Why It Matters</div>
+    <div class="movie-title" role="button" tabindex="0" aria-label="Module Activities" onclick="loadText('activities')" onkeydown="if(event.key === 'Enter' || event.key === ' ') loadText('activities')">Module Activities</div>
+    <div class="movie-title" role="button" tabindex="0" aria-label="Demonstrate Competency" onclick="loadText('competency')" onkeydown="if(event.key === 'Enter' || event.key === ' ') loadText('competency')">Demonstrate Competency</div>
   </div>
 
   <div class="background" role="region" aria-labelledby="main-title" aria-live="polite">
     <div class="overlay">
       <div class="scrolling-wrapper">
         <div class="scrolling-text" id="text-content">
-          <p>Welcome! Click on a title above to display its description here.</p>
+          <p>Welcome! Click on a title above to display its description here. For content that is too long for the screen please hover your mouse over the screen and manuaaly scroll throught the content.</p>
         </div>
       </div>
     </div>
   </div>
 
   <div class="static-content" id="mobile-content">
-    <p>Welcome! Click on a selection above to display its content here. If you are on a computer you can hover over the content in this section to temporarily halt the scroll.</p>
+    <p>Welcome! Click on a selection above to display its content here.</p>
   </div>
 
   <script>
@@ -249,9 +221,6 @@
       const container = document.getElementById('text-content');
       const mobile = document.getElementById('mobile-content');
       container.innerHTML = texts[key];
-      container.classList.remove('animate');
-      void container.offsetWidth;
-      container.classList.add('animate');
       mobile.innerHTML = texts[key];
     }
   </script>
