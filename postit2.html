@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 2.5em;
+      color: #333;
+    }
+    .board {
+      max-width: 900px;
+      width: 100%;
+      background: url('http://www.photoshopbuzz.com/wp-content/uploads/2012/07/cork.jpg') no-repeat center center;
+      background-size: cover;
+      padding: 40px;
+      border-radius: 20px;
+      border: 5px solid green;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-sizing: border-box;
+    }
+    .note-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .note-container h2 {
+      background: #ffeb3b;
+      color: #333;
+      font-weight: 500;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      margin: 0;
+      width: 140px;
+      flex-shrink: 0;
+    }
+    .section {
+      background: #f9f871;
+      border-radius: 0;
+      padding: 20px;
+      width: 70%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    .section p {
+      text-align: left;
+      color: #555;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+    .section li {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #555;
+      text-align: left;
+      margin-bottom: 10px;
+    }
+    .section ul, .section ol {
+      padding-left: 20px;
+      margin: 0;
+    }
+    .controls {
+      text-align: center;
+      margin: 20px 0;
+      width: 100%;
+    }
+    .controls button {
+      margin: 5px;
+      cursor: pointer;
+      background-color: #007bff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: white;
+      transition: background-color 0.3s ease;
+      font-size: 1em;
+    }
+    .controls button:hover {
+      background-color: #0056b3;
+    }
+    .controls button:focus {
+      outline: 3px solid #fff;
+      outline-offset: 2px;
+    }
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+      .note-container {
+        flex-direction: column;
+        align-items: flex-start;
+        width: calc(100% - 30px);
+        box-sizing: border-box;
+        margin: 20px 15px;
+        transform: rotate(-1deg);
+      }
+      .note-container:nth-child(even) {
+        transform: rotate(1.5deg);
+        margin-left: 30px;
+      }
+      .note-container:nth-child(3n) {
+        transform: rotate(-2deg);
+        margin-left: 10px;
+      }
+      .section {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 15px;
+        background: #fff9c4;
+        border: 1px solid #e0c000;
+        box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
+      }
+      .note-container h2 {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+        background: #fff176;
+        border: 1px solid #fbc02d;
+        box-shadow: 1px 2px 5px rgba(0,0,0,0.1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Class Name</h1>
+  </header>
+  <main>
+    <div class="board">
+      <div class="note-container">
+        <h2>Module Overview</h2>
+        <div class="section">
+          <p>Many of today's modern websites use some type of content management system or web framework. Both tools provide a means to create beautiful, responsive webpages more quickly than a standard text editor.</p>
+          <p>This chapter provides an introduction to Bootstrap, a popular front-end web framework used to create responsive webpages. You will learn how to create a webpage using Bootstrap's starter template, and then integrate and design a responsive navigation system using the Bootstrap framework. You will learn how to create a hero feature using the Bootstrap framework, to use the Bootstrap grid system to lay out webpage content, and to style text, images, and a table using the Bootstrap framework. Finally, you will learn about content management systems. You can see examples of themes built for developers <a href="https://themes.getbootstrap.com/official-themes/" target="_blank">on the official Bootstrap themes page</a>.</p>
+        </div>
+      </div>
+      <div class="note-container">
+        <h2>Why It Matters</h2>
+        <div class="section">
+          <p>Content management systems (CMS) and web frameworks have revolutionized the way websites are built, offering developers efficient tools to create visually appealing and responsive webpages. In an era where user experience is paramount, these tools provide the speed and flexibility needed to stay competitive in the digital landscape.</p>
+          <p>Bootstrap, in particular, stands out as a frontrunner among web frameworks, known for its simplicity and robustness. Mastering Bootstrap enables developers to create responsive and mobile-friendly websites quickly, ensuring a seamless experience across various devices.</p>
+          <p>Understanding the importance of CMS platforms is equally crucial. These systems empower developers to efficiently manage website content, streamline workflows, and deliver dynamic and customizable websites to clients.</p>
+        </div>
+      </div>
+      <div class="note-container">
+        <h2>Module Activities</h2>
+        <div class="section">
+          <ol>
+            <li>Chapter 12 Reading</li>
+            <li>Chapter 12 - Lab 2</li>
+          </ol>
+        </div>
+      </div>
+      <div class="note-container">
+        <h2>Demonstrate Competency</h2>
+        <div class="section">
+          <ul>
+            <li>Describe the Bootstrap framework</li>
+            <li>Create a webpage using Bootstrap's starter template</li>
+            <li>Create a Bootstrap navbar</li>
+            <li>Integrate a Bootstrap hamburger menu</li>
+            <li>Style navigation links using Bootstrap</li>
+            <li>Define and create a jumbotron</li>
+            <li>Explain how to style text using Bootstrap</li>
+            <li>Write a jQuery document ready event</li>
+            <li>Describe and use the Bootstrap grid system</li>
+            <li>Explain how to style images using Bootstrap</li>
+            <li>Style a table using Bootstrap</li>
+            <li>Describe a content management system</li>
+          </ul>
+        </div>
+      </div>
+      <div class="note-container">
+        <h2>Resources</h2>
+        <div class="section">
+          <ul>
+            <li><a href="https://getbootstrap.com/" target="_blank">Bootstrap</a></li>
+            <li><a href="https://themes.getbootstrap.com/official-themes/" target="_blank">Official Bootstrap Themes</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
