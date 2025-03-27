@@ -45,11 +45,6 @@
       width: 100%;
       position: relative;
       margin-bottom: 20px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .note-container:hover {
-      transform: rotate(2deg) scale(1.03);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     }
     .note-container h2 {
       background: #ffeb3b;
@@ -70,6 +65,11 @@
       width: 70%;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .section:hover {
+      transform: rotate(2deg) scale(1.03);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
     }
     .section p {
       text-align: left;
@@ -211,6 +211,8 @@
       </div>
     </div>
   </main>
-
+  <footer>
+    <p>&copy; 2025 Your Course or School Name</p>
+  </footer>
 </body>
 </html>
