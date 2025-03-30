@@ -7,171 +7,197 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: white;
-      font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 2rem 1rem;
+      background-color: white;
+      font-family: 'Poppins', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
-    .module-button {
-      width: 250px;
-      height: 250px;
+    h1 {
+      margin-bottom: 2rem;
+    }
+
+    main {
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .circle-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .circle {
+      width: 100%;
+      max-width: 180px;
+      height: 180px;
       border-radius: 50%;
       background-color: #00467f;
-      border: 10px solid #e7a614;
+      border: 6px solid #e7a614;
       color: white;
+      font-weight: bold;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 1rem;
-      margin: 1rem 0;
-      transition: all 0.8s ease;
-      overflow: hidden;
       cursor: pointer;
       outline: none;
-      flex-direction: column;
-      position: relative;
-      z-index: 1; /* Ensure hover background shows above pseudo element */
+      transition: all 0.3s ease;
     }
 
-    .module-button h2 {
-      font-size: 1.2rem;
-      margin: 0;
-    }
-
-    /* Gradient border animation layer */
-    .module-button:not(.expanded)::before {
-      content: "";
-      position: absolute;
-      inset: -4px;
-      z-index: 0; /* Behind the button background and content */
-      border-radius: 50%;
-      
-      background-size: 300% 300%;
-      animation: borderShift 4s ease infinite;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .module-button:not(.expanded):hover::before {
-      opacity: 1;
-    }
-
-    /* Hover background + text color */
-    .module-button:not(.expanded):hover {
+    .circle:hover,
+    .circle[aria-expanded="true"] {
       background-color: #3bb3e5;
-      color: #000;
+      color: black;
     }
 
-    @keyframes borderShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .circle:focus {
+      outline: 3px solid #e7a614;
+      outline-offset: 4px;
     }
 
-    .module-button.expanded {
-      border-radius: 20px;
-      height: auto;
-      width: 90%;
-      max-width: 600px;
-      align-items: flex-start;
-      text-align: left;
-      padding: 2rem 1.5rem;
+    .expander-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      height: 0;
+    }
+
+    .expander {
+      position: absolute;
+      top: 0;
       background-color: #00467f;
       color: white;
+      border: 6px solid #e7a614;
+      border-radius: 20px;
+      width: 90%;
+      max-width: 600px;
+      padding: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px) scale(0.5);
+      transition: all 0.5s ease;
+      pointer-events: none;
     }
 
-    .module-button.expanded h2 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      text-align: left;
-      width: 100%;
+    .expander.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
     }
 
-    .module-content {
-      display: none;
-      color: white;
-      margin-top: 1rem;
+    .expander h2,
+    .expander p {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 0.6s ease forwards;
     }
 
-    .module-button.expanded .module-content {
-      display: block;
+    .expander h2 {
+      animation-delay: 0.2s;
     }
 
-    .module-button:focus {
-      outline: 3px solid #e7a614;
-      outline-offset: 3px;
+    .expander p:nth-of-type(1) {
+      animation-delay: 0.4s;
     }
 
-    @media (max-width: 500px) {
-      .module-button {
+    .expander p:nth-of-type(2) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 420px) {
+      .circle {
         width: 90vw;
-        height: 250px;
+        height: 90vw;
       }
     }
   </style>
 </head>
 <body>
+  <header>
+    <h1>Course Modules</h1>
+  </header>
 
-  <h1 id="page-title">Course Modules</h1>
-
-  <button class="module-button" role="button" aria-expanded="false" aria-controls="module1-content" id="module1" tabindex="0">
-    <h2>Module Overview</h2>
-    <div class="module-content" id="module1-content">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+  <main role="region" aria-label="Interactive Module Content">
+    <div class="circle-row" role="group" aria-label="Module Navigation">
+      <button class="circle" aria-expanded="false" data-title="Module Overview" data-content="Lorem ipsum dolor sit amet.||Consectetur adipiscing elit.">Module Overview</button>
+      <button class="circle" aria-expanded="false" data-title="Why It Matters" data-content="Understanding concepts is key.||It helps in real-world application.">Why It Matters</button>
+      <button class="circle" aria-expanded="false" data-title="Module Activities" data-content="Complete the practice exercises.||Review and test your knowledge.">Module Activities</button>
+      <button class="circle" aria-expanded="false" data-title="Demonstrate Competency" data-content="Apply what you've learned.||Show your understanding with a project.">Demonstrate Competency</button>
     </div>
-  </button>
 
-  <button class="module-button" role="button" aria-expanded="false" aria-controls="module2-content" id="module2" tabindex="0">
-    <h2>Why It Matters</h2>
-    <div class="module-content" id="module2-content">
-      <p>Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
-      <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.</p>
+    <div class="expander-container" aria-live="polite">
+      <div class="expander" id="expander">
+        <h2></h2>
+        <p></p>
+        <p></p>
+      </div>
     </div>
-  </button>
-
-  <button class="module-button" role="button" aria-expanded="false" aria-controls="module3-content" id="module3" tabindex="0">
-    <h2>Module Activities</h2>
-    <div class="module-content" id="module3-content">
-      <p>Donec rutrum congue leo eget malesuada.</p>
-      <p>Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.</p>
-    </div>
-  </button>
-
-  <button class="module-button" role="button" aria-expanded="false" aria-controls="module4-content" id="module4" tabindex="0">
-    <h2>Demonstrate Competency</h2>
-    <div class="module-content" id="module4-content">
-      <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
-      <p>Quisque velit nisi, pretium ut lacinia in, elementum id enim.</p>
-    </div>
-  </button>
+  </main>
 
   <script>
-    const buttons = document.querySelectorAll('.module-button');
+    const buttons = document.querySelectorAll('.circle');
+    const expander = document.getElementById('expander');
 
-    buttons.forEach(button => {
-      button.addEventListener('click', () => toggleModule(button));
-      button.addEventListener('keydown', (e) => {
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => toggleContent(btn));
+      btn.addEventListener('keydown', e => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          toggleModule(button);
+          toggleContent(btn);
         }
       });
     });
 
-    function toggleModule(activeButton) {
-      buttons.forEach(button => {
-        const expanded = button === activeButton && !button.classList.contains('expanded');
-        button.classList.toggle('expanded', expanded);
-        button.setAttribute('aria-expanded', expanded);
+    function toggleContent(btn) {
+      const title = btn.getAttribute('data-title');
+      const [para1, para2] = btn.getAttribute('data-content').split('||');
+
+      const currentTitle = expander.querySelector('h2').textContent;
+      const isActive = btn.getAttribute('aria-expanded') === "true";
+
+      // Reset all buttons
+      buttons.forEach(b => b.setAttribute('aria-expanded', 'false'));
+
+      // If same button clicked again, collapse
+      if (isActive) {
+        expander.classList.remove('active');
+        return;
+      }
+
+      // Set active state
+      btn.setAttribute('aria-expanded', 'true');
+      expander.querySelector('h2').textContent = title;
+      expander.querySelectorAll('p')[0].textContent = para1;
+      expander.querySelectorAll('p')[1].textContent = para2;
+
+      // Restart animation
+      expander.querySelectorAll('h2, p').forEach(el => {
+        el.style.animation = 'none';
+        el.offsetHeight; // force reflow
+        el.style.animation = '';
       });
+
+      expander.classList.add('active');
+
+      setTimeout(() => {
+        expander.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
     }
   </script>
-
 </body>
 </html>
