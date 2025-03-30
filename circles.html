@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: white;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .module-button {
+      width: 250px;
+      height: 250px;
+      border-radius: 50%;
+      background-color: #00467f;
+      border: 10px solid #e7a614;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 1rem;
+      margin: 1rem 0;
+      transition: all 0.8s ease;
+      overflow: hidden;
+      cursor: pointer;
+      outline: none;
+      flex-direction: column;
+      position: relative;
+      z-index: 1; /* Ensure hover background shows above pseudo element */
+    }
+
+    .module-button h2 {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    /* Gradient border animation layer */
+    .module-button:not(.expanded)::before {
+      content: "";
+      position: absolute;
+      inset: -4px;
+      z-index: 0; /* Behind the button background and content */
+      border-radius: 50%;
+      
+      background-size: 300% 300%;
+      animation: borderShift 4s ease infinite;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .module-button:not(.expanded):hover::before {
+      opacity: 1;
+    }
+
+    /* Hover background + text color */
+    .module-button:not(.expanded):hover {
+      background-color: #3bb3e5;
+      color: #000;
+    }
+
+    @keyframes borderShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .module-button.expanded {
+      border-radius: 20px;
+      height: auto;
+      width: 90%;
+      max-width: 600px;
+      align-items: flex-start;
+      text-align: left;
+      padding: 2rem 1.5rem;
+      background-color: #00467f;
+      color: white;
+    }
+
+    .module-button.expanded h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      text-align: left;
+      width: 100%;
+    }
+
+    .module-content {
+      display: none;
+      color: white;
+      margin-top: 1rem;
+    }
+
+    .module-button.expanded .module-content {
+      display: block;
+    }
+
+    .module-button:focus {
+      outline: 3px solid #e7a614;
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 500px) {
+      .module-button {
+        width: 90vw;
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="page-title">Course Modules</h1>
+
+  <button class="module-button" role="button" aria-expanded="false" aria-controls="module1-content" id="module1" tabindex="0">
+    <h2>Module Overview</h2>
+    <div class="module-content" id="module1-content">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+    </div>
+  </button>
+
+  <button class="module-button" role="button" aria-expanded="false" aria-controls="module2-content" id="module2" tabindex="0">
+    <h2>Why It Matters</h2>
+    <div class="module-content" id="module2-content">
+      <p>Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.</p>
+      <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi.</p>
+    </div>
+  </button>
+
+  <button class="module-button" role="button" aria-expanded="false" aria-controls="module3-content" id="module3" tabindex="0">
+    <h2>Module Activities</h2>
+    <div class="module-content" id="module3-content">
+      <p>Donec rutrum congue leo eget malesuada.</p>
+      <p>Vivamus magna justo, lacinia eget consectetur sed, convallis at tellus.</p>
+    </div>
+  </button>
+
+  <button class="module-button" role="button" aria-expanded="false" aria-controls="module4-content" id="module4" tabindex="0">
+    <h2>Demonstrate Competency</h2>
+    <div class="module-content" id="module4-content">
+      <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+      <p>Quisque velit nisi, pretium ut lacinia in, elementum id enim.</p>
+    </div>
+  </button>
+
+  <script>
+    const buttons = document.querySelectorAll('.module-button');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => toggleModule(button));
+      button.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleModule(button);
+        }
+      });
+    });
+
+    function toggleModule(activeButton) {
+      buttons.forEach(button => {
+        const expanded = button === activeButton && !button.classList.contains('expanded');
+        button.classList.toggle('expanded', expanded);
+        button.setAttribute('aria-expanded', expanded);
+      });
+    }
+  </script>
+
+</body>
+</html>
