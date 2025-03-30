@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module Overview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: white;
+      font-family: 'Gloria Hallelujah', cursive;
+      font-size: 1.25rem;
+      line-height: 1.5em;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      padding-top: 1.5em;
+      margin: 0;
+    }
+
+    .legalpaper {
+      position: relative;
+      border: none;
+      box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.2);
+      padding: 1.5em 2em 1em 4em;
+      padding-top: 3.85em;
+      max-width: 80ch;
+      margin: 1em auto;
+      background-color: #fdf6c2;
+      box-sizing: border-box;
+    }
+
+    .legalpaper::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 2.5em;
+      border-left: solid 0.1em #fcc;
+    }
+
+    .legalpaper::before {
+      content: "";
+      position: absolute;
+      top: 3.5em;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-image: linear-gradient(rgba(153,204,255,.3) .1em, transparent .1em);
+      background-size: 100% 1.5em;
+      z-index: 0;
+    }
+
+    .legalpaper * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .legalpaper p,
+    .legalpaper ul,
+    .legalpaper h2 {
+      margin: 0;
+      line-height: 1.5em;
+    }
+
+    .checkbox-list {
+      margin-bottom: 1.5em;
+    }
+
+    .checkbox-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      line-height: 1.5em;
+      font-size: 1.25rem;
+    }
+
+    .checkbox-item input[type="checkbox"] {
+      transform: scale(1.2);
+      margin: 0;
+    }
+
+    .checkbox-item input[type="checkbox"]:focus,
+    .checkbox-item label:focus {
+      outline: 3px solid #00467f;
+      outline-offset: 2px;
+    }
+
+    .checkbox-item label {
+      cursor: pointer;
+    }
+
+    .checkbox-item.checked label {
+      text-decoration: line-through;
+      color: #666;
+    }
+
+    .content-container {
+      display: none;
+    }
+
+    .content-container.active {
+      display: block;
+    }
+
+    .content-container h2 {
+      padding-top: 1.5em;
+      margin: 0;
+    }
+
+    .content-container p,
+    .content-container ul,
+    .content-container li {
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    .content-container p:nth-of-type(1) { animation-delay: 0.2s; }
+    .content-container p:nth-of-type(2) { animation-delay: 0.5s; }
+    .content-container ul { animation-delay: 0.8s; }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .content-container ul {
+      padding-left: 2em;
+    }
+
+    .content-container li {
+      line-height: 1.5em;
+    }
+
+    @media (max-width: 600px) {
+      .legalpaper {
+        margin-left: 1em;
+        margin-right: 1em;
+        padding-left: 2em;
+        padding-right: 2em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Module 7 - Responsive Design Part 2: Designing for Tablet and Desktop Devices</h1>
+
+  <section class="legalpaper" role="region" aria-labelledby="todo-heading">
+    <div class="checkbox-list" id="todo-heading">
+      <div class="checkbox-item">
+        <input type="checkbox" id="overview" aria-controls="section-overview" aria-expanded="false">
+        <label for="overview">Module Overview</label>
+      </div>
+      <div class="checkbox-item">
+        <input type="checkbox" id="matters" aria-controls="section-matters" aria-expanded="false">
+        <label for="matters">Why It Matters</label>
+      </div>
+      <div class="checkbox-item">
+        <input type="checkbox" id="activities" aria-controls="section-activities" aria-expanded="false">
+        <label for="activities">Module Activities</label>
+      </div>
+      <div class="checkbox-item">
+        <input type="checkbox" id="competency" aria-controls="section-competency" aria-expanded="false">
+        <label for="competency">Demonstrate Competency</label>
+      </div>
+    </div>
+
+    <div id="section-overview" class="content-container" aria-live="polite">
+      <h2>Module Overview</h2>
+ <p>As you learned in Chapter 5, the responsive web design approach styles content differently depending upon the type of device used to view the site. The mobile-first approach focuses on styling content appropriately for smaller, mobile devices. It also uses a single-column layout to prevent horizontal scrolling and minimize vertical scrolling. This layout creates a more enjoyable experience for users of mobile devices.</p><br>
+  <p>The design process for tablet and desktop displays allows more flexibility with the webpage layout. A tablet design can use a two-column layout, while a desktop design can use a multicolumn layout. Designing layouts for tablet and desktop displays is simplified through the use of media queries. Media queries are essential to responsive web design because they let you customize layouts for various viewport sizes. If you take a mobile-first approach, use media queries to create the desired look for various-sized viewports, such as tablet, laptop, desktop, and larger desktop viewports.</p>
+         </div>
+
+    <div id="section-matters" class="content-container" aria-live="polite">
+      <h2>Why It Matters</h2>
+<p>Responsive web design is essential in today's multi-device world, ensuring that website content is styled appropriately for various devices. The mobile-first approach prioritizes the user experience on smaller screens, using a single-column layout to eliminate horizontal scrolling and minimize vertical scrolling. This method creates a more enjoyable and accessible experience for mobile users, who make up a significant portion of web traffic.</p><br>
+<p>As screen sizes increase, such as with tablets and desktops, responsive design offers more layout flexibility. Tablets can benefit from two-column layouts, while desktops can utilize multicolumn designs. This adaptability is made possible through media queries, which are crucial to responsive web design. Media queries allow developers to customize layouts for different viewport sizes, ensuring that the website looks and functions optimally across all devices. By adopting a mobile-first approach and leveraging media queries, you can create seamless and intuitive user experiences, regardless of the device used to access the site.</p>
+
+    </div>
+
+    <div id="section-activities" class="content-container" aria-live="polite">
+      <h2>Module Activities</h2>
+      <ul>
+    <li>Chapter 6 Reading</li> 
+    <li>Chapter 6 - Lab 2</li> 
+    <li>Final Project Theme</li> 
+    </ul>
+    </div>
+
+    <div id="section-competency" class="content-container" aria-live="polite">
+      <h2>Demonstrate Competency</h2>
+     <ul>
+    <li>Identify and use media query expressions</li> 
+    <li>Explain the design principles of a tablet website</li> 
+    <li>Insert a media query to target tablet viewports</li> 
+    <li>Create style rules for tablet viewports</li> 
+    <li>Explain the design principles of a desktop website</li> 
+    <li>Insert a media query and create style rules to target desktop viewports</li> 
+    <li>Insert a media query and create a style rule for large desktop viewports</li> 
+    <li>Create a media query for print</li> 
+    <li>Identify and modify breakpoints</li> 
+    <li>Describe and add dynamic pseudo-classes to a website</li> 
+    <li>Explain linear and radial gradients</li>   
+    <li>Apply a linear gradient to a webpage for a desktop viewport</li> 
+  
+    </ul>
+    </div>
+  </section>
+
+  <script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const contentSections = document.querySelectorAll('.content-container');
+    const checkboxItems = document.querySelectorAll('.checkbox-item');
+
+    function updateView() {
+      contentSections.forEach(section => section.classList.remove('active'));
+      checkboxItems.forEach(item => item.classList.remove('checked'));
+
+      checkboxes.forEach((checkbox, index) => {
+        const sectionId = checkbox.getAttribute('aria-controls');
+        const section = document.getElementById(sectionId);
+        const isChecked = checkbox.checked;
+
+        checkbox.setAttribute('aria-expanded', isChecked.toString());
+
+        if (isChecked) {
+          section.classList.add('active');
+          checkboxItems[index].classList.add('checked');
+        }
+      });
+    }
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener('change', updateView);
+    });
+
+    updateView();
+  </script>
+</body>
+</html>
