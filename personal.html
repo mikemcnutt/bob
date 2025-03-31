@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Samurai Data Center</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: cursive;
+      font-size: 20px;
+      color: white;
+    }
+
+    section {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    section img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .front {
+      z-index: 105;
+    }
+
+    .samurai {
+      position: absolute;
+      width: auto;
+    height: 25vh;   
+  bottom: 34vh; 
+      animation: animateSamurai 10s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes animateSamurai {
+      0% {
+        transform: translateX(100vw);
+      }
+      50% {
+        transform: translateX(-100vw);
+      }
+      50.01% {
+        transform: translateX(-100vw) rotateY(180deg);
+      }
+      100% {
+        transform: translateX(100vw) rotateY(180deg);
+      }
+    }
+
+    /* Clock styling */
+    #clock {
+      position: absolute;
+      top: 31vh;
+      left: 53%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+      z-index: 110;
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <img src="background4.gif" class="front" alt="Foreground servers" />
+    <img src="background3.png" class="bg" alt="Background servers" />
+    <img src="samurai.png" class="samurai" alt="Samurai on motorcycle" />
+  </section>
+
+  <canvas id="clock" width="60" height="60"></canvas>
+
+  <script>
+    const canvas = document.getElementById("clock");
+    const ctx = canvas.getContext("2d");
+
+    function drawClock() {
+      const now = new Date();
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const centerX = w / 2;
+      const centerY = h / 2;
+
+      // Clock face
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, w / 2 - 3, 0, 2 * Math.PI);
+      ctx.fillStyle = "#111";
+      ctx.fill();
+      ctx.strokeStyle = "#888";
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Hour marks
+      for (let i = 0; i < 12; i++) {
+        const angle = (i * Math.PI) / 6;
+        const x1 = centerX + Math.cos(angle) * (w / 2 - 10);
+        const y1 = centerY + Math.sin(angle) * (h / 2 - 10);
+        const x2 = centerX + Math.cos(angle) * (w / 2 - 5);
+        const y2 = centerY + Math.sin(angle) * (h / 2 - 5);
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = "#fff";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      const hour = now.getHours() % 12;
+      const minute = now.getMinutes();
+      const second = now.getSeconds();
+
+      drawHand(((hour + minute / 60) * Math.PI) / 6, w / 2.8, 3);
+      drawHand(((minute + second / 60) * Math.PI) / 30, w / 2.1, 2);
+      drawHand((second * Math.PI) / 30, w / 2 - 5, 1, "#f00");
+
+      function drawHand(angle, length, width, color = "#fff") {
+        ctx.beginPath();
+        ctx.lineWidth = width;
+        ctx.lineCap = "round";
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(
+          centerX + Math.cos(angle - Math.PI / 2) * length,
+          centerY + Math.sin(angle - Math.PI / 2) * length
+        );
+        ctx.strokeStyle = color;
+        ctx.stroke();
+      }
+    }
+
+    setInterval(drawClock, 1000);
+    drawClock();
+  </script>
+</body>
+</html>
