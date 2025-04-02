@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module Overview</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      background: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .machine-wrapper {
+      position: relative;
+      max-width: 850px;
+      width: 100%;
+    }
+
+    .machine-img {
+      width: 100%;
+      display: block;
+    }
+
+    .button {
+      position: absolute;
+      width: 32%;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  box-shadow 0.15s ease;
+      box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+      border-radius: 12px;
+    }
+
+    .button:active,
+    .button[aria-pressed="true"] {
+      transform: translateY(4px) scale(0.98);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) inset;
+    }
+
+    .btn-overview     { top: calc(18.3% + 14vw); left: calc(15.5% + 4vw); }
+    .btn-why          { top: calc(28.3% + 14vw); left: calc(15.5% + 4vw); }
+    .btn-activities   { top: calc(38.3% + 14vw); left: calc(15.5% + 4vw); }
+    .btn-demonstrate  { top: calc(48.3% + 14vw); left: calc(15.5% + 4vw); }
+
+    @media (max-width: 400px) {
+      .btn-overview     { top: calc(18.3% + 28vw); left: calc(15.5% + 14vw); }
+      .btn-why          { top: calc(28.3% + 28vw); left: calc(15.5% + 14vw); }
+      .btn-activities   { top: calc(38.3% + 28vw); left: calc(15.5% + 14vw); }
+      .btn-demonstrate  { top: calc(48.3% + 28vw); left: calc(15.5% + 14vw); }
+    }
+
+    @media (min-width: 401px) and (max-width: 600px) {
+      .btn-overview     { top: calc(18.3% + 26vw); left: calc(15.5% + 12vw); }
+      .btn-why          { top: calc(28.3% + 26vw); left: calc(15.5% + 12vw); }
+      .btn-activities   { top: calc(38.3% + 26vw); left: calc(15.5% + 12vw); }
+      .btn-demonstrate  { top: calc(48.3% + 26vw); left: calc(15.5% + 12vw); }
+    }
+
+    @media (min-width: 601px) and (max-width: 800px) {
+      .btn-overview     { top: calc(18.3% + 24vw); left: calc(15.5% + 10vw); }
+      .btn-why          { top: calc(28.3% + 24vw); left: calc(15.5% + 10vw); }
+      .btn-activities   { top: calc(38.3% + 24vw); left: calc(15.5% + 10vw); }
+      .btn-demonstrate  { top: calc(48.3% + 24vw); left: calc(15.5% + 10vw); }
+    }
+
+    @media (min-width: 801px) and (max-width: 1000px) {
+      .btn-overview     { top: calc(18.3% + 22vw); left: calc(15.5% + 8vw); }
+      .btn-why          { top: calc(28.3% + 22vw); left: calc(15.5% + 8vw); }
+      .btn-activities   { top: calc(38.3% + 22vw); left: calc(15.5% + 8vw); }
+      .btn-demonstrate  { top: calc(48.3% + 22vw); left: calc(15.5% + 8vw); }
+    }
+
+    @media (min-width: 1001px) and (max-width: 1200px) {
+      .btn-overview     { top: calc(18.3% + 22vw); left: calc(15.5% + 6vw); }
+      .btn-why          { top: calc(28.3% + 22vw); left: calc(15.5% + 6vw); }
+      .btn-activities   { top: calc(38.3% + 22vw); left: calc(15.5% + 6vw); }
+      .btn-demonstrate  { top: calc(48.3% + 22vw); left: calc(15.5% + 6vw); }
+    }
+
+    @media (min-width: 1201px) and (max-width: 1400px) {
+      .btn-overview     { top: calc(18.3% + 17vw); left: calc(15.5% + 5vw); }
+      .btn-why          { top: calc(28.3% + 17vw); left: calc(15.5% + 5vw); }
+      .btn-activities   { top: calc(38.3% + 17vw); left: calc(15.5% + 5vw); }
+      .btn-demonstrate  { top: calc(48.3% + 17vw); left: calc(15.5% + 5vw); }
+    }
+
+    @media (min-width: 1401px) and (max-width: 1600px) {
+      .btn-overview     { top: calc(18.3% + 15vw); left: calc(15.5% + 4vw); }
+      .btn-why          { top: calc(28.3% + 15vw); left: calc(15.5% + 4vw); }
+      .btn-activities   { top: calc(38.3% + 15vw); left: calc(15.5% + 4vw); }
+      .btn-demonstrate  { top: calc(48.3% + 15vw); left: calc(15.5% + 4vw); }
+    }
+
+    @media (min-width: 1601px) {
+      .btn-overview     { top: calc(18.3% + 13vw); left: calc(15.5% + 3vw); }
+      .btn-why          { top: calc(28.3% + 13vw); left: calc(15.5% + 3vw); }
+      .btn-activities   { top: calc(38.3% + 13vw); left: calc(15.5% + 3vw); }
+      .btn-demonstrate  { top: calc(48.3% + 13vw); left: calc(15.5% + 3vw); }
+    }
+
+    .content-box {
+      margin-top: 20px;
+      padding: 20px;
+      background: #d2c19a;
+      border-radius: 12px;
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+      max-width: 850px;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(-5px) scale(0.98);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .content-box.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  </style>
+</head>
+<body>
+  <a href="#content" class="skip-link" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:-999;">Skip to content</a>
+  <h1>Module Overview</h1>
+  <div class="machine-wrapper">
+    <img src="sodamachine4.png" alt="Soda Machine" class="machine-img" />
+    <img src="overview.png" alt="Overview" class="button btn-overview" role="button" aria-label="Overview" aria-pressed="false" data-content="<p>This is the overview of the module. It provides a general introduction to key topics and sets expectations.</p><ul><li>Introduction to the topic</li><li>Learning goals</li><li>Structure of the module</li></ul>" />
+    <img src="why.png" alt="Why" class="button btn-why" role="button" aria-label="Why" aria-pressed="false" data-content="<p>This section explains why the topic is important and relevant to real-world applications.</p><ul><li>Importance of the subject</li><li>Practical applications</li><li>Future impact</li></ul>" />
+    <img src="activities.png" alt="Activities" class="button btn-activities" role="button" aria-label="Activities" aria-pressed="false" data-content="<p>This section outlines the interactive elements that help reinforce learning through engagement.</p><ul><li>Group discussions</li><li>Hands-on exercises</li><li>Real-world scenarios</li></ul>" />
+    <img src="demonstrate.png" alt="Demonstrate" class="button btn-demonstrate" role="button" aria-label="Demonstrate" aria-pressed="false" data-content="<p>This section shows how to apply the concepts in practice through demos and walkthroughs.</p><ul><li>Video demonstrations</li><li>Live simulations</li><li>Step-by-step guides</li></ul>" />
+  </div>
+  <div id="content" class="content-box" aria-live="polite"></div>
+
+  <script>
+    const buttons = document.querySelectorAll('.button');
+    const contentBox = document.getElementById('content');
+
+    buttons.forEach(button => {
+      button.setAttribute('tabindex', '0');
+      button.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          button.click();
+        }
+      });
+
+      button.addEventListener('click', () => {
+      const isActive = button.getAttribute('aria-pressed') === 'true';
+
+      if (isActive) {
+        button.setAttribute('aria-pressed', 'false');
+        contentBox.classList.remove('visible');
+        setTimeout(() => {
+          contentBox.innerHTML = '';
+        }, 150);
+        return;
+      }
+
+      // Reset all other buttons
+      buttons.forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+
+      // Set this one to active
+      button.setAttribute('aria-pressed', 'true');
+
+      // Animate content update
+      contentBox.classList.remove('visible');
+      setTimeout(() => {
+        contentBox.innerHTML = button.dataset.content;
+        contentBox.classList.add('visible');
+      }, 150);
+    });
+    });
+  </script>
+</body>
