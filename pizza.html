@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIT 155 Pizzeria Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playball&family=Fondamento&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #ffffff;
+      margin: 0;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+      font-family: 'Fondamento', cursive;
+    }
+    .container {
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+      width: 100%;
+      background: url('https://i.imgur.com/ijEbHrM.png') repeat-y top center;
+      background-size: auto;
+    }
+    h1 {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      font-size: 3em;
+      color: #c0392b;
+      font-weight: 700;
+      text-shadow: 2px 2px #333;
+      font-family: 'Playball', cursive;
+    }
+    .menu-header {
+      background-color: #fdf2e9;
+      border: 2px dashed #c0392b;
+      padding: 15px 20px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 1.25em;
+      margin-bottom: 30px;
+      color: #5d4037;
+      font-family: 'Fondamento', cursive;
+    }
+    .menu-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .menu-section {
+      padding: 20px;
+      background-color: rgba(255,255,255,0.85);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .menu-section h2 {
+      background: rgba(0, 0, 0, 0.7);
+      color: #ffffff;
+      padding: 10px;
+      border-radius: 10px;
+      margin: 0;
+      text-align: center;
+      font-size: 1.5em;
+      font-family: 'Playball', cursive;
+    }
+    .content {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 10px;
+      border-radius: 10px;
+      font-family: 'Fondamento', cursive;
+    }
+    .content p, .content ul, .content ol {
+      margin: 0;
+      color: #333;
+    }
+    @media (max-width: 768px) {
+      .menu-container {
+        grid-template-columns: 1fr;
+      }
+      .menu-section h2 {
+        font-size: 1.3em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="container">
+    <h1>Module 2 - Introduction to the Internet and Web Design</h1>
+
+    <div class="menu-header">
+      Welcome to the CIT 155 Pizzeria! Below is a menu of all of our specialty pizzas — and be sure to ask the waiter about this week's special!
+    </div>
+
+    <div class="menu-container">
+      <div class="menu-section">
+        <h2>Module Overview</h2>
+        <div class="content">
+          <p>Today, millions of people worldwide have access to the Internet, the world's largest network. Billions of webpages providing information on any subject you can imagine are currently available on the web. People use the Internet to search for information, to communicate with others around the world, and to seek entertainment...</p>
+        </div>
+      </div>
+      <div class="menu-section">
+        <h2>Why It Matters</h2>
+        <div class="content">
+          <p>Understanding the foundations of web design is essential in today's digital landscape, where millions of people worldwide rely on the Internet for information, communication, and entertainment...</p>
+        </div>
+      </div>
+      <div class="menu-section">
+        <h2>Module Activities</h2>
+        <div class="content">
+          <ul>
+            <li>Chapter 1 Reading</li>
+            <li>Chapter 1 - Lab 2</li>
+          </ul>
+        </div>
+      </div>
+      <div class="menu-section">
+        <h2>Demonstrate Competency</h2>
+        <div class="content">
+          <ul>
+            <li>Define the Internet and associated key terms</li>
+            <li>Recognize Internet protocols</li>
+            <li>Discuss web browsers and identify their main features</li>
+            <li>Describe the types and purposes of websites</li>
+            <li>Plan a website for a target audience</li>
+            <li>Define a wireframe and a site map</li>
+            <li>Explain how websites use graphics, navigation tools, typography, and color</li>
+            <li>Design for accessibility</li>
+            <li>Design for multiplatform display</li>
+            <li>Define HTML and HTML elements</li>
+            <li>Recognize HTML versions and web programming languages</li>
+            <li>Identify web authoring tools</li>
+            <li>Download and use a web authoring tool</li>
+            <li>Create and view a basic HTML webpage</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+      </div>
+  </main>
+</body>
+</html>
