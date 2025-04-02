@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Module Overview</title>
   <style>
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      z-index: -999;
+    }
+
+    .skip-link:focus {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 8px;
+      background: #000;
+      color: #fff;
+      z-index: 1000;
+    }
+
     body {
       font-family: sans-serif;
       margin: 0;
@@ -124,7 +144,8 @@
   </style>
 </head>
 <body>
-  <a href="#content" class="skip-link" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:-999;">Skip to content</a>
+  <a href="#content" class="skip-link">Skip to content</a>
+  <main>
   <h1>Module Overview</h1>
   <div class="machine-wrapper">
     <img src="sodamachine4.png" alt="Soda Machine" class="machine-img" />
@@ -133,7 +154,8 @@
     <img src="activities.png" alt="Activities" class="button btn-activities" role="button" aria-label="Activities" aria-pressed="false" data-content="<p>This section outlines the interactive elements that help reinforce learning through engagement.</p><ul><li>Group discussions</li><li>Hands-on exercises</li><li>Real-world scenarios</li></ul>" />
     <img src="demonstrate.png" alt="Demonstrate" class="button btn-demonstrate" role="button" aria-label="Demonstrate" aria-pressed="false" data-content="<p>This section shows how to apply the concepts in practice through demos and walkthroughs.</p><ul><li>Video demonstrations</li><li>Live simulations</li><li>Step-by-step guides</li></ul>" />
   </div>
-  <div id="content" class="content-box" aria-live="polite"></div>
+      <div id="content" class="content-box" aria-live="polite"></div>
+  </main>
 
   <script>
     const buttons = document.querySelectorAll('.button');
