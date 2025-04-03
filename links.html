@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CIT 155 Project Links</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #fdfdfd;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      color: #c0392b;
+    }
+    .link-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1000px;
+    }
+    .link-card {
+      background: #fff8f0;
+      border: 2px solid #f0e0d6;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      transition: 0.3s ease;
+    }
+    .link-card:hover {
+      background: #fff1e6;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .link-card a {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #2c3e50;
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+    }
+    .link-card a:hover {
+      color: #c0392b;
+    }
+    .link-card small {
+      font-size: 0.85rem;
+      color: #777;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>CIT 155 Projects Dashboard</h1>
+    <p>Below are links to each project page and their WAVE ADA accessibility checker previews.</p>
+  </header>
+
+  <section class="link-grid">
+    <div class="link-card">
+      <a href="https://mikemcnutt.github.io/bob/3dexplode.html" target="_blank">3D Explode</a>
+      <a href="https://wave.webaim.org/report#/https://mikemcnutt.github.io/bob/3dexplode.html" target="_blank"><small>Check WAVE</small></a>
+    </div>
+    <div class="link-card">
+      <a href="https://mikemcnutt.github.io/bob/3dmenu.html" target="_blank">3D Menu</a>
+      <a href="https://wave.webaim.org/report#/https://mikemcnutt.github.io/bob/3dmenu.html" target="_blank"><small>Check WAVE</small></a>
+    </div>
+    <div class="link-card">
+      <a href="https://mikemcnutt.github.io/bob/blue.html" target="_blank">Blue</a>
+      <a href="https://wave.webaim.org/report#/https://mikemcnutt.github.io/bob/blue.html" target="_blank"><small>Check WAVE</small></a>
+    </div>
+    <div class="link-card">
+      <a href="https://mikemcnutt.github.io/bob/bookshelf.html" target="_blank">Bookshelf</a>
+      <a href="https://wave.webaim.org/report#/https://mikemcnutt.github.io/bob/bookshelf.html" target="_blank"><small>Check WAVE</small></a>
+    </div>
+    <div class="link-card">
+      <a href="https://mikemcnutt.github.io/bob/cal.html" target="_blank">Calendar</a>
+      <a href="https://wave.webaim.org/report#/https://mikemcnutt.github.io/bob/cal.html" target="_blank"><small>Check WAVE</small></a>
+    </div>
+    <div class="link-card">
+      <a href="https://mikemcnutt.github.io/bob/movie.html" target="_blank">Movie</a>
+      <a href="https://wave.webaim.org/report#/https://mikemcnutt.github.io/bob/movie.html" target="_blank"><small>Check WAVE</small></a>
+    </div>
+    <div class="link-card">
+      <a href="https://mikemcnutt.github.io/bob/pizza.html" target="_blank">Pizza Menu</a>
+      <a href="https://wave.webaim.org/report#/https://mikemcnutt.github.io/bob/pizza.html" target="_blank"><small>Check WAVE</small></a>
+    </div>
+    <div class="link-card">
+      <a href="https://mikemcnutt.github.io/bob/postit.html" target="_blank">Post-it Notes</a>
+      <a href="https://wave.webaim.org/report#/https://mikemcnutt.github.io/bob/postit.html" target="_blank"><small>Check WAVE</small></a>
+    </div>
+    <div class="link-card">
+      <a href="https://mikemcnutt.github.io/bob/rabbit.html" target="_blank">Rabbit</a>
+      <a href="https://wave.webaim.org/report#/https://mikemcnutt.github.io/bob/rabbit.html" target="_blank"><small>Check WAVE</small></a>
+    </div>
+    <div class="link-card">
+      <a href="https://mikemcnutt.github.io/bob/soda.html" target="_blank">Soda Machine</a>
+      <a href="https://wave.webaim.org/report#/https://mikemcnutt.github.io/bob/soda.html" target="_blank"><small>Check WAVE</small></a>
+    </div>
+    <div class="link-card">
+      <a href="https://mikemcnutt.github.io/bob/todo.html" target="_blank">To-Do List</a>
+      <a href="https://wave.webaim.org/report#/https://mikemcnutt.github.io/bob/todo.html" target="_blank"><small>Check WAVE</small></a>
+    </div>
+  </section>
+</body>
+</html>
