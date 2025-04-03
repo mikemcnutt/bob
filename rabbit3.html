@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Forest Rabbit Module</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 900px;
+      width: 100%;
+      background: white;
+      font-family: 'Merriweather', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 850px;
+      width: 100%;
+    }
+    #infoHeading {
+      color: black;
+      font-size: 1.8rem;
+      text-shadow: 1px 1px 4px black;
+      font-family: 'Merriweather', serif;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 850px;
+      height: 100vh;
+      background: url("https://elearning.kctcs.edu/bbcswebdav/xid-520727475_4") no-repeat center center;
+      background-size: contain;
+      overflow: hidden;
+    }
+    .rabbit {
+      position: absolute;
+      width: 20vw;
+      max-width: 200px;
+      pointer-events: none;
+      z-index: 10;
+      transform: scaleX(1);
+    }
+    .textbox {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.95);
+      color: #1e3a8a;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 20;
+      max-width: 90%;
+      font-size: 1rem;
+    }
+    .textbox ul {
+      padding-left: 1.2em;
+      margin-top: 0.5em;
+    }
+    nav.sign-row {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 2vw;
+      z-index: 30;
+      pointer-events: auto;
+    }
+    .sign {
+      width: 180px;
+      height: 100px;
+      background: white;
+      color: #1e3a8a;
+      font-weight: bold;
+      font-size: 0.95rem;
+      font-family: 'Merriweather', serif;
+      border: 3px solid #1e3a8a;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      padding: 1rem;
+      transition: transform 0.2s ease;
+    }
+    .sign:hover {
+      transform: translateY(-4px);
+    }
+  .butterfly {
+  position: absolute;
+  width: 28px;
+  top: 50%;
+  left: -50px;
+  z-index: 5;
+  opacity: 0.9;
+  pointer-events: none;
+  animation: butterflyFly 16s linear infinite alternate;
+}
+
+@keyframes butterflyFly {
+  0% {
+    transform: translate(0, 0) rotate(0deg) scaleX(1);
+  }
+  25% {
+    transform: translate(300px, -30px) rotate(10deg) scaleX(1);
+  }
+  50% {
+    transform: translate(600px, 10px) rotate(-10deg) scaleX(1);
+  }
+  75% {
+    transform: translate(900px, -30px) rotate(5deg) scaleX(1);
+  }
+  100% {
+    transform: translate(1200px, 0px) rotate(0deg) scaleX(-1);
+  }
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="infoHeading">Module Information</h1>
+    <main class="wrapper" id="wrapper" role="img" aria-label="Illustration of a forest path with trees and bushes">
+      <img class="rabbit" id="rabbit" src="https://elearning.kctcs.edu/bbcswebdav/xid-520727476_4" alt="A rabbit riding a tricycle" />
+      <img class="butterfly" src="borboletas-butterflies.gif" alt="A butterfly flying through the forest" aria-hidden="true" />
+      <div class="textbox" id="infoBox" role="region" aria-live="polite" aria-hidden="true" aria-labelledby="infoHeading"></div>
+      <nav class="sign-row" id="signRow" aria-label="Module navigation buttons" role="region" aria-labelledby="infoHeading">
+        <button class="sign" onclick="showText('overview')" aria-expanded="false">Module Overview</button>
+        <button class="sign" onclick="showText('why')" aria-expanded="false">Why It Matters</button>
+        <button class="sign" onclick="showText('activities')" aria-expanded="false">Module Activities</button>
+        <button class="sign" onclick="showText('competency')" aria-expanded="false">Demonstrate Competency</button>
+      </nav>
+    </main>
+  </div>
+</body>
+</html>
