@@ -16,21 +16,23 @@
       justify-content: center;
       align-items: center;
     }
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 850px;
-      width: 100%;
-    }
-    #infoHeading {
-      color: black;
-      font-size: 1.8rem;
-      text-shadow: 1px 1px 4px black;
-      font-family: 'Merriweather', serif;
-      text-align: center;
-      margin-bottom: 10px;
-    }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 850px;
+  width: 100%;
+}
+
+#infoHeading {
+  color: black;
+  font-size: 1.8rem;
+  text-shadow: 1px 1px 4px black;
+  font-family: 'Merriweather', serif;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
     .wrapper {
       position: relative;
       width: 100%;
@@ -40,6 +42,7 @@
       background-size: contain;
       overflow: hidden;
     }
+
     .rabbit {
       position: absolute;
       width: 20vw;
@@ -48,6 +51,7 @@
       z-index: 10;
       transform: scaleX(1);
     }
+
     .textbox {
       position: absolute;
       left: 50%;
@@ -62,10 +66,12 @@
       max-width: 90%;
       font-size: 1rem;
     }
+
     .textbox ul {
       padding-left: 1.2em;
       margin-top: 0.5em;
     }
+
     nav.sign-row {
       position: absolute;
       left: 0;
@@ -76,6 +82,7 @@
       z-index: 30;
       pointer-events: auto;
     }
+
     .sign {
       width: 180px;
       height: 100px;
@@ -92,10 +99,12 @@
       padding: 1rem;
       transition: transform 0.2s ease;
     }
+
     .sign:hover {
       transform: translateY(-4px);
     }
-  .butterfly {
+
+.butterfly {
   position: absolute;
   width: 28px;
   top: 50%;
@@ -123,22 +132,119 @@
     transform: translate(1200px, 0px) rotate(0deg) scaleX(-1);
   }
 }
-</style>
+  </style>
 </head>
-<body>
-  <div class="container">
-    <h1 id="infoHeading">Module Information</h1>
-    <main class="wrapper" id="wrapper" role="img" aria-label="Illustration of a forest path with trees and bushes">
-      <img class="rabbit" id="rabbit" src="https://elearning.kctcs.edu/bbcswebdav/xid-520727476_4" alt="A rabbit riding a tricycle" />
-      <img class="butterfly" src="borboletas-butterflies.gif" alt="A butterfly flying through the forest" aria-hidden="true" />
-      <div class="textbox" id="infoBox" role="region" aria-live="polite" aria-hidden="true" aria-labelledby="infoHeading"></div>
-      <nav class="sign-row" id="signRow" aria-label="Module navigation buttons" role="region" aria-labelledby="infoHeading">
-        <button class="sign" onclick="showText('overview')" aria-expanded="false">Module Overview</button>
-        <button class="sign" onclick="showText('why')" aria-expanded="false">Why It Matters</button>
-        <button class="sign" onclick="showText('activities')" aria-expanded="false">Module Activities</button>
-        <button class="sign" onclick="showText('competency')" aria-expanded="false">Demonstrate Competency</button>
-      </nav>
-    </main>
-  </div>
+<body><div class="container">
+  <h1 id="infoHeading">Module Information</h1>
+  <main class="wrapper" id="wrapper" role="img" aria-label="Illustration of a forest path with trees and bushes">
+    <img class="rabbit" id="rabbit" src="https://elearning.kctcs.edu/bbcswebdav/xid-520727476_4" alt="A rabbit riding a tricycle" />
+    <img class="butterfly" src="borboletas-butterflies.gif" alt="A butterfly flying through the forest" aria-hidden="true" />
+
+    <div class="textbox" id="infoBox" aria-live="polite" aria-hidden="true"></div>
+
+    <nav class="sign-row" id="signRow" aria-label="Module navigation buttons">
+      <button class="sign" onclick="showText('overview')" aria-expanded="false">Module Overview</button>
+      <button class="sign" onclick="showText('why')" aria-expanded="false">Why It Matters</button>
+      <button class="sign" onclick="showText('activities')" aria-expanded="false">Module Activities</button>
+      <button class="sign" onclick="showText('competency')" aria-expanded="false">Demonstrate Competency</button>
+    </nav>
+  </main>
+</div>
+<script>
+  const wrapper = document.getElementById('wrapper');
+  const rabbit = document.getElementById('rabbit');
+  const infoBox = document.getElementById('infoBox');
+  const signRow = document.getElementById('signRow');
+  const signButtons = signRow.querySelectorAll('button');
+  let currentMessage = null;
+
+  function updatePositions() {
+    const rect = wrapper.getBoundingClientRect();
+    const size = Math.min(rect.width, rect.height);
+    const imageTop = (rect.height - size) / 2;
+    const imageBottom = imageTop + size;
+
+    const pathY = imageTop + size * 0.87;
+    rabbit.style.bottom = `${rect.height - pathY}px`;
+    infoBox.style.top = `${imageTop + 20}px`;
+
+    const signHeight = signRow.offsetHeight || 100;
+    signRow.style.top = `${imageBottom - signHeight - 15}px`;
+  }
+
+  function showText(key) {
+    const messages = {
+      overview: `<strong>Module Overview</strong>   <p>Prior to the era of mobile devices, websites were almost exclusively accessed by desktop computers. However, the use of mobile devices to connect to the Internet has been rising since 2010. According to statista.com, nearly 50 percent of websites were visited between 2017 and 2018 worldwide using a mobile device. This trend is expected to continue. That means a business must create a website that includes an optimum viewing experience for mobile users. Have you ever visited a website from a mobile device that was not displayed well on a small screen? Webpages that require users to zoom and scroll to read and navigate the website drive visitors away.</p><br><p>The good news is that with a web development approach called responsive design, you have the power to create one website that is displayed well across various screen sizes and browsers on devices ranging from phones and tablets through laptops and traditional desktop displays. Responsive design is a website development strategy that strives to provide an optimal user experience of a website regardless of the device used. By applying responsive design principles, the webpage and content respond to the screen size of the user's device to minimize unnecessary scrolling and zooming, making reading and interacting with the site as convenient and intuitive as possible.</p>`,
+      why: `<strong>Why It Matters</strong><p>In the era of mobile devices, nearly half of all website visits are made using smartphones and tablets, a trend that continues to grow. For businesses, this means that creating a website optimized for mobile viewing is crucial. Poorly displayed websites on small screens, which require users to zoom and scroll excessively, can frustrate visitors and drive them away. Ensuring a seamless mobile experience is essential for maintaining user engagement and satisfaction.</p><br><p>Responsive design is the key to achieving this. It allows developers to create a single website that adapts seamlessly to various screen sizes and devices, from mobile phones and tablets to laptops and desktops. By implementing responsive design principles, webpages adjust dynamically to the user's device, providing an optimal viewing and interaction experience without the need for unnecessary scrolling or zooming. This approach enhances usability and accessibility, making it easier for users to read and navigate the site, ultimately improving user retention and satisfaction.</p>`,
+      activities: `<strong>Module Activities</strong> <ul><li>Explain the principles of responsive design</li><li>Describe the pros and cons of a mobile website</li><li>Explain the design principles of a mobile website</li><li>Describe a mobile-first strategy</li><li>Define a viewport</li><li>Insert a meta viewport element</li><li>Use a mobile simulator</li><li>Create a sticky element</li><li>ntegrate custom fonts</li><li>Use a pseudo-class</li><li>Create a mobile-friendly navigation system</li><li>Add a telephone link</li><li>Make rounded corners</li></ul>`,
+      competency: `<strong>Demonstrate Competency</strong>   <ul><li>Chapter 5 Reading</li><li>Chapter 5 - Lab 2</li></ul>`
+    };
+
+    signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+
+    if (currentMessage === key) {
+      infoBox.style.display = 'none';
+      infoBox.setAttribute('aria-hidden', 'true');
+      currentMessage = null;
+    } else {
+      infoBox.innerHTML = messages[key];
+      infoBox.style.display = 'block';
+      infoBox.setAttribute('aria-hidden', 'false');
+      document.querySelector(`button[onclick="showText('${key}')"]`).setAttribute('aria-expanded', 'true');
+      currentMessage = key;
+    }
+  }
+
+  let direction = -1;
+  let speed = 250;
+  let positionX = window.innerWidth;
+  let lastTime = null;
+  let paused = false;
+  let pauseStart = null;
+  const pauseDuration = 3000;
+
+  function animateRabbit(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const deltaTime = (timestamp - lastTime) / 1000;
+    lastTime = timestamp;
+
+    const rabbitWidth = rabbit.offsetWidth;
+
+    if (paused) {
+      if (!pauseStart) pauseStart = timestamp;
+      if (timestamp - pauseStart >= pauseDuration) {
+        paused = false;
+        pauseStart = null;
+        direction = 1;
+        rabbit.style.transform = "scaleX(-1)";
+        positionX = -rabbitWidth;
+      }
+      requestAnimationFrame(animateRabbit);
+      return;
+    }
+
+    positionX += direction * speed * deltaTime;
+    rabbit.style.left = `${positionX}px`;
+
+    if (direction === -1 && positionX + rabbitWidth < 0) {
+      paused = true;
+    } else if (direction === 1 && positionX > window.innerWidth) {
+      direction = -1;
+      rabbit.style.transform = "scaleX(1)";
+      positionX = window.innerWidth;
+    }
+
+    requestAnimationFrame(animateRabbit);
+  }
+
+  window.addEventListener('load', () => {
+    updatePositions();
+    positionX = window.innerWidth;
+    rabbit.style.left = `${positionX}px`;
+    requestAnimationFrame(animateRabbit);
+  });
+
+  window.addEventListener('resize', updatePositions);
+</script>
 </body>
 </html>
