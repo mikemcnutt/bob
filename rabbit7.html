@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Module Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100%;
+      background: white;
+      font-family: 'Merriweather', serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 850px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    #infoHeading {
+      color: black;
+      font-size: 1.8rem;
+      text-shadow: 1px 1px 4px black;
+      font-family: 'Merriweather', serif;
+      text-align: center;
+      margin: 10px 0;
+    }
+    .wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 850px;
+      height: 90vh;
+      background: url("https://elearning.kctcs.edu/bbcswebdav/xid-520727475_4") no-repeat center center;
+      background-size: contain;
+      overflow: hidden;
+    }
+    .rabbit {
+      position: absolute;
+      width: 20vw;
+      max-width: 200px;
+      pointer-events: none;
+      z-index: 10;
+      transform: scaleX(1);
+    }
+    .butterfly1, .butterfly2 {
+      position: absolute;
+      width: 28px;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+    .butterfly1 {
+      top: 45%;
+      z-index: 5;
+      animation: fly1 10s ease-in-out 0s 1 forwards, fly2left 10s ease-in-out 10s 1 forwards, fly1 10s ease-in-out 20s infinite alternate;
+    }
+    .butterfly2 {
+      top: 58%;
+      z-index: 15;
+      animation: fly3 12s ease-in-out 1s 1 forwards, fly4right 12s ease-in-out 13s 1 forwards, fly3 12s ease-in-out 25s infinite alternate;
+    }
+    @keyframes fly1 {
+      0%   { transform: translateX(1100px) translateY(0px) scaleX(-1); }
+      25%  { transform: translateX(800px) translateY(-15px) scaleX(-1); }
+      50%  { transform: translateX(600px) translateY(20px) scaleX(-1); }
+      75%  { transform: translateX(300px) translateY(-10px) scaleX(-1); }
+      100% { transform: translateX(-100px) translateY(5px) scaleX(-1); }
+    }
+    @keyframes fly2left {
+      0%   { transform: translateX(-100px) translateY(5px) scaleX(1); }
+      25%  { transform: translateX(300px) translateY(-10px) scaleX(1); }
+      50%  { transform: translateX(600px) translateY(20px) scaleX(1); }
+      75%  { transform: translateX(800px) translateY(-15px) scaleX(1); }
+      100% { transform: translateX(1100px) translateY(0px) scaleX(1); }
+    }
+    @keyframes fly3 {
+      0%   { transform: translateX(-120px) translateY(0px) scaleX(1); }
+      25%  { transform: translateX(200px) translateY(25px) scaleX(1); }
+      50%  { transform: translateX(500px) translateY(-20px) scaleX(1); }
+      75%  { transform: translateX(800px) translateY(15px) scaleX(1); }
+      100% { transform: translateX(1100px) translateY(0px) scaleX(1); }
+    }
+    @keyframes fly4right {
+      0%   { transform: translateX(1100px) translateY(0px) scaleX(-1); }
+      25%  { transform: translateX(800px) translateY(15px) scaleX(-1); }
+      50%  { transform: translateX(500px) translateY(-20px) scaleX(-1); }
+      75%  { transform: translateX(200px) translateY(25px) scaleX(-1); }
+      100% { transform: translateX(-120px) translateY(0px) scaleX(-1); }
+    }
+    .textbox {
+      position: absolute;
+      left: 50%;
+      top: 10%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.95);
+      color: #1e3a8a;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      display: none;
+      z-index: 20;
+      max-width: 90%;
+      font-size: 1rem;
+    }
+    .textbox ul {
+      padding-left: 1.2em;
+      margin-top: 0.5em;
+    }
+    nav.sign-row {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 2vw;
+      z-index: 30;
+      pointer-events: auto;
+    }
+    .sign {
+      width: 180px;
+      height: 100px;
+      background: white;
+      color: #1e3a8a;
+      font-weight: bold;
+      font-size: 0.95rem;
+      font-family: 'Merriweather', serif;
+      border: 3px solid #1e3a8a;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      padding: 1rem;
+      transition: transform 0.2s ease;
+    }
+    .sign:hover {
+      transform: translateY(-4px);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 id="infoHeading">Module Overview</h1>
+  <main class="wrapper" id="wrapper" role="img" aria-label="Illustration of a forest path with trees and bushes">
+    <img class="rabbit" id="rabbit" src="https://elearning.kctcs.edu/bbcswebdav/xid-520727476_4" alt="A rabbit riding a tricycle" />
+    <img class="butterfly1" src="borboletas-butterflies.gif" alt="A butterfly flying" />
+    <img class="butterfly2" src="borboletas-butterflies%20(1).gif" alt="A purple butterfly flying" />
+    <div class="textbox" id="infoBox" aria-live="polite" aria-hidden="true"></div>
+    <nav class="sign-row" id="signRow" aria-label="Module navigation buttons">
+      <button class="sign" onclick="showText('overview')" aria-expanded="false">Module Overview</button>
+      <button class="sign" onclick="showText('why')" aria-expanded="false">Why It Matters</button>
+      <button class="sign" onclick="showText('activities')" aria-expanded="false">Module Activities</button>
+      <button class="sign" onclick="showText('competency')" aria-expanded="false">Demonstrate Competency</button>
+    </nav>
+  </main>
+</div>
+<script>
+  const wrapper = document.getElementById('wrapper');
+  const rabbit = document.getElementById('rabbit');
+  const infoBox = document.getElementById('infoBox');
+  const signRow = document.getElementById('signRow');
+  const signButtons = signRow.querySelectorAll('button');
+  let currentMessage = null;
+
+  function updatePositions() {
+    const rect = wrapper.getBoundingClientRect();
+    const size = Math.min(rect.width, rect.height);
+    const imageTop = (rect.height - size) / 2;
+    const imageBottom = imageTop + size;
+
+    const pathY = imageTop + size * 0.87;
+    rabbit.style.bottom = `${rect.height - pathY}px`;
+
+    infoBox.style.top = `${imageTop + 20}px`;
+
+    const signHeight = signRow.offsetHeight || 100;
+    signRow.style.top = `${imageBottom - signHeight - 15}px`;
+  }
+
+  function showText(key) {
+    const messages = {
+      overview: `<strong>Module Overview</strong><p>Many of today's modern websites use some type of content management system or web framework. Both tools provide a means to create beautiful, responsive webpages more quickly than a standard text editor.</p><p>This chapter provides an introduction to Bootstrap, a popular front-end web framework used to create responsive webpages. You will learn how to create a webpage using Bootstrap's starter template, and then integrate and design a responsive navigation system using the Bootstrap framework. You will learn how to create a hero feature using the Bootstrap framework, to use the Bootstrap grid system to lay out webpage content, and to style text, images, and a table using the Bootstrap framework. Finally, you will learn about content management systems. You can see examples of themes built for developers <a href="https://themes.getbootstrap.com/official-themes/" target="_blank">on the official Bootstrap themes page</a>.</p>`,
+      why: `<strong>Why It Matters</strong><p>Content management systems (CMS) and web frameworks have revolutionized the way websites are built, offering developers efficient tools to create visually appealing and responsive webpages. In an era where user experience is paramount, these tools provide the speed and flexibility needed to stay competitive in the digital landscape.</p><p>Bootstrap, in particular, stands out as a frontrunner among web frameworks, known for its simplicity and robustness. Mastering Bootstrap enables developers to create responsive and mobile-friendly websites quickly, ensuring a seamless experience across various devices.</p><p>Understanding the importance of CMS platforms is equally crucial. These systems empower developers to efficiently manage website content, streamline workflows, and deliver dynamic and customizable websites to clients.</p>`,
+      activities: `<strong>Module Activities</strong><ol><li>Chapter 12 Reading</li><li>Chapter 12 - Lab 2</li></ol>`,
+      competency: `<strong>Demonstrate Competency</strong><ul><li>Describe the Bootstrap framework</li><li>Create a webpage using Bootstrap's starter template</li><li>Create a Bootstrap navbar</li><li>Integrate a Bootstrap hamburger menu</li><li>Style navigation links using Bootstrap</li><li>Define and create a jumbotron</li><li>Explain how to style text using Bootstrap</li><li>Write a jQuery document ready event</li><li>Describe and use the Bootstrap grid system</li><li>Explain how to style images using Bootstrap</li><li>Style a table using Bootstrap</li><li>Describe a content management system</li></ul>`
+    };
+
+    signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+
+    if (currentMessage === key) {
+      infoBox.style.display = 'none';
+      infoBox.setAttribute('aria-hidden', 'true');
+      currentMessage = null;
+    } else {
+      infoBox.innerHTML = messages[key];
+      infoBox.style.display = 'block';
+      infoBox.setAttribute('aria-hidden', 'false');
+      document.querySelector(`button[onclick="showText('${key}')"]`).setAttribute('aria-expanded', 'true');
+      currentMessage = key;
+    }
+  }
+
+  let direction = -1;
+  let speed = 250;
+  let positionX = window.innerWidth;
+  let lastTime = null;
+  let paused = false;
+  let pauseStart = null;
+  const pauseDuration = 3000;
+
+  function animateRabbit(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const deltaTime = (timestamp - lastTime) / 1000;
+    lastTime = timestamp;
+
+    const rabbitWidth = rabbit.offsetWidth;
+
+    if (paused) {
+      if (!pauseStart) pauseStart = timestamp;
+      if (timestamp - pauseStart >= pauseDuration) {
+        paused = false;
+        pauseStart = null;
+        direction = 1;
+        rabbit.style.transform = "scaleX(-1)";
+        positionX = -rabbitWidth;
+      }
+      requestAnimationFrame(animateRabbit);
+      return;
+    }
+
+    positionX += direction * speed * deltaTime;
+    rabbit.style.left = `${positionX}px`;
+
+    if (direction === -1 && positionX + rabbitWidth < 0) {
+      paused = true;
+    } else if (direction === 1 && positionX > window.innerWidth) {
+      direction = -1;
+      rabbit.style.transform = "scaleX(1)";
+      positionX = window.innerWidth;
+    }
+
+    requestAnimationFrame(animateRabbit);
+  }
+
+  window.addEventListener('load', () => {
+    updatePositions();
+    positionX = window.innerWidth;
+    rabbit.style.left = `${positionX}px`;
+    requestAnimationFrame(animateRabbit);
+  });
+
+  window.addEventListener('resize', updatePositions);
+</script>
+</body>
+</html>
