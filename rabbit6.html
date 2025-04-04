@@ -51,57 +51,34 @@
       width: 28px;
       opacity: 0.9;
       pointer-events: none;
-      animation: flutter 1s ease-in-out infinite;
     }
     .butterfly1 {
-      left: -100px;
       top: 47%;
       z-index: 5;
-      animation: fly1 10s cubic-bezier(0.4, 0, 0.2, 1) 0s 1 forwards, fly2 10s cubic-bezier(0.4, 0, 0.2, 1) 10s infinite alternate, flutter 1.2s ease-in-out infinite;
+      transform: translateX(1000px);
+      animation: fly1 10s ease-in-out 0s 1 forwards, fly2 10s ease-in-out 10s infinite alternate;
     }
     .butterfly2 {
-      left: -120px;
       top: 61%;
       z-index: 15;
-      animation: fly3 12s cubic-bezier(0.4, 0, 0.2, 1) 1.5s 1 forwards, fly4 12s cubic-bezier(0.4, 0, 0.2, 1) 13.5s infinite alternate, flutter 1s ease-in-out infinite;
-    }
-    @keyframes flutter {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      25% { transform: translateY(-2px) rotate(-2deg); }
-      50% { transform: translateY(1px) rotate(2deg); }
-      75% { transform: translateY(-1px) rotate(-1deg); }
+      transform: translateX(-200px);
+      animation: fly3 12s ease-in-out 1.5s 1 forwards, fly4 12s ease-in-out 13.5s infinite alternate;
     }
     @keyframes fly1 {
-      0%   { transform: translate(1000px, 0px) scaleX(-1); }
-      20%  { transform: translate(700px, 15px) scaleX(-1); }
-      40%  { transform: translate(500px, -25px) scaleX(-1); }
-      60%  { transform: translate(300px, 10px) scaleX(-1); }
-      80%  { transform: translate(150px, -40px) scaleX(-1); }
-      100% { transform: translate(-150px, 0px) scaleX(-1); }
+      0%   { transform: translateX(1000px) scaleX(-1); }
+      100% { transform: translateX(-150px) scaleX(-1); }
     }
     @keyframes fly2 {
-      0%   { transform: translate(-150px, 0px) scaleX(1); }
-      20%  { transform: translate(150px, -40px) scaleX(1); }
-      40%  { transform: translate(300px, 10px) scaleX(1); }
-      60%  { transform: translate(500px, -25px) scaleX(1); }
-      80%  { transform: translate(700px, 15px) scaleX(1); }
-      100% { transform: translate(1000px, 0px) scaleX(1); }
+      0%   { transform: translateX(-150px) scaleX(1); }
+      100% { transform: translateX(1000px) scaleX(1); }
     }
     @keyframes fly3 {
-      0%   { transform: translate(-200px, 20px) scaleX(1); }
-      20%  { transform: translate(200px, 0px) scaleX(1); }
-      40%  { transform: translate(400px, 30px) scaleX(1); }
-      60%  { transform: translate(600px, 5px) scaleX(1); }
-      80%  { transform: translate(800px, 25px) scaleX(1); }
-      100% { transform: translate(1100px, 0px) scaleX(1); }
+      0%   { transform: translateX(-200px) scaleX(1); }
+      100% { transform: translateX(1100px) scaleX(1); }
     }
     @keyframes fly4 {
-      0%   { transform: translate(1100px, 0px) scaleX(-1); }
-      20%  { transform: translate(800px, 25px) scaleX(-1); }
-      40%  { transform: translate(600px, 5px) scaleX(-1); }
-      60%  { transform: translate(400px, 30px) scaleX(-1); }
-      80%  { transform: translate(200px, 0px) scaleX(-1); }
-      100% { transform: translate(-200px, 20px) scaleX(-1); }
+      0%   { transform: translateX(1100px) scaleX(-1); }
+      100% { transform: translateX(-200px) scaleX(-1); }
     }
     .textbox {
       position: absolute;
@@ -182,6 +159,7 @@ function updatePositions() {
   const rect = wrapper.getBoundingClientRect();
   const size = Math.min(rect.width, rect.height);
   const imageTop = (rect.height - size) / 2;
+  const imageBottom = imageTop + size;
   const pathY = imageTop + size * 0.87;
   rabbit.style.bottom = `${rect.height - pathY}px`;
   infoBox.style.top = `${imageTop + 20}px`;
@@ -189,12 +167,11 @@ function updatePositions() {
 
 function showText(key) {
   const messages = {
-    overview: `<strong>Module Overview</strong>  <p>Many of today's modern websites use some type of content management system or web framework. Both tools provide a means to create beautiful, responsive webpages more quickly than a standard text editor.</p><p>This chapter provides an introduction to Bootstrap, a popular front-end web framework used to create responsive webpages. You will learn how to create a webpage using Bootstrap's starter template, and then integrate and design a responsive navigation system using the Bootstrap framework. You will learn how to create a hero feature using the Bootstrap framework, to use the Bootstrap grid system to lay out webpage content, and to style text, images, and a table using the Bootstrap framework. Finally, you will learn about content management systems.</p>` ,
-    why: `<strong>Why It Matters</strong> <p>Content management systems (CMS) and web frameworks have revolutionized the way websites are built, offering developers efficient tools to create visually appealing and responsive webpages. In an era where user experience is paramount, these tools provide the speed and flexibility needed to stay competitive in the digital landscape.</p><p>Bootstrap, in particular, stands out as a frontrunner among web frameworks, known for its simplicity and robustness. Mastering Bootstrap enables developers to create responsive and mobile-friendly websites quickly, ensuring a seamless experience across various devices.</p>` ,
-    activities: `<strong>Module Activities</strong>  <ol><li>Chapter 12 Reading</li><li>Chapter 12 - Lab 2</li></ol>`,
-    competency: `<strong>Demonstrate Competency</strong> <ul><li>Describe the Bootstrap framework</li><li>Create a webpage using Bootstrap's starter template</li><li>Create a Bootstrap navbar</li><li>Integrate a Bootstrap hamburger menu</li><li>Style navigation links using Bootstrap</li><li>Define and create a jumbotron</li><li>Explain how to style text using Bootstrap</li><li>Write a jQuery document ready event</li><li>Describe and use the Bootstrap grid system</li><li>Explain how to style images using Bootstrap</li><li>Style a table using Bootstrap</li><li>Describe a content management system</li></ul>`
+    overview: `<strong>Module Overview</strong><p>Many of today's modern websites use some type of content management system or web framework. Both tools provide a means to create beautiful, responsive webpages more quickly than a standard text editor.</p><p>This chapter provides an introduction to Bootstrap...</p>`,
+    why: `<strong>Why It Matters</strong><p>Content management systems (CMS) and web frameworks have revolutionized...</p>`,
+    activities: `<strong>Module Activities</strong><ol><li>Chapter 12 Reading</li><li>Chapter 12 - Lab 2</li></ol>`,
+    competency: `<strong>Demonstrate Competency</strong><ul><li>Describe the Bootstrap framework</li>...</ul>`
   };
-
   signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
   if (currentMessage === key) {
     infoBox.style.display = 'none';
@@ -228,7 +205,7 @@ function animateRabbit(timestamp) {
       paused = false;
       pauseStart = null;
       direction = 1;
-      rabbit.style.transform = 'scaleX(-1)';
+      rabbit.style.transform = "scaleX(-1)";
       positionX = -rabbitWidth;
     }
     requestAnimationFrame(animateRabbit);
@@ -240,7 +217,7 @@ function animateRabbit(timestamp) {
     paused = true;
   } else if (direction === 1 && positionX > window.innerWidth) {
     direction = -1;
-    rabbit.style.transform = 'scaleX(1)';
+    rabbit.style.transform = "scaleX(1)";
     positionX = window.innerWidth;
   }
   requestAnimationFrame(animateRabbit);
@@ -252,7 +229,6 @@ window.addEventListener('load', () => {
   rabbit.style.left = `${positionX}px`;
   requestAnimationFrame(animateRabbit);
 });
-
 window.addEventListener('resize', updatePositions);
 </script>
 </body>
