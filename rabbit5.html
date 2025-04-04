@@ -145,7 +145,7 @@
 </head>
 <body>
 <div class="container">
-  <h1 id="infoHeading">Module Information</h1>
+  <h1 id="infoHeading">Module 13 - Getting Started with Bootstrap</h1>
   <main class="wrapper" id="wrapper" role="img" aria-label="Illustration of a forest path with trees and bushes">
     <img class="rabbit" id="rabbit" src="https://elearning.kctcs.edu/bbcswebdav/xid-520727476_4" alt="A rabbit riding a tricycle" />
     <img class="butterfly1" src="borboletas-butterflies.gif" alt="A butterfly flying" />
@@ -181,10 +181,28 @@
 
   function showText(key) {
     const messages = {
-      overview: `<strong>Module Overview</strong><p>Prior to the era of mobile devices, websites were almost exclusively accessed by desktop computers. However, the use of mobile devices to connect to the Internet has been rising since 2010. According to statista.com, nearly 50 percent of websites were visited between 2017 and 2018 worldwide using a mobile device. This trend is expected to continue. That means a business must create a website that includes an optimum viewing experience for mobile users.</p><p>The good news is that with a web development approach called responsive design, you have the power to create one website that is displayed well across various screen sizes and browsers on devices ranging from phones and tablets through laptops and traditional desktop displays.</p>`,
-      why: `<strong>Why It Matters</strong><p>In the era of mobile devices, nearly half of all website visits are made using smartphones and tablets, a trend that continues to grow. Poorly displayed websites on small screens can frustrate visitors and drive them away. Responsive design allows developers to create a single website that adapts to various screen sizes and devices, improving usability and user retention.</p>`,
-      activities: `<strong>Module Activities</strong><ul><li>Explain the principles of responsive design</li><li>Describe mobile-first strategy</li><li>Use viewport meta tag</li><li>Simulate mobile devices</li><li>Create sticky elements</li><li>Use custom fonts and pseudo-classes</li><li>Design mobile-friendly navigation</li><li>Add telephone links</li></ul>`,
-      competency: `<strong>Demonstrate Competency</strong><ul><li>Chapter 5 Reading</li><li>Chapter 5 - Lab 2</li></ul>`
+      overview: `<strong>Module Overview</strong>  <p>Many of today's modern websites use some type of content management system or web framework. Both tools provide a means to create beautiful, responsive webpages more quickly than a standard text editor.</p>
+          <p>This chapter provides an introduction to Bootstrap, a popular front-end web framework used to create responsive webpages. You will learn how to create a webpage using Bootstrap's starter template, and then integrate and design a responsive navigation system using the Bootstrap framework. You will learn how to create a hero feature using the Bootstrap framework, to use the Bootstrap grid system to lay out webpage content, and to style text, images, and a table using the Bootstrap framework. Finally, you will learn about content management systems. You can see examples of themes built for developers <a href="https://themes.getbootstrap.com/official-themes/" target="_blank">on the official Bootstrap themes page</a>.</p>`,
+        why: why: `<strong>Why It Matters</strong> <p>Content management systems (CMS) and web frameworks have revolutionized the way websites are built, offering developers efficient tools to create visually appealing and responsive webpages. In an era where user experience is paramount, these tools provide the speed and flexibility needed to stay competitive in the digital landscape.</p>
+          <p>Bootstrap, in particular, stands out as a frontrunner among web frameworks, known for its simplicity and robustness. Mastering Bootstrap enables developers to create responsive and mobile-friendly websites quickly, ensuring a seamless experience across various devices.</p>
+          <p>Understanding the importance of CMS platforms is equally crucial. These systems empower developers to efficiently manage website content, streamline workflows, and deliver dynamic and customizable websites to clients.</p>`,
+    activities:  `<strong>Module Activities</strong>  <ol>
+            <li>Chapter 12 Reading</li>
+            <li>Chapter 12 - Lab 2</li>
+          </ol>`,    competency: `<strong>Demonstrate Competency</strong> <ul>
+            <li>Describe the Bootstrap framework</li>
+            <li>Create a webpage using Bootstrap's starter template</li>
+            <li>Create a Bootstrap navbar</li>
+            <li>Integrate a Bootstrap hamburger menu</li>
+            <li>Style navigation links using Bootstrap</li>
+            <li>Define and create a jumbotron</li>
+            <li>Explain how to style text using Bootstrap</li>
+            <li>Write a jQuery document ready event</li>
+            <li>Describe and use the Bootstrap grid system</li>
+            <li>Explain how to style images using Bootstrap</li>
+            <li>Style a table using Bootstrap</li>
+            <li>Describe a content management system</li>
+          </ul>`
     };
 
     signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
