@@ -49,16 +49,18 @@
     .butterfly1, .butterfly2 {
       position: absolute;
       width: 28px;
-      top: 50%;
       left: 0;
       z-index: 5;
       opacity: 0.9;
       pointer-events: none;
     }
+    
     .butterfly1 {
+      top: 50%;
       animation: fly1 8s linear infinite alternate, fly2 8s linear infinite alternate 8s;
     }
     .butterfly2 {
+      top: 42%;
       animation: fly3 10s linear infinite alternate, fly4 10s linear infinite alternate 10s;
     }
     @keyframes fly1 {
