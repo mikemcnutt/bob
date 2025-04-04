@@ -121,25 +121,19 @@
     .butterfly {
       top: 50%;
       left: -50px;
-      animation: butterflyFlyRight 16s linear infinite;
+      animation: butterflyRight 16s linear infinite alternate;
     }
     .butterfly2 {
       top: 60%;
       left: -50px;
-      animation: butterflyFlyLeft 20s linear infinite;
+      animation: butterflyLeft 20s linear infinite alternate;
     }
-    @keyframes butterflyFlyRight {
+    @keyframes butterflyRight {
       0% { transform: translate(0, 0) rotate(0deg) scaleX(1); }
-      25% { transform: translate(300px, -30px) rotate(10deg) scaleX(1); }
-      50% { transform: translate(600px, 10px) rotate(-10deg) scaleX(1); }
-      75% { transform: translate(900px, -30px) rotate(5deg) scaleX(1); }
-      100% { transform: translate(1200px, 0px) rotate(0deg) scaleX(1); }
+      100% { transform: translate(1200px, 0) rotate(0deg) scaleX(1); }
     }
-    @keyframes butterflyFlyLeft {
+    @keyframes butterflyLeft {
       0% { transform: translate(1200px, 0) rotate(0deg) scaleX(-1); }
-      25% { transform: translate(900px, 20px) rotate(5deg) scaleX(-1); }
-      50% { transform: translate(600px, -10px) rotate(-10deg) scaleX(-1); }
-      75% { transform: translate(300px, 30px) rotate(5deg) scaleX(-1); }
       100% { transform: translate(0, 0) rotate(0deg) scaleX(-1); }
     }
   </style>
@@ -174,12 +168,9 @@ function updatePositions() {
   const size = Math.min(rect.width, rect.height);
   const imageTop = (rect.height - size) / 2;
   const imageBottom = imageTop + size;
-
   const pathY = imageTop + size * 0.87;
   rabbit.style.bottom = `${rect.height - pathY}px`;
-
   infoBox.style.top = `${imageTop + 20}px`;
-
   const signHeight = signRow.offsetHeight || 100;
   signRow.style.top = `${imageBottom - signHeight - 15}px`;
 }
@@ -191,9 +182,7 @@ function showText(key) {
     activities: `<strong>Module Activities</strong><ul><li>Explain the principles...</li></ul>`,
     competency: `<strong>Demonstrate Competency</strong><ul><li>Chapter 5 Reading</li></ul>`
   };
-
   signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
-
   if (currentMessage === key) {
     infoBox.style.display = 'none';
     infoBox.setAttribute('aria-hidden', 'true');
@@ -219,9 +208,7 @@ function animateRabbit(timestamp) {
   if (!lastTime) lastTime = timestamp;
   const deltaTime = (timestamp - lastTime) / 1000;
   lastTime = timestamp;
-
   const rabbitWidth = rabbit.offsetWidth;
-
   if (paused) {
     if (!pauseStart) pauseStart = timestamp;
     if (timestamp - pauseStart >= pauseDuration) {
@@ -234,10 +221,8 @@ function animateRabbit(timestamp) {
     requestAnimationFrame(animateRabbit);
     return;
   }
-
   positionX += direction * speed * deltaTime;
   rabbit.style.left = `${positionX}px`;
-
   if (direction === -1 && positionX + rabbitWidth < 0) {
     paused = true;
   } else if (direction === 1 && positionX > window.innerWidth) {
@@ -245,7 +230,6 @@ function animateRabbit(timestamp) {
     rabbit.style.transform = "scaleX(1)";
     positionX = window.innerWidth;
   }
-
   requestAnimationFrame(animateRabbit);
 }
 
