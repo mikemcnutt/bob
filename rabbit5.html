@@ -46,7 +46,7 @@
       z-index: 10;
       transform: scaleX(1);
     }
-    .butterfly1, .butterfly2 {
+.butterfly1, .butterfly2 {
       position: absolute;
       width: 28px;
       opacity: 0.9;
@@ -55,12 +55,12 @@
     .butterfly1 {
       top: 45%;
       z-index: 5;
-      animation: fly1 10s ease-in-out 0s 1 forwards, fly2 10s ease-in-out 10s infinite alternate;
+      animation: fly1 10s ease-in-out 0s 1 forwards, fly2left 10s ease-in-out 10s 1 forwards, fly1 10s ease-in-out 20s infinite alternate;
     }
     .butterfly2 {
       top: 58%;
       z-index: 15;
-      animation: fly3 12s ease-in-out 1s 1 forwards, fly4 12s ease-in-out 13s infinite alternate;
+      animation: fly3 12s ease-in-out 1s 1 forwards, fly4right 12s ease-in-out 13s 1 forwards, fly3 12s ease-in-out 25s infinite alternate;
     }
     @keyframes fly1 {
       0%   { transform: translateX(1100px) translateY(0px) scaleX(-1); }
@@ -69,12 +69,12 @@
       75%  { transform: translateX(300px) translateY(-10px) scaleX(-1); }
       100% { transform: translateX(-100px) translateY(5px) scaleX(-1); }
     }
-    @keyframes fly2 {
-      0%   { transform: translateX(-100px) translateY(5px) scaleX(1); }
-      25%  { transform: translateX(300px) translateY(-10px) scaleX(1); }
-      50%  { transform: translateX(600px) translateY(20px) scaleX(1); }
-      75%  { transform: translateX(800px) translateY(-15px) scaleX(1); }
-      100% { transform: translateX(1100px) translateY(0px) scaleX(1); }
+    @keyframes fly2left {
+      0%   { transform: translateX(-100px) translateY(5px) scaleX(-1); }
+      25%  { transform: translateX(300px) translateY(-10px) scaleX(-1); }
+      50%  { transform: translateX(600px) translateY(20px) scaleX(-1); }
+      75%  { transform: translateX(800px) translateY(-15px) scaleX(-1); }
+      100% { transform: translateX(1100px) translateY(0px) scaleX(-1); }
     }
     @keyframes fly3 {
       0%   { transform: translateX(-120px) translateY(0px) scaleX(1); }
@@ -83,12 +83,12 @@
       75%  { transform: translateX(800px) translateY(15px) scaleX(1); }
       100% { transform: translateX(1100px) translateY(0px) scaleX(1); }
     }
-    @keyframes fly4 {
-      0%   { transform: translateX(1100px) translateY(0px) scaleX(-1); }
-      25%  { transform: translateX(800px) translateY(15px) scaleX(-1); }
-      50%  { transform: translateX(500px) translateY(-20px) scaleX(-1); }
-      75%  { transform: translateX(200px) translateY(25px) scaleX(-1); }
-      100% { transform: translateX(-120px) translateY(0px) scaleX(-1); }
+    @keyframes fly4right {
+      0%   { transform: translateX(1100px) translateY(0px) scaleX(1); }
+      25%  { transform: translateX(800px) translateY(15px) scaleX(1); }
+      50%  { transform: translateX(500px) translateY(-20px) scaleX(1); }
+      75%  { transform: translateX(200px) translateY(25px) scaleX(1); }
+      100% { transform: translateX(-120px) translateY(0px) scaleX(1); }
     }
     .textbox {
       position: absolute;
