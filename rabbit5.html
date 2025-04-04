@@ -40,22 +40,6 @@
       background-size: contain;
       overflow: hidden;
     }
-    .tree-layer {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://cdnb.artstation.com/p/assets/images/images/028/840/059/original/lukasz-szmidel-forest-background.gif') repeat-x bottom;
-      background-size: cover;
-      opacity: 0.4;
-      z-index: 1;
-      animation: treeDrift 60s linear infinite;
-    }
-    @keyframes treeDrift {
-      from { background-position-x: 0; }
-      to { background-position-x: -200px; }
-    }
     .rabbit {
       position: absolute;
       width: 20vw;
@@ -64,98 +48,48 @@
       z-index: 10;
       transform: scaleX(1);
     }
-    .textbox {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255,255,255,0.95);
-      color: #1e3a8a;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-      display: none;
-      z-index: 20;
-      max-width: 90%;
-      font-size: 1rem;
-    }
-    .textbox ul {
-      padding-left: 1.2em;
-      margin-top: 0.5em;
-    }
-    nav.sign-row {
-      position: absolute;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 2vw;
-      z-index: 30;
-      pointer-events: auto;
-    }
-    .sign {
-      width: 180px;
-      height: 100px;
-      background: white;
-      color: #1e3a8a;
-      font-weight: bold;
-      font-size: 0.95rem;
-      font-family: 'Merriweather', serif;
-      border: 3px solid #1e3a8a;
-      border-radius: 6px;
-      cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      text-align: center;
-      padding: 1rem;
-      transition: transform 0.2s ease;
-    }
-    .sign:hover {
-      transform: translateY(-4px);
-    }
-    .butterfly, .butterfly2 {
+    .butterfly1, .butterfly2 {
       position: absolute;
       width: 28px;
+      top: 50%;
+      left: -50px;
       z-index: 5;
       opacity: 0.9;
       pointer-events: none;
     }
-    .butterfly {
-      top: 45%;
-      left: -50px;
-      animation: butterflyPath1 10s linear 0s 1 forwards, butterflyPath2 10s linear 10s infinite alternate;
+    .butterfly1 {
+      animation: fly1 8s linear infinite alternate, fly2 8s linear infinite alternate;
     }
     .butterfly2 {
-      top: 60%;
-      left: -50px;
-      animation: butterfly2Path1 12s linear 0s 1 forwards, butterfly2Path2 12s linear 12s infinite alternate;
+      animation: fly3 10s linear infinite alternate, fly4 10s linear infinite alternate;
     }
-    @keyframes butterflyPath1 {
-            0% { transform: translate(1200px, 0px) rotate(0deg) scaleX(-1); }
-      25% { transform: translate(900px, -30px) rotate(-3deg) scaleX(-1); }
-      50% { transform: translate(600px, 20px) rotate(5deg) scaleX(-1); }
-      75% { transform: translate(300px, -20px) rotate(-5deg) scaleX(-1); }
-      100% { transform: translate(0px, 0px) rotate(0deg) scaleX(-1); }
-
+    @keyframes fly1 {
+      0%   { transform: translate(0px, 0px) scaleX(1); }
+      25%  { transform: translate(200px, -30px) scaleX(1); }
+      50%  { transform: translate(400px, 10px) scaleX(1); }
+      75%  { transform: translate(600px, -20px) scaleX(1); }
+      100% { transform: translate(800px, 0px) scaleX(-1); }
     }
-    @keyframes butterflyPath2 {
-      0% { transform: translate(0, 0) rotate(0deg) scaleX(1); }
-      25% { transform: translate(300px, -20px) rotate(5deg) scaleX(1); }
-      50% { transform: translate(600px, 20px) rotate(-5deg) scaleX(1); }
-      75% { transform: translate(900px, -30px) rotate(3deg) scaleX(1); }
-      100% { transform: translate(1200px, 0px) rotate(0deg) scaleX(1); }
+    @keyframes fly2 {
+      0%   { transform: translate(800px, 0px) scaleX(-1); }
+      25%  { transform: translate(600px, -20px) scaleX(-1); }
+      50%  { transform: translate(400px, 10px) scaleX(-1); }
+      75%  { transform: translate(200px, -30px) scaleX(-1); }
+      100% { transform: translate(0px, 0px) scaleX(1); }
     }
-    @keyframes butterfly2Path1 {
-      0% { transform: translate(0px, 0px) rotate(0deg) scaleX(1); }
-      25% { transform: translate(250px, 30px) rotate(5deg) scaleX(1); }
-      50% { transform: translate(500px, -10px) rotate(-5deg) scaleX(1); }
-      75% { transform: translate(750px, 20px) rotate(3deg) scaleX(1); }
-      100% { transform: translate(1000px, 0px) rotate(0deg) scaleX(1); }
+    @keyframes fly3 {
+      0%   { transform: translate(0px, 20px) scaleX(1); }
+      25%  { transform: translate(250px, 0px) scaleX(1); }
+      50%  { transform: translate(500px, 30px) scaleX(1); }
+      75%  { transform: translate(750px, 10px) scaleX(1); }
+      100% { transform: translate(1000px, 0px) scaleX(-1); }
     }
-    @keyframes butterfly2Path2 {
-      0% { transform: translate(1000px, 0px) rotate(0deg) scaleX(-1); }
-      25% { transform: translate(750px, 20px) rotate(-3deg) scaleX(-1); }
-      50% { transform: translate(500px, -10px) rotate(5deg) scaleX(-1); }
-      75% { transform: translate(250px, 30px) rotate(-5deg) scaleX(-1); }
-      100% { transform: translate(0px, 0px) rotate(0deg) scaleX(-1); }
+    @keyframes fly4 {
+      0%   { transform: translate(1000px, 0px) scaleX(-1); }
+      25%  { transform: translate(750px, 10px) scaleX(-1); }
+      50%  { transform: translate(500px, 30px) scaleX(-1); }
+      75%  { transform: translate(250px, 0px) scaleX(-1); }
+      100% { transform: translate(0px, 20px) scaleX(1); }
     }
   </style>
 </head>
@@ -163,10 +97,9 @@
 <div class="container">
   <h1 id="infoHeading">Module Information</h1>
   <main class="wrapper" id="wrapper" role="img" aria-label="Illustration of a forest path with trees and bushes">
-    <div class="tree-layer" aria-hidden="true"></div>
     <img class="rabbit" id="rabbit" src="https://elearning.kctcs.edu/bbcswebdav/xid-520727476_4" alt="A rabbit riding a tricycle" />
-    <img class="butterfly" src="borboletas-butterflies.gif" alt="A butterfly flying through the forest" aria-hidden="true" />
-    <img class="butterfly2" src="borboletas-butterflies (1).gif" alt="A purple butterfly flying through the forest" aria-hidden="true" />
+    <img class="butterfly1" src="borboletas-butterflies.gif" alt="A butterfly flying" />
+    <img class="butterfly2" src="borboletas-butterflies%20(1).gif" alt="A purple butterfly flying" />
     <div class="textbox" id="infoBox" aria-live="polite" aria-hidden="true"></div>
     <nav class="sign-row" id="signRow" aria-label="Module navigation buttons">
       <button class="sign" onclick="showText('overview')" aria-expanded="false">Module Overview</button>
@@ -189,17 +122,18 @@ function updatePositions() {
   const size = Math.min(rect.width, rect.height);
   const imageTop = (rect.height - size) / 2;
   const imageBottom = imageTop + size;
+
   const pathY = imageTop + size * 0.87;
   rabbit.style.bottom = `${rect.height - pathY}px`;
   infoBox.style.top = `${imageTop + 20}px`;
   const signHeight = signRow.offsetHeight || 100;
-  signRow.style.top = `${imageBottom - signHeight - 15}px`;
+  signRow.style.top = `${imageBottom - signHeight -15}px`;
 }
 
 function showText(key) {
   const messages = {
     overview: `<strong>Module Overview</strong><p>Prior to the era of mobile devices, websites were almost exclusively accessed by desktop computers. However, the use of mobile devices to connect to the Internet has been rising since 2010...</p>`,
-    why: `<strong>Why It Matters</strong><p>In the era of mobile devices, nearly half of all website visits are made using smartphones and tablets...</p>`,
+    why: `<strong>Why It Matters</strong><p>In the era of mobile devices, nearly half of all website visits are made using smartphones and tablets, a trend that continues to grow...</p>`,
     activities: `<strong>Module Activities</strong><ul><li>Explain the principles of responsive design</li>...</ul>`,
     competency: `<strong>Demonstrate Competency</strong><ul><li>Chapter 5 Reading</li><li>Chapter 5 - Lab 2</li></ul>`
   };
@@ -231,6 +165,7 @@ function animateRabbit(timestamp) {
   if (!lastTime) lastTime = timestamp;
   const deltaTime = (timestamp - lastTime) / 1000;
   lastTime = timestamp;
+
   const rabbitWidth = rabbit.offsetWidth;
 
   if (paused) {
@@ -239,7 +174,7 @@ function animateRabbit(timestamp) {
       paused = false;
       pauseStart = null;
       direction = 1;
-      rabbit.style.transform = 'scaleX(-1)';
+      rabbit.style.transform = "scaleX(-1)";
       positionX = -rabbitWidth;
     }
     requestAnimationFrame(animateRabbit);
@@ -253,7 +188,7 @@ function animateRabbit(timestamp) {
     paused = true;
   } else if (direction === 1 && positionX > window.innerWidth) {
     direction = -1;
-    rabbit.style.transform = 'scaleX(1)';
+    rabbit.style.transform = "scaleX(1)";
     positionX = window.innerWidth;
   }
 
