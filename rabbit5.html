@@ -27,13 +27,13 @@
       text-shadow: 1px 1px 4px black;
       font-family: 'Merriweather', serif;
       text-align: center;
-      margin: 20px 0;
+      margin: 10px 0;
     }
     .wrapper {
       position: relative;
       width: 100%;
       max-width: 850px;
-      height: 100vh;
+      height: 90vh;
       background: url("https://elearning.kctcs.edu/bbcswebdav/xid-520727475_4") no-repeat center center;
       background-size: contain;
       overflow: hidden;
@@ -46,67 +46,49 @@
       z-index: 10;
       transform: scaleX(1);
     }
+    .butterfly1, .butterfly2 {
+      position: absolute;
+      width: 28px;
+      opacity: 0.9;
+      pointer-events: none;
+    }
     .butterfly1 {
-      position: absolute;
-      width: 28px;
-      left: -50px;
+      top: 45%;
       z-index: 5;
-      opacity: 0.9;
-      pointer-events: none;
-       top: 47%;
-            animation: fly1 8s ease-in-out 0s 1 forwards, fly2 8s ease-in-out 8s infinite alternate;
-    }
-    
-.butterfly2 
-    {
-      position: absolute;
-      width: 28px;
-      left: -30px;
-      z-index: 15;
-      opacity: 0.9;
-      pointer-events: none;
-       top: 61%;
-            animation: fly3 10s ease-in-out 0s 1 forwards, fly4 10s ease-in-out 10s infinite alternate;
-      animation-delay: 1.5s, 11.5s;
-    }
-     .butterfly1 {
-
+      animation: fly1 10s ease-in-out 0s 1 forwards, fly2 10s ease-in-out 10s infinite alternate;
     }
     .butterfly2 {
-
+      top: 58%;
+      z-index: 15;
+      animation: fly3 12s ease-in-out 1s 1 forwards, fly4 12s ease-in-out 13s infinite alternate;
     }
-  @keyframes fly1 {
-      0%   { transform: translate(900px, 0px) rotate(0deg) scaleX(-1) scale(1); }
-      20%  { transform: translate(700px, 15px) rotate(-1deg) scaleX(-1) scale(1.1); }
-      40%  { transform: translate(500px, -25px) rotate(2deg) scaleX(-1) scale(1); }
-      60%  { transform: translate(300px, 10px) rotate(-3deg) scaleX(-1) scale(1.05); }
-      80%  { transform: translate(150px, -40px) rotate(5deg) scaleX(-1) scale(1); }
-      100% { transform: translate(-20px, 0px) rotate(0deg) scaleX(-1) scale(1); }
+    @keyframes fly1 {
+      0%   { transform: translateX(1100px) translateY(0px) scaleX(-1); }
+      25%  { transform: translateX(800px) translateY(-15px) scaleX(-1); }
+      50%  { transform: translateX(600px) translateY(20px) scaleX(-1); }
+      75%  { transform: translateX(300px) translateY(-10px) scaleX(-1); }
+      100% { transform: translateX(-100px) translateY(5px) scaleX(-1); }
     }
     @keyframes fly2 {
-            0%   { transform: translate(-20px, 0px) rotate(0deg) scaleX(1) scale(1); }
-      20%  { transform: translate(150px, -40px) rotate(5deg) scaleX(1) scale(1.1); }
-      40%  { transform: translate(300px, 10px) rotate(-3deg) scaleX(1) scale(1); }
-      60%  { transform: translate(500px, -25px) rotate(2deg) scaleX(1) scale(1.05); }
-      80%  { transform: translate(700px, 15px) rotate(-1deg) scaleX(1) scale(1); }
-      100% { transform: translate(900px, 0px) rotate(0deg) scaleX(1) scale(1); }
-
+      0%   { transform: translateX(-100px) translateY(5px) scaleX(1); }
+      25%  { transform: translateX(300px) translateY(-10px) scaleX(1); }
+      50%  { transform: translateX(600px) translateY(20px) scaleX(1); }
+      75%  { transform: translateX(800px) translateY(-15px) scaleX(1); }
+      100% { transform: translateX(1100px) translateY(0px) scaleX(1); }
     }
     @keyframes fly3 {
-      0%   { transform: translate(-135px, 20px) rotate(0deg) scaleX(1) scale(1); }
-      20%  { transform: translate(200px, 0px) rotate(2deg) scaleX(1) scale(1.1); }
-      40%  { transform: translate(400px, 30px) rotate(-2deg) scaleX(1) scale(1); }
-      60%  { transform: translate(600px, 5px) rotate(1deg) scaleX(1) scale(1.05); }
-      80%  { transform: translate(800px, 25px) rotate(-1deg) scaleX(1) scale(1); }
-      100% { transform: translate(1000px, 0px) rotate(0deg) scaleX(1) scale(1); }
+      0%   { transform: translateX(-120px) translateY(0px) scaleX(1); }
+      25%  { transform: translateX(200px) translateY(25px) scaleX(1); }
+      50%  { transform: translateX(500px) translateY(-20px) scaleX(1); }
+      75%  { transform: translateX(800px) translateY(15px) scaleX(1); }
+      100% { transform: translateX(1100px) translateY(0px) scaleX(1); }
     }
     @keyframes fly4 {
-      0%   { transform: translate(1000px, 0px) rotate(0deg) scaleX(-1) scale(1); }
-      20%  { transform: translate(800px, 25px) rotate(-1deg) scaleX(-1) scale(1.1); }
-      40%  { transform: translate(600px, 5px) rotate(1deg) scaleX(-1) scale(1); }
-      60%  { transform: translate(400px, 30px) rotate(-2deg) scaleX(-1) scale(1.05); }
-      80%  { transform: translate(200px, 0px) rotate(2deg) scaleX(-1) scale(1); }
-      100% { transform: translate(-135px, 20px) rotate(0deg) scaleX(-1) scale(1); }
+      0%   { transform: translateX(1100px) translateY(0px) scaleX(-1); }
+      25%  { transform: translateX(800px) translateY(15px) scaleX(-1); }
+      50%  { transform: translateX(500px) translateY(-20px) scaleX(-1); }
+      75%  { transform: translateX(200px) translateY(25px) scaleX(-1); }
+      100% { transform: translateX(-120px) translateY(0px) scaleX(-1); }
     }
     .textbox {
       position: absolute;
@@ -176,117 +158,88 @@
   </main>
 </div>
 <script>
-  const wrapper = document.getElementById('wrapper');
-  const rabbit = document.getElementById('rabbit');
-  const infoBox = document.getElementById('infoBox');
-  const signRow = document.getElementById('signRow');
-  const signButtons = signRow.querySelectorAll('button');
-  let currentMessage = null;
+const wrapper = document.getElementById('wrapper');
+const rabbit = document.getElementById('rabbit');
+const infoBox = document.getElementById('infoBox');
+const signRow = document.getElementById('signRow');
+const signButtons = signRow.querySelectorAll('button');
+let currentMessage = null;
 
-  function updatePositions() {
-    const rect = wrapper.getBoundingClientRect();
-    const size = Math.min(rect.width, rect.height);
-    const imageTop = (rect.height - size) / 2;
-    const imageBottom = imageTop + size;
+function updatePositions() {
+  const rect = wrapper.getBoundingClientRect();
+  const size = Math.min(rect.width, rect.height);
+  const imageTop = (rect.height - size) / 2;
+  const imageBottom = imageTop + size;
+  const pathY = imageTop + size * 0.87;
+  rabbit.style.bottom = `${rect.height - pathY}px`;
+  infoBox.style.top = `${imageTop + 20}px`;
+}
 
-    const pathY = imageTop + size * 0.87;
-    rabbit.style.bottom = `${rect.height - pathY}px`;
-
-    infoBox.style.top = `${imageTop + 20}px`;
+function showText(key) {
+  const messages = {
+    overview: `<strong>Module Overview</strong><p>Many of today's modern websites use some type of content management system or web framework. Both tools provide a means to create beautiful, responsive webpages more quickly than a standard text editor.</p><p>This chapter provides an introduction to Bootstrap, a popular front-end web framework used to create responsive webpages. You will learn how to create a webpage using Bootstrap's starter template, and then integrate and design a responsive navigation system using the Bootstrap framework. You will learn how to create a hero feature using the Bootstrap framework, to use the Bootstrap grid system to lay out webpage content, and to style text, images, and a table using the Bootstrap framework. Finally, you will learn about content management systems. You can see examples of themes built for developers <a href="https://themes.getbootstrap.com/official-themes/" target="_blank">on the official Bootstrap themes page</a>.</p>`,
+    why: `<strong>Why It Matters</strong><p>Content management systems (CMS) and web frameworks have revolutionized the way websites are built, offering developers efficient tools to create visually appealing and responsive webpages. In an era where user experience is paramount, these tools provide the speed and flexibility needed to stay competitive in the digital landscape.</p><p>Bootstrap, in particular, stands out as a frontrunner among web frameworks, known for its simplicity and robustness. Mastering Bootstrap enables developers to create responsive and mobile-friendly websites quickly, ensuring a seamless experience across various devices.</p><p>Understanding the importance of CMS platforms is equally crucial. These systems empower developers to efficiently manage website content, streamline workflows, and deliver dynamic and customizable websites to clients.</p>`,
+    activities: `<strong>Module Activities</strong><ol><li>Chapter 12 Reading</li><li>Chapter 12 - Lab 2</li></ol>`,
+    competency: `<strong>Demonstrate Competency</strong><ul><li>Describe the Bootstrap framework</li><li>Create a webpage using Bootstrap's starter template</li><li>Create a Bootstrap navbar</li><li>Integrate a Bootstrap hamburger menu</li><li>Style navigation links using Bootstrap</li><li>Define and create a jumbotron</li><li>Explain how to style text using Bootstrap</li><li>Write a jQuery document ready event</li><li>Describe and use the Bootstrap grid system</li><li>Explain how to style images using Bootstrap</li><li>Style a table using Bootstrap</li><li>Describe a content management system</li></ul>`
+  };
+  signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+  if (currentMessage === key) {
+    infoBox.style.display = 'none';
+    infoBox.setAttribute('aria-hidden', 'true');
+    currentMessage = null;
+  } else {
+    infoBox.innerHTML = messages[key];
+    infoBox.style.display = 'block';
+    infoBox.setAttribute('aria-hidden', 'false');
+    document.querySelector(`button[onclick="showText('${key}')"]`).setAttribute('aria-expanded', 'true');
+    currentMessage = key;
   }
+}
 
-  function showText(key) {
-    const messages = {
-      overview: `<strong>Module Overview</strong>  <p>Many of today's modern websites use some type of content management system or web framework. Both tools provide a means to create beautiful, responsive webpages more quickly than a standard text editor.</p>
-          <p>This chapter provides an introduction to Bootstrap, a popular front-end web framework used to create responsive webpages. You will learn how to create a webpage using Bootstrap's starter template, and then integrate and design a responsive navigation system using the Bootstrap framework. You will learn how to create a hero feature using the Bootstrap framework, to use the Bootstrap grid system to lay out webpage content, and to style text, images, and a table using the Bootstrap framework. Finally, you will learn about content management systems. You can see examples of themes built for developers <a href="https://themes.getbootstrap.com/official-themes/" target="_blank">on the official Bootstrap themes page</a>.</p>`,
-       why: `<strong>Why It Matters</strong> <p>Content management systems (CMS) and web frameworks have revolutionized the way websites are built, offering developers efficient tools to create visually appealing and responsive webpages. In an era where user experience is paramount, these tools provide the speed and flexibility needed to stay competitive in the digital landscape.</p>
-          <p>Bootstrap, in particular, stands out as a frontrunner among web frameworks, known for its simplicity and robustness. Mastering Bootstrap enables developers to create responsive and mobile-friendly websites quickly, ensuring a seamless experience across various devices.</p>
-          <p>Understanding the importance of CMS platforms is equally crucial. These systems empower developers to efficiently manage website content, streamline workflows, and deliver dynamic and customizable websites to clients.</p>`,
-    activities:  `<strong>Module Activities</strong>  <ol>
-            <li>Chapter 12 Reading</li>
-            <li>Chapter 12 - Lab 2</li>
-          </ol>`,   
-      competency: `<strong>Demonstrate Competency</strong> <ul>
-            <li>Describe the Bootstrap framework</li>
-            <li>Create a webpage using Bootstrap's starter template</li>
-            <li>Create a Bootstrap navbar</li>
-            <li>Integrate a Bootstrap hamburger menu</li>
-            <li>Style navigation links using Bootstrap</li>
-            <li>Define and create a jumbotron</li>
-            <li>Explain how to style text using Bootstrap</li>
-            <li>Write a jQuery document ready event</li>
-            <li>Describe and use the Bootstrap grid system</li>
-            <li>Explain how to style images using Bootstrap</li>
-            <li>Style a table using Bootstrap</li>
-            <li>Describe a content management system</li>
-          </ul>`
-    };
+let direction = -1;
+let speed = 250;
+let positionX = window.innerWidth;
+let lastTime = null;
+let paused = false;
+let pauseStart = null;
+const pauseDuration = 3000;
 
-    signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
-
-    if (currentMessage === key) {
-      infoBox.style.display = 'none';
-      infoBox.setAttribute('aria-hidden', 'true');
-      currentMessage = null;
-    } else {
-      infoBox.innerHTML = messages[key];
-      infoBox.style.display = 'block';
-      infoBox.setAttribute('aria-hidden', 'false');
-      document.querySelector(`button[onclick="showText('${key}')"]`).setAttribute('aria-expanded', 'true');
-      currentMessage = key;
+function animateRabbit(timestamp) {
+  if (!lastTime) lastTime = timestamp;
+  const deltaTime = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+  const rabbitWidth = rabbit.offsetWidth;
+  if (paused) {
+    if (!pauseStart) pauseStart = timestamp;
+    if (timestamp - pauseStart >= pauseDuration) {
+      paused = false;
+      pauseStart = null;
+      direction = 1;
+      rabbit.style.transform = "scaleX(-1)";
+      positionX = -rabbitWidth;
     }
-  }
-
-  let direction = -1;
-  let speed = 250;
-  let positionX = window.innerWidth;
-  let lastTime = null;
-  let paused = false;
-  let pauseStart = null;
-  const pauseDuration = 3000;
-
-  function animateRabbit(timestamp) {
-    if (!lastTime) lastTime = timestamp;
-    const deltaTime = (timestamp - lastTime) / 1000;
-    lastTime = timestamp;
-
-    const rabbitWidth = rabbit.offsetWidth;
-
-    if (paused) {
-      if (!pauseStart) pauseStart = timestamp;
-      if (timestamp - pauseStart >= pauseDuration) {
-        paused = false;
-        pauseStart = null;
-        direction = 1;
-        rabbit.style.transform = "scaleX(-1)";
-        positionX = -rabbitWidth;
-      }
-      requestAnimationFrame(animateRabbit);
-      return;
-    }
-
-    positionX += direction * speed * deltaTime;
-    rabbit.style.left = `${positionX}px`;
-
-    if (direction === -1 && positionX + rabbitWidth < 0) {
-      paused = true;
-    } else if (direction === 1 && positionX > window.innerWidth) {
-      direction = -1;
-      rabbit.style.transform = "scaleX(1)";
-      positionX = window.innerWidth;
-    }
-
     requestAnimationFrame(animateRabbit);
+    return;
   }
-
-  window.addEventListener('load', () => {
-    updatePositions();
+  positionX += direction * speed * deltaTime;
+  rabbit.style.left = `${positionX}px`;
+  if (direction === -1 && positionX + rabbitWidth < 0) {
+    paused = true;
+  } else if (direction === 1 && positionX > window.innerWidth) {
+    direction = -1;
+    rabbit.style.transform = "scaleX(1)";
     positionX = window.innerWidth;
-    rabbit.style.left = `${positionX}px`;
-    requestAnimationFrame(animateRabbit);
-  });
+  }
+  requestAnimationFrame(animateRabbit);
+}
 
-  window.addEventListener('resize', updatePositions);
+window.addEventListener('load', () => {
+  updatePositions();
+  positionX = window.innerWidth;
+  rabbit.style.left = `${positionX}px`;
+  requestAnimationFrame(animateRabbit);
+});
+window.addEventListener('resize', updatePositions);
 </script>
 </body>
 </html>
