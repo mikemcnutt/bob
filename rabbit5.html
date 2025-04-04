@@ -12,9 +12,6 @@
       width: 100%;
       background: white;
       font-family: 'Merriweather', serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
     .container {
       display: flex;
@@ -22,6 +19,7 @@
       align-items: center;
       max-width: 850px;
       width: 100%;
+      margin: 0 auto;
     }
     #infoHeading {
       color: black;
@@ -29,7 +27,7 @@
       text-shadow: 1px 1px 4px black;
       font-family: 'Merriweather', serif;
       text-align: center;
-      margin-bottom: 10px;
+      margin: 20px 0;
     }
     .wrapper {
       position: relative;
@@ -94,6 +92,7 @@
     .textbox {
       position: absolute;
       left: 50%;
+      top: 10%;
       transform: translateX(-50%);
       background: rgba(255,255,255,0.95);
       color: #1e3a8a;
@@ -111,6 +110,7 @@
     }
     nav.sign-row {
       position: absolute;
+      bottom: 40px;
       left: 0;
       width: 100%;
       display: flex;
@@ -157,7 +157,6 @@
   </main>
 </div>
 <script>
-<script>
   const wrapper = document.getElementById('wrapper');
   const rabbit = document.getElementById('rabbit');
   const infoBox = document.getElementById('infoBox');
@@ -175,38 +174,14 @@
     rabbit.style.bottom = `${rect.height - pathY}px`;
 
     infoBox.style.top = `${imageTop + 20}px`;
-
-    const signHeight = signRow.offsetHeight || 100;
-    signRow.style.top = `${imageBottom - signHeight - 15}px`;
   }
 
   function showText(key) {
     const messages = {
-      overview: `<strong>Module Overview</strong>
-        <p>Prior to the era of mobile devices, websites were almost exclusively accessed by desktop computers. However, the use of mobile devices to connect to the Internet has been rising since 2010. According to statista.com, nearly 50 percent of websites were visited between 2017 and 2018 worldwide using a mobile device. This trend is expected to continue. That means a business must create a website that includes an optimum viewing experience for mobile users.</p>
-        <p>The good news is that with a web development approach called responsive design, you have the power to create one website that is displayed well across various screen sizes and browsers. Responsive design is a strategy that strives to provide an optimal user experience of a website regardless of the device used.</p>`,
-      why: `<strong>Why It Matters</strong>
-        <p>In the era of mobile devices, nearly half of all website visits are made using smartphones and tablets. Poorly displayed websites on small screens can frustrate users. Creating a mobile-optimized website is essential for maintaining user engagement and satisfaction.</p>
-        <p>Responsive design allows developers to create one site that adapts to various devices, enhancing usability and accessibility and ultimately improving user retention and experience.</p>`,
-      activities: `<strong>Module Activities</strong>
-        <ul>
-          <li>Explain the principles of responsive design</li>
-          <li>Describe the pros and cons of a mobile website</li>
-          <li>Explain mobile design principles</li>
-          <li>Define a viewport and use the meta viewport tag</li>
-          <li>Use a mobile simulator</li>
-          <li>Create sticky elements</li>
-          <li>Integrate custom fonts</li>
-          <li>Use pseudo-classes</li>
-          <li>Create mobile-friendly navigation</li>
-          <li>Add telephone links</li>
-          <li>Make rounded corners</li>
-        </ul>`,
-      competency: `<strong>Demonstrate Competency</strong>
-        <ul>
-          <li>Chapter 5 Reading</li>
-          <li>Chapter 5 - Lab 2</li>
-        </ul>`
+      overview: `<strong>Module Overview</strong><p>Prior to the era of mobile devices, websites were almost exclusively accessed by desktop computers. However, the use of mobile devices to connect to the Internet has been rising since 2010. According to statista.com, nearly 50 percent of websites were visited between 2017 and 2018 worldwide using a mobile device. This trend is expected to continue. That means a business must create a website that includes an optimum viewing experience for mobile users.</p><p>The good news is that with a web development approach called responsive design, you have the power to create one website that is displayed well across various screen sizes and browsers on devices ranging from phones and tablets through laptops and traditional desktop displays.</p>`,
+      why: `<strong>Why It Matters</strong><p>In the era of mobile devices, nearly half of all website visits are made using smartphones and tablets, a trend that continues to grow. Poorly displayed websites on small screens can frustrate visitors and drive them away. Responsive design allows developers to create a single website that adapts to various screen sizes and devices, improving usability and user retention.</p>`,
+      activities: `<strong>Module Activities</strong><ul><li>Explain the principles of responsive design</li><li>Describe mobile-first strategy</li><li>Use viewport meta tag</li><li>Simulate mobile devices</li><li>Create sticky elements</li><li>Use custom fonts and pseudo-classes</li><li>Design mobile-friendly navigation</li><li>Add telephone links</li></ul>`,
+      competency: `<strong>Demonstrate Competency</strong><ul><li>Chapter 5 Reading</li><li>Chapter 5 - Lab 2</li></ul>`
     };
 
     signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
@@ -224,7 +199,6 @@
     }
   }
 
-  // Rabbit animation
   let direction = -1;
   let speed = 250;
   let positionX = window.innerWidth;
@@ -275,8 +249,6 @@
   });
 
   window.addEventListener('resize', updatePositions);
-</script>
-
 </script>
 </body>
 </html>
