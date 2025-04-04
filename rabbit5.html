@@ -162,7 +162,100 @@
   </main>
 </div>
 <script>
-// (same JS code remains unchanged)
+  const wrapper = document.getElementById('wrapper');
+  const rabbit = document.getElementById('rabbit');
+  const infoBox = document.getElementById('infoBox');
+  const signRow = document.getElementById('signRow');
+  const signButtons = signRow.querySelectorAll('button');
+  let currentMessage = null;
+
+  function updatePositions() {
+    const rect = wrapper.getBoundingClientRect();
+    const size = Math.min(rect.width, rect.height);
+    const imageTop = (rect.height - size) / 2;
+    const imageBottom = imageTop + size;
+
+    const pathY = imageTop + size * 0.87;
+    rabbit.style.bottom = `${rect.height - pathY}px`;
+    infoBox.style.top = `${imageTop + 20}px`;
+
+    const signHeight = signRow.offsetHeight || 100;
+    signRow.style.top = `${imageBottom - signHeight - 15}px`;
+  }
+
+  function showText(key) {
+    const messages = {
+      overview: `<strong>Module Overview</strong><p>Prior to the era of mobile devices...</p>`,
+      why: `<strong>Why It Matters</strong><p>In the era of mobile devices...</p>`,
+      activities: `<strong>Module Activities</strong><ul><li>Explain the principles...</li></ul>`,
+      competency: `<strong>Demonstrate Competency</strong><ul><li>Chapter 5 Reading</li></ul>`
+    };
+
+    signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+
+    if (currentMessage === key) {
+      infoBox.style.display = 'none';
+      infoBox.setAttribute('aria-hidden', 'true');
+      currentMessage = null;
+    } else {
+      infoBox.innerHTML = messages[key];
+      infoBox.style.display = 'block';
+      infoBox.setAttribute('aria-hidden', 'false');
+      document.querySelector(`button[onclick="showText('${key}')"]`).setAttribute('aria-expanded', 'true');
+      currentMessage = key;
+    }
+  }
+
+  let direction = -1;
+  let speed = 250;
+  let positionX = window.innerWidth;
+  let lastTime = null;
+  let paused = false;
+  let pauseStart = null;
+  const pauseDuration = 3000;
+
+  function animateRabbit(timestamp) {
+    if (!lastTime) lastTime = timestamp;
+    const deltaTime = (timestamp - lastTime) / 1000;
+    lastTime = timestamp;
+
+    const rabbitWidth = rabbit.offsetWidth;
+
+    if (paused) {
+      if (!pauseStart) pauseStart = timestamp;
+      if (timestamp - pauseStart >= pauseDuration) {
+        paused = false;
+        pauseStart = null;
+        direction = 1;
+        rabbit.style.transform = "scaleX(-1)";
+        positionX = -rabbitWidth;
+      }
+      requestAnimationFrame(animateRabbit);
+      return;
+    }
+
+    positionX += direction * speed * deltaTime;
+    rabbit.style.left = `${positionX}px`;
+
+    if (direction === -1 && positionX + rabbitWidth < 0) {
+      paused = true;
+    } else if (direction === 1 && positionX > window.innerWidth) {
+      direction = -1;
+      rabbit.style.transform = "scaleX(1)";
+      positionX = window.innerWidth;
+    }
+
+    requestAnimationFrame(animateRabbit);
+  }
+
+  window.addEventListener('load', () => {
+    updatePositions();
+    positionX = window.innerWidth;
+    rabbit.style.left = `${positionX}px`;
+    requestAnimationFrame(animateRabbit);
+  });
+
+  window.addEventListener('resize', updatePositions);
 </script>
 </body>
 </html>
