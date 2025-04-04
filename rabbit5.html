@@ -77,18 +77,18 @@
       100% { transform: translateX(1100px) translateY(0px) scaleX(1); }
     }
     @keyframes fly3 {
-      0%   { transform: translateX(-120px) translateY(0px) scaleX(-1); }
-      25%  { transform: translateX(200px) translateY(25px) scaleX(-1); }
-      50%  { transform: translateX(500px) translateY(-20px) scaleX(-1); }
-      75%  { transform: translateX(800px) translateY(15px) scaleX(-1); }
-      100% { transform: translateX(1100px) translateY(0px) scaleX(-1); }
+      0%   { transform: translateX(-120px) translateY(0px) scaleX(1); }
+      25%  { transform: translateX(200px) translateY(25px) scaleX(1); }
+      50%  { transform: translateX(500px) translateY(-20px) scaleX(1); }
+      75%  { transform: translateX(800px) translateY(15px) scaleX(1); }
+      100% { transform: translateX(1100px) translateY(0px) scaleX(1); }
     }
     @keyframes fly4 {
-      0%   { transform: translateX(1100px) translateY(0px) scaleX(1); }
-      25%  { transform: translateX(800px) translateY(15px) scaleX(1); }
-      50%  { transform: translateX(500px) translateY(-20px) scaleX(1); }
-      75%  { transform: translateX(200px) translateY(25px) scaleX(1); }
-      100% { transform: translateX(-120px) translateY(0px) scaleX(1); }
+      0%   { transform: translateX(1100px) translateY(0px) scaleX(-1); }
+      25%  { transform: translateX(800px) translateY(15px) scaleX(-1); }
+      50%  { transform: translateX(500px) translateY(-20px) scaleX(-1); }
+      75%  { transform: translateX(200px) translateY(25px) scaleX(-1); }
+      100% { transform: translateX(-120px) translateY(0px) scaleX(-1); }
     }
     .textbox {
       position: absolute;
@@ -141,3 +141,105 @@
     }
   </style>
 </head>
+<body>
+<div class="container">
+  <h1 id="infoHeading">Module 13 - Getting Started with Bootstrap</h1>
+  <main class="wrapper" id="wrapper" role="img" aria-label="Illustration of a forest path with trees and bushes">
+    <img class="rabbit" id="rabbit" src="https://elearning.kctcs.edu/bbcswebdav/xid-520727476_4" alt="A rabbit riding a tricycle" />
+    <img class="butterfly1" src="borboletas-butterflies.gif" alt="A butterfly flying" />
+    <img class="butterfly2" src="borboletas-butterflies%20(1).gif" alt="A purple butterfly flying" />
+    <div class="textbox" id="infoBox" aria-live="polite" aria-hidden="true"></div>
+    <nav class="sign-row" id="signRow" aria-label="Module navigation buttons">
+      <button class="sign" onclick="showText('overview')" aria-expanded="false">Module Overview</button>
+      <button class="sign" onclick="showText('why')" aria-expanded="false">Why It Matters</button>
+      <button class="sign" onclick="showText('activities')" aria-expanded="false">Module Activities</button>
+      <button class="sign" onclick="showText('competency')" aria-expanded="false">Demonstrate Competency</button>
+    </nav>
+  </main>
+</div>
+<script>
+const wrapper = document.getElementById('wrapper');
+const rabbit = document.getElementById('rabbit');
+const infoBox = document.getElementById('infoBox');
+const signRow = document.getElementById('signRow');
+const signButtons = signRow.querySelectorAll('button');
+let currentMessage = null;
+
+function updatePositions() {
+  const rect = wrapper.getBoundingClientRect();
+  const size = Math.min(rect.width, rect.height);
+  const imageTop = (rect.height - size) / 2;
+  const imageBottom = imageTop + size;
+  const pathY = imageTop + size * 0.87;
+  rabbit.style.bottom = `${rect.height - pathY}px`;
+  infoBox.style.top = `${imageTop + 20}px`;
+}
+
+function showText(key) {
+  const messages = {
+    overview: `<strong>Module Overview</strong><p>Many of today's modern websites use some type of content management system or web framework. Both tools provide a means to create beautiful, responsive webpages more quickly than a standard text editor.</p><p>This chapter provides an introduction to Bootstrap, a popular front-end web framework used to create responsive webpages. You will learn how to create a webpage using Bootstrap's starter template, and then integrate and design a responsive navigation system using the Bootstrap framework. You will learn how to create a hero feature using the Bootstrap framework, to use the Bootstrap grid system to lay out webpage content, and to style text, images, and a table using the Bootstrap framework. Finally, you will learn about content management systems. You can see examples of themes built for developers <a href="https://themes.getbootstrap.com/official-themes/" target="_blank">on the official Bootstrap themes page</a>.</p>`,
+    why: `<strong>Why It Matters</strong><p>Content management systems (CMS) and web frameworks have revolutionized the way websites are built, offering developers efficient tools to create visually appealing and responsive webpages. In an era where user experience is paramount, these tools provide the speed and flexibility needed to stay competitive in the digital landscape.</p><p>Bootstrap, in particular, stands out as a frontrunner among web frameworks, known for its simplicity and robustness. Mastering Bootstrap enables developers to create responsive and mobile-friendly websites quickly, ensuring a seamless experience across various devices.</p><p>Understanding the importance of CMS platforms is equally crucial. These systems empower developers to efficiently manage website content, streamline workflows, and deliver dynamic and customizable websites to clients.</p>`,
+    activities: `<strong>Module Activities</strong><ol><li>Chapter 12 Reading</li><li>Chapter 12 - Lab 2</li></ol>`,
+    competency: `<strong>Demonstrate Competency</strong><ul><li>Describe the Bootstrap framework</li><li>Create a webpage using Bootstrap's starter template</li><li>Create a Bootstrap navbar</li><li>Integrate a Bootstrap hamburger menu</li><li>Style navigation links using Bootstrap</li><li>Define and create a jumbotron</li><li>Explain how to style text using Bootstrap</li><li>Write a jQuery document ready event</li><li>Describe and use the Bootstrap grid system</li><li>Explain how to style images using Bootstrap</li><li>Style a table using Bootstrap</li><li>Describe a content management system</li></ul>`
+  };
+  signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+  if (currentMessage === key) {
+    infoBox.style.display = 'none';
+    infoBox.setAttribute('aria-hidden', 'true');
+    currentMessage = null;
+  } else {
+    infoBox.innerHTML = messages[key];
+    infoBox.style.display = 'block';
+    infoBox.setAttribute('aria-hidden', 'false');
+    document.querySelector(`button[onclick="showText('${key}')"]`).setAttribute('aria-expanded', 'true');
+    currentMessage = key;
+  }
+}
+
+let direction = -1;
+let speed = 250;
+let positionX = window.innerWidth;
+let lastTime = null;
+let paused = false;
+let pauseStart = null;
+const pauseDuration = 3000;
+
+function animateRabbit(timestamp) {
+  if (!lastTime) lastTime = timestamp;
+  const deltaTime = (timestamp - lastTime) / 1000;
+  lastTime = timestamp;
+  const rabbitWidth = rabbit.offsetWidth;
+  if (paused) {
+    if (!pauseStart) pauseStart = timestamp;
+    if (timestamp - pauseStart >= pauseDuration) {
+      paused = false;
+      pauseStart = null;
+      direction = 1;
+      rabbit.style.transform = "scaleX(-1)";
+      positionX = -rabbitWidth;
+    }
+    requestAnimationFrame(animateRabbit);
+    return;
+  }
+  positionX += direction * speed * deltaTime;
+  rabbit.style.left = `${positionX}px`;
+  if (direction === -1 && positionX + rabbitWidth < 0) {
+    paused = true;
+  } else if (direction === 1 && positionX > window.innerWidth) {
+    direction = -1;
+    rabbit.style.transform = "scaleX(1)";
+    positionX = window.innerWidth;
+  }
+  requestAnimationFrame(animateRabbit);
+}
+
+window.addEventListener('load', () => {
+  updatePositions();
+  positionX = window.innerWidth;
+  rabbit.style.left = `${positionX}px`;
+  requestAnimationFrame(animateRabbit);
+});
+window.addEventListener('resize', updatePositions);
+</script>
+</body>
+</html>
