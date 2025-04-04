@@ -241,5 +241,25 @@ window.addEventListener('load', () => {
 });
 window.addEventListener('resize', updatePositions);
 </script>
+  <script>function positionSigns() {
+  const wrapperRect = wrapper.getBoundingClientRect();
+  const signRowHeight = signRow.offsetHeight || 100;
+
+  // Dynamically position the sign row near the bottom of the image
+  const offset = wrapperRect.height * 0.06;
+  signRow.style.bottom = `${offset}px`;
+}
+
+window.addEventListener('load', () => {
+  updatePositions();   // Rabbit and text positioning
+  positionSigns();     // Dynamically position signs
+  // startRabbit() and butterfly animations if present
+});
+
+window.addEventListener('resize', () => {
+  updatePositions();
+  positionSigns();
+});
+</script>
 </body>
 </html>
