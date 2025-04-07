@@ -242,7 +242,7 @@
     const cheatSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
     let cheatIndex = 0;
     window.addEventListener('keydown', (e) => {
-      if (e.key === cheatSequence[cheatIndex]) {
+        if (e.key.toLowerCase() === cheatSequence[cheatIndex]) {
         cheatIndex++;
         if (cheatIndex === cheatSequence.length) {
           cheatIndex = 0;
