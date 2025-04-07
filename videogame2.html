@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #111;
+      color: #00ffcc;
+      font-family: 'Press Start 2P', monospace;
+      padding: 20px;
+      margin: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      background-color: #000;
+      border: 4px solid #00ffcc;
+      box-shadow: 0 0 20px #00ffcc;
+    }
+    h1, h2 {
+      color: #00ffcc;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .section {
+      border: 4px solid #00ffaa;
+      box-shadow: 0 0 10px #00ffaa;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #111;
+      border-radius: 8px;
+    }
+    .label {
+      background-color: #00ffcc;
+      color: #000;
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      margin-bottom: 10px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    a {
+      color: #fff100;
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 10px;
+      }
+    }
+    .progress-bar {
+      background: #222;
+      border: 2px solid #00ffcc;
+      border-radius: 6px;
+      height: 30px;
+      width: 100%;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      background: linear-gradient(to right, #00ffaa, #00ffcc);
+      transition: width 0.5s ease-in-out;
+      color: #000;
+      text-align: center;
+      line-height: 30px;
+      font-weight: bold;
+      height: 100%;
+    }
+    .icon {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    .save-button {
+      display: block;
+      margin: 30px auto 10px;
+      background-color: #00ffcc;
+      color: #000;
+      padding: 10px 20px;
+      font-size: 0.75rem;
+      font-family: 'Press Start 2P', monospace;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+    .save-button:hover {
+      background-color: #00ffaa;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+    #wizardMessage {
+      text-align: center;
+      margin-top: 20px;
+    }
+    #typedText {
+      color: #fff100;
+      font-size: 0.9rem;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div style="background: #000; color: #00ffcc; font-size: 0.75rem; text-align: center; padding: 8px 0; border-bottom: 2px solid #00ffcc; font-family: 'Press Start 2P', monospace;">
+    💖 Lives: 3 | 🕐 Time: ∞ | 🎓 Level: 5
+  </div>
+  <main>
+    <div class="container">
+      <h1>🎮 Module Overview</h1>
+      <!-- Sections Here -->
+      <div id="wizardMessage" style="display:none;">
+        <img src="bob.png" alt="Wizard giving advice with fire" width="180" height="auto">
+        <div id="typedText"></div>
+      </div>
+    </div>
+  </main>
+  <script>
+    const infoBox = document.getElementById('infoBox');
+    const progressFill = document.getElementById('progressFill');
+    const messages = {
+      overview: `<strong>Module Overview</strong><p>This module launches your journey through space-themed web development using Bootstrap and front-end frameworks. You will learn how to navigate a responsive universe of layouts and design patterns that make websites stellar across devices.</p>`,
+      why: `<strong>Why It Matters</strong><p>Like exploring space, understanding responsive design helps you navigate across different screen environments. It's essential for accessibility, user experience, and reaching a broader audience—your mission is to make the web universally awesome.</p>`,
+      activities: `<strong>Module Activities</strong><ul><li>Explore Bootstrap's Grid System</li><li>Design a responsive layout</li><li>Create and style components using Bootstrap</li><li>Use accessibility tools like WAVE</li></ul>`,
+      competency: `<strong>Demonstrate Competency</strong><ul><li>Submit your Bootstrap-themed webpage</li><li>Include mobile-optimized elements</li><li>Explain your design choices for accessibility</li></ul>`
+    };
+
+    function showText(key) {
+      if (infoBox.innerHTML === messages[key]) {
+        infoBox.classList.remove('active');
+        infoBox.setAttribute('aria-hidden', 'true');
+        infoBox.innerHTML = '';
+      } else {
+        infoBox.innerHTML = messages[key];
+        infoBox.classList.add('active');
+        infoBox.setAttribute('aria-hidden', 'false');
+      }
+    }
+
+    function typeOutMessage(text, element, delay = 30) {
+      let index = 0;
+      element.textContent = '';
+      function typeChar() {
+        if (index < text.length) {
+          element.innerHTML += text[index] === '\n' ? '<br>' : text[index];
+          index++;
+          setTimeout(typeChar, delay);
+        }
+      }
+      typeChar();
+    }
+
+    let xp = 0;
+    const xpPerClick = 250;
+    const maxXP = 1000;
+
+    function updateProgressBar() {
+      const percent = Math.min((xp / maxXP) * 100, 100);
+      progressFill.style.width = percent + '%';
+      progressFill.setAttribute('aria-valuenow', percent);
+      progressFill.textContent = `XP: ${xp} / ${maxXP}`;
+
+      if (percent === 100 && !document.getElementById('wizardMessage').style.display) {
+        document.getElementById('wizardMessage').style.display = 'block';
+        typeOutMessage("It's dangerous to do Bootstrap alone! Take these links: \n<ul><li><a href='https://getbootstrap.com' target='_blank'>Bootstrap</a></li><li><a href='https://themes.getbootstrap.com/official-themes/' target='_blank'>Bootstrap themes</a></li></ul>", document.getElementById('typedText'));
+      }
+    }
+
+    function createSaveButton(section) {
+      const button = document.createElement('button');
+      button.className = 'save-button';
+      button.setAttribute('aria-label', 'Save your progress and continue');
+      button.textContent = '💾 Save Game';
+      let used = false;
+      button.addEventListener('click', () => {
+        if (used) return;
+        used = true;
+        xp = Math.min(xp + xpPerClick, maxXP);
+        updateProgressBar();
+      });
+      section.appendChild(button);
+    }
+
+    document.querySelectorAll('.section').forEach((section, index) => {
+      if (index > 0) createSaveButton(section);
+    });
+
+    updateProgressBar();
+  </script>
+</body>
+</html>
