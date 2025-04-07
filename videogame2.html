@@ -104,6 +104,7 @@
     #wizardMessage {
       text-align: center;
       margin-top: 20px;
+      display: none;
     }
     #typedText {
       color: #fff100;
@@ -143,7 +144,7 @@
       </div>
 
       <div class="section">
-        <div class="label">🧩 QUEST LOG</div>
+        <div class="label">🧹 QUEST LOG</div>
         <h2>Module Activities</h2>
         <ul>
           <li>📖 Chapter 1 Reading</li>
@@ -169,7 +170,7 @@
         </ul>
       </div>
 
-      <div id="wizardMessage" style="display:none;">
+      <div id="wizardMessage">
         <img src="bob.png" alt="Wizard giving advice with fire" width="180" height="auto">
         <div id="typedText"></div>
       </div>
@@ -200,12 +201,6 @@
       progressFill.style.width = percent + '%';
       progressFill.setAttribute('aria-valuenow', percent);
       progressFill.textContent = `XP: ${xp} / ${maxXP}`;
-
-      if (percent === 100 && document.getElementById('wizardMessage').style.display === 'none') {
-        document.getElementById('wizardMessage').style.display = 'block';
-        const message = `It's dangerous to do Bootstrap alone! Take these links:\n<ul><li><a href='https://getbootstrap.com' target='_blank'>Bootstrap</a></li><li><a href='https://themes.getbootstrap.com/official-themes/' target='_blank'>Bootstrap themes</a></li></ul>`;
-        typeOutMessage(message, document.getElementById('typedText'));
-      }
     }
 
     function createSaveButton(section) {
