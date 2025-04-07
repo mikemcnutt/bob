@@ -111,6 +111,12 @@
       font-size: 0.9rem;
       margin-top: 15px;
     }
+    #marioMessage {
+      text-align: center;
+      color: #fff100;
+      font-size: 0.9rem;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -174,10 +180,16 @@
         <img src="bob.png" alt="Wizard giving advice with fire" width="180" height="auto">
         <div id="typedText"></div>
       </div>
+
+      <div id="marioMessage" style="display: none;">
+        <p>Sorry Mario, but the princess is in another Module Overview</p>
+        <p>Hint: Try the classic cheat code (↑↑↓↓←→←→B A) to unlock something special!</p>
+      </div>
     </div>
   </main>
   <script>
     const progressFill = document.getElementById('progressFill');
+    const marioMessage = document.getElementById('marioMessage');
 
     function typeOutMessage(text, element, delay = 30) {
       let index = 0;
@@ -195,6 +207,7 @@
     let xp = 0;
     const xpPerClick = 250;
     const maxXP = 1000;
+    let saveClicks = 0;
 
     function updateProgressBar() {
       const percent = Math.min((xp / maxXP) * 100, 100);
@@ -214,6 +227,10 @@
         used = true;
         xp = Math.min(xp + xpPerClick, maxXP);
         updateProgressBar();
+        saveClicks++;
+        if (saveClicks === 4) {
+          marioMessage.style.display = 'block';
+        }
       });
       section.appendChild(button);
     }
