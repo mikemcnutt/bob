@@ -150,7 +150,7 @@
       </div>
 
       <div class="section">
-        <div class="label">🧹 QUEST LOG</div>
+        <div class="label">🩹 QUEST LOG</div>
         <h2>Module Activities</h2>
         <ul>
           <li>📖 Chapter 1 Reading</li>
@@ -239,15 +239,18 @@
       createSaveButton(section);
     });
 
-    const cheatSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    const cheatSequence = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a'];
     let cheatIndex = 0;
+
     window.addEventListener('keydown', (e) => {
-        if (e.key.toLowerCase() === cheatSequence[cheatIndex]) {
+      const key = e.key.toLowerCase();
+      if (key === cheatSequence[cheatIndex]) {
         cheatIndex++;
         if (cheatIndex === cheatSequence.length) {
           cheatIndex = 0;
-          if (document.getElementById('wizardMessage').style.display === 'none') {
-            document.getElementById('wizardMessage').style.display = 'block';
+          const wizard = document.getElementById('wizardMessage');
+          if (wizard.style.display === 'none') {
+            wizard.style.display = 'block';
             const message = `It's dangerous to do Bootstrap alone! Take these links:\n<ul><li><a href='https://getbootstrap.com' target='_blank'>Bootstrap</a></li><li><a href='https://themes.getbootstrap.com/official-themes/' target='_blank'>Bootstrap themes</a></li></ul>`;
             typeOutMessage(message, document.getElementById('typedText'));
           }
