@@ -119,7 +119,6 @@
   <main>
     <div class="container">
       <h1>🎮 Module Overview</h1>
-      <!-- Sections Here -->
       <div id="wizardMessage" style="display:none;">
         <img src="bob.png" alt="Wizard giving advice with fire" width="180" height="auto">
         <div id="typedText"></div>
@@ -129,28 +128,10 @@
   <script>
     const infoBox = document.getElementById('infoBox');
     const progressFill = document.getElementById('progressFill');
-    const messages = {
-      overview: `<strong>Module Overview</strong><p>This module launches your journey through space-themed web development using Bootstrap and front-end frameworks. You will learn how to navigate a responsive universe of layouts and design patterns that make websites stellar across devices.</p>`,
-      why: `<strong>Why It Matters</strong><p>Like exploring space, understanding responsive design helps you navigate across different screen environments. It's essential for accessibility, user experience, and reaching a broader audience—your mission is to make the web universally awesome.</p>`,
-      activities: `<strong>Module Activities</strong><ul><li>Explore Bootstrap's Grid System</li><li>Design a responsive layout</li><li>Create and style components using Bootstrap</li><li>Use accessibility tools like WAVE</li></ul>`,
-      competency: `<strong>Demonstrate Competency</strong><ul><li>Submit your Bootstrap-themed webpage</li><li>Include mobile-optimized elements</li><li>Explain your design choices for accessibility</li></ul>`
-    };
-
-    function showText(key) {
-      if (infoBox.innerHTML === messages[key]) {
-        infoBox.classList.remove('active');
-        infoBox.setAttribute('aria-hidden', 'true');
-        infoBox.innerHTML = '';
-      } else {
-        infoBox.innerHTML = messages[key];
-        infoBox.classList.add('active');
-        infoBox.setAttribute('aria-hidden', 'false');
-      }
-    }
 
     function typeOutMessage(text, element, delay = 30) {
       let index = 0;
-      element.textContent = '';
+      element.innerHTML = '';
       function typeChar() {
         if (index < text.length) {
           element.innerHTML += text[index] === '\n' ? '<br>' : text[index];
@@ -171,9 +152,10 @@
       progressFill.setAttribute('aria-valuenow', percent);
       progressFill.textContent = `XP: ${xp} / ${maxXP}`;
 
-      if (percent === 100 && !document.getElementById('wizardMessage').style.display) {
+      if (percent === 100 && document.getElementById('wizardMessage').style.display === 'none') {
         document.getElementById('wizardMessage').style.display = 'block';
-        typeOutMessage("It's dangerous to do Bootstrap alone! Take these links: \n<ul><li><a href='https://getbootstrap.com' target='_blank'>Bootstrap</a></li><li><a href='https://themes.getbootstrap.com/official-themes/' target='_blank'>Bootstrap themes</a></li></ul>", document.getElementById('typedText'));
+        const message = `It's dangerous to do Bootstrap alone! Take these links:\n<ul><li><a href='https://getbootstrap.com' target='_blank'>Bootstrap</a></li><li><a href='https://themes.getbootstrap.com/official-themes/' target='_blank'>Bootstrap themes</a></li></ul>`;
+        typeOutMessage(message, document.getElementById('typedText'));
       }
     }
 
