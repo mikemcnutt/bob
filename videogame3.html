@@ -169,9 +169,7 @@
         </div>
   </main>
   <script>
-   <script>
   const progressFill = document.getElementById('progressFill');
-  const saveButtons = document.querySelectorAll('.save-button');
 
   let xp = 0;
   const xpPerClick = 250;
@@ -194,7 +192,6 @@
       msg.style.fontSize = '0.9rem';
       document.querySelector('.container').appendChild(msg);
 
-      // Cheat code instructions
       const hint = document.createElement('p');
       hint.textContent = 'Hint: Try the cheat code (↑↑↓↓←→←→B A) to unlock something special!';
       hint.style.color = '#00ffcc';
@@ -211,16 +208,18 @@
     button.setAttribute('aria-label', 'Save your progress and continue');
     button.textContent = '💾 Save Game';
     let used = false;
+
     button.addEventListener('click', () => {
       if (used) return;
       used = true;
       xp = Math.min(xp + xpPerClick, maxXP);
       updateProgressBar();
     });
+
     section.appendChild(button);
   }
 
-  // Cheat code detection (moved out of button click handler)
+  // Cheat code detection (runs once)
   const cheatSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
   let cheatIndex = 0;
 
