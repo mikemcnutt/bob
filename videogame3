@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #111;
+      color: #00ffcc;
+      font-family: 'Press Start 2P', monospace;
+      padding: 20px;
+      margin: 0;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      background-color: #000;
+      border: 4px solid #00ffcc;
+      box-shadow: 0 0 20px #00ffcc;
+    }
+    h1, h2 {
+      color: #00ffcc;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .section {
+      border: 2px dashed #00ffcc;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #111;
+    }
+    .label {
+      background-color: #00ffcc;
+      color: #000;
+      display: inline-block;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      margin-bottom: 10px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    a {
+      color: #fff100;
+      text-decoration: underline;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 10px;
+      }
+    }
+    .progress-bar {
+      background: #222;
+      border: 2px solid #00ffcc;
+      border-radius: 6px;
+      height: 30px;
+      width: 100%;
+      margin-top: 10px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      background: linear-gradient(to right, #00ffaa, #00ffcc);
+      transition: width 0.5s ease-in-out;
+      color: #000;
+      text-align: center;
+      line-height: 30px;
+      font-weight: bold;
+      height: 100%;
+    
+      to { width: 25%; }
+    }
+    .section {
+      border: 4px solid #00ffaa;
+      box-shadow: 0 0 10px #00ffaa;
+      padding: 20px;
+      margin-bottom: 20px;
+      background-color: #111;
+      border-radius: 8px;
+    }
+    .icon {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    .save-button {
+      display: block;
+      margin: 30px auto 10px;
+      background-color: #00ffcc;
+      color: #000;
+      padding: 10px 20px;
+      font-size: 0.75rem;
+      font-family: 'Press Start 2P', monospace;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+    .save-button:hover {
+      background-color: #00ffaa;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div style="background: #000; color: #00ffcc; font-size: 0.75rem; text-align: center; padding: 8px 0; border-bottom: 2px solid #00ffcc; font-family: 'Press Start 2P', monospace;">
+    💖 Lives: 3 | 🕐 Time: ∞ | 🎓 Level: 5
+  </div>
+  <main>
+    <div class="container">
+    <h1>🎮 Module Overview</h1>
+
+    <div class="section">
+      <img src="https://i.imgur.com/C4v2F4Q.png" alt="Retro Buddy" class="icon" aria-hidden="true">
+      <h2 id="progressTitle">Module XP Progress</h2>
+      <div class="label">PROGRESS</div>
+      <div class="progress-bar" aria-labelledby="progressTitle">
+  <div class="progress-fill" id="progressFill" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="25">XP: 250 / 1000</div>
+</div>
+    </div>
+    <div class="section">
+      <div class="label">🧭 INTRO SEQUENCE</div>
+      <h2>Module Overview</h2>
+      <p>Today, millions of people worldwide have access to the Internet, the world's largest network. Billions of webpages provide information on any subject you can imagine. People use the Internet to search, communicate, and be entertained. Businesses rely on it to sell products and services. HTML and CSS make this possible.</p>
+      <p>HTML 5.3 is the most recent version of HTML and is called HTML 5. You'll learn the basics of the Internet, how it works, website types, how to plan a website for an audience, and how to create a basic webpage using a text editor.</p>
+    </div>
+
+    <div class="section">
+      <div class="label">💡 THE LORE</div>
+      <h2>Why It Matters</h2>
+      <p>Understanding the foundations of web design is essential in today's digital world. Businesses rely heavily on the web to market and sell. HTML and CSS are the backbone of every site. Mastering them lets you build meaningful, interactive websites that shape how users experience the web.</p>
+      <p>This quest builds your foundation with modern HTML (5.3), CSS, and planning techniques — all while sharpening your ability to craft professional, accessible, and appealing websites.</p>
+    </div>
+
+    <div class="section">
+      <div class="label">🧩 QUEST LOG</div>
+      <h2>Module Activities</h2>
+      <ul>
+        <li>📖 Chapter 1 Reading</li>
+        <li>🧪 Chapter 1 - Lab 2</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <div class="label">🏆 FINAL BOSS</div>
+      <h2>Demonstrate Competency</h2>
+      <ul>
+        <li>Define Internet and key terms</li>
+        <li>Recognize Internet protocols</li>
+        <li>Discuss browsers and features</li>
+        <li>Describe types/purposes of websites</li>
+        <li>Plan a site for a target audience</li>
+        <li>Define a wireframe and a site map</li>
+        <li>Explain navigation, typography, color</li>
+        <li>Design for accessibility & devices</li>
+        <li>Define HTML and elements</li>
+        <li>Recognize HTML versions & tools</li>
+        <li>Create and view a basic webpage</li>
+      </ul>
+        </div>
+  </main>
+  <script>
+   <script>
+  const progressFill = document.getElementById('progressFill');
+  const saveButtons = document.querySelectorAll('.save-button');
+
+  let xp = 0;
+  const xpPerClick = 250;
+  const maxXP = 1000;
+
+  function updateProgressBar() {
+    const percent = Math.min((xp / maxXP) * 100, 100);
+    progressFill.style.width = percent + '%';
+    progressFill.setAttribute('aria-valuenow', percent);
+    progressFill.textContent = `XP: ${xp} / ${maxXP}`;
+
+    // Show message at 100%
+    if (percent === 100 && !document.getElementById('marioMessage')) {
+      const msg = document.createElement('p');
+      msg.id = 'marioMessage';
+      msg.textContent = 'Sorry Mario, but the princess is in another Module Overview';
+      msg.style.color = '#fff100';
+      msg.style.textAlign = 'center';
+      msg.style.marginTop = '20px';
+      msg.style.fontSize = '0.9rem';
+      document.querySelector('.container').appendChild(msg);
+
+      // Cheat code instructions
+      const hint = document.createElement('p');
+      hint.textContent = 'Hint: Try the cheat code (↑↑↓↓←→←→B A) to unlock something special!';
+      hint.style.color = '#00ffcc';
+      hint.style.textAlign = 'center';
+      hint.style.marginTop = '10px';
+      hint.style.fontSize = '0.8rem';
+      document.querySelector('.container').appendChild(hint);
+    }
+  }
+
+  function createSaveButton(section) {
+    const button = document.createElement('button');
+    button.className = 'save-button';
+    button.setAttribute('aria-label', 'Save your progress and continue');
+    button.textContent = '💾 Save Game';
+    let used = false;
+    button.addEventListener('click', () => {
+      if (used) return;
+      used = true;
+      xp = Math.min(xp + xpPerClick, maxXP);
+      updateProgressBar();
+    });
+    section.appendChild(button);
+  }
+
+  // Cheat code detection (moved out of button click handler)
+  const cheatSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  let cheatIndex = 0;
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === cheatSequence[cheatIndex]) {
+      cheatIndex++;
+      if (cheatIndex === cheatSequence.length) {
+        cheatIndex = 0;
+        if (!document.getElementById('wizardMessage')) {
+          const cheatMsg = document.createElement('p');
+          cheatMsg.id = 'wizardMessage';
+          cheatMsg.innerHTML = `It's dangerous to do Bootstrap alone! Take these links:<br><ul><li><a href='https://getbootstrap.com' target='_blank'>Bootstrap</a></li><li><a href='https://themes.getbootstrap.com/official-themes/' target='_blank'>Bootstrap themes</a></li></ul>`;
+          cheatMsg.style.color = '#fff100';
+          cheatMsg.style.textAlign = 'center';
+          cheatMsg.style.marginTop = '20px';
+          cheatMsg.style.fontSize = '0.9rem';
+          cheatMsg.setAttribute('aria-live', 'polite');
+          document.querySelector('.container').appendChild(cheatMsg);
+        }
+      }
+    } else {
+      cheatIndex = 0;
+    }
+  });
+
+  document.querySelectorAll('.section').forEach((section, index) => {
+    if (index > 0) createSaveButton(section);
+  });
+
+  updateProgressBar();
+</script>
+
+  </script>
+</body>
+</html>
