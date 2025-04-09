@@ -72,6 +72,16 @@
     
       to { width: 25%; }
     }
+    @keyframes pulse {
+  0% { box-shadow: 0 0 4px #00ffcc; }
+  50% { box-shadow: 0 0 10px #00ffaa; }
+  100% { box-shadow: 0 0 4px #00ffcc; }
+}
+
+.progress-fill.gain-xp {
+  animation: pulse 0.6s ease;
+}
+
     .section {
       border: 4px solid #00ffaa;
       box-shadow: 0 0 10px #00ffaa;
@@ -180,6 +190,9 @@
     progressFill.style.width = percent + '%';
     progressFill.setAttribute('aria-valuenow', xp);
     progressFill.textContent = `XP: ${xp} / ${maxXP}`;
+    progressFill.classList.add('gain-xp');
+       setTimeout(() => progressFill.classList.remove('gain-xp'), 600);
+
 
     if (percent === 100 && !document.getElementById('marioMessage')) {
       const container = document.querySelector('.container');
