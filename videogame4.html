@@ -217,7 +217,11 @@
       used = true;
       xp = Math.min(xp + xpPerClick, maxXP);
       updateProgressBar();
-      button.textContent = '✅ Game Saved!';
+     
+      button.disabled = true;
+button.style.backgroundColor = '#333';
+button.style.color = '#00ffaa';
+button.textContent = '💾 Game Saved';
     });
 
     section.appendChild(button);
