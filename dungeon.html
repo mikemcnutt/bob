@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dungeon Module Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Press Start 2P', monospace;
+      background-color: #1c1c1c;
+      color: #fffcc0;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .room {
+      border: 2px solid #555;
+      border-radius: 8px;
+      background-color: #2b2b2b;
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .room h2 {
+      font-size: 0.75rem;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .room p {
+      font-size: 0.65rem;
+      margin-bottom: 1rem;
+    }
+
+    .room.unlocked {
+      border-color: #88ff88;
+    }
+
+    .room.locked {
+      opacity: 0.6;
+    }
+
+    .enter-btn {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 0.6rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #c49e4e;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .enter-btn:disabled {
+      background-color: #777;
+      color: #ccc;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 600px) {
+      .room h2 {
+        font-size: 0.65rem;
+      }
+      .room p, .enter-btn {
+        font-size: 0.55rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>🧙‍♂️ Module Quest: The Dungeon of Knowledge</h1>
+
+    <section class="room unlocked" aria-labelledby="room1-title">
+      <h2 id="room1-title">🗝️ Room 1: The Lore</h2>
+      <p>Begin your journey. Discover the background and purpose of the topic.</p>
+      <button class="enter-btn" aria-label="Enter Room 1: The Lore">Enter</button>
+    </section>
+
+    <section class="room locked" aria-labelledby="room2-title">
+      <h2 id="room2-title">📜 Room 2: Scroll of Knowledge</h2>
+      <p>Unlock the sacred texts — your required readings.</p>
+      <button class="enter-btn" disabled aria-label="Room 2: Locked">Locked</button>
+    </section>
+
+    <section class="room locked" aria-labelledby="room3-title">
+      <h2 id="room3-title">⚔️ Room 3: Mini-Boss Trials</h2>
+      <p>Prove your growing power in formative assessments.</p>
+      <button class="enter-btn" disabled aria-label="Room 3: Locked">Locked</button>
+    </section>
+
+    <section class="room locked" aria-labelledby="room4-title">
+      <h2 id="room4-title">👑 Final Room: The Trial of Mastery</h2>
+      <p>Defeat the final boss by demonstrating full mastery!</p>
+      <button class="enter-btn" disabled aria-label="Final Room: Locked">Locked</button>
+    </section>
+  </main>
+</body>
+</html>
