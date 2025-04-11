@@ -159,9 +159,12 @@
 <body>
   <div id="loading-splash">Initializing Module Systems…</div>
 
-  <div class="container">
-    <div class="corner left">🧠 AI: Online</div>
-    <div class="corner right">❤️ HP: 100%</div>
+  <main class="container" role="main">
+<header role="banner">
+  <div class="corner left">🧠 AI: Online</div>
+  <div class="corner right">❤️ HP: 100%</div>
+</header>
+
 
     <button class="contrast-toggle" id="contrast-toggle">Toggle High Contrast</button>
     <h1>Module 4 - Enhancing a Website with Images and Links</h1>
@@ -175,10 +178,11 @@
 
     <iframe id="content" title="Module Content"></iframe>
 
-    <div class="hud">
-      <div>🧠 XP: <span id="xp">2500</span></div>
-      <div>🌐 Status: Synced</div>
-    </div>
+<footer role="contentinfo" class="hud">
+  <div>🧠 XP: <span id="xp">2500</span></div>
+  <div>🌐 Status: Synced</div>
+</footer>
+
   </div>
 
  <script>
