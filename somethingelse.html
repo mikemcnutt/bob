@@ -1,270 +1,231 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Module Overview</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet"/>
   <style>
+    :root {
+      --neon-blue: #00f7ff;
+      --bg-dark: #0f2027;
+      --bg-mid: #203a43;
+      --bg-light: #2c5364;
+      --text-color: var(--neon-blue);
+      --border-color: var(--neon-blue);
+      --bg-gradient: linear-gradient(to bottom right, var(--bg-dark), var(--bg-mid), var(--bg-light));
+      --box-bg: rgba(0,0,0,0.5);
+    }
+
+    body.high-contrast {
+      --neon-blue: #ffffff;
+      --bg-dark: #000000;
+      --bg-mid: #000000;
+      --bg-light: #000000;
+      --text-color: #ffffff;
+      --border-color: #ffffff;
+      --bg-gradient: #000000;
+      --box-bg: #000000;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     html, body {
       margin: 0;
       padding: 0;
       font-family: 'Orbitron', sans-serif;
       background-color: #ffffff;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    a {
-      text-decoration: none;
-      color: inherit;
+    .background-svg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    .module-container {
-      max-width: 900px;
+    .particle {
+      fill: var(--neon-blue);
+      opacity: 0.3;
+      animation: float 10s infinite ease-in-out alternate;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 0.3; }
+      100% { transform: translateY(-20px); opacity: 0.6; }
+    }
+
+    .outer-wrapper {
+      max-width: 1000px;
       margin: 2rem auto;
       padding: 1rem;
-      border-radius: 10px;
-      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
-      box-shadow: 0 0 20px rgba(0, 247, 255, 0.2);
-      color: #00f7ff;
+      position: relative;
+      z-index: 1;
     }
 
-    .app-wrapper {
-      display: grid;
-      grid-template-rows: auto 1fr auto;
+    .container {
+      border-radius: 20px;
+      border: 2px solid var(--border-color);
+      box-shadow: 0 0 30px var(--border-color);
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      padding: 2rem 1rem;
     }
 
-    .app-header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: rgba(18, 18, 18, 0.8);
-      padding: 1rem;
-      border-radius: 6px;
-    }
-
-    .app-header h1 {
-      font-size: 1.5rem;
-      color: #00f7ff;
+    h1 {
       text-align: center;
+      font-size: 1.8rem;
+      margin-bottom: 2rem;
+      text-shadow: 0 0 8px var(--text-color);
     }
 
-    .app-body {
+    .theme-toggle {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .theme-toggle button {
+      background-color: var(--box-bg);
+      border: 2px solid var(--border-color);
+      color: var(--text-color);
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-shadow: 0 0 4px var(--text-color);
+    }
+
+    .button-grid {
       display: flex;
       flex-wrap: wrap;
+      gap: 1rem;
       justify-content: center;
-      gap: 2rem;
-      padding: 1rem 1rem 0 1rem;
     }
 
-    .btn-group {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .btn-wrapper,
-    .btn-wrapper-right {
-      display: grid;
-      grid-template-columns: 20px auto;
-      grid-gap: 10px;
-      min-width: 250px;
-      height: 35px;
-      overflow: hidden;
-      transform: skewX(-30deg);
-      --bg-color: #1a2e35;
-      --font-color: #00f7ff;
-      --bg-color-hovered: #00f7ff;
-      --font-color-hovered: #0d0d0d;
-    }
-
-    .btn-wrapper-right {
-      grid-template-columns: auto 20px;
-    }
-
-    .btn-wrapper > *,
-    .btn-wrapper-right > * {
-      background-color: var(--bg-color);
-    }
-
-    .btn-tail {
-      height: 120%;
-      width: 100%;
-      transition: all 0s ease-out 0.3s;
-      position: relative;
-      top: -3px;
-    }
-
-    .btn-body {
-      position: relative;
-      display: flex;
-      align-items: center;
-      height: 100%;
-      padding: 0;
-      color: var(--font-color);
-      text-shadow: 0 0 3px var(--font-color);
-    }
-
-    .btn-body p {
-      margin-left: 20px;
-      font-size: 0.9rem;
-      line-height: 1;
-      text-transform: uppercase;
-      transform: skewX(30deg);
-      position: relative;
-      top: 1px;
-      z-index: 1;
-      text-shadow: 0 0 3px #00f7ff;
-    }
-
-    .btn-body::before {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 100%;
-      left: 0;
-      top: 0;
-      background-color: var(--bg-color-hovered);
-      transition: all 0.3s ease-out;
-      z-index: 0;
-    }
-
-    .btn-wrapper:hover .btn-body,
-    .btn-wrapper-right:hover .btn-body {
-      color: var(--font-color-hovered);
-      text-shadow: none;
-    }
-
-    .btn-wrapper:hover .btn-body::before,
-    .btn-wrapper-right:hover .btn-body::before {
-      width: 100%;
-    }
-
-    .btn-wrapper:hover .btn-tail,
-    .btn-wrapper-right:hover .btn-tail {
-      background-color: var(--bg-color-hovered);
-      transition: none;
-    }
-
-    .iframe-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      margin-top: 30px;
-      padding: 0 1rem;
-    }
-
-    .iframe-style {
-      width: 100%;
-      max-width: 800px;
-      min-height: 200px;
+    .glow-button {
+      flex: 1 1 45%;
       padding: 1rem;
-      border: 3px solid #00f7ff;
-      background-color: rgba(13, 13, 13, 0.8);
-      box-shadow: 0 0 20px #00f7ff;
-      color: #00f7ff;
-      box-sizing: border-box;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      border-radius: 6px;
+      border: 2px solid var(--border-color);
+      border-radius: 10px;
+      background-color: var(--box-bg);
+      color: var(--text-color);
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s ease;
+      text-shadow: 0 0 6px var(--text-color);
+      box-shadow: 0 0 10px var(--text-color);
     }
 
-    .iframe-style ul {
-      padding-left: 20px;
+    .glow-button:hover,
+    .glow-button:focus {
+      background-color: rgba(0, 255, 255, 0.1);
+      outline: 3px solid var(--text-color);
+      outline-offset: 3px;
     }
 
-    @media (max-width: 768px) {
-      .app-body {
-        flex-direction: column;
-        align-items: center;
-      }
+    .glow-button.active {
+      box-shadow: 0 0 20px var(--text-color), inset 0 0 10px var(--text-color);
+    }
 
-      .btn-group {
-        align-items: center;
-      }
+    .output-box {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 2px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 0 12px var(--border-color);
+      background-color: var(--box-bg);
+      font-size: 0.95rem;
+      transition: all 0.6s ease;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(20px);
+    }
 
-      .btn-wrapper,
-      .btn-wrapper-right {
-        transform: none;
-        width: 90%;
-        max-width: 320px;
-        grid-template-columns: auto;
-      }
+    .output-box.expanded {
+      max-height: 1000px;
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-      .btn-tail {
-        display: none;
-      }
+    ul {
+      padding-left: 1.2rem;
+    }
 
-      .btn-body {
-        justify-content: center;
-      }
-
-      .btn-body p {
-        transform: none;
-        margin-left: 0;
-        text-align: center;
-        width: 100%;
-      }
-
-      .iframe-style {
-        font-size: 0.9rem;
-        padding: 1rem;
-        max-width: 90%;
+    @media (max-width: 500px) {
+      .glow-button {
+        flex: 1 1 100%;
       }
     }
   </style>
 </head>
 <body>
-  <div class="module-container">
-    <div class="app-wrapper">
-      <header class="app-header" role="banner">
-        <h1>Module Overview</h1>
-      </header>
+  <svg class="background-svg">
+    <circle class="particle" cx="10%" cy="10%" r="3"/>
+    <circle class="particle" cx="25%" cy="70%" r="2"/>
+    <circle class="particle" cx="80%" cy="20%" r="4"/>
+    <circle class="particle" cx="60%" cy="90%" r="3"/>
+    <circle class="particle" cx="40%" cy="40%" r="2"/>
+    <circle class="particle" cx="90%" cy="60%" r="3"/>
+  </svg>
 
-      <main class="app-body" role="main">
-        <!-- Left Buttons -->
-        <div class="btn-group" aria-label="Left button group">
-          <a href="#" class="btn-wrapper" role="button" aria-label="Module Overview" data-content="<p>The Module Overview introduces the basics of the web, including what HTML and CSS are and how they work together to create websites.</p><ul><li>Understand website structure</li><li>Learn basic HTML</li><li>See CSS in action</li></ul>">
-            <div class="btn-tail" aria-hidden="true"></div>
-            <div class="btn-body"><p>Module Overview</p></div>
-          </a>
-          <a href="#" class="btn-wrapper" role="button" aria-label="Why It Matters" data-content="<p>This module matters because the web is essential to modern life and work. Knowing how it works is a power skill.</p><ul><li>Web fluency</li><li>Career relevance</li><li>Accessibility awareness</li></ul><p>This module matters because the web is essential to modern life and work. Knowing how it works is a power skill.</p><ul><li>Web fluency</li><li>Career relevance</li><li>Accessibility awareness</li></ul><p>This module matters because the web is essential to modern life and work. Knowing how it works is a power skill.</p><ul><li>Web fluency</li><li>Career relevance</li><li>Accessibility awareness</li></ul>">
-            <div class="btn-tail" aria-hidden="true"></div>
-            <div class="btn-body"><p>Why It Matters</p></div>
-          </a>
-        </div>
-
-        <!-- Right Buttons -->
-        <div class="btn-group" aria-label="Right button group">
-          <a href="#" class="btn-wrapper-right" role="button" aria-label="Module Activities" data-content="<p>Activities include interactive labs and short challenges to practice what you’ve learned.</p><ul><li>Lab 1: Structure</li><li>Lab 2: Formatting</li><li>Mini Challenge</li></ul>">
-            <div class="btn-body"><p>Module Activities</p></div>
-            <div class="btn-tail" aria-hidden="true"></div>
-          </a>
-          <a href="#" class="btn-wrapper-right" role="button" aria-label="Demonstrate Competency" data-content="<p>To demonstrate competency, you’ll build and explain a simple web page from scratch.</p><ul><li>Define core tags</li><li>Plan a layout</li><li>Apply styling</li></ul>">
-            <div class="btn-body"><p>Demonstrate Competency</p></div>
-            <div class="btn-tail" aria-hidden="true"></div>
-          </a>
-        </div>
-      </main>
-
-      <section class="iframe-wrapper" aria-label="Module details display">
-        <div id="contentFrame" class="iframe-style" role="region" aria-live="polite">
-          <p>Select a module topic above to learn more.</p>
-        </div>
+  <div class="outer-wrapper">
+    <div class="container" role="main">
+      <div class="theme-toggle">
+        <button onclick="toggleContrast()" aria-label="Toggle high contrast mode">Toggle High Contrast</button>
+      </div>
+      <h1 id="page-title">Module Overview</h1>
+      <div class="button-grid" aria-labelledby="page-title">
+        <button class="glow-button" onclick="showContent(this, 'overview')" onkeydown="handleKey(event, this, 'overview')" aria-label="Module Overview">Module Overview</button>
+        <button class="glow-button" onclick="showContent(this, 'activities')" onkeydown="handleKey(event, this, 'activities')" aria-label="Module Activities">Module Activities</button>
+        <button class="glow-button" onclick="showContent(this, 'why')" onkeydown="handleKey(event, this, 'why')" aria-label="Why It Matters">Why It Matters</button>
+        <button class="glow-button" onclick="showContent(this, 'competency')" onkeydown="handleKey(event, this, 'competency')" aria-label="Demonstrate Competency">Demonstrate Competency</button>
+      </div>
+      <section class="output-box" id="output" role="region" aria-live="polite" aria-label="Module content display">
+        <p>Select a module topic above to learn more.</p>
       </section>
     </div>
   </div>
 
   <script>
-    const buttons = document.querySelectorAll('.btn-wrapper, .btn-wrapper-right');
-    const contentFrame = document.getElementById('contentFrame');
+    const output = document.getElementById('output');
+    const buttons = document.querySelectorAll('.glow-button');
+    const content = {
+      overview: "<p>The Module Overview introduces the basics of the web, including what HTML and CSS are and how they work together to create websites.</p><ul><li>Understand website structure</li><li>Learn basic HTML</li><li>See CSS in action</li></ul>",
+      activities: "<p>Activities include interactive labs and short challenges to practice what you’ve learned.</p><ul><li>Lab 1: Structure</li><li>Lab 2: Formatting</li><li>Mini Challenge</li></ul>",
+      why: "<p>This module matters because the web is essential to modern life and work. Knowing how it works is a power skill.</p><ul><li>Web fluency</li><li>Career relevance</li><li>Accessibility awareness</li></ul>",
+      competency: "<p>To demonstrate competency, you’ll build and explain a simple web page from scratch.</p><ul><li>Define core tags</li><li>Plan a layout</li><li>Apply styling</li></ul>"
+    };
 
-    buttons.forEach(button => {
-      button.addEventListener('click', e => {
-        e.preventDefault();
-        const html = button.getAttribute('data-content');
-        contentFrame.innerHTML = html;
+    function showContent(button, type) {
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute("aria-pressed", "false");
       });
-    });
+      button.classList.add('active');
+      button.setAttribute("aria-pressed", "true");
+      output.innerHTML = content[type];
+      output.classList.add('expanded');
+    }
+
+    function handleKey(event, button, type) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        showContent(button, type);
+      }
+    }
+
+    function toggleContrast() {
+      document.body.classList.toggle('high-contrast');
+    }
   </script>
 </body>
 </html>
