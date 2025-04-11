@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Orbitron', sans-serif;
+      background-color: #ffffff;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .module-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1rem;
+      border-radius: 10px;
+      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+      box-shadow: 0 0 20px rgba(0, 247, 255, 0.2);
+      color: #00f7ff;
+    }
+
+    .app-wrapper {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+
+    .app-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(18, 18, 18, 0.8);
+      padding: 1rem;
+      border-radius: 6px;
+    }
+
+    .app-header h1 {
+      font-size: 1.5rem;
+      color: #00f7ff;
+      text-align: center;
+    }
+
+    .app-body {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1rem 1rem 0 1rem;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .btn-wrapper,
+    .btn-wrapper-right {
+      display: grid;
+      grid-template-columns: 20px auto;
+      grid-gap: 10px;
+      min-width: 250px;
+      height: 35px;
+      overflow: hidden;
+      transform: skewX(-30deg);
+      --bg-color: #1a2e35;
+      --font-color: #00f7ff;
+      --bg-color-hovered: #00f7ff;
+      --font-color-hovered: #0d0d0d;
+    }
+
+    .btn-wrapper-right {
+      grid-template-columns: auto 20px;
+    }
+
+    .btn-wrapper > *,
+    .btn-wrapper-right > * {
+      background-color: var(--bg-color);
+    }
+
+    .btn-tail {
+      height: 120%;
+      width: 100%;
+      transition: all 0s ease-out 0.3s;
+      position: relative;
+      top: -3px;
+    }
+
+    .btn-body {
+      position: relative;
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding: 0;
+      color: var(--font-color);
+      text-shadow: 0 0 3px var(--font-color);
+    }
+
+    .btn-body p {
+      margin-left: 20px;
+      font-size: 0.9rem;
+      line-height: 1;
+      text-transform: uppercase;
+      transform: skewX(30deg);
+      position: relative;
+      top: 1px;
+      z-index: 1;
+      text-shadow: 0 0 3px #00f7ff;
+    }
+
+    .btn-body::before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 100%;
+      left: 0;
+      top: 0;
+      background-color: var(--bg-color-hovered);
+      transition: all 0.3s ease-out;
+      z-index: 0;
+    }
+
+    .btn-wrapper:hover .btn-body,
+    .btn-wrapper-right:hover .btn-body {
+      color: var(--font-color-hovered);
+      text-shadow: none;
+    }
+
+    .btn-wrapper:hover .btn-body::before,
+    .btn-wrapper-right:hover .btn-body::before {
+      width: 100%;
+    }
+
+    .btn-wrapper:hover .btn-tail,
+    .btn-wrapper-right:hover .btn-tail {
+      background-color: var(--bg-color-hovered);
+      transition: none;
+    }
+
+    .iframe-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+      padding: 0 1rem;
+    }
+
+    .iframe-style {
+      width: 100%;
+      max-width: 800px;
+      min-height: 200px;
+      padding: 1rem;
+      border: 3px solid #00f7ff;
+      background-color: rgba(13, 13, 13, 0.8);
+      box-shadow: 0 0 20px #00f7ff;
+      color: #00f7ff;
+      box-sizing: border-box;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      border-radius: 6px;
+    }
+
+    .iframe-style ul {
+      padding-left: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .app-body {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .btn-group {
+        align-items: center;
+      }
+
+      .btn-wrapper,
+      .btn-wrapper-right {
+        transform: none;
+        width: 90%;
+        max-width: 320px;
+        grid-template-columns: auto;
+      }
+
+      .btn-tail {
+        display: none;
+      }
+
+      .btn-body {
+        justify-content: center;
+      }
+
+      .btn-body p {
+        transform: none;
+        margin-left: 0;
+        text-align: center;
+        width: 100%;
+      }
+
+      .iframe-style {
+        font-size: 0.9rem;
+        padding: 1rem;
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="module-container">
+    <div class="app-wrapper">
+      <header class="app-header" role="banner">
+        <h1>Module Overview</h1>
+      </header>
+
+      <main class="app-body" role="main">
+        <!-- Left Buttons -->
+        <div class="btn-group" aria-label="Left button group">
+          <a href="#" class="btn-wrapper" role="button" aria-label="Module Overview" data-content="<p>The Module Overview introduces the basics of the web, including what HTML and CSS are and how they work together to create websites.</p><ul><li>Understand website structure</li><li>Learn basic HTML</li><li>See CSS in action</li></ul>">
+            <div class="btn-tail" aria-hidden="true"></div>
+            <div class="btn-body"><p>Module Overview</p></div>
+          </a>
+          <a href="#" class="btn-wrapper" role="button" aria-label="Why It Matters" data-content="<p>This module matters because the web is essential to modern life and work. Knowing how it works is a power skill.</p><ul><li>Web fluency</li><li>Career relevance</li><li>Accessibility awareness</li></ul><p>This module matters because the web is essential to modern life and work. Knowing how it works is a power skill.</p><ul><li>Web fluency</li><li>Career relevance</li><li>Accessibility awareness</li></ul><p>This module matters because the web is essential to modern life and work. Knowing how it works is a power skill.</p><ul><li>Web fluency</li><li>Career relevance</li><li>Accessibility awareness</li></ul>">
+            <div class="btn-tail" aria-hidden="true"></div>
+            <div class="btn-body"><p>Why It Matters</p></div>
+          </a>
+        </div>
+
+        <!-- Right Buttons -->
+        <div class="btn-group" aria-label="Right button group">
+          <a href="#" class="btn-wrapper-right" role="button" aria-label="Module Activities" data-content="<p>Activities include interactive labs and short challenges to practice what you’ve learned.</p><ul><li>Lab 1: Structure</li><li>Lab 2: Formatting</li><li>Mini Challenge</li></ul>">
+            <div class="btn-body"><p>Module Activities</p></div>
+            <div class="btn-tail" aria-hidden="true"></div>
+          </a>
+          <a href="#" class="btn-wrapper-right" role="button" aria-label="Demonstrate Competency" data-content="<p>To demonstrate competency, you’ll build and explain a simple web page from scratch.</p><ul><li>Define core tags</li><li>Plan a layout</li><li>Apply styling</li></ul>">
+            <div class="btn-body"><p>Demonstrate Competency</p></div>
+            <div class="btn-tail" aria-hidden="true"></div>
+          </a>
+        </div>
+      </main>
+
+      <section class="iframe-wrapper" aria-label="Module details display">
+        <div id="contentFrame" class="iframe-style" role="region" aria-live="polite">
+          <p>Select a module topic above to learn more.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.btn-wrapper, .btn-wrapper-right');
+    const contentFrame = document.getElementById('contentFrame');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', e => {
+        e.preventDefault();
+        const html = button.getAttribute('data-content');
+        contentFrame.innerHTML = html;
+      });
+    });
+  </script>
+</body>
+</html>
