@@ -249,7 +249,6 @@
     <button title="Final Chamber">👑</button>
   </div>
 </div>
-
 <script>
   const chambers = [
     {
@@ -323,9 +322,10 @@
       `;
       chambersContainer.appendChild(room);
 
+      const allDivs = room.querySelectorAll("div");
+      const para = allDivs[0];      // content section
+      const confirm = allDivs[1];   // checkbox section
       const btn = room.querySelector("button");
-      const para = room.querySelector("div.hidden");
-      const confirm = room.querySelector(".confirm");
       const checkbox = confirm.querySelector("input");
 
       btn.addEventListener("click", () => {
@@ -356,17 +356,20 @@
           if (index < miniMapButtons.length) {
             const miniMapButton = miniMapButtons[index];
             miniMapButton.textContent = "Completed";
-            miniMapButton.style.background = "#4B0082"; 
+            miniMapButton.style.background = "#4B0082";
             miniMapButton.disabled = true;
           }
 
+          // ✅ Fix: Use only actual `.room` elements
           if (index + 1 < chambers.length) {
-            const next = chambersContainer.children[index + 1];
+            const rooms = chambersContainer.querySelectorAll('.room');
+            const next = rooms[index + 1];
             next.classList.add("unlocked");
             next.querySelector("button").textContent = "Enter";
           } else {
             document.getElementById("completion").classList.remove("hidden");
-            document.getElementById("player-name-display").textContent = document.getElementById("playerName").value || "Adventurer";
+            document.getElementById("player-name-display").textContent =
+              document.getElementById("playerName").value || "Adventurer";
           }
         }
       });
@@ -374,12 +377,6 @@
   }
 
   function chooseClass(role) {
-    const iconMap = {
-      Wizard: "https://twemoji.maxcdn.com/v/latest/svg/1f9d9.svg",
-      Rogue: "https://twemoji.maxcdn.com/v/latest/svg/1f5e1.svg",
-      Barbarian: "https://twemoji.maxcdn.com/v/latest/svg/1f4a5.svg",
-      Fighter: "https://twemoji.maxcdn.com/v/latest/svg/1f6e1.svg"
-    };
     const descriptions = {
       Wizard: `
         <strong>🧙‍♂️ Wizard (HTML Specialist)</strong><br>
@@ -432,6 +429,7 @@
 
   renderChambers();
 </script>
+
 
 </body>
 </html>
