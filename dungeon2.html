@@ -120,14 +120,22 @@
       width: 0%;
       transition: width 0.5s ease;
     }
-    .completion-message {
-      background: #1e1e1e;
-      border: 2px solid gold;
-      text-align: center;
-      padding: 2rem;
-      margin: 2rem auto;
-      border-radius: 12px;
-    }
+.completion-message {
+  background: #1e1e1e;
+  border: 2px solid gold;
+  text-align: center;
+  padding: 2rem;
+  margin: 2rem auto;
+  border-radius: 12px;
+  font-size: clamp(1rem, 2.5vw, 1.2rem); 
+}
+.completion-message h2 {
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+}
+.completion-message p {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
     .mini-map-section {
       background: #333;
       border: 3px solid #d2b48c;
