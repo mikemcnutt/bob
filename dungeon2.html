@@ -232,7 +232,7 @@
 
 <div id="chambers" aria-labelledby="chambers-heading">
   <h2 id="chambers-heading" class="visually-hidden">Adventure Chambers</h2>
-  <!-- Chambers inserted dynamically -->
+ 
 </div>
 
 <div id="completion" class="completion-message hidden" aria-live="assertive">
@@ -323,8 +323,8 @@
       chambersContainer.appendChild(room);
 
       const allDivs = room.querySelectorAll("div");
-      const para = allDivs[0];      // content section
-      const confirm = allDivs[1];   // checkbox section
+      const para = allDivs[0];     
+      const confirm = allDivs[1];   
       const btn = room.querySelector("button");
       const checkbox = confirm.querySelector("input");
 
@@ -360,7 +360,6 @@
             miniMapButton.disabled = true;
           }
 
-          // ✅ Fix: Use only actual `.room` elements
           if (index + 1 < chambers.length) {
             const rooms = chambersContainer.querySelectorAll('.room');
             const next = rooms[index + 1];
