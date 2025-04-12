@@ -360,11 +360,18 @@
             miniMapButton.disabled = true;
           }
 
-          if (index + 1 < chambers.length) {
-            const rooms = chambersContainer.querySelectorAll('.room');
-            const next = rooms[index + 1];
-            next.classList.add("unlocked");
-            next.querySelector("button").textContent = "Enter";
+if (index + 1 < chambers.length) {
+  const rooms = [...chambersContainer.children].filter(child =>
+    child.classList.contains("room")
+  );
+  const next = rooms[index + 1];
+  if (next) {
+    next.classList.add("unlocked");
+    const nextBtn = next.querySelector("button");
+    if (nextBtn) nextBtn.textContent = "Enter";
+  }
+}
+
           } else {
             document.getElementById("completion").classList.remove("hidden");
             document.getElementById("player-name-display").textContent =
