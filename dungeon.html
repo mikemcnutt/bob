@@ -1,112 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dungeon Module Overview</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Module Overview</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      padding: 0;
+      background: #111;
+      color: #fdf6b2;
       font-family: 'Press Start 2P', monospace;
-      background-color: #1c1c1c;
-      color: #fffcc0;
-      line-height: 1.6;
-    }
-
-    main {
-      max-width: 900px;
-      margin: auto;
       padding: 1rem;
     }
-
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .header img {
+      height: 48px;
+    }
     h1 {
-      text-align: center;
-      font-size: 1rem;
-      margin-bottom: 2rem;
+      font-size: 1.2rem;
+      margin: 0;
     }
-
-    .room {
-      border: 2px solid #555;
-      border-radius: 8px;
-      background-color: #2b2b2b;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
+    .resources {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      background: #2a2a2a;
+      margin: 1rem 0;
+      border-radius: 10px;
+      font-size: 0.7rem;
     }
-
-    .room h2 {
-      font-size: 0.75rem;
-      margin: 0 0 0.5rem 0;
-    }
-
-    .room p {
-      font-size: 0.65rem;
+    .badges {
+      border-top: 2px solid #d2b48c;
+      padding: 0.5rem;
       margin-bottom: 1rem;
     }
-
-    .room.unlocked {
-      border-color: #88ff88;
+    .badge-icon {
+      display: inline-block;
+      margin-right: 0.5rem;
     }
-
-    .room.locked {
-      opacity: 0.6;
+    .class-select {
+      background: #222;
+      border: 2px solid #444;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 10px;
     }
-
-    .enter-btn {
-      font-family: 'Press Start 2P', monospace;
-      font-size: 0.6rem;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 5px;
-      background-color: #c49e4e;
-      color: #000;
+    .class-select button {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.8rem;
+      margin: 0.5rem 0;
+      background: #4b3c25;
+      color: #fdf6b2;
+      border: 2px solid #d2b48c;
+      border-radius: 8px;
       cursor: pointer;
+      transition: background 0.3s;
     }
-
-    .enter-btn:disabled {
-      background-color: #777;
-      color: #ccc;
-      cursor: not-allowed;
+    .class-select button:hover {
+      background: #6f5d3d;
     }
-
-    @media (max-width: 600px) {
-      .room h2 {
-        font-size: 0.65rem;
-      }
-      .room p, .enter-btn {
-        font-size: 0.55rem;
-      }
+    .room {
+      background: #222;
+      border: 2px solid #444;
+      border-radius: 10px;
+      margin: 1rem 0;
+      padding: 1rem;
+    }
+    .room.unlocked {
+      border-color: lime;
+    }
+    .room h2 {
+      font-size: 0.8rem;
+      margin-top: 0;
+    }
+    .room p {
+      font-size: 0.6rem;
+    }
+    .room .enter-btn {
+      font-size: 0.6rem;
+      padding: 0.4rem 0.8rem;
+      margin-top: 0.5rem;
+      background: #4b3c25;
+      color: #fdf6b2;
+      border: 2px solid #d2b48c;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .room .enter-btn:hover {
+      background: #6f5d3d;
+    }
+    .hidden {
+      display: none;
+    }
+    .xp-bar {
+      background: #444;
+      border: 1px solid #888;
+      height: 10px;
+      width: 100%;
+      margin-top: 4px;
+      position: relative;
+    }
+    .xp-fill {
+      background: #ffcc00;
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+    .completion-message {
+      background: #1e1e1e;
+      border: 2px solid gold;
+      text-align: center;
+      padding: 2rem;
+      margin: 2rem auto;
+      border-radius: 12px;
+    }
+    .mini-map-section {
+      background: #333;
+      border: 3px solid #d2b48c;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+    }
+    .map-grid button {
+      font-size: 1rem;
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 2px solid #d2b48c;
+      border-radius: 8px;
+      background: #4b3c25;
+      color: #fdf6b2;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .map-grid button:hover {
+      background: #6f5d3d;
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>🧙‍♂️ Module Quest: The Dungeon of Knowledge</h1>
 
-    <section class="room unlocked" aria-labelledby="room1-title">
-      <h2 id="room1-title">🗝️ Room 1: The Lore</h2>
-      <p>Begin your journey. Discover the background and purpose of the topic.</p>
-      <button class="enter-btn" aria-label="Enter Room 1: The Lore">Enter</button>
-    </section>
+<div class="header">
+  
+  <h1>Module 3 - Building a Webpage Template with HTML 5</h1>
+</div>
 
-    <section class="room locked" aria-labelledby="room2-title">
-      <h2 id="room2-title">📜 Room 2: Scroll of Knowledge</h2>
-      <p>Unlock the sacred texts — your required readings.</p>
-      <button class="enter-btn" disabled aria-label="Room 2: Locked">Locked</button>
-    </section>
+<div class="resources">
+  <div>🧠 XP: <span id="xp">0</span></div>
+  <div>🪙 Gold: <span id="gold">0</span></div>
+  <div>📜 Scrolls: <span id="scrolls">0</span></div>
+</div>
 
-    <section class="room locked" aria-labelledby="room3-title">
-      <h2 id="room3-title">⚔️ Room 3: Mini-Boss Trials</h2>
-      <p>Prove your growing power in formative assessments.</p>
-      <button class="enter-btn" disabled aria-label="Room 3: Locked">Locked</button>
-    </section>
+<div>
+  <label for="playerName">Adventurer, enter your name:</label>
+  <input type="text" id="playerName" placeholder="e.g., Aria" />
+</div>
 
-    <section class="room locked" aria-labelledby="room4-title">
-      <h2 id="room4-title">👑 Final Room: The Trial of Mastery</h2>
-      <p>Defeat the final boss by demonstrating full mastery!</p>
-      <button class="enter-btn" disabled aria-label="Final Room: Locked">Locked</button>
-    </section>
-  </main>
+<div class="class-select">
+  <p>Choose your class:</p>
+  <button onclick="chooseClass('Wizard')">🧙 Wizard</button>
+  <button onclick="chooseClass('Rogue')">🗡️ Rogue</button>
+  <button onclick="chooseClass('Barbarian')">💥 Barbarian</button>
+  <button onclick="chooseClass('Fighter')">🛡️ Fighter</button>
+  <div id="class-description"></div>
+</div>
+
+<div id="badges" class="badges hidden">
+  <strong>🏅 Badges</strong>
+  <div id="badge-list"></div>
+</div>
+
+<div id="xpProgress" class="xp-bar"><div class="xp-fill" id="xp-fill"></div></div>
+
+<div id="chambers">
+  <!-- Chambers will be inserted dynamically -->
+</div>
+
+<div id="completion" class="completion-message hidden">
+  <h2>✨ Congratulations, <span id="player-name-display"></span>! ✨</h2>
+  <p>You have completed the Dungeon Quest!</p>
+</div>
+
+<div class="mini-map-section">
+  <h3>📘 Dungeon Mini-Map</h3>
+  <div class="map-grid">
+    <button title="Chamber I">I</button>
+    <button title="Chamber II">II</button>
+    <button title="Chamber III">III</button>
+    <button title="Final Chamber">👑</button>
+  </div>
+</div>
+
+<script>
+  const chambers = [
+    {
+      name: "Chamber I: The Lore",
+      icon: "🗝️",
+      content: `
+	  <h2>Module Overview</h2>
+       <p>Building a website from scratch involves a lot of time and planning, which is one reason that professional web design services are in high demand. Some web designers have their own business and provide their services on contract to clients, who are people or other businesses that want to build or redesign a website. Other web designers work in larger organizations and provide their services to people within the organization, who are called stakeholders. As an introduction to basic website design and development, this book provides a foundation on which to build your web design skills.</p>
+     <p>As discussed in Chapter 1, before you start building a website, you must plan it, which includes meeting with the clients or stakeholders to discover their needs, the purpose of the website, and their target audience. After developing a plan, you can start constructing the website by creating an HTML document and then adding the required basic HTML elements so visitors can display the webpage in a browser. Next, include HTML 5 elements to define the specific sections or areas of the webpage. This initial HTML document can serve as the template for the site. A template is a predefined webpage that contains a specific HTML structure to be used by all pages within the website. This chapter focuses on how to build a webpage template with HTML 5 elements and then use that template to create a home page.</p>
+  
+      `,
+      badge: "Scholar"
+    },
+    {
+      name: "Chamber II: Scroll of Knowledge",
+      icon: "📜",
+      content: `
+	  <h2>Why It Matters</h2>
+        <p>Uncover the wisdom of the ancients hidden in scrolls and runes.</p>
+          <p>Building a website from scratch requires meticulous planning and a clear understanding of the client's or stakeholder's needs, making professional web design services highly sought after. Whether working independently or within larger organizations, web designers must gather detailed requirements to ensure the website meets its intended purpose and effectively targets the right audience. This foundational knowledge is crucial for anyone aspiring to develop their web design skills and create functional, appealing websites.</p>
+<p>This module introduces the essential steps of website design and development, starting with the critical planning phase where you engage with clients or stakeholders to outline their needs. You'll learn to construct an initial HTML document, incorporating fundamental HTML elements to ensure the webpage displays correctly in browsers. By mastering HTML 5 elements, you'll define specific sections of the webpage and create a versatile template to streamline the development of the entire site. This hands-on approach provides a practical foundation for building professional, user-friendly websites.</p>
+
+      `,
+      badge: "Guardian"
+    },
+    {
+      name: "Chamber III: Trials of the Mind",
+      icon: "⚔️",
+      content: `
+	  <h2>Module Activities</h2>
+          <ul>
+    <li>Chapter 2 Reading</li> 
+    <li>Chapter 2 - Lab 2</li> 
+    </ul>
+      `,
+      badge: "Initiate"
+    },
+    {
+      name: "Chamber IV: Master’s Hall",
+      icon: "👑",
+      content: `
+<h2>Demonstrate Competency</h2>
+        <ul>
+          <li>Explain how to manage website files</li> 
+          <li>Describe and use HTML 5 semantic elements</li> 
+          <li>Determine the elements to use when setting the structure of a webpage</li> 
+          <li>Design and build a semantic wireframe</li> 
+          <li>Create a webpage template</li> 
+          <li>Insert comments in an HTML document</li> 
+          <li>Add static content to a webpage template</li> 
+          <li>Insert symbol codes and other character entities</li> 
+          <li>Describe and use heading elements</li> 
+          <li>Describe the benefits of validating web documents</li> 
+          <li>Validate an HTML template</li>   
+          <li>Create a home page from an HTML template</li> 
+          <li>Add unique content to a webpage</li> 
+        </ul>
+      `,
+      badge: "Champion"
+    }
+  ];
+
+  let xp = 0;
+  let gold = 0;
+  let scrolls = 0;
+
+  const xpEl = document.getElementById("xp");
+  const goldEl = document.getElementById("gold");
+  const scrollsEl = document.getElementById("scrolls");
+  const badgeList = document.getElementById("badge-list");
+  const badgesSection = document.getElementById("badges");
+  const chambersContainer = document.getElementById("chambers");
+
+  function renderChambers() {
+    chambers.forEach((chamber, index) => {
+      const room = document.createElement("div");
+      room.className = "room" + (index === 0 ? " unlocked" : "");
+      room.innerHTML = `
+        <h2>${chamber.icon} ${chamber.name}</h2>
+        <div class="hidden">${chamber.content}</div>
+        <button class="enter-btn">${index === 0 ? "Enter" : "Locked"}</button>
+        <div class="confirm hidden">
+          <label><input type="checkbox" /> I have completed this adventure.</label>
+        </div>
+      `;
+      chambersContainer.appendChild(room);
+
+      const btn = room.querySelector("button");
+      const para = room.querySelector("div.hidden");
+      const confirm = room.querySelector(".confirm");
+      const checkbox = confirm.querySelector("input");
+
+      btn.addEventListener("click", () => {
+        if (btn.textContent === "Enter" || btn.textContent === "Unlocked") {
+          para.classList.remove("hidden");
+          confirm.classList.remove("hidden");
+        }
+      });
+
+      checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+          xp += 50;
+          gold += 10;
+          scrolls += 1;
+          xpEl.textContent = xp;
+          goldEl.textContent = gold;
+          scrollsEl.textContent = scrolls;
+          document.getElementById("xp-fill").style.width = `${Math.min(100, (xp / 200) * 100)}%`;
+
+          if (!badgeList.textContent.includes(chamber.badge)) {
+            badgeList.innerHTML += `<div class="badge-icon">🏷️ ${chamber.badge}</div>`;
+            badgesSection.classList.remove("hidden");
+          }
+
+          btn.textContent = "Unlocked";
+
+          const miniMapButtons = document.querySelectorAll('.map-grid button');
+          if (index < miniMapButtons.length) {
+            const miniMapButton = miniMapButtons[index];
+            miniMapButton.textContent = "Completed";
+            miniMapButton.style.background = "#4B0082"; // Change to dark purple
+            miniMapButton.disabled = true;
+          }
+
+          if (index + 1 < chambers.length) {
+            const next = chambersContainer.children[index + 1];
+            next.classList.add("unlocked");
+            next.querySelector("button").textContent = "Enter";
+          } else {
+            document.getElementById("completion").classList.remove("hidden");
+            document.getElementById("player-name-display").textContent = document.getElementById("playerName").value || "Adventurer";
+          }
+        }
+      });
+    });
+  }
+
+  function chooseClass(role) {
+    const iconMap = {
+      Wizard: "https://twemoji.maxcdn.com/v/latest/svg/1f9d9.svg",
+      Rogue: "https://twemoji.maxcdn.com/v/latest/svg/1f5e1.svg",
+      Barbarian: "https://twemoji.maxcdn.com/v/latest/svg/1f4a5.svg",
+      Fighter: "https://twemoji.maxcdn.com/v/latest/svg/1f6e1.svg"
+    };
+    const descriptions = {
+      Wizard: `
+        <strong>🧙‍♂️ Wizard (HTML Specialist)</strong><br>
+        <em>Arcane Architect of Structure</em><br>
+        You wield the foundational magic of the web. With the power of HTML, you breathe structure into chaos.<br><br>
+        <strong>Strengths:</strong>
+        <ul>
+          <li>Deep knowledge of semantic markup</li>
+          <li>Can summon forms, layouts, and tables with ease</li>
+          <li>Often underestimated — until the page collapses without them</li>
+        </ul>
+      `,
+      Rogue: `
+        <strong>🗡️ Rogue (JavaScript Developer)</strong><br>
+        <em>Shadow Coder of Interactivity</em><br>
+        You strike from the shadows of the DOM, manipulating elements in silence.<br><br>
+        <strong>Strengths:</strong>
+        <ul>
+          <li>Quick-thinking and agile in debugging</li>
+          <li>Master of <code>onclick</code>, <code>addEventListener</code>, and anonymous functions</li>
+          <li>Can turn a simple &lt;button&gt; into an entire adventure</li>
+        </ul>
+      `,
+      Barbarian: `
+        <strong>💥 Barbarian (CSS Warrior)</strong><br>
+        <em>Styling Berserker of the Cascade</em><br>
+        You rage through stylesheets with wild abandon, swinging gradients and flexbox properties like axes.<br><br>
+        <strong>Strengths:</strong>
+        <ul>
+          <li>Unstoppable in animations and pseudo-classes</li>
+          <li>Excels in mobile responsiveness and layout control</li>
+          <li>May destroy IE compatibility when enraged</li>
+        </ul>
+      `,
+      Fighter: `
+        <strong>🛡️ Fighter (Full-Stack Combatant)</strong><br>
+        <em>Balanced Warrior of All Fronts</em><br>
+        You have trained in every aspect of the code battlefield — HTML, CSS, JS, even backend.<br><br>
+        <strong>Strengths:</strong>
+        <ul>
+          <li>Can create full applications with minimal fuss</li>
+          <li>Handles structure, style, and scripting equally</li>
+          <li>A true hero of hackathons</li>
+        </ul>
+      `
+    };
+
+    document.getElementById("class-icon").src = iconMap[role];
+    document.getElementById("class-description").innerHTML = descriptions[role];
+  }
+
+  renderChambers();
+</script>
+
 </body>
 </html>
