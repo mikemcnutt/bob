@@ -149,19 +149,29 @@
     .map-grid button:hover {
       background: #6f5d3d;
     }
-
-    /* Media Queries for Responsiveness */
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+    
     @media (max-width: 600px) {
       .resources {
         flex-direction: column;
         align-items: center;
       }
       .class-select button {
-        flex: 1 1 calc(100% - 1rem); /* Full width on small screens */
-        max-width: none; /* Remove max width */
+        flex: 1 1 calc(100% - 1rem); 
+        max-width: none; 
       }
       h1 {
-        font-size: 1.2rem; /* Smaller header on small devices */
+        font-size: 1.2rem; 
       }
     }
   </style>
@@ -172,7 +182,8 @@
   <h1>Module 3 - Building a Webpage Template with HTML 5</h1>
 </div>
 
-<div class="resources" aria-labelledby="resources">
+<div class="resources" aria-labelledby="resources-heading">
+  <div id="resources-heading" class="visually-hidden">Player Resources</div>
   <div>🧠 XP: <span id="xp">0</span></div>
   <div>🪙 Gold: <span id="gold">0</span></div>
   <div>📜 Scrolls: <span id="scrolls">0</span></div>
@@ -183,8 +194,8 @@
   <input type="text" id="playerName" placeholder="e.g., Aria" aria-label="Player Name" />
 </div>
 
-<div class="class-select" aria-labelledby="class-select">
-  <p>Choose your class:</p>
+<div class="class-select" aria-labelledby="class-select-heading">
+  <p id="class-select-heading">Choose your class:</p>
   <button onclick="chooseClass('Wizard')">🧙 Wizard</button>
   <button onclick="chooseClass('Rogue')">🗡️ Rogue</button>
   <button onclick="chooseClass('Barbarian')">💥 Barbarian</button>
@@ -192,15 +203,16 @@
   <div id="class-description" role="region" aria-live="polite"></div>
 </div>
 
-<div id="badges" class="badges hidden" aria-labelledby="badges">
-  <strong>🏅 Badges</strong>
+<div id="badges" class="badges hidden" aria-labelledby="badges-heading">
+  <strong id="badges-heading">🏅 Badges</strong>
   <div id="badge-list"></div>
 </div>
 
 <div id="xpProgress" class="xp-bar"><div class="xp-fill" id="xp-fill"></div></div>
 
-<div id="chambers" aria-labelledby="chambers">
-  <!-- Chambers will be inserted dynamically -->
+<div id="chambers" aria-labelledby="chambers-heading">
+  <h2 id="chambers-heading" class="visually-hidden">Adventure Chambers</h2>
+
 </div>
 
 <div id="completion" class="completion-message hidden" aria-live="assertive">
@@ -208,8 +220,8 @@
   <p>You have completed the Dungeon Quest!</p>
 </div>
 
-<div class="mini-map-section" aria-labelledby="mini-map">
-  <h3>📘 Dungeon Mini-Map</h3>
+<div class="mini-map-section" aria-labelledby="mini-map-heading">
+  <h3 id="mini-map-heading">📘 Dungeon Mini-Map</h3>
   <div class="map-grid">
     <button title="Chamber I">I</button>
     <button title="Chamber II">II</button>
