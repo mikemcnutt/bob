@@ -194,7 +194,9 @@
   <button onclick="chooseClass('Rogue')">🗡️ Rogue</button>
   <button onclick="chooseClass('Barbarian')">💥 Barbarian</button>
   <button onclick="chooseClass('Fighter')">🛡️ Fighter</button>
-  <div id="class-description" role="region" aria-live="polite"></div>
+  <div id="class-description" role="region" aria-live="polite" aria-labelledby="class-description-header">
+    <h3 id="class-description-header" class="hidden">Class Description</h3>
+  </div>
 </div>
 
 <div id="badges" class="badges hidden" aria-labelledby="badges-header">
