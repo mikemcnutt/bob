@@ -121,17 +121,24 @@
       transition: width 0.5s ease;
     }
 .completion-message {
-  background: #1e1e1e;
-  border: 2px solid gold;
-  text-align: center;
+  font-size: clamp(0.8rem, 2.5vw, 1.2rem);
   padding: 2rem;
   margin: 2rem auto;
+  border: 2px solid gold;
+  text-align: center;
+  background: #1e1e1e;
   border-radius: 12px;
-  font-size: clamp(1rem, 2.5vw, 1.2rem); 
+  max-width: 100%;
+  box-sizing: border-box;
 }
+
 .completion-message h2 {
-  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-size: clamp(1rem, 6vw, 2rem);
+  word-break: break-word;
+  text-wrap: balance;
+  line-height: 1.4;
 }
+
 .completion-message p {
   font-size: clamp(1rem, 2.5vw, 1.2rem);
 }
@@ -181,6 +188,9 @@
       h1 {
         font-size: 1.2rem; 
       }
+      .completion-message {
+    padding: 1rem;
+  }
     }
   </style>
 </head>
