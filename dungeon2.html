@@ -121,26 +121,31 @@
       transition: width 0.5s ease;
     }
 .completion-message {
-  font-size: clamp(0.8rem, 2.5vw, 1.2rem);
-  padding: 2rem;
-  margin: 2rem auto;
+  background: #1e1e1e;
   border: 2px solid gold;
   text-align: center;
-  background: #1e1e1e;
+  padding: 2rem;
+  margin: 2rem auto;
   border-radius: 12px;
   max-width: 100%;
   box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .completion-message h2 {
-  font-size: clamp(1rem, 6vw, 2rem);
+  font-size: 4vw; 
+  line-height: 1.3;
   word-break: break-word;
-  text-wrap: balance;
-  line-height: 1.4;
+  white-space: normal;
+  max-width: 100%;
+  margin: 0 auto;
+  display: inline-block;
 }
 
 .completion-message p {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-size: 3.5vw;
+  line-height: 1.5;
 }
 
     .mini-map-section {
@@ -164,18 +169,7 @@
     .map-grid button:hover {
       background: #6f5d3d;
     }
-  .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-    
+
     @media (max-width: 600px) {
       .resources {
         flex-direction: column;
@@ -188,9 +182,6 @@
       h1 {
         font-size: 1.2rem; 
       }
-      .completion-message {
-    padding: 1rem;
-  }
     }
   </style>
 </head>
@@ -200,8 +191,7 @@
   <h1>Module 3 - Building a Webpage Template with HTML 5</h1>
 </div>
 
-<div class="resources" aria-labelledby="resources-heading">
-  <div id="resources-heading" class="visually-hidden">Player Resources</div>
+<div class="resources" aria-labelledby="resources">
   <div>🧠 XP: <span id="xp">0</span></div>
   <div>🪙 Gold: <span id="gold">0</span></div>
   <div>📜 Scrolls: <span id="scrolls">0</span></div>
@@ -212,8 +202,8 @@
   <input type="text" id="playerName" placeholder="e.g., Aria" aria-label="Player Name" />
 </div>
 
-<div class="class-select" aria-labelledby="class-select-heading">
-  <p id="class-select-heading">Choose your class:</p>
+<div class="class-select" aria-labelledby="class-select">
+  <p>Choose your class:</p>
   <button onclick="chooseClass('Wizard')">🧙 Wizard</button>
   <button onclick="chooseClass('Rogue')">🗡️ Rogue</button>
   <button onclick="chooseClass('Barbarian')">💥 Barbarian</button>
@@ -221,25 +211,24 @@
   <div id="class-description" role="region" aria-live="polite"></div>
 </div>
 
-<div id="badges" class="badges hidden" aria-labelledby="badges-heading">
-  <strong id="badges-heading">🏅 Badges</strong>
+<div id="badges" class="badges hidden" aria-labelledby="badges">
+  <strong>🏅 Badges</strong>
   <div id="badge-list"></div>
 </div>
 
 <div id="xpProgress" class="xp-bar"><div class="xp-fill" id="xp-fill"></div></div>
 
-<div id="chambers" aria-labelledby="chambers-heading">
-  <h2 id="chambers-heading" class="visually-hidden">Adventure Chambers</h2>
-
+<div id="chambers" aria-labelledby="chambers">
+  
 </div>
 
 <div id="completion" class="completion-message hidden" aria-live="assertive">
   <h2>✨ Congratulations, <span id="player-name-display"></span>! ✨</h2>
-  <p>You have completed the Dungeon Quest!</p>
+  <p>You have completed the Module Overview Quest!</p>
 </div>
 
-<div class="mini-map-section" aria-labelledby="mini-map-heading">
-  <h3 id="mini-map-heading">📘 Dungeon Mini-Map</h3>
+<div class="mini-map-section" aria-labelledby="mini-map">
+  <h3>📘 Dungeon Mini-Map</h3>
   <div class="map-grid">
     <button title="Chamber I">I</button>
     <button title="Chamber II">II</button>
@@ -354,7 +343,7 @@
           if (index < miniMapButtons.length) {
             const miniMapButton = miniMapButtons[index];
             miniMapButton.textContent = "Completed";
-            miniMapButton.style.background = "#4B0082"; // Change to dark purple
+            miniMapButton.style.background = "#4B0082"; 
             miniMapButton.disabled = true;
           }
 
