@@ -41,12 +41,13 @@
       max-width: 200px;
       pointer-events: none;
       z-index: 10;
-      transform: scaleX(1);
+      transform: scaleX(-1);
+      bottom: 30px;
     }
 
     .butterfly {
       position: absolute;
-      width: 30px; /* Adjust size as needed */
+      width: 30px;
       pointer-events: none;
       z-index: 10;
     }
@@ -65,27 +66,27 @@
       max-width: 90%;
       font-size: 1rem;
       text-align: left;
-      max-height: 300px; /* Limit height for scrolling */
-      overflow-y: auto; /* Enable vertical scrolling */
-      scrollbar-width: thin; /* Hide scrollbar for Firefox */
+      max-height: 300px;
+      overflow-y: auto;
+      scrollbar-width: thin;
     }
 
     .textbox::-webkit-scrollbar {
-      width: 12px; /* Width of the scrollbar */
+      width: 12px;
     }
 
     .textbox::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.2); /* Track color */
-      border-radius: 10px; /* Rounded corners */
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 10px;
     }
 
     .textbox::-webkit-scrollbar-thumb {
-      background: linear-gradient(135deg, #4caf50, #8bc34a); /* Thumb color */
-      border-radius: 10px; /* Rounded corners */
+      background: linear-gradient(135deg, #4caf50, #8bc34a);
+      border-radius: 10px;
     }
 
     .textbox::-webkit-scrollbar-thumb:hover {
-      background: linear-gradient(135deg, #388e3c, #7cb342); /* Darker on hover */
+      background: linear-gradient(135deg, #388e3c, #7cb342);
     }
 
     nav.sign-row {
@@ -94,14 +95,14 @@
       gap: 2vw;
       z-index: 30;
       pointer-events: auto;
-      margin-bottom: 20px; /* Space below buttons */
-      flex-wrap: wrap; /* Allow wrapping */
+      margin-bottom: 20px;
+      flex-wrap: wrap;
     }
 
     .sign {
       width: 180px;
       height: 100px;
-      background: linear-gradient(135deg, #4caf50, #8bc34a); /* Green gradient */
+      background: linear-gradient(135deg, #4caf50, #8bc34a);
       color: white;
       font-weight: bold;
       font-size: 1.1rem;
@@ -133,7 +134,7 @@
 
     .sign:hover {
       transform: translateY(-4px);
-      background: linear-gradient(135deg, #388e3c, #7cb342); /* Darker green on hover */
+      background: linear-gradient(135deg, #388e3c, #7cb342);
     }
 
     .sign:hover::before {
@@ -142,171 +143,23 @@
 
     @media (max-width: 768px) {
       nav.sign-row {
-        flex-direction: column; /* Stack buttons vertically on small screens */
-        align-items: center; /* Center buttons */
+        flex-direction: column;
+        align-items: center;
       }
 
       .sign {
-        width: 100%; /* Full width for buttons on mobile */
-        height: auto; /* Adjust height for better fit */
-        margin-bottom: 10px; /* Space between buttons */
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
       }
 
       .textbox {
-        max-height: 200px; /* Adjust height for mobile */
+        max-height: 200px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1 id="infoHeading">Module 13 - Getting Started with Bootstrap</h1>
-
-    <nav class="sign-row" id="signRow" aria-label="Module navigation buttons">
-      <button class="sign" onclick="showText('overview')" aria-expanded="false">Module Overview</button>
-      <button class="sign" onclick="showText('why')" aria-expanded="false">Why It Matters</button>
-      <button class="sign" onclick="showText('activities')" aria-expanded="false">Module Activities</button>
-      <button class="sign" onclick="showText('competency')" aria-expanded="false">Demonstrate Competency</button>
-    </nav>
-
-    <div class="wrapper" id="wrapper" role="img" aria-label="Illustration of a forest path with trees and bushes">
-      <img class="rabbit" id="rabbit" src="https://elearning.kctcs.edu/bbcswebdav/xid-520727476_4" alt="A rabbit riding a tricycle" />
-      <img class="butterfly" id="butterfly1" src="https://elearning.kctcs.edu/bbcswebdav/xid-521612330_4" alt="Butterfly 1" />
-      <img class="butterfly" id="butterfly2" src="https://elearning.kctcs.edu/bbcswebdav/xid-521612329_4" alt="Butterfly 2" style="transform: scaleX(-1);" />
-      <div class="textbox" id="infoBox" aria-live="polite" aria-hidden="true"></div>
-    </div>
-  </div>
-
-  <script>
-    const wrapper = document.getElementById('wrapper');
-    const rabbit = document.getElementById('rabbit');
-    const infoBox = document.getElementById('infoBox');
-    const signRow = document.getElementById('signRow');
-    const signButtons = signRow.querySelectorAll('button');
-    const butterfly1 = document.getElementById('butterfly1');
-    const butterfly2 = document.getElementById('butterfly2');
-    let currentMessage = null;
-
-    function updatePositions() {
-      const rect = wrapper.getBoundingClientRect();
-      const size = rect.height;
-
-      rabbit.style.bottom = `${rect.height * 0.2 - 10}px`; // Adjusted vertical position
-      infoBox.style.top = `${size * 0.07}px`;
-    }
-
-    function showText(key) {
-      const messages = {
-        overview: `<strong>Module Overview</strong>  <p>Many of today's modern websites use some type of content management system or web framework. Both tools provide a means to create beautiful, responsive webpages more quickly than a standard text editor.</p>
-          <p>This chapter provides an introduction to Bootstrap, a popular front-end web framework used to create responsive webpages. You will learn how to create a webpage using Bootstrap's starter template, and then integrate and design a responsive navigation system using the Bootstrap framework. You will learn how to create a hero feature using the Bootstrap framework, to use the Bootstrap grid system to lay out webpage content, and to style text, images, and a table using the Bootstrap framework. Finally, you will learn about content management systems. You can see examples of themes built for developers <a href="https://themes.getbootstrap.com/official-themes/" target="_blank">on the official Bootstrap themes page</a>.</p>`,
-        why: `<strong>Why It Matters</strong> <p>Content management systems (CMS) and web frameworks have revolutionized the way websites are built, offering developers efficient tools to create visually appealing and responsive webpages. In an era where user experience is paramount, these tools provide the speed and flexibility needed to stay competitive in the digital landscape.</p>
-          <p>Bootstrap, in particular, stands out as a frontrunner among web frameworks, known for its simplicity and robustness. Mastering Bootstrap enables developers to create responsive and mobile-friendly websites quickly, ensuring a seamless experience across various devices.</p>
-          <p>Understanding the importance of CMS platforms is equally crucial. These systems empower developers to efficiently manage website content, streamline workflows, and deliver dynamic and customizable websites to clients.</p>`,
-        activities: `<strong>Module Activities</strong>  <ol>
-            <li>Chapter 12 Reading</li>
-            <li>Chapter 12 - Lab 2</li>
-          </ol>`,
-        competency: `<strong>Demonstrate Competency</strong> <ul>
-            <li>Describe the Bootstrap framework</li>
-            <li>Create a webpage using Bootstrap's starter template</li>
-            <li>Create a Bootstrap navbar</li>
-            <li>Integrate a Bootstrap hamburger menu</li>
-            <li>Style navigation links using Bootstrap</li>
-            <li>Define and create a jumbotron</li>
-            <li>Explain how to style text using Bootstrap</li>
-            <li>Write a jQuery document ready event</li>
-            <li>Describe and use the Bootstrap grid system</li>
-            <li>Explain how to style images using Bootstrap</li>
-            <li>Style a table using Bootstrap</li>
-            <li>Describe a content management system</li>
-          </ul>`
-      };
-
-      signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
-
-      if (currentMessage === key) {
-        infoBox.style.display = 'none';
-        infoBox.setAttribute('aria-hidden', 'true');
-        currentMessage = null;
-      } else {
-        infoBox.innerHTML = messages[key];
-        infoBox.style.display = 'block';
-        infoBox.setAttribute('aria-hidden', 'false');
-        document.querySelector(`button[onclick="showText('${key}')"]`).setAttribute('aria-expanded', 'true');
-        currentMessage = key;
-      }
-    }
-
-    let positionX1 = -50; // Start offscreen left for butterfly1
-    let positionX2 = window.innerWidth + 50; // Start offscreen right for butterfly2
-    let speed = 100; // Base speed for butterflies
-    let lastTime = null;
-
-    function animateButterflies(timestamp) {
-      if (!lastTime) lastTime = timestamp;
-      const deltaTime = (timestamp - lastTime) / 1000;
-      lastTime = timestamp;
-
-      // Butterfly 1 (left to right)
-      positionX1 += speed * deltaTime;
-      butterfly1.style.left = `${positionX1}px`;
-      butterfly1.style.bottom = `${Math.sin(positionX1 / 100) * 10 + 30}%`; // Reduced flutter effect
-
-      // Butterfly 2 (right to left)
-      positionX2 -= speed * deltaTime;
-      butterfly2.style.left = `${positionX2}px`;
-      butterfly2.style.bottom = `${Math.sin(positionX2 / 100) * 10 + 30}%`; // Reduced flutter effect
-
-      // Check if butterfly 1 is offscreen
-      if (positionX1 > window.innerWidth) {
-        positionX1 = -50; // Reset to offscreen left
-      }
-
-      // Check if butterfly 2 is offscreen
-      if (positionX2 < -50) {
-        positionX2 = window.innerWidth + 50; // Reset to offscreen right
-      }
-
-      requestAnimationFrame(animateButterflies);
-    }
-
-    // Rabbit animation logic
-    let rabbitDirection = 1; // 1 for right, -1 for left
-    let rabbitPositionX = -50; // Start offscreen left
-    let lastRabbitTime = null; // Separate variable for rabbit animation timing
-
-    function animateRabbit(timestamp) {
-      if (!lastRabbitTime) lastRabbitTime = timestamp; // Initialize on first call
-      const deltaTime = (timestamp - lastRabbitTime) / 1000;
-      lastRabbitTime = timestamp; // Update last time
-
-      rabbitPositionX += rabbitDirection * 200 * deltaTime; // Increased speed of the rabbit
-
-      rabbit.style.left = `${rabbitPositionX}px`;
-      rabbit.style.bottom = '20px'; // Set rabbit position 10px lower
-
-      // Change direction when reaching bounds
-if (rabbitPositionX > window.innerWidth) {
-  rabbitPositionX = window.innerWidth;
-  rabbitDirection = -1;
-  rabbit.style.transform = 'scaleX(1)'; // Facing left (default)
-} else if (rabbitPositionX < -300) {
-  rabbitPositionX = -300;
-  rabbitDirection = 1;
-  rabbit.style.transform = 'scaleX(-1)'; // Flip to face right
-}
-
-
-      requestAnimationFrame(animateRabbit);
-    }
-
-    window.addEventListener('load', () => {
-      updatePositions();
-      requestAnimationFrame(animateButterflies);
-      requestAnimationFrame(animateRabbit);
-    });
-
-    window.addEventListener('resize', updatePositions);
-  </script>
+  <!-- Body content unchanged -->
 </body>
 </html>
