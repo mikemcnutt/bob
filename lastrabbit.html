@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>Module Overview</title>
-  <link href="https://elearning.kctcs.edu/bbcswebdav/xid-520727475_4" rel="stylesheet" />
   <style>
     body {
       margin: 0;
@@ -42,7 +41,7 @@
       pointer-events: none;
       z-index: 10;
       transform: scaleX(-1);
-      bottom: 30px;
+      bottom: 40px;
     }
 
     .butterfly {
@@ -160,6 +159,123 @@
   </style>
 </head>
 <body>
-  <!-- Body content unchanged -->
+  <div class="container">
+    <h1 id="infoHeading">Module 13 - Getting Started with Bootstrap</h1>
+
+    <nav class="sign-row" id="signRow" aria-label="Module navigation buttons">
+      <button class="sign" onclick="showText('overview')" aria-expanded="false">Module Overview</button>
+      <button class="sign" onclick="showText('why')" aria-expanded="false">Why It Matters</button>
+      <button class="sign" onclick="showText('activities')" aria-expanded="false">Module Activities</button>
+      <button class="sign" onclick="showText('competency')" aria-expanded="false">Demonstrate Competency</button>
+    </nav>
+
+    <div class="wrapper" id="wrapper" role="img" aria-label="Illustration of a forest path with trees and bushes">
+      <img class="rabbit" id="rabbit" src="https://elearning.kctcs.edu/bbcswebdav/xid-520727476_4" alt="A rabbit riding a tricycle" />
+      <img class="butterfly" id="butterfly1" src="https://elearning.kctcs.edu/bbcswebdav/xid-521612330_4" alt="Butterfly 1" />
+      <img class="butterfly" id="butterfly2" src="https://elearning.kctcs.edu/bbcswebdav/xid-521612329_4" alt="Butterfly 2" style="transform: scaleX(-1);" />
+      <div class="textbox" id="infoBox" aria-live="polite" aria-hidden="true"></div>
+    </div>
+  </div>
+  <script>
+    const wrapper = document.getElementById('wrapper');
+    const rabbit = document.getElementById('rabbit');
+    const infoBox = document.getElementById('infoBox');
+    const signRow = document.getElementById('signRow');
+    const signButtons = signRow.querySelectorAll('button');
+    const butterfly1 = document.getElementById('butterfly1');
+    const butterfly2 = document.getElementById('butterfly2');
+    let currentMessage = null;
+
+    function updatePositions() {
+      const rect = wrapper.getBoundingClientRect();
+      const size = rect.height;
+      rabbit.style.bottom = `${rect.height * 0.2}px`;
+      infoBox.style.top = `${size * 0.07}px`;
+    }
+
+    function showText(key) {
+      const messages = {
+        overview: `<strong>Module Overview</strong>  <p>Many of today's modern websites use some type of content management system or web framework...</p>`,
+        why: `<strong>Why It Matters</strong> <p>Content management systems (CMS) and web frameworks have revolutionized...</p>` ,
+        activities: `<strong>Module Activities</strong>  <ol><li>Chapter 12 Reading</li><li>Chapter 12 - Lab 2</li></ol>`,
+        competency: `<strong>Demonstrate Competency</strong> <ul><li>Describe the Bootstrap framework</li><li>Create a webpage using Bootstrap's starter template</li></ul>`
+      };
+
+      signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
+
+      if (currentMessage === key) {
+        infoBox.style.display = 'none';
+        infoBox.setAttribute('aria-hidden', 'true');
+        currentMessage = null;
+      } else {
+        infoBox.innerHTML = messages[key];
+        infoBox.style.display = 'block';
+        infoBox.setAttribute('aria-hidden', 'false');
+        document.querySelector(`button[onclick="showText('${key}')"]`).setAttribute('aria-expanded', 'true');
+        currentMessage = key;
+      }
+    }
+
+    let positionX1 = -50;
+    let positionX2 = window.innerWidth + 50;
+    let speed = 100;
+    let lastTime = null;
+
+    function animateButterflies(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      const deltaTime = (timestamp - lastTime) / 1000;
+      lastTime = timestamp;
+
+      positionX1 += speed * deltaTime;
+      butterfly1.style.left = `${positionX1}px`;
+      butterfly1.style.bottom = `${Math.sin(positionX1 / 100) * 10 + 30}%`;
+
+      positionX2 -= speed * deltaTime;
+      butterfly2.style.left = `${positionX2}px`;
+      butterfly2.style.bottom = `${Math.sin(positionX2 / 100) * 10 + 30}%`;
+
+      if (positionX1 > window.innerWidth) {
+        positionX1 = -50;
+      }
+      if (positionX2 < -50) {
+        positionX2 = window.innerWidth + 50;
+      }
+
+      requestAnimationFrame(animateButterflies);
+    }
+
+    let rabbitDirection = 1;
+    let rabbitPositionX = -50;
+    let lastRabbitTime = null;
+
+    function animateRabbit(timestamp) {
+      if (!lastRabbitTime) lastRabbitTime = timestamp;
+      const deltaTime = (timestamp - lastRabbitTime) / 1000;
+      lastRabbitTime = timestamp;
+
+      rabbitPositionX += rabbitDirection * 200 * deltaTime;
+      rabbit.style.left = `${rabbitPositionX}px`;
+
+      if (rabbitPositionX > window.innerWidth) {
+        rabbitPositionX = window.innerWidth;
+        rabbitDirection = -1;
+        rabbit.style.transform = 'scaleX(-1)';
+      } else if (rabbitPositionX < -300) {
+        rabbitPositionX = -300;
+        rabbitDirection = 1;
+        rabbit.style.transform = 'scaleX(1)';
+      }
+
+      requestAnimationFrame(animateRabbit);
+    }
+
+    window.addEventListener('load', () => {
+      updatePositions();
+      requestAnimationFrame(animateButterflies);
+      requestAnimationFrame(animateRabbit);
+    });
+
+    window.addEventListener('resize', updatePositions);
+  </script>
 </body>
 </html>
