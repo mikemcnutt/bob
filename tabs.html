@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module Overview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0077b6;
+      --primary-border: #00b4d8;
+      --text: #111111;
+      --widget-background: #ffffff;
+    }
+    html, body {
+      height: 100%;
+      width: 100%;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      background-color: var(--widget-background);
+      color: var(--text);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+      color: var(--text);
+    }
+	h1, h2 {
+  font-family: 'Montserrat', sans-serif;
+}
+    .tabs-container {
+      padding: 16px;
+      width: 100%;
+      max-width: 580px !important;
+      min-width: 320px;
+      display: flex;
+      margin: 0 auto;
+      border-radius: 16px;
+      background: linear-gradient(to bottom right, #ffffff, #e0f7ff);
+      border: 1px solid var(--primary-border);
+      box-shadow: 10px 10px rgba(0, 180, 216, 0.3);
+      justify-content: center;
+    }
+    main {
+      display: flex;
+      justify-content: center;
+      padding: 16px;
+    }
+    .tabs {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      border-right: 1px solid var(--primary-border);
+      list-style-type: none;
+      padding-right: 16px;
+      gap: 8px;
+    }
+    .tabs a {
+      min-width: 160px;
+      max-width: 160px;
+      word-wrap: break-word;
+      position: relative;
+      display: flex;
+      text-decoration: none;
+      width: 100%;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: left;
+      border-radius: 8px;
+      justify-content: start;
+      padding: 12px;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      user-select: none;
+      border: 1px solid transparent;
+      transition: all 0.3s ease-in-out;
+    }
+    .tabs a:hover,
+    .tabs a.active {
+      outline: none;
+      background-color: var(--primary);
+      border: 1px solid var(--primary-border);
+      color: #ffffff;
+    }
+    .tabs a.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background-color: var(--primary-border);
+      border-radius: 2px;
+    }
+    .tabs a:focus-visible {
+      box-shadow: 0 0 0 3px var(--primary-border);
+      outline: none;
+    }
+    .tab-content-wrapper {
+      padding: 0px 16px;
+      overflow-y: auto;
+      height: 300px;
+      scroll-behavior: smooth;
+      flex-grow: 1;
+      transition: opacity 0.4s ease-in-out;
+    }
+    .tab-content {
+      display: none;
+      font-size: 0.8rem;
+      color: var(--text);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease-in-out;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .tab-content h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+	 .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  @media (max-width: 500px) {
+  .tabs-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .tabs {
+    flex-direction: column;
+    border-right: none;
+    border-bottom: none;
+    padding-right: 0;
+    margin-bottom: 1rem;
+  }
+  .tabs a {
+    flex: 0 0 auto;
+    min-width: auto;
+    max-width: none;
+    white-space: nowrap;
+    justify-content: center;
+    text-align: center;
+    padding: 16px;
+    margin: 4px 0;
+    background-color: #e0f7ff;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .tabs a:hover {
+    background-color: var(--primary);
+    color: #ffffff;
+  }
+  .tabs a.active {
+    background-color: var(--primary);
+    color: #ffffff;
+    border: 1px solid var(--primary-border);
+  }
+  body { font-size: 0.9rem; }
+  .tabs a { font-size: 0.85rem; }
+  .tab-content h2 { font-size: 1rem; }
+}
+  </style>
+</head>
+<body>
+  <header role="banner">
+    <h1>Module 5  - Designing Webpages with CSS</h1>
+  </header>
+  <main role="main">
+    <div class="tabs-container">
+      <ul class="tabs" role="tablist" aria-label="Module Sections">
+        <li><a id="tab1" role="tab" aria-controls="tab1-content" aria-selected="true" href="#tab1-content" tabindex="0">Module Overview</a></li>
+        <li><a id="tab2" role="tab" aria-controls="tab2-content" aria-selected="false" href="#tab2-content" tabindex="-1">Why It Matters</a></li>
+        <li><a id="tab3" role="tab" aria-controls="tab3-content" aria-selected="false" href="#tab3-content" tabindex="-1">Module Activities</a></li>
+        <li><a id="tab4" role="tab" aria-controls="tab4-content" aria-selected="false" href="#tab4-content" tabindex="-1">Demonstrate Competency</a></li>
+      </ul>
+
+      <div class="tab-content-wrapper">
+        <div id="aria-status" role="status" aria-live="polite" class="visually-hidden"></div>
+        <section id="tab1-content" class="tab-content active" role="tabpanel">
+          <h2>Module Overview</h2>
+             <p>Creating a well-designed website that captures your audience's attention is vital in attracting and obtaining new customers. To do so, a web developer can use formatting such as font styles, font colors, white space, and background colors or images to increase the visual appeal of the webpages. Websites developed with HTML 5 alone can be functional, but they lack this important element of visual appeal. To improve the appearance of a website by including color, formatting text, and adding margins, borders, and shadows, for example, you need to apply styles created with Cascading Style Sheets (CSS), a language you use to describe the formatting of a document written in a markup language such as HTML 5. While HTML provides the structural foundation of a webpage, you use CSS styles to determine the formatting for a webpage. By defining CSS styles in a style sheet separate from the HTML code, you can format a webpage in an unlimited number of ways, such as changing the background color of the webpage, increasing the size of text or bolding it, applying margins to a section, and adding borders to elements. We will also be taking Test 1 this module which covers the material from the first three chapters of the book. The test consists of 25 multiple choice questions and has no time limit. There is only 1 attempt allowed. </p>
+ 
+        </section>
+
+        <section id="tab2-content" class="tab-content" role="tabpanel">
+          <h2>Why It Matters</h2>
+<p>Creating a visually appealing website is crucial for capturing and retaining your audience's attention, which directly impacts your ability to attract and convert new customers. While HTML 5 provides the structural foundation of a website, it lacks the stylistic elements necessary for enhancing visual appeal. This is where Cascading Style Sheets (CSS) come into play. CSS allows web developers to apply various styles, such as font colors, font styles, background colors, and images, to improve the overall look and feel of a webpage.</p>
+<p>Using CSS, you can transform a basic HTML webpage into a dynamic and engaging site by adding margins, borders, shadows, and other formatting features. By keeping the CSS styles separate from the HTML code, you gain the flexibility to make extensive visual modifications without altering the underlying structure. This separation allows for a limitless range of design possibilities, ensuring that your website not only functions well but also stands out aesthetically, providing a superior user experience that draws in and keeps visitors engaged.</p>
+        </section>
+
+        <section id="tab3-content" class="tab-content" role="tabpanel">
+          <h2>Module Activities</h2>
+     <ul>
+    <li>Chapter 4 Reading</li> 
+    <li>Chapter 4 - Lab 2</li> 
+  <li>Test 1 - This test covers the material from chapters 1-3. Test questions may be in the form of fill in the blank, multiple answer, multiple choice, short answer and/or true/false.</li> 
+    </ul>
+        </section>
+
+        <section id="tab4-content" class="tab-content" role="tabpanel">
+          <h2>Demonstrate Competency</h2>
+       <ul>
+    <li>Explain the importance of separating design from content</li> 
+    <li>Describe Cascading Style Sheets (CSS)</li> 
+    <li>Define inline, embedded, and external styles and their order of precedence</li> 
+    <li>Describe a CSS rule and its syntax</li> 
+    <li>Explain the difference between a selector, property, and value</li> 
+    <li>Create styles that use text and color properties</li> 
+    <li>Explain the difference between inline and block content</li> 
+    <li>Describe and use the CSS box model to apply margins, padding, and borders</li> 
+    <li>Create an external style sheet and link it to an HTML page</li> 
+    <li>Create responsive images</li> 
+    <li>Use float and clear properties</li>   
+    <li>Create and style id and class attributes</li> 
+    <li>Use a span element</li> 
+    <li>Add comments to an external style sheet and validate a CSS file</li>   
+    </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const allLinks = document.querySelectorAll(".tabs a");
+    const allTabs = document.querySelectorAll(".tab-content");
+    const status = document.getElementById("aria-status");
+
+    function switchTab(link) {
+      allLinks.forEach(l => {
+        l.classList.remove("active");
+        l.setAttribute("aria-selected", "false");
+        l.setAttribute("tabindex", "-1");
+      });
+      link.classList.add("active");
+      link.setAttribute("aria-selected", "true");
+      link.setAttribute("tabindex", "0");
+      link.focus();
+
+      const targetId = link.getAttribute("aria-controls");
+      allTabs.forEach(tab => tab.classList.remove("active"));
+      document.getElementById(targetId).classList.add("active");
+      status.textContent = link.textContent.trim();
+    }
+
+    allLinks.forEach((link, index) => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        switchTab(this);
+      });
+
+      link.addEventListener("keydown", function (e) {
+        let newIndex = index;
+        if (e.key === "ArrowDown") {
+          newIndex = (index + 1) % allLinks.length;
+          e.preventDefault();
+        } else if (e.key === "ArrowUp") {
+          newIndex = (index - 1 + allLinks.length) % allLinks.length;
+          e.preventDefault();
+        } else if (e.ctrlKey && e.key >= '1' && e.key <= String(allLinks.length)) {
+          newIndex = Number(e.key) - 1;
+          switchTab(allLinks[newIndex]);
+          e.preventDefault();
+          return;
+        }
+        if (newIndex !== index) {
+          switchTab(allLinks[newIndex]);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
