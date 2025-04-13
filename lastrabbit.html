@@ -40,7 +40,7 @@
       max-width: 200px;
       pointer-events: none;
       z-index: 10;
-      bottom: 50px;
+      bottom: 60px;
     }
 
     .butterfly {
@@ -256,9 +256,9 @@
       rabbit.style.left = `${rabbitPositionX}px`;
 
       if (rabbitDirection === 1) {
-        rabbit.style.transform = 'scaleX(1)';
-      } else {
         rabbit.style.transform = 'scaleX(-1)';
+      } else {
+        rabbit.style.transform = 'scaleX(1)';
       }
 
       if (rabbitPositionX >= window.innerWidth) {
