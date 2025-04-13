@@ -286,15 +286,16 @@
       rabbit.style.bottom = '20px'; // Set rabbit position 10px lower
 
       // Change direction when reaching bounds
-      if (rabbitPositionX > window.innerWidth) {
-        rabbitPositionX = window.innerWidth; // Reset to offscreen right
-        rabbitDirection = -1; // Change direction to left
-        rabbit.style.transform = 'scaleX(-1)'; // Flip the rabbit to face left
-      } else if (rabbitPositionX < -300) { // Ensure full off-screen left
-        rabbitPositionX = -250; // Reset to offscreen left
-        rabbitDirection = 1; // Change direction to right
-        rabbit.style.transform = 'scaleX(1)'; // Flip the rabbit to face right
-      }
+if (rabbitPositionX > window.innerWidth) {
+  rabbitPositionX = window.innerWidth;
+  rabbitDirection = -1;
+  rabbit.style.transform = 'scaleX(1)'; // Facing left (default)
+} else if (rabbitPositionX < -300) {
+  rabbitPositionX = -300;
+  rabbitDirection = 1;
+  rabbit.style.transform = 'scaleX(-1)'; // Flip to face right
+}
+
 
       requestAnimationFrame(animateRabbit);
     }
