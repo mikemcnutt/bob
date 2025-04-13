@@ -159,7 +159,7 @@
 </head>
 <body>
   <div class="container">
-    <h1 id="infoHeading">Module 13 - Getting Started with Bootstrap</h1>
+    <h1 id="infoHeading">Module 3 - Building a Webpage Template with HTML 5</h1>
 
     <nav class="sign-row" id="signRow" aria-label="Module navigation buttons">
       <button class="sign" onclick="showText('overview')" aria-expanded="false">Module Overview</button>
@@ -194,10 +194,31 @@
 
     function showText(key) {
       const messages = {
-        overview: `<strong>Module Overview</strong>  <p>Many of today's modern websites use some type of content management system or web framework...</p>`,
-        why: `<strong>Why It Matters</strong> <p>Content management systems (CMS) and web frameworks have revolutionized...</p>` ,
-        activities: `<strong>Module Activities</strong>  <ol><li>Chapter 12 Reading</li><li>Chapter 12 - Lab 2</li></ol>`,
-        competency: `<strong>Demonstrate Competency</strong> <ul><li>Describe the Bootstrap framework</li><li>Create a webpage using Bootstrap's starter template</li></ul>`
+        overview: `<strong>Module Overview</strong>    <p>Building a website from scratch involves a lot of time and planning, which is one reason that professional web design services are in high demand. Some web designers have their own business and provide their services on contract to clients, who are people or other businesses that want to build or redesign a website. Other web designers work in larger organizations and provide their services to people within the organization, who are called stakeholders. As an introduction to basic website design and development, this book provides a foundation on which to build your web design skills.</p>
+     <p>As discussed in Chapter 1, before you start building a website, you must plan it, which includes meeting with the clients or stakeholders to discover their needs, the purpose of the website, and their target audience. After developing a plan, you can start constructing the website by creating an HTML document and then adding the required basic HTML elements so visitors can display the webpage in a browser. Next, include HTML 5 elements to define the specific sections or areas of the webpage. This initial HTML document can serve as the template for the site. A template is a predefined webpage that contains a specific HTML structure to be used by all pages within the website. This chapter focuses on how to build a webpage template with HTML 5 elements and then use that template to create a home page.</p>
+  `,
+        why: `<strong>Why It Matters</strong> <p>Building a website from scratch requires meticulous planning and a clear understanding of the client's or stakeholder's needs, making professional web design services highly sought after. Whether working independently or within larger organizations, web designers must gather detailed requirements to ensure the website meets its intended purpose and effectively targets the right audience. This foundational knowledge is crucial for anyone aspiring to develop their web design skills and create functional, appealing websites.</p>
+<p>This module introduces the essential steps of website design and development, starting with the critical planning phase where you engage with clients or stakeholders to outline their needs. You'll learn to construct an initial HTML document, incorporating fundamental HTML elements to ensure the webpage displays correctly in browsers. By mastering HTML 5 elements, you'll define specific sections of the webpage and create a versatile template to streamline the development of the entire site. This hands-on approach provides a practical foundation for building professional, user-friendly websites.</p>
+` ,
+        activities: `<strong>Module Activities</strong>       <ul>
+    <li>Chapter 2 Reading</li> 
+    <li>Chapter 2 - Lab 2</li> 
+    </ul>`,
+        competency: `<strong>Demonstrate Competency</strong>     <ul>
+    <li>Explain how to manage website files</li> 
+    <li>Describe and use HTML 5 semantic elements</li> 
+    <li>Determine the elements to use when setting the structure of a webpage</li> 
+    <li>Design and build a semantic wireframe</li> 
+    <li>Create a webpage template</li> 
+    <li>Insert comments in an HTML document</li> 
+    <li>Add static content to a webpage template</li> 
+    <li>Insert symbol codes and other character entities</li> 
+    <li>Describe and use heading elements</li> 
+    <li>Describe the benefits of validating web documents</li> 
+    <li>Validate an HTML template</li>   
+    <li>Create a home page from an HTML template</li> 
+    <li>Add unique content to a webpage</li> 
+    </ul>`
       };
 
       signButtons.forEach(btn => btn.setAttribute('aria-expanded', 'false'));
