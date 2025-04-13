@@ -270,9 +270,28 @@
       requestAnimationFrame(animateButterflies);
     }
 
+    // Rabbit animation logic
+    let direction = -1; // -1 for left, 1 for right
+    let rabbitPositionX = window.innerWidth;
+
+    function animateRabbit(timestamp) {
+      rabbitPositionX += direction * 200 * (timestamp / 1000);
+      rabbit.style.left = `${rabbitPositionX}px`;
+      rabbit.style.bottom = '30%'; // Adjust as needed
+
+      if (rabbitPositionX < -200) {
+        rabbitPositionX = window.innerWidth; // Reset to offscreen right
+      } else if (rabbitPositionX > window.innerWidth) {
+        rabbitPositionX = -200; // Reset to offscreen left
+      }
+
+      requestAnimationFrame(animateRabbit);
+    }
+
     window.addEventListener('load', () => {
       updatePositions();
       requestAnimationFrame(animateButterflies);
+      requestAnimationFrame(animateRabbit);
     });
 
     window.addEventListener('resize', updatePositions);
