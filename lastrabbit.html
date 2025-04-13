@@ -40,7 +40,7 @@
       max-width: 200px;
       pointer-events: none;
       z-index: 10;
-      transform: scaleX(-1);
+      transform: scaleX(1);
       bottom: 40px;
     }
 
@@ -256,14 +256,18 @@
       rabbitPositionX += rabbitDirection * 200 * deltaTime;
       rabbit.style.left = `${rabbitPositionX}px`;
 
+      if (rabbitDirection === 1) {
+        rabbit.style.transform = 'scaleX(1)';
+      } else {
+        rabbit.style.transform = 'scaleX(-1)';
+      }
+
       if (rabbitPositionX > window.innerWidth) {
         rabbitPositionX = window.innerWidth;
         rabbitDirection = -1;
-        rabbit.style.transform = 'scaleX(-1)';
       } else if (rabbitPositionX < -300) {
         rabbitPositionX = -300;
         rabbitDirection = 1;
-        rabbit.style.transform = 'scaleX(1)';
       }
 
       requestAnimationFrame(animateRabbit);
