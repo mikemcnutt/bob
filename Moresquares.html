@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Button Flip</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      font-family: 'Merriweather', serif;
+      color: #2c5364;
+    }
+
+    .wrapper {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 20px;
+      text-align: center;
+      background: linear-gradient(to bottom right, #0f2027, #203a43, #2c5364);
+      border-radius: 8px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 150px);
+      grid-template-rows: repeat(2, 150px);
+      gap: 30px;
+      perspective: 1000px;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .button-container {
+      width: 150px;
+      height: 150px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s ease;
+    }
+
+    .face {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: #203a43;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      text-shadow: none;
+    }
+
+    .button-container.active .face.back,
+    .button-container.active .face.right,
+    .button-container.active .face.left,
+    .button-container.active .face.top,
+    .button-container.active .face.bottom {
+      text-shadow: 0 0 10px rgba(255,255,255,0.9), 0 0 20px rgba(255,255,255,0.8);
+    }
+
+    .front  { transform: rotateY(0deg) translateZ(75px); }
+    .back   { transform: rotateY(180deg) translateZ(75px); }
+    .right  { transform: rotateY(90deg) translateZ(75px); }
+    .left   { transform: rotateY(-90deg) translateZ(75px); }
+    .top    { transform: rotateX(90deg) translateZ(75px); }
+    .bottom { transform: rotateX(-90deg) translateZ(75px); }
+
+    .button-container.animate-top {
+      animation: topFlipSequence 4s ease forwards;
+    }
+
+    .button-container.animate-bottom {
+      animation: bottomFlipSequence 4s ease forwards;
+    }
+
+    @keyframes topFlipSequence {
+      0%   { transform: translateY(0) rotateX(0); }
+      25%  { transform: translateY(-10px) rotateX(0); }
+      50%  { transform: translateY(-10px) rotateX(0); }
+      75%  { transform: translateY(-10px) rotateX(90deg); }
+      100% { transform: translateY(0) rotateX(90deg); }
+    }
+
+    @keyframes bottomFlipSequence {
+      0%   { transform: translateY(0) rotateX(0); }
+      25%  { transform: translateY(10px) rotateX(0); }
+      50%  { transform: translateY(10px) rotateX(0); }
+      75%  { transform: translateY(10px) rotateX(-90deg); }
+      100% { transform: translateY(0) rotateX(-90deg); }
+    }
+
+    .content-display {
+      display: none;
+      background-color: #ffffff;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      color: #2c5364;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: opacity 0.5s ease-in-out;
+      min-height: 350px;
+    }
+
+    .content-display.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h1>Module Name</h1>
+    <div class="grid">
+      <div class="button-container btn" data-pos="top" data-content="Content for Module Overview">
+        <div class="face front">Module Overview</div>
+        <div class="face back">Module Overview</div>
+        <div class="face right">Module Overview</div>
+        <div class="face left">Module Overview</div>
+        <div class="face top">Module Overview</div>
+        <div class="face bottom">Module Overview</div>
+      </div>
+      <div class="button-container btn" data-pos="top" data-content="Content for Why It Matters">
+        <div class="face front">Why It Matters</div>
+        <div class="face back">Why It Matters</div>
+        <div class="face right">Why It Matters</div>
+        <div class="face left">Why It Matters</div>
+        <div class="face top">Why It Matters</div>
+        <div class="face bottom">Why It Matters</div>
+      </div>
+      <div class="button-container btn" data-pos="bottom" data-content="Content for Module Activities">
+        <div class="face front">Module Activities</div>
+        <div class="face back">Module Activities</div>
+        <div class="face right">Module Activities</div>
+        <div class="face left">Module Activities</div>
+        <div class="face top">Module Activities</div>
+        <div class="face bottom">Module Activities</div>
+      </div>
+      <div class="button-container btn" data-pos="bottom" data-content="Content for Demonstrate Competency">
+        <div class="face front">Demonstrate Competency</div>
+        <div class="face back">Demonstrate Competency</div>
+        <div class="face right">Demonstrate Competency</div>
+        <div class="face left">Demonstrate Competency</div>
+        <div class="face top">Demonstrate Competency</div>
+        <div class="face bottom">Demonstrate Competency</div>
+      </div>
+    </div>
+    <div id="content" class="content-display"></div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.btn');
+    const content = document.getElementById('content');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        buttons.forEach(btn => {
+          btn.classList.remove('animate-top', 'animate-bottom', 'active');
+        });
+
+        const pos = button.getAttribute('data-pos');
+        const contentText = button.getAttribute('data-content');
+
+        button.classList.add(pos === 'top' ? 'animate-top' : 'animate-bottom', 'active');
+
+        setTimeout(() => {
+          content.textContent = contentText;
+          content.classList.add('active');
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html>
