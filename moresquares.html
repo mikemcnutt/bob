@@ -119,66 +119,71 @@
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <h1>Module Name</h1>
-    <div class="grid">
-      <div class="button-container btn" data-pos="top" data-content="Content for Module Overview">
-        <div class="face front">Module Overview</div>
-        <div class="face back">Module Overview</div>
-        <div class="face right">Module Overview</div>
-        <div class="face left">Module Overview</div>
-        <div class="face top">Module Overview</div>
-        <div class="face bottom">Module Overview</div>
-      </div>
-      <div class="button-container btn" data-pos="top" data-content="Content for Why It Matters">
-        <div class="face front">Why It Matters</div>
-        <div class="face back">Why It Matters</div>
-        <div class="face right">Why It Matters</div>
-        <div class="face left">Why It Matters</div>
-        <div class="face top">Why It Matters</div>
-        <div class="face bottom">Why It Matters</div>
-      </div>
-      <div class="button-container btn" data-pos="bottom" data-content="Content for Module Activities">
-        <div class="face front">Module Activities</div>
-        <div class="face back">Module Activities</div>
-        <div class="face right">Module Activities</div>
-        <div class="face left">Module Activities</div>
-        <div class="face top">Module Activities</div>
-        <div class="face bottom">Module Activities</div>
-      </div>
-      <div class="button-container btn" data-pos="bottom" data-content="Content for Demonstrate Competency">
-        <div class="face front">Demonstrate Competency</div>
-        <div class="face back">Demonstrate Competency</div>
-        <div class="face right">Demonstrate Competency</div>
-        <div class="face left">Demonstrate Competency</div>
-        <div class="face top">Demonstrate Competency</div>
-        <div class="face bottom">Demonstrate Competency</div>
-      </div>
+  <header role="banner">
+    <div class="wrapper">
+      <h1>Module Name</h1>
     </div>
-    <div id="content" class="content-display"></div>
-  </div>
-
-  <script>
-    const buttons = document.querySelectorAll('.btn');
-    const content = document.getElementById('content');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        buttons.forEach(btn => {
-          btn.classList.remove('animate-top', 'animate-bottom', 'active');
-        });
-
-        const pos = button.getAttribute('data-pos');
-        const contentText = button.getAttribute('data-content');
-
-        button.classList.add(pos === 'top' ? 'animate-top' : 'animate-bottom', 'active');
-
-        setTimeout(() => {
-          content.textContent = contentText;
-          content.classList.add('active');
-        }, 2000);
-      });
-    });
-  </script>
+  </header>
+  <main role="main">
+    <div class="wrapper">
+      <div class="grid">
+        <div class="button-container btn" data-pos="top" data-content="Content for Module Overview">
+          <div class="face front">Module Overview</div>
+          <div class="face back">Module Overview</div>
+          <div class="face right">Module Overview</div>
+          <div class="face left">Module Overview</div>
+          <div class="face top">Module Overview</div>
+          <div class="face bottom">Module Overview</div>
+        </div>
+        <div class="button-container btn" data-pos="top" data-content="Content for Why It Matters">
+          <div class="face front">Why It Matters</div>
+          <div class="face back">Why It Matters</div>
+          <div class="face right">Why It Matters</div>
+          <div class="face left">Why It Matters</div>
+          <div class="face top">Why It Matters</div>
+          <div class="face bottom">Why It Matters</div>
+        </div>
+        <div class="button-container btn" data-pos="bottom" data-content="Content for Module Activities">
+          <div class="face front">Module Activities</div>
+          <div class="face back">Module Activities</div>
+          <div class="face right">Module Activities</div>
+          <div class="face left">Module Activities</div>
+          <div class="face top">Module Activities</div>
+          <div class="face bottom">Module Activities</div>
+        </div>
+        <div class="button-container btn" data-pos="bottom" data-content="Content for Demonstrate Competency">
+          <div class="face front">Demonstrate Competency</div>
+          <div class="face back">Demonstrate Competency</div>
+          <div class="face right">Demonstrate Competency</div>
+          <div class="face left">Demonstrate Competency</div>
+          <div class="face top">Demonstrate Competency</div>
+          <div class="face bottom">Demonstrate Competency</div>
+        </div>
+      </div>
+      <div id="content" class="content-display" role="region" aria-live="polite"></div>
+    </div>
+  </main>
 </body>
+<script>
+  const buttons = document.querySelectorAll('.btn');
+  const content = document.getElementById('content');
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      buttons.forEach(btn => {
+        btn.classList.remove('animate-top', 'animate-bottom', 'active');
+      });
+
+      const pos = button.getAttribute('data-pos');
+      const contentText = button.getAttribute('data-content');
+
+      button.classList.add(pos === 'top' ? 'animate-top' : 'animate-bottom', 'active');
+
+      setTimeout(() => {
+        content.textContent = contentText;
+        content.classList.add('active');
+      }, 2000);
+    });
+  });
+</script>
 </html>
