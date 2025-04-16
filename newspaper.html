@@ -55,8 +55,14 @@
       min-width: 260px;
       box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.05);
       padding: 0 10px;
-      text-align: justify;
-      hyphens: auto;
+    }
+
+    .column p:first-of-type::first-letter {
+      float: left;
+      font-size: 2.5em;
+      line-height: 1;
+      padding-right: 0.1em;
+      font-weight: bold;
     }
 
     h2 {
@@ -70,22 +76,25 @@
       margin-top: 30px;
       padding-top: 10px;
       font-size: 0.8rem;
-      text-align: center;
       font-variant: small-caps;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     #weather {
       font-size: 0.9rem;
-      margin-top: 10px;
       color: #333;
       background-color: #f4f4f4;
       padding: 10px;
-      margin: 10px auto;
       border: 1px solid #ccc;
       border-radius: 4px;
       display: inline-block;
       border-left: 4px solid #4a90e2;
       font-style: italic;
+      width: 300px;
+      text-align: center;
     }
 
     #zipInput {
@@ -94,9 +103,67 @@
     }
     #zipButton {
       padding: 5px 10px;
+      display: block;
+      margin: 5px auto;
     }
     #weatherDisplay {
       display: none;
+      margin-top: 5px;
+    }
+
+    .editor-form {
+      text-align: left;
+      font-style: normal;
+      width: 300px;
+    }
+    .editor-form input,
+    .editor-form textarea {
+      font-family: 'Georgia', serif;
+      width: 100%;
+      padding: 5px;
+      margin-top: 4px;
+      margin-bottom: 8px;
+      box-sizing: border-box;
+    }
+    .editor-submissions {
+      margin-top: 10px;
+      text-align: left;
+    }
+    .editor-submissions h2 {
+      margin-bottom: 5px;
+      display: none;
+    }
+    .editor-submissions div {
+      border-left: 3px solid #aaa;
+      padding-left: 10px;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+    .footer-center {
+      text-align: center;
+      flex: 1;
+      font-style: italic;
+      align-self: center;
+    }
+
+    .horoscope-box {
+      font-style: italic;
+      padding: 10px;
+      border: 1px dotted #999;
+      background: #f9f9f9;
+      margin-top: 10px;
+      max-width: 100%;
+      text-align: left;
+    }
+
+    .horoscope-box strong {
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: block;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #999;
+      padding-bottom: 4px;
     }
   </style>
 </head>
@@ -104,11 +171,11 @@
   <div class="paper" role="main">
     <header>
       <h1>Web Design Times</h1>
+      <div class="sub-header">
+        <span id="current-date"></span>
+        <span id="quote"></span>
+      </div>
     </header>
-    <div class="sub-header">
-      <span id="current-date"></span>
-      <span id="quote"></span>
-    </div>
     <div class="columns">
       <div class="column">
         <h2>Module Overview</h2>
@@ -142,13 +209,31 @@
           <li>Explain linear and radial gradients</li>
           <li>Apply a linear gradient to a webpage for a desktop viewport</li>
         </ul>
+        <div class="editor-submissions" id="editorSubmissions">
+          <h2>Letters to the Editor</h2>
+        </div>
       </div>
     </div>
     <footer role="contentinfo">
+      <div class="editor-form">
+        <label for="editorName">Letter to the Editor (Name):</label>
+        <input type="text" id="editorName" name="editorName" placeholder="Your Name">
+        <label for="editorMessage">Message:</label>
+        <textarea id="editorMessage" name="editorMessage" rows="3" placeholder="Your message..."></textarea>
+        <button onclick="addLetter()">Submit</button>
+      </div>
+      <div class="footer-center">
+        <div class="horoscope-box">
+          <strong>Today's Horoscope:</strong>
+          Your ability to multitask will reach new heights this month as you handle your to-do list with the precision of a synchronized swimmer in a shark tank. Be ready to defend yourself with confidence when you end up accidentally replying to your boss with a “not another stupid meeting that could have been an email” meme.
+        </div>
+      </div>
       <div id="weather" aria-label="Weather for chosen ZIP code">
         <label for="zipInput">Enter ZIP Code:</label>
         <input type="text" id="zipInput" name="zipInput" maxlength="5" pattern="\d{5}" aria-label="ZIP Code" />
         <button id="zipButton">Get Weather</button>
+        <br />
+        <img id="weatherImage" src="" alt="Weather icon" style="max-width: 100%; display: none; margin-top: 5px;" />
         <span id="weatherDisplay"></span>
       </div>
     </footer>
@@ -158,6 +243,8 @@
     const dateEl = document.getElementById("current-date");
     const quoteEl = document.getElementById("quote");
     const weatherEl = document.getElementById("weatherDisplay");
+    const weatherImg = document.getElementById("weatherImage");
+    const lettersHeader = document.querySelector(".editor-submissions h2");
 
     const quotes = [
       "Success is not final, failure is not fatal: It is the courage to continue that counts. – Winston Churchill",
@@ -176,11 +263,14 @@
 
     async function getWeatherByZip(zip) {
       try {
+        weatherImg.src = `https://wttr.in/${zip}.png?0p`;
+        weatherImg.style.display = 'block';
         const response = await fetch(`https://wttr.in/${zip}?format=%e+%C+%t`);
         const text = await response.text();
         weatherEl.textContent = `Weather for ${zip}: ${text}`;
         weatherEl.style.display = 'inline';
       } catch (err) {
+        weatherImg.style.display = 'none';
         weatherEl.textContent = "Unable to load weather.";
         weatherEl.style.display = 'inline';
       }
@@ -193,8 +283,22 @@
       } else {
         weatherEl.textContent = "Please enter a valid 5-digit ZIP code.";
         weatherEl.style.display = 'inline';
+        weatherImg.style.display = 'none';
       }
     });
+
+    function addLetter() {
+      const name = document.getElementById("editorName").value.trim();
+      const message = document.getElementById("editorMessage").value.trim();
+      if (name && message) {
+        const entry = document.createElement("div");
+        entry.innerHTML = `<strong>${name}</strong>: ${message}`;
+        document.getElementById("editorSubmissions").appendChild(entry);
+        document.getElementById("editorName").value = "";
+        document.getElementById("editorMessage").value = "";
+        lettersHeader.style.display = 'block';
+      }
+    }
   </script>
 </body>
 </html>
