@@ -6,11 +6,34 @@
   <title>CIT 155 Pizzeria Menu</title>
   <link href="https://fonts.googleapis.com/css2?family=Playball&family=Fondamento&display=swap" rel="stylesheet" />
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background-color: #ffffff;
       margin: 0;
       padding: 20px 0;
       font-family: 'Fondamento', cursive;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    .skip-link:focus {
+      position: static;
+      width: auto;
+      height: auto;
+      padding: 10px;
+      background: #000;
+      color: #fff;
+      z-index: 1000;
     }
 
     .page {
@@ -25,24 +48,27 @@
 
     header.menu-header-bar,
     footer.pizza-footer {
-      width: 100%;
-      background-color: #fdf2e9;
-      padding: 15px 10px;
+      background: url('pizza.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      text-align: center;
+      padding: 20px 10px;
     }
 
-    .menu-header-bar h1 {
-      text-align: center;
-      font-size: 2.5em;
-      color: #c0392b;
-      margin: 0;
+    header.menu-header-bar h1 {
+      font-size: 3em;
       font-family: 'Playball', cursive;
+      color: white;
+      margin: 0;
+      text-shadow: 2px 2px 4px #000000;
     }
 
-    .menu-header-bar .tagline {
-      text-align: center;
-      font-size: 1em;
-      color: #5d4037;
-      margin-top: 5px;
+    header.menu-header-bar .tagline {
+      font-size: 1.2em;
+      color: white;
+      margin: 5px 0 0;
+      text-shadow: 1px 1px 3px #000000;
     }
 
     nav.pizza-nav {
@@ -53,7 +79,16 @@
       margin-bottom: 20px;
       background-color: #c0392b;
       padding: 8px 0;
+    }
+
+    nav.pizza-nav a {
       color: white;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    nav.pizza-nav a:hover {
+      text-decoration: underline;
     }
 
     .menu-header {
@@ -128,7 +163,7 @@
       text-align: center;
       border-top: 4px solid #c0392b;
       font-size: 0.9em;
-      color: #5d4037;
+      color: #fff;
       margin-top: 30px;
     }
 
@@ -156,50 +191,53 @@
   </style>
 </head>
 <body>
-  <div class="page">
-    <header class="menu-header-bar">
+  <a href="#menu" class="skip-link">Skip to Menu</a>
+  <a href="#specials" class="skip-link">Skip to Specials</a>
+  <a href="#reservations" class="skip-link">Skip to Reservations</a>
+  <a href="#contact" class="skip-link">Skip to Contact</a>
+
+  <div class="page" role="main" aria-label="Main content">
+    <header class="menu-header-bar" role="banner" aria-label="Site Header">
       <h1>CIT 155 Pizzeria</h1>
       <p class="tagline">Serving Fresh HTML & CSS Since 2005!</p>
     </header>
 
-    <nav class="pizza-nav">
-      Menu | Specials | Reservations | Contact
+    <nav class="pizza-nav" role="navigation" aria-label="Primary navigation">
+      <a href="#menu">Menu</a> |
+      <a href="#specials">Specials</a> |
+      <a href="#reservations">Reservations</a> |
+      <a href="#contact">Contact</a>
     </nav>
 
-    <div class="menu-header">
-      Welcome to the CIT 155 Pizzeria! Below is a menu of all of our specialty pizzas — and be sure to ask the waiter about this week's special!<br><br>
-	  Module 2 - Introduction to the Internet and Web Design
-    </div>
-
     <div class="menu-container">
-      <div class="menu-section">
-        <h2>Module Overview</h2>
+      <section class="menu-section" id="menu" aria-labelledby="menu-heading">
+        <h2 id="menu-heading">Module Overview</h2>
         <div class="content">
-               <p>Today, millions of people worldwide have access to the Internet, the world's largest network. Billions of webpages providing information on any subject you can imagine are currently available on the web. People use the Internet to search for information, to communicate with others around the world, and to seek entertainment. Students use the Internet to register for classes, pay tuition, and find out final grades. Businesses and other organizations rely on the Internet and the web to sell products and services. Hypertext Markup Language (HTML) and Cascading Style Sheets (CSS) are two of the technologies that make this possible.</p>
+          <p>Today, millions of people worldwide have access to the Internet, the world's largest network. Billions of webpages providing information on any subject you can imagine are currently available on the web. People use the Internet to search for information, to communicate with others around the world, and to seek entertainment. Students use the Internet to register for classes, pay tuition, and find out final grades. Businesses and other organizations rely on the Internet and the web to sell products and services. Hypertext Markup Language (HTML) and Cascading Style Sheets (CSS) are two of the technologies that make this possible.</p>
           <p>HTML 5.3 is the most recent version of HTML and is called HTML 5. Before exploring the details of creating webpages with HTML 5 and CSS, it is useful to look at how these technologies relate to the development of the Internet and the web. In this chapter, you learn some basics about the Internet and the web, and the rules both follow to allow computers to communicate with each other. You review types of websites and learn how to properly plan a website so that it is appealing and useful to your target audience. You also explore web browsers, HTML, and its associated key terms. Lastly, you create a basic webpage using a text editor.</p>
-    </div>
-      </div>
+        </div>
+      </section>
 
-      <div class="menu-section">
-        <h2>Why It Matters</h2>
+      <section class="menu-section" id="specials" aria-labelledby="specials-heading">
+        <h2 id="specials-heading">Why It Matters</h2>
         <div class="content">
           <p>Understanding the foundations of web design is essential in today's digital landscape, where millions of people worldwide rely on the Internet for information, communication, and entertainment. Businesses and organizations depend heavily on the web to market and sell their products and services. The technologies behind these webpages, primarily HTML and CSS, are what make this vast network of information and interaction possible. By mastering these tools, you gain the ability to create effective, engaging, and user-friendly websites that can significantly impact a business's success and a user's experience.</p>
           <p>This module delves into the essential components of web design, including the latest version of HTML (HTML 5.3) and CSS, and explores their roles in the evolution of the Internet and web development. You will learn how to properly plan and design a website to ensure it meets the needs of your target audience, making it both appealing and functional. Additionally, you will get hands-on experience creating a basic webpage using a text editor, setting the foundation for more advanced web design skills.</p>
-         </div>
-      </div>
+        </div>
+      </section>
 
-      <div class="menu-section" style="grid-column: 1; grid-row: 2;">
-        <h2>Module Activities</h2>
+      <section class="menu-section" id="reservations" aria-labelledby="reservations-heading" style="grid-column: 1; grid-row: 2;">
+        <h2 id="reservations-heading">Module Activities</h2>
         <div class="content">
           <ul>
             <li>Chapter 1 Reading</li>
             <li>Chapter 1 - Lab 2</li>
           </ul>
         </div>
-      </div>
+      </section>
 
-      <div class="menu-section student-reviews" style="grid-column: 1; grid-row: 3;">
-        <h2>⭐ Student Reviews</h2>
+      <section class="menu-section student-reviews" id="contact" aria-labelledby="contact-heading" style="grid-column: 1; grid-row: 3;">
+        <h2 id="contact-heading">⭐ Student Reviews</h2>
         <div class="content">
           <div class="review"><strong>Jenna:</strong> "I came for the pizza, stayed for the semantic tags!"</div>
           <div class="review"><strong>Marcus:</strong> "Best crust and closing tags in town."</div>
@@ -208,9 +246,9 @@
           <div class="review"><strong>Noah:</strong> "Pepperoni and pseudo-classes? Yes, please!"</div>
           <div class="review"><strong>Zoe:</strong> "10/10 would validate again."</div>
         </div>
-      </div>
+      </section>
 
-      <div class="menu-section" style="grid-column: 2; grid-row: 2 / span 2;">
+      <section class="menu-section" style="grid-column: 2; grid-row: 2 / span 2;">
         <h2>Demonstrate Competency</h2>
         <div class="content">
           <ul>
@@ -230,10 +268,10 @@
             <li>Create and view a basic HTML webpage</li>
           </ul>
         </div>
-      </div>
+      </section>
     </div>
 
-    <footer class="pizza-footer">
+    <footer class="pizza-footer" role="contentinfo" aria-label="Footer">
       <p><strong>Hours:</strong> Mon–Fri: 11am–9pm | Sat–Sun: 12pm–10pm</p>
       <p><strong>Address:</strong> 155 CIT Way, Somewhere, USA</p>
       <p class="disclaimer">This pizzeria is purely educational. No actual pizza will be served. 🍕</p>
