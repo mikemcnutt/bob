@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shan Shui Module Overview</title>
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f9f9f9;
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 2em;
+      color: #333;
+    }
+
+    .button-container {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .button {
+      position: relative;
+      width: 160px;
+      height: 60px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      text-align: center;
+      border-radius: 30px;
+      background: url('https://elearning.kctcs.edu/bbcswebdav/xid-524184271_4') no-repeat center;
+      background-size: cover;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .image-container {
+      position: relative;
+      display: inline-block;
+      margin-top: 20px;
+      overflow: hidden;
+      width: 1024px;
+      height: 1024px;
+    }
+
+    .image-container img.backback,
+    .image-container img.backfront {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1024px;
+      height: 1024px;
+    }
+
+    .image-container img.backback {
+      z-index: 1;
+    }
+
+    .image-container img.backfront {
+      z-index: 5;
+    }
+
+    .dragon {
+      position: absolute;
+      bottom: 130px;
+      left: 41%;
+      transform: translateX(-50%);
+      z-index: 6;
+      width: 100px;
+    }
+
+    .butterfly {
+      opacity: 0;
+      position: absolute;
+      height: 13px !important;
+      width: 13px !important;
+      object-fit: contain;
+      z-index: 3;
+    }
+
+    .butterfly1 {
+      top: 320px;
+      left: -120px;
+      animation: flyacross1 15s linear infinite;
+    }
+
+    .butterfly2 {
+      top: 330px;
+      left: -120px;
+      animation: flyacross2 18s linear infinite;
+    }
+
+    .butterfly3 {
+      top: 340px;
+      left: -120px;
+      animation: flyacross3 16s linear infinite;
+    }
+
+    @keyframes flyacross1 {
+      0% { left: -120px; top: 320px; opacity: 0; }
+      10% { opacity: 1; }
+      40% { opacity: 1; top: 270px; }
+      100% { left: 1024px; top: 295px; opacity: 0; }
+    }
+
+    @keyframes flyacross2 {
+      0% { left: -120px; top: 330px; opacity: 0; }
+      10% { opacity: 1; }
+      40% { opacity: 1; top: 210px; }
+      100% { left: 1024px; top: 315px; opacity: 0; }
+    }
+
+    @keyframes flyacross3 {
+      0% { left: -120px; top: 340px; opacity: 0; }
+      10% { opacity: 1; }
+      40% { opacity: 1; top: 170px; }
+      100% { left: 1024px; top: 325px; opacity: 0; }
+    }
+
+    .boat {
+      position: absolute;
+      bottom: 200px;
+      right: -200px;
+      height: 100px;
+      z-index: 6;
+      animation: sailleft 27s linear infinite;
+    }
+
+    @keyframes sailleft {
+      0% { right: -200px; bottom: 200px; opacity: 0; }
+      10% { opacity: 1; }
+      50% { opacity: 1; bottom: 265px; }
+      100% { right: 110%; bottom: 335px; opacity: 0; }
+    }
+
+    .textbox {
+      display: none;
+      position: fixed;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 350px;
+      height: 500px;
+      background: url('https://elearning.kctcs.edu/bbcswebdav/xid-524184273_4') no-repeat center;
+      background-size: cover;
+      padding: 20px;
+      color: #333;
+      font-size: 16px;
+      border-radius: 10px;
+      overflow-y: scroll;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      z-index: 1000;
+      text-align: center;
+    }
+
+    .textbox::-webkit-scrollbar {
+      display: none;
+    }
+
+    .textbox.active {
+      display: block;
+    }
+
+    .textbox p {
+      max-width: 280px;
+      height: 380px;
+      margin: 20px auto;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-align: left;
+      overflow-y: scroll;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .textbox p::-webkit-scrollbar {
+      display: none;
+    }
+
+    .close-btn {
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      color: #333;
+      display: block;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <h1>Header here</h1>
+  
+  <div class="button-container">
+    <button class="button" onclick="showTextbox('Module Overview content goes here. This is a longer text to ensure that the content area is scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.')">Module Overview</button>
+    <button class="button" onclick="showTextbox('Why It Matters content goes here.')">Why It Matters</button>
+    <button class="button" onclick="showTextbox('Module Activities content goes here.')">Module Activities</button>
+    <button class="button" onclick="showTextbox('Demonstrate Competency content goes here.')">Demonstrate Competency</button>
+  </div>
+
+  <div class="image-container">
+    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124446_4" alt="Back of Backpack" class="backback">
+    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524182790_4" alt="Front of Backpack" class="backfront">
+    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124449_4" alt="Butterfly Animation" class="butterfly butterfly1">
+    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124449_4" alt="Butterfly Animation" class="butterfly butterfly2">
+    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124449_4" alt="Butterfly Animation" class="butterfly butterfly3">
+    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124448_4" alt="Boat with Shadow" class="boat">
+    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524182780_4" alt="Dragon Bob" class="dragon">
+  </div>
+
+  <div class="textbox" id="infoTextbox">
+    <button class="close-btn" onclick="hideTextbox()">✖</button>
+    <p id="textboxContent">Content goes here.</p>
+  </div>
+
+  <script>
+    function showTextbox(content) {
+      document.getElementById('textboxContent').innerHTML = content;
+      document.getElementById('infoTextbox').classList.add('active');
+    }
+
+    function hideTextbox() {
+      document.getElementById('infoTextbox').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
