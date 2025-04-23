@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+
   <title>Shan Shui Module Overview</title>
-<style>
+  <style>
     body {
       margin: 0;
       padding: 0;
@@ -12,6 +14,24 @@
       text-align: center;
       background-color: #f9f9f9;
     }
+.top-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 20px;
+}
 
     h1 {
       margin-top: 30px;
@@ -19,12 +39,7 @@
       color: #333;
     }
 
-    .button-container {
-      margin: 20px 0;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
+   
 
     .button {
       position: relative;
@@ -37,15 +52,34 @@
       border: none;
       text-align: center;
       border-radius: 30px;
-      background: url('https://elearning.kctcs.edu/bbcswebdav/xid-524184271_4') no-repeat center;
+      background-color: rgba(46, 139, 87); 
+      
+      background-repeat: no-repeat;
+      background-position: center;
       background-size: cover;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+	  overflow: hidden;
     }
 
-    .button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
+	.particle
+{
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	background: #fff;
+	border-radius: 50%;
+	pointer-events: none;
+	opacity: 1;
+	transform: translate(0, 0);
+	animation: particleAnim 1s ease-out forwards;
+}
+@keyframes particleAnim {
+	to
+	{
+		opacity: 0;
+		transform: translate(var(--tx), var(--ty)) scale(5);
+	}
+}
 
     .image-container {
       position: relative;
@@ -76,34 +110,43 @@
     .dragon {
       position: absolute;
       bottom: 145px;
-      left: 41%;
+      left: 46%;
       transform: translateX(-50%);
       z-index: 6;
-      width: 130px;
+      width: 170px;
     }
 
-    .butterfly {
+        .girl {
+      position: absolute;
+      bottom: 158px;
+      left: 31%;
+      transform: translateX(-50%);
+      z-index: 6;
+      width: 100px;
+    }
+
+    .bird {
       opacity: 0;
       position: absolute;
-      height: 13px !important;
-      width: 13px !important;
+      height: 23px !important;
+ 
       object-fit: contain;
       z-index: 3;
     }
 
-    .butterfly1 {
+    .bird1 {
       top: 320px;
       left: -120px;
       animation: flyacross1 15s linear infinite;
     }
 
-    .butterfly2 {
+    .bird2 {
       top: 330px;
       left: -120px;
       animation: flyacross2 18s linear infinite;
     }
 
-    .butterfly3 {
+    .bird3 {
       top: 340px;
       left: -120px;
       animation: flyacross3 16s linear infinite;
@@ -175,51 +218,55 @@
       display: block;
     }
 
-    .textbox p {
+    #textboxContent {
       max-width: 280px;
-      height: 380px;
-      margin: 20px auto;
-      padding-top: 20px;
-      padding-bottom: 20px;
+      height: 340px;
+      margin: 22px auto;
+      padding-top: 10px;
+      padding-bottom: 40px;
       text-align: left;
-      overflow-y: scroll;
+      overflow-y: auto;
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
 
-    .textbox p::-webkit-scrollbar {
+    #textboxContent::-webkit-scrollbar {
       display: none;
     }
 
     .close-btn {
       cursor: pointer;
-      background: transparent;
+      background-color: #2e8b57;
       border: none;
-      font-size: 20px;
-      color: #333;
-      display: block;
-      text-align: right;
+      font-size: 14px;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-  <h1>Header here</h1>
+  <div class="top-wrapper">
+    <h1>Explore the Backpack Design</h1>
   
-  <div class="button-container">
-    <button class="button" onclick="showTextbox('Module Overview content goes here. This is a longer text to ensure that the content area is scrollable. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.')">Module Overview</button>
-    <button class="button" onclick="showTextbox('Why It Matters content goes here.')">Why It Matters</button>
-    <button class="button" onclick="showTextbox('Module Activities content goes here.')">Module Activities</button>
-    <button class="button" onclick="showTextbox('Demonstrate Competency content goes here.')">Demonstrate Competency</button>
+    <div class="button-container">
+      <button class="button" id="btn" onclick="showTextbox('Module Overview content goes here...')">Module Overview</button>
+      <button class="button" id="btn" onclick="showTextbox('Why It Matters content goes here.')">Why It Matters</button>
+      <button class="button" id="btn" onclick="showTextbox('Module Activities content goes here.')">Module Activities</button>
+      <button class="button" id="btn" onclick="showTextbox('Demonstrate Competency content goes here.')">Demonstrate Competency</button>
+    </div>
   </div>
 
   <div class="image-container">
     <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124446_4" alt="Back of Backpack" class="backback">
-    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524182790_4" alt="Front of Backpack" class="backfront">
-    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124449_4" alt="Butterfly Animation" class="butterfly butterfly1">
-    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124449_4" alt="Butterfly Animation" class="butterfly butterfly2">
-    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124449_4" alt="Butterfly Animation" class="butterfly butterfly3">
+    <img src="backfront.png" alt="Front of Backpack" class="backfront">
+    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524528029_4" alt="bird Animation" class="bird bird1">
+    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524528029_4" alt="bird Animation" class="bird bird2">
+    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524528029_4" alt="bird Animation" class="bird bird3">
     <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124448_4" alt="Boat with Shadow" class="boat">
     <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524269578_4" alt="Dragon Bob" class="dragon">
+	    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524789327_4" alt="Dragon Bob" class="girl">
   </div>
 
   <div class="textbox" id="infoTextbox">
@@ -227,15 +274,53 @@
     <p id="textboxContent">Content goes here.</p>
   </div>
 
-  <script>
-    function showTextbox(content) {
-      document.getElementById('textboxContent').innerHTML = content;
-      document.getElementById('infoTextbox').classList.add('active');
-    }
+ <script>
+  function showTextbox(content) {
+    const textbox = document.getElementById('infoTextbox');
+    const textboxContent = document.getElementById('textboxContent');
+    textboxContent.innerHTML = content;
+    textbox.classList.add('active');
+  }
 
-    function hideTextbox() {
-      document.getElementById('infoTextbox').classList.remove('active');
-    }
-  </script>
+  function hideTextbox() {
+    const textbox = document.getElementById('infoTextbox');
+    textbox.classList.remove('active');
+  }
+
+  // Add particle effects to all buttons
+  const buttons = document.querySelectorAll('.button');
+  buttons.forEach(button => {
+    button.addEventListener('mousemove', function (e) {
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      for (let i = 0; i < 10; i++) { // Number of particles per mousemove
+        createParticle(x, y, button);
+      }
+    });
+  });
+
+  function createParticle(x, y, button) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+
+    particle.style.left = `${x}px`;
+    particle.style.top = `${y}px`;
+
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = Math.random() * 60 + 10; // Distance between 10px and 70px
+    const tx = Math.cos(angle) * distance;
+    const ty = Math.sin(angle) * distance;
+
+    particle.style.setProperty('--tx', `${tx}px`);
+    particle.style.setProperty('--ty', `${ty}px`);
+
+    button.appendChild(particle);
+
+    setTimeout(() => particle.remove(), 1000); // Remove after 1 second
+  }
+</script>
+
 </body>
 </html>
