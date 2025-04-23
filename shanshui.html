@@ -244,6 +244,29 @@
       border-radius: 5px;
       margin-bottom: 10px;
     }
+
+	  	@media (max-width: 600px) {
+
+ .image-container {
+   display:none;
+ }
+
+  .textbox {
+    width: 90%; /* Use most of the screen width */
+    height: auto; /* Adapt height to content */
+    max-height: 80%; /* Prevent overflow */
+    padding: 15px; /* Reduce padding for smaller screens */
+  }
+
+  .close-btn {
+    font-size: 12px; /* Adjust button size for small screens */
+    padding: 5px 8px;
+  }
+
+  #textboxContent {
+    font-size: 14px; /* Adjust font size for readability */
+  }
+}
   </style>
 </head>
 <body>
