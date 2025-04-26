@@ -252,19 +252,19 @@
  }
 
   .textbox {
-    width: 90%; /* Use most of the screen width */
-    height: auto; /* Adapt height to content */
-    max-height: 80%; /* Prevent overflow */
-    padding: 15px; /* Reduce padding for smaller screens */
+    width: 90%; 
+    height: auto; 
+    max-height: 80%; 
+    padding: 15px; 
   }
 
   .close-btn {
-    font-size: 12px; /* Adjust button size for small screens */
+    font-size: 12px; 
     padding: 5px 8px;
   }
 
   #textboxContent {
-    font-size: 14px; /* Adjust font size for readability */
+    font-size: 14px; 
   }
 }
   </style>
@@ -272,7 +272,7 @@
 <body>
   <div class="top-wrapper">
    <header> <h1>Explore the Backpack Design</h1></header>
-  
+  <main>
     <div class="button-container">
       <button class="button" id="btn" onclick="showTextbox('Module Overview content goes here...')">Module Overview</button>
       <button class="button" id="btn" onclick="showTextbox('Why It Matters content goes here.')">Why It Matters</button>
@@ -296,7 +296,7 @@
     <button class="close-btn" onclick="hideTextbox()">✖</button>
     <p id="textboxContent">Content goes here.</p>
   </div>
-
+<main>
  <script>
   function showTextbox(content) {
     const textbox = document.getElementById('infoTextbox');
@@ -310,7 +310,7 @@
     textbox.classList.remove('active');
   }
 
-  // Add particle effects to all buttons
+  
   const buttons = document.querySelectorAll('.button');
   buttons.forEach(button => {
     button.addEventListener('mousemove', function (e) {
@@ -318,7 +318,7 @@
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      for (let i = 0; i < 10; i++) { // Number of particles per mousemove
+      for (let i = 0; i < 10; i++) { 
         createParticle(x, y, button);
       }
     });
@@ -332,7 +332,7 @@
     particle.style.top = `${y}px`;
 
     const angle = Math.random() * 2 * Math.PI;
-    const distance = Math.random() * 60 + 10; // Distance between 10px and 70px
+    const distance = Math.random() * 60 + 10; 
     const tx = Math.cos(angle) * distance;
     const ty = Math.sin(angle) * distance;
 
@@ -341,7 +341,7 @@
 
     button.appendChild(particle);
 
-    setTimeout(() => particle.remove(), 1000); // Remove after 1 second
+    setTimeout(() => particle.remove(), 1000); 
   }
 </script>
 
