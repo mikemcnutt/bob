@@ -192,7 +192,7 @@
 
     let xp = 2500;
 
-   const contentData = {
+const contentData = {
     overview: `<p>Images are used throughout a website to enhance visual appeal and provide visitors with additional information about a product or service. Other images, such as a business logo, promote the company's presence and brand. Almost all modern webpages contain images, whether they are photos, drawings, logos, or other types of graphics.</p>
      <p>One of the most useful and important aspects of the web is the ability to connect (link) one webpage to other webpages - on the same server or on different web servers - located anywhere in the world. Using hyperlinks, a website visitor can move from one page to another, view a page on another website, start a new email message, download a file, or make a phone call from a mobile device. Many types of webpage content, including text, graphics, and animations, can serve as hyperlinks.</p> 
   </p>`,
@@ -215,18 +215,18 @@
     </ul>`
   };
 
-  buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      buttons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      const key = btn.getAttribute("data-module");
-      if (key && contentData[key]) {
-        contentBox.srcdoc = contentData[key];
-        xp += 100;
-        xpDisplay.textContent = xp;
-      }
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        buttons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const key = btn.getAttribute("data-module");
+        if (key && contentData[key]) {
+          contentBox.srcdoc = contentData[key];
+          xp += 100;
+          xpDisplay.textContent = xp;
+        }
+      });
     });
-  });
 
     toggleBtn.addEventListener("click", () => {
       document.body.classList.toggle("high-contrast");
@@ -245,4 +245,10 @@
         aiStatus.textContent = "🧠 AI: Online";
       }, 7000);
 
-      setTimeout(() =>
+      setTimeout(() => {
+        aiStatus.textContent = "🧠 AI: Calculating world domination";
+      }, 14000);
+    });
+  </script>
+</body>
+</html>
