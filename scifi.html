@@ -192,25 +192,41 @@
 
     let xp = 2500;
 
-    const contentData = {
-      overview: `<p>Images are used throughout a website to enhance visual appeal and provide visitors with additional information about a product or service...</p>`,
-      activities: `<ul><li>Chapter 3 Reading</li><li>Chapter 3 - Lab 2</li></ul>`,
-      matters: `<p>Images and hyperlinks are fundamental elements that enhance both the functionality and visual appeal of websites...</p>`,
-      competency: `<ul><li>Describe image file formats</li><li>Describe the image tag and its attributes</li></ul>`
-    };
+   const contentData = {
+    overview: `<p>Images are used throughout a website to enhance visual appeal and provide visitors with additional information about a product or service. Other images, such as a business logo, promote the company's presence and brand. Almost all modern webpages contain images, whether they are photos, drawings, logos, or other types of graphics.</p>
+     <p>One of the most useful and important aspects of the web is the ability to connect (link) one webpage to other webpages - on the same server or on different web servers - located anywhere in the world. Using hyperlinks, a website visitor can move from one page to another, view a page on another website, start a new email message, download a file, or make a phone call from a mobile device. Many types of webpage content, including text, graphics, and animations, can serve as hyperlinks.</p> 
+  </p>`,
+    activities: `<ul><li>Chapter 3 Reading</li><li>Chapter 3 - Lab 2</li></ul>>`,
+    matters: `<p>Images and hyperlinks are fundamental elements that enhance both the functionality and visual appeal of websites. Images not only make websites more attractive but also provide critical information about products or services, reinforcing the company's brand identity through elements like logos. In modern web design, incorporating various types of graphics is essential for creating an engaging user experience that captures visitors' attention and conveys key messages effectively.</p>
+<p>Hyperlinks, another crucial component of web design, enable seamless navigation and connectivity across the vast landscape of the Internet. They allow users to easily move between pages, access external resources, initiate email communications, download files, or even make phone calls directly from a webpage. By integrating hyperlinks within text, graphics, and animations, you can create interactive and intuitive websites that provide a richer, more dynamic user experience. Understanding how to effectively use images and hyperlinks is essential for anyone looking to build modern, user-friendly websites.</p>
+`,
+    competency: `<ul>
+    <li>Describe image file formats</li> 
+    <li>Describe the image tag and its attributes</li> 
+    <li>Add images to a website</li> 
+    <li>Explain div elements and attributes</li> 
+    <li>Use a div element within a webpage</li> 
+    <li>Describe types of hyperlinks</li> 
+    <li>Create relative links, absolute links, bookmark links, email links, and telephone links</li> 
+    <li>Describe the types of lists in an HTML document</li> 
+    <li>Create an unordered list and a description list</li> 
+    <li>Embed a map within a webpage</li> 
+    <li>Test and validate links on a webpage</li>   
+    </ul>`
+  };
 
-    buttons.forEach(btn => {
-      btn.addEventListener("click", () => {
-        buttons.forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        const key = btn.getAttribute("data-module");
-        if (key && contentData[key]) {
-          contentBox.srcdoc = contentData[key];
-          xp += 100;
-          xpDisplay.textContent = xp;
-        }
-      });
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      buttons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      const key = btn.getAttribute("data-module");
+      if (key && contentData[key]) {
+        contentBox.srcdoc = contentData[key];
+        xp += 100;
+        xpDisplay.textContent = xp;
+      }
     });
+  });
 
     toggleBtn.addEventListener("click", () => {
       document.body.classList.toggle("high-contrast");
