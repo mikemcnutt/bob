@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&display=swap" rel="stylesheet">
 
-  <title>Shan Shui Module Overview</title>
+  <title>Module Overview</title>
   <style>
     body {
       margin: 0;
@@ -222,7 +222,7 @@
       max-width: 280px;
       height: 340px;
       margin: 22px auto;
-      padding-top: 10px;
+      padding-top: 0px;
       padding-bottom: 40px;
       text-align: left;
       overflow-y: auto;
@@ -271,16 +271,54 @@
 </head>
 <body>
   <div class="top-wrapper">
-   <header> <h1>Explore the Backpack Design</h1></header>
-  <main>
-    <div class="button-container">
-      <button class="button" id="btn" onclick="showTextbox('Module Overview content goes here...')">Module Overview</button>
-      <button class="button" id="btn" onclick="showTextbox('Why It Matters content goes here.')">Why It Matters</button>
-      <button class="button" id="btn" onclick="showTextbox('Module Activities content goes here.')">Module Activities</button>
-      <button class="button" id="btn" onclick="showTextbox('Demonstrate Competency content goes here.')">Demonstrate Competency</button>
-    </div>
-  </div>
+   <header> <h1>Module 11 - Creating Interactivity with CSS and JavaScript</h1></header>
+  <nav>
+<div class="button-container">
+  <button class="button" onclick="showTextbox(`
+    <h2>Module Overview</h2>
+    <p>Most modern websites include some form of interactivity. Interactivity is commonly integrated within a website using CSS and JavaScript, a web programming language used to enhance a website and create interactivity. An effective way to create interesting and useful webpages is to include dynamic content to make the webpage interactive. One way to engage and interact with customers on a webpage is to use JavaScript code to display messages.</p><br>
+        <p>In this chapter, you will explore how to integrate animation on a webpage using CSS and JavaScript. You will learn how to use the CSS transform property to make elements move on a webpage. You will also use CSS to create an animation using keyframes. Next, you will learn how to create an external JavaScript file and write several functions. Finally, you will learn how to reference the external JavaScript file within an HTML webpage.</p><br>
+        <p>We will also be taking Test 3 this module which covers the material from the chapters 7, 8 and 9 of the book. The test consists of 25 multiple choice questions and has no time limit. There is only 1 attempt allowed. </p>
+      
+  `)">Module Overview</button>
 
+  <button class="button" onclick="showTextbox(`
+  <h2>Why It Matters</h2>
+    <p>Interactivity is a cornerstone of modern website design, enhancing user engagement and enriching the browsing experience. By leveraging CSS and JavaScript, web developers can infuse websites with dynamic content and interactive elements, fostering deeper connections with visitors. Incorporating animation adds visual interest and liveliness to webpages, capturing attention and encouraging exploration.</p><br>
+        <p>In this chapter, you'll discover techniques for integrating animation using CSS and JavaScript. You'll learn how to use CSS transform properties to animate webpage elements, creating captivating visual effects. Additionally, you'll explore CSS keyframes to craft complex animations with precise control. By creating external JavaScript files and writing functions, you'll enhance website interactivity and functionality, enabling seamless user interactions.</p><br>
+        <p>Mastering these techniques empowers you to create compelling and interactive web experiences that keep visitors engaged and entertained. Whether you're animating elements or adding dynamic functionality, CSS and JavaScript are powerful tools for elevating website design and delivering memorable user experiences.</p>
+   
+  `)">Why It Matters</button>
+
+  <button class="button" onclick="showTextbox(`
+    <h2>Module Activities</h2>
+    <ul>
+          <li>Test 3 - This test covers the material from chapters 7-9. Test questions may be in the form of fill in the blank, multiple answer, multiple choice, short answer and/or true/false.</li>
+                  <li>Chapter 10 Reading</li>
+          <li>Chapter 10 - Lab 2</li>
+          <li>C10 Extend Your Knowledge: Using jQuery</li>
+        </ul>
+  `)">Module Activities</button>
+
+  <button class="button" onclick="showTextbox(`
+<h2>Demonstrate Competency</h2>
+<ul>
+          <li>Use the CSS transform property</li>
+          <li>Create animations with CSS keyframes</li>
+          <li>Understand JavaScript</li>
+          <li>Describe JavaScript code</li>
+          <li>Understand and use the script element</li>
+          <li>Understand where JavaScript code may be written</li>
+          <li>Create an external JavaScript file</li>
+          <li>Create JavaScript functions</li>
+          <li>Understand events</li>
+          <li>Use an onclick event handler</li>
+        </ul>
+  `)">Demonstrate Competency</button>
+</div>
+
+  </nav></div>
+<main>
   <div class="image-container">
     <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124446_4" alt="" class="backback">
     <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124447_4" alt="" class="backfront">
@@ -296,7 +334,7 @@
     <button class="close-btn" onclick="hideTextbox()">✖</button>
     <p id="textboxContent">Content goes here.</p>
   </div>
-<main>
+</main>
  <script>
   function showTextbox(content) {
     const textbox = document.getElementById('infoTextbox');
