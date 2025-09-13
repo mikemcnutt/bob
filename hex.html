@@ -116,13 +116,12 @@
 @media (max-width: 520px) {
   .hex { font-size: clamp(8px, calc(var(--hex-w) * 0.108), 11px); }
 }
-/* keep the far-right hex inside on iPhone */
+
 :root { --edge-safe: 4px; }
 
-/* container query path */
+
 @supports (width: 1cqi) {
   .hex-bar{
-    /* container padding is already accounted for in your existing math; just subtract a tiny safety */
     --hex-w: clamp(64px, calc((100cqi - 48px - var(--edge-safe)) / 4), 94.7px);
     --hex-h: calc(var(--hex-w) / 1.1547);
     --dx:    calc(var(--hex-w) * 0.75);
@@ -130,7 +129,6 @@
   }
 }
 
-/* fallback path (iPhone WebView/Safari without container queries) */
 @supports not (width: 1cqi) {
   .hex-bar{
     width: 100%;
@@ -141,7 +139,6 @@
   }
 }
 
-/* clip any sub-pixel paint outside the border radius */
 .container { overflow: hidden; }
 
 
