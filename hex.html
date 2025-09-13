@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Content Module</title>
+<style>
+  :root{
+    --hex-h: 82px;
+    --hex-w: calc(var(--hex-h) * 1.1547);
+    --dx: calc(var(--hex-w) * 0.75);
+    --dy: calc(var(--hex-h) * 0.5);
+    --fold-angle: -150deg;
+    --flip-dur: .6s;
+    --join-nudge: -0.5px;
+    --fg: #ffffff;
+    --blue-1: #4da3ff;
+    --blue-2: #0a3d62;
+    --blue-3: #1f669e;
+    --shadow: 0 14px 36px rgba(0,0,0,.25);
+    --panel-pad: 16px;
+    --panel-bevel-1: #0b2a4a;
+    --panel-bevel-2: #00132a;
+    --hex-ratio: 1.1547;
+  }
+
+  body{height:800px;margin:0;background:#ffffff;color:#0b1320;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+
+  .container{
+    width:80%;max-width:900px;margin:18px auto;border:4px solid var(--panel-bevel-1);border-radius:20px;
+    padding:18px 14px 24px;box-shadow:0 8px 24px rgba(0,0,0,.12);position:relative;
+    background:
+      radial-gradient(1200px 800px at 10% -20%, rgba(77,163,255,0.12), transparent 60%),
+      radial-gradient(1000px 600px at 110% 120%, rgba(31,102,158,0.10), transparent 55%),
+      linear-gradient(#ffffff,#ffffff);
+    container-type:inline-size;
+  }
+  .container::after{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.06;border-radius:inherit;
+    background-image:repeating-linear-gradient(0deg, rgba(0,0,0,.5) 0 1px, transparent 1px 2px),
+                     repeating-linear-gradient(90deg, rgba(0,0,0,.5) 0 1px, transparent 1px 2px);
+    mix-blend-mode:multiply
+  }
+
+  .module-title{
+    margin:4px 0 10px;text-align:center;font-size:clamp(20px,2.4vw,28px);font-weight:700;color:#0b2a4a
+  }
+
+  @supports (width: 1cqi){
+    .hex-bar{
+      --hex-w: clamp(64px, calc((100cqi - 48px) / 4), 94.7px);
+      --hex-h: calc(var(--hex-w) / var(--hex-ratio));
+      --dx: calc(var(--hex-w) * 0.75);
+      --dy: calc(var(--hex-h) * 0.5);
+    }
+  }
+  @supports not (width: 1cqi){
+    .hex-bar{
+      --hex-w: clamp(64px, calc((min(100vw, 900px) - 48px) / 4), 94.7px);
+      --hex-h: calc(var(--hex-w) / var(--hex-ratio));
+      --dx: calc(var(--hex-w) * 0.75);
+      --dy: calc(var(--hex-h) * 0.5);
+    }
+  }
+
+  .hex-bar{position:relative;width:calc(var(--dx)*4 + var(--hex-w));height:calc(var(--hex-h) + var(--dy));margin:8px auto 18px;perspective:1200px}
+
+  .hex{
+    width:var(--hex-w);height:var(--hex-h);
+    clip-path:polygon(25% 0%,75% 0%,100% 50%,75% 100%,25% 100%,0% 50%);
+    display:grid;place-items:center;color:var(--fg);user-select:none;cursor:pointer;backface-visibility:hidden;
+    position:absolute;isolation:isolate;border:0;text-align:center;font-size:clamp(9px,calc(var(--hex-w) * 0.12),12px);line-height:1.15;padding:4px 8px;font-weight:650;white-space:normal;word-break:keep-all;z-index:1
+  }
+  .hex::before{content:"";position:absolute;inset:-4px;clip-path:inherit;background:linear-gradient(145deg,#ff3b3b,#800000);z-index:0;pointer-events:none}
+  .hex::after{content:"";position:absolute;inset:0;clip-path:inherit;background:inherit;z-index:1;pointer-events:none}
+  .hex > span{position:absolute;inset:0;display:grid;place-items:center;z-index:10;transform:translateZ(1px)}
+
+  .hex--1{background:linear-gradient(135deg,var(--blue-1),var(--blue-2));z-index:5;left:0;top:0}
+  .hex--2{background:linear-gradient(135deg,#4da3ff,#1f669e)}
+  .hex--3{background:linear-gradient(135deg,#3a9bdc,#174d80)}
+  .hex--4{background:linear-gradient(135deg,#2f7fbf,#123a66)}
+  .hex--5{background:linear-gradient(135deg,#1a4373,#0d2744)}
+
+  .hinge{position:absolute;width:var(--hex-w);height:var(--hex-h);transform-style:preserve-3d;backface-visibility:hidden;pointer-events:none;transition:transform var(--flip-dur) cubic-bezier(.2,.8,.2,1),opacity .2s ease;opacity:1}
+  .hex-bar:not(.expanded) .hinge{display:none;opacity:0}
+  .hex-bar.expanded .hinge{display:block;opacity:1}
+
+  .hinge--2{left:calc(var(--dx) + var(--join-nudge));top:var(--dy);transform-origin:12.5% 25%;transform:rotateZ(-30deg) rotateY(var(--fold-angle)) rotateZ(30deg)}
+  .hinge--3{left:calc(var(--dx)*2 + var(--join-nudge));top:0;transform-origin:12.5% 75%;transform:rotateZ(30deg) rotateY(var(--fold-angle)) rotateZ(-30deg)}
+  .hinge--4{left:calc(var(--dx)*3 + var(--join-nudge));top:var(--dy);transform-origin:12.5% 25%;transform:rotateZ(-30deg) rotateY(var(--fold-angle)) rotateZ(30deg)}
+  .hinge--5{left:calc(var(--dx)*4 + var(--join-nudge));top:0;transform-origin:12.5% 75%;transform:rotateZ(30deg) rotateY(var(--fold-angle)) rotateZ(-30deg)}
+
+  .hinge.open.hinge--2{transform:rotateZ(-30deg) rotateY(0deg) rotateZ(30deg)}
+  .hinge.open.hinge--3{transform:rotateZ(30deg) rotateY(0deg) rotateZ(-30deg)}
+  .hinge.open.hinge--4{transform:rotateZ(-30deg) rotateY(0deg) rotateZ(30deg)}
+  .hinge.open.hinge--5{transform:rotateZ(30deg) rotateY(0deg) rotateZ(-30deg)}
+
+  .hinge>.hex{position:absolute;left:0;top:0;pointer-events:auto}
+
+  .panel{
+    position:relative;margin:12px auto 0;padding:calc(var(--panel-pad) + 2px);width:100%;max-width:100%;min-height:160px;box-sizing:border-box;display:none;filter:drop-shadow(var(--shadow));
+    background:#ffffff;border-radius:12px;border:3px solid var(--panel-bevel-1);color:#000000
+  }
+  .panel.show{display:block}
+  .panel h2{margin:0 0 8px;font-size:clamp(16px,2.1vw,21px);color:#000}
+  .panel p,.panel li{color:#000;font-size:clamp(13px,1.7vw,16px);line-height:1.45;margin:0 0 8px}
+  .panel ul{margin:8px 0 0 18px;padding:0}
+  .panel-content{position:relative;border-radius:10px;padding:14px 16px;background:transparent;color:inherit}
+
+@supports (width: 1cqi) {
+  @container (max-width: 520px) {
+    .hex { font-size: clamp(8px, calc(var(--hex-w) * 0.108), 11px); }
+  }
+}
+
+@media (max-width: 520px) {
+  .hex { font-size: clamp(8px, calc(var(--hex-w) * 0.108), 11px); }
+}
+/* keep the far-right hex inside on iPhone */
+:root { --edge-safe: 4px; }
+
+/* container query path */
+@supports (width: 1cqi) {
+  .hex-bar{
+    /* container padding is already accounted for in your existing math; just subtract a tiny safety */
+    --hex-w: clamp(64px, calc((100cqi - 48px - var(--edge-safe)) / 4), 94.7px);
+    --hex-h: calc(var(--hex-w) / 1.1547);
+    --dx:    calc(var(--hex-w) * 0.75);
+    --dy:    calc(var(--hex-h) * 0.5);
+  }
+}
+
+/* fallback path (iPhone WebView/Safari without container queries) */
+@supports not (width: 1cqi) {
+  .hex-bar{
+    width: 100%;
+    --hex-w: clamp(64px, calc((100% - var(--edge-safe)) / 4), 94.7px);
+    --hex-h: calc(var(--hex-w) / 1.1547);
+    --dx:    calc(var(--hex-w) * 0.75);
+    --dy:    calc(var(--hex-h) * 0.5);
+  }
+}
+
+/* clip any sub-pixel paint outside the border radius */
+.container { overflow: hidden; }
+
+
+.container { --pad-x: 0px; }
+
+
+@supports (width: 1cqi) {
+  @container (max-width: 520px) {
+    .hex-bar{
+
+      transform: translateX(calc(-1 * var(--pad-x)));
+      --hex-w: calc((100cqi - (var(--pad-x) * 2)) / 4);
+      --hex-h: calc(var(--hex-w) / 1.1547);
+      --dx:    calc(var(--hex-w) * 0.75);
+      --dy:    calc(var(--hex-h) * 0.5);
+    }
+  }
+}
+
+@supports not (width: 1cqi) {
+  @media (max-width: 520px) {
+    .hex-bar{
+      width: 100%;
+    
+      transform: translateX(calc(-1 * var(--pad-x)));
+      --hex-w: calc((100% - (var(--pad-x) * 2)) / 4);
+      --hex-h: calc(var(--hex-w) / 1.1547);
+      --dx:    calc(var(--hex-w) * 0.75);
+      --dy:    calc(var(--hex-h) * 0.5);
+    }
+  }
+}
+
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="module-title">Sample Module Header</h1>
+
+    <div class="hex-bar" id="hexBar">
+      <button class="hex hex--1" id="hex1" type="button"><span>Module 4</span></button>
+      <div class="hinge hinge--2" id="hinge2"><button class="hex hex--2" id="hex2" type="button"><span>Module<br>Overview</span></button></div>
+      <div class="hinge hinge--3" id="hinge3"><button class="hex hex--3" id="hex3" type="button"><span>Why It Matters</span></button></div>
+      <div class="hinge hinge--4" id="hinge4"><button class="hex hex--4" id="hex4" type="button"><span>Module<br>Activities</span></button></div>
+      <div class="hinge hinge--5" id="hinge5"><button class="hex hex--5" id="hex5" type="button"><span>Demonstrate<br>Competency</span></button></div>
+    </div>
+
+    <section id="panel" class="panel" aria-hidden="true">
+      <div class="panel-content" id="panelContent"></div>
+    </section>
+  </div>
+
+<script>
+(function(){
+  const dur=600,gap=120;
+  const hexBar=document.getElementById('hexBar');
+  const hex1=document.getElementById('hex1');
+  const hinges=['hinge2','hinge3','hinge4','hinge5'].map(id=>document.getElementById(id));
+  const buttons=['hex2','hex3','hex4','hex5'].map(id=>document.getElementById(id));
+  const panel=document.getElementById('panel');
+  const content=document.getElementById('panelContent');
+
+  let expanded=false,animating=false;
+
+  function after(el,cb){
+    let done=false;
+    const t=setTimeout(()=>{if(!done){done=true;cb();}},dur+gap+120);
+    function onEnd(e){
+      if(e.propertyName!=='transform')return;
+      el.removeEventListener('transitionend',onEnd);
+      if(!done){done=true;clearTimeout(t);cb();}
+    }
+    el.addEventListener('transitionend',onEnd);
+  }
+
+  function openSeq(i=0){
+    if(i===0){hexBar.classList.add('expanded');hinges.forEach(h=>h.style.display='block');}
+    if(i>=hinges.length){animating=false;buttons.forEach(b=>b.tabIndex=0);buttons[0].focus();return;}
+    const h=hinges[i];
+    h.setAttribute('aria-hidden','false');
+    setTimeout(()=>{h.classList.add('open');after(h,()=>openSeq(i+1));},i*gap);
+  }
+
+  function closeSeq(i=hinges.length-1){
+    if(i<0){animating=false;buttons.forEach(b=>b.tabIndex=-1);hinges.forEach(h=>{h.setAttribute('aria-hidden','true');h.style.display='none';});hexBar.classList.remove('expanded');return;}
+    const h=hinges[i];
+    setTimeout(()=>{h.classList.remove('open');after(h,()=>closeSeq(i-1));},(hinges.length-1-i)*gap);
+  }
+
+  function expand(){if(expanded||animating)return;expanded=true;animating=true;openSeq(0);}
+  function collapse(){if(!expanded||animating)return;expanded=false;animating=true;closeSeq(hinges.length-1);}
+
+  hex1.addEventListener('click',()=>{if(animating)return;expanded?collapse():expand();});
+
+  const sections={
+    hex2:`<h2>Module Overview</h2><p>Welcome! This module introduces the core outcomes, weekly flow, and the skills you’ll demonstrate by the end.</p><ul><li>What you’ll learn and why it matters.</li><li>How activities build to your final competency check.</li><li>Helpful resources and tips for success.</li></ul>`,
+    hex3:`<h2>Why It Matters</h2><p>Understanding the “why” helps you connect concepts to real projects in web design and IT.</p><ul><li>See where these skills appear in industry workflows.</li><li>Map the module to course outcomes &amp; certifications.</li><li>Preview common pitfalls and how to avoid them.</li></ul>`,
+    hex4:`<h2>Module Activities</h2><p>Complete each step in order. Track your progress as you go:</p><ul><li>Read: short primer &amp; examples.</li><li>Practice: hands-on tasks in your code editor.</li><li>Discuss: share insights on the forum.</li><li>Apply: build a mini feature for the module project.</li></ul>`,
+    hex5:`<h2>Demonstrate Competency</h2><p>Show what you can do by completing the competency check:</p><ul><li>Criteria: clarity, accessibility, responsiveness, and correctness.</li><li>Submission: link to your page or repo with a short reflection.</li><li>Rubric: meets/exceeds standards for each outcome.</li></ul>`
+  };
+
+  function showPanel(){if(!panel.classList.contains('show')){panel.classList.add('show');panel.setAttribute('aria-hidden','false');}}
+
+  buttons.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const html=sections[btn.id];
+      if(html){content.innerHTML=html;showPanel();}
+    });
+  });
+})();
+</script>
+</body>
+</html>
