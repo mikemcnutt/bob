@@ -179,10 +179,11 @@
 </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container" role="main">
     <h1 class="module-title">Sample Module Header</h1>
 
-    <div class="hex-bar" id="hexBar">
+    <nav class="hex-bar" id="hexBar" aria-label="Module sections">
+
       <button class="hex hex--1" id="hex1" type="button"><span>Module 4</span></button>
       <div class="hinge hinge--2" id="hinge2"><button class="hex hex--2" id="hex2" type="button"><span>Module<br>Overview</span></button></div>
       <div class="hinge hinge--3" id="hinge3"><button class="hex hex--3" id="hex3" type="button"><span>Why It Matters</span></button></div>
@@ -190,7 +191,8 @@
       <div class="hinge hinge--5" id="hinge5"><button class="hex hex--5" id="hex5" type="button"><span>Demonstrate<br>Competency</span></button></div>
     </div>
 
-    <section id="panel" class="panel" aria-hidden="true">
+  <section id="panel" class="panel" role="region" aria-label="Module content" aria-hidden="true">
+
       <div class="panel-content" id="panelContent"></div>
     </section>
   </div>
