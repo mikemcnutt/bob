@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Course Module Page</title>
+<style>
+  :root{
+    --bg:#0a1020;
+    --text:#eaf1ff;
+    --muted:#c7d6ff;
+    --card:#16223c;
+    --card-edge:#2a3a60;
+    --chip:#73c8ff;
+    --chip-hover:#9ddcff;
+    --accent:#7fd1ff;
+    --accent-strong:#3bb2ff;
+    --shadow:0 12px 40px rgba(0,0,0,.55);
+  }
+
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,"Helvetica Neue",sans-serif;
+    line-height:1.65;
+    color:var(--text);
+    background-color:#0a0f1f;
+    background-image:
+      radial-gradient(700px 480px at 78% 8%, rgba(165,26,26,.55), transparent 60%),
+      radial-gradient(520px 320px at 50% 92%, rgba(255,198,69,.55), transparent 65%),
+      radial-gradient(1100px 800px at 15% 0%, rgba(14,27,62,.9), transparent 60%);
+    background-attachment:fixed;
+  }
+
+  .skip-link{
+    position:absolute;left:-9999px;top:0;
+    background:#ffd166;color:#111;border-radius:.5rem;
+    padding:.7rem 1rem;z-index:1000
+  }
+  .skip-link:focus{left:1rem;top:1rem;outline:3px solid #111}
+
+  .wrapper{max-width:1100px;margin:clamp(1rem,3vw,2.5rem) auto;padding:0 clamp(1rem,3.2vw,2rem)}
+
+  header[role="banner"]{
+    background:linear-gradient(180deg, rgba(20,32,60,.75), rgba(20,32,60,.55));
+    border:1px solid rgba(111,133,188,.28);
+    box-shadow:0 20px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.05);
+    backdrop-filter:saturate(110%) blur(2px);
+    border-radius:22px;
+    padding:clamp(1.25rem,3vw,2rem)
+  }
+  h1{
+    font-weight:800;
+    font-size:clamp(2rem,4vw,3rem);
+    line-height:1.15;
+    margin:0 0 .35rem 0;
+    letter-spacing:.01em
+  }
+  .subhead{color:var(--muted);font-size:clamp(1rem,2.2vw,1.1rem);margin:.2rem 0 0}
+
+  nav[aria-label="Section navigation"]{display:flex;flex-wrap:wrap;gap:.6rem;margin:1.1rem 0 0}
+  nav a{
+    display:inline-block;padding:.6rem 1rem;border-radius:999px;
+    border:1px solid rgba(111,133,188,.35);
+    background-color:var(--chip);
+    color:#0b2237;text-decoration:none;font-weight:800;letter-spacing:.02em
+  }
+  nav a:hover, nav a:focus{background-color:var(--chip-hover);outline:3px solid transparent}
+
+  main[role="main"]{
+    margin-top:clamp(1rem,2.5vw,1.75rem);
+    display:grid;grid-template-columns:1fr;gap:clamp(1rem,2.2vw,1.4rem)
+  }
+  @media (min-width:820px){main[role="main"]{grid-template-columns:1fr 1fr}}
+
+  section.card{
+    background:linear-gradient(180deg, rgba(26,38,70,1), rgba(22,34,60,1));
+    border:1px solid var(--card-edge);
+    border-radius:20px;
+    padding:clamp(1rem,2.2vw,1.6rem);
+    box-shadow:var(--shadow), inset 0 1px 0 rgba(255,255,255,.03);
+    position:relative;
+  }
+
+  h2{
+    font-size:clamp(1.25rem,2.4vw,1.6rem);
+    line-height:1.25;margin:0 0 .6rem 0;
+    display:flex;align-items:center;gap:.65rem;font-weight:800
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:2rem;height:2rem;border-radius:12px;
+    background:linear-gradient(135deg, var(--accent), var(--accent-strong));
+    color:#071522;font-weight:900;font-size:.95rem;border:2px solid rgba(0,0,0,.25);
+    box-shadow:0 6px 14px rgba(0,0,0,.35)
+  }
+
+  p{margin:.25rem 0 0}
+  :focus-visible{outline:3px solid #9ddcff;outline-offset:2px}
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+  @media (forced-colors: active){
+    nav a{border:1px solid CanvasText}
+    .eyebrow{border:2px solid CanvasText}
+  }
+
+@media (min-width:980px){
+  header[role="banner"] nav[aria-label="Section navigation"]{
+    display: none;
+  }
+}
+
+</style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <div class="wrapper">
+    <header role="banner" aria-labelledby="page-title">
+      <h1 id="page-title">Linux Installation and Usage and Exploring Linux Filesystems</h1>
+     
+ 
+    </header>
+
+    <main id="main" role="main">
+      <section id="module-overviews" class="card" aria-labelledby="h2-overviews">
+        <h2 id="h2-overviews">Module Overview</h2>
+                    <p>
+Chapter 2 explores the concepts and procedures needed to install a Fedora Linux system. The latter half of the chapter explains the various components you will use when interacting with the operating system as well as how to enter basic shell commands, obtain help, and properly shut down the Linux system.
+
+
+  </p><br>
+<p>An understanding of the structure and commands surrounding the Linux filesystem is essential for effectively using Linux to manipulate data. In the first part of Chapter 3, you explore the Linux filesystem hierarchy by changing your position in the filesystem tree and listing filenames of various types. Next, you examine the shell wildcard metacharacters used to specify multiple filenames as well as view the contents of files using standard Linux commands. You then learn about the regular expression metacharacters used when searching for text within files, and are introduced to the vi text editor and its equivalents.</p>
+      </section>
+
+      <section id="why-it-matters" class="card" aria-labelledby="h2-matters">
+        <h2 id="h2-matters">Why It Matters</h2>
+       <p>
+Understanding the installation and basic operation of Fedora Linux is crucial for proficiency in Linux-based systems. This chapter offers a comprehensive guide to installing Fedora Linux, covering key concepts and procedures essential for successful deployment. Learners gain practical insights into the installation process, from selecting appropriate options to configuring system settings, providing a foundational understanding for working with Linux environments. Additionally, the chapter explores essential components and procedures for interacting with Fedora Linux, including fundamental shell commands, obtaining assistance, and proper shutdown procedures, ensuring smooth operation and maintenance of Linux systems. Mastering these concepts lays the groundwork for proficiency in Fedora Linux administration, whether in enterprise environments or personal projects, facilitating success in the dynamic world of Linux computing.
+  </p><br>
+       <p>
+A solid grasp of the Linux filesystem structure and commands is fundamental for efficiently manipulating data within a Linux environment. This chapter delves into the Linux filesystem hierarchy, guiding learners through navigating and listing filenames of different types within the filesystem tree. Participants explore shell wildcard metacharacters, enabling the specification of multiple filenames, and learn to view file contents using standard Linux commands.</p>
+<br>
+<p>Moreover, you will gain insight into regular expression metacharacters for text search within files, expanding their capabilities for data manipulation and retrieval. Additionally, the introduction to the vi text editor and its equivalents equips you with essential tools for text editing and file management within the Linux environment. By mastering these concepts and commands, you will enhance your proficiency in Linux filesystem navigation and manipulation, empowering you to efficiently handle data tasks in diverse Linux computing environments.
+  </p>
+      </section>
+
+      <section id="module-activities" class="card" aria-labelledby="h2-activities">
+        <h2 id="h2-activities">Module Activities</h2>
+          <ul>
+
+<li>Read Chapters 2 & 3</li>
+ <li>Chapter 2 & 3 labs</li>
+<li>Quiz 2 & 3</li>
+  </ul>
+
+      </section>
+
+      <section id="demonstrate-competency" class="card" aria-labelledby="h2-competency">
+        <h2 id="h2-competency">Demonstrate Competency</h2>
+        <p>
+    By the end of this module, you should be able to:
+  </p>
+      <ul>
+     <li>Prepare for and install Fedora Linux using good practices</li>
+     <li>Outline the structure of the Linux interface</li>
+     <li>Enter basic shell commands and find command documentation</li>
+     <li>Properly shut down the Linux operating system</li>
+     <li>Understand and navigate the Linux directory structure using relative and absolute pathnames
+</li>
+     <li>Describe the various types of Linux files</li>
+     <li>View filenames and file types</li>
+     <li>Use shell wildcards to specify multiple filenames</li>
+     <li>Display the contents of text files and binary files</li>
+     <li>Search text files for regular expressions using grep</li>
+     <li>Use the vi editor to manipulate text files</li>
+     <li>Identify common alternatives to the vi text editors used today</li>
+     </ul>
+      </section>
+    </main>
+  </div>
+  <div><p>&nbsp;</p></div>
+</body>
+</html>
