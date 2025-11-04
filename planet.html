@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Module Overview</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Exo+2:wght@400;500;600&family=Rajdhani:wght@400;500;600&family=Titillium+Web:wght@400;600&family=Prompt:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#eaf1ff;
@@ -23,14 +23,20 @@
 html{scroll-behavior:smooth}
 body{
   margin:0 auto;background:var(--bg);color:var(--ink);
-  font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Arial,"Helvetica Neue";
+  font-family:'Exo 2', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Helvetica Neue";
+  font-size:16px;line-height:1.6;
   width:98%;
   padding-bottom:20px
 }
+body.font-exo2{font-family:'Exo 2', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Helvetica Neue"}
+body.font-rajdhani{font-family:'Rajdhani', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Helvetica Neue"}
+body.font-titillium{font-family:'Titillium Web', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Helvetica Neue"}
+body.font-prompt{font-family:'Prompt', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Helvetica Neue"}
 a{color:#8fd5ff;text-decoration:underline;text-underline-offset:3px}
 a:hover{color:#ccecff}
 :focus-visible{outline:3px solid var(--ring);outline-offset:4px}
-.wrapper{max-width:1100px;margin:clamp(14px,3vw,26px) auto;padding:0 clamp(14px,3vw,24px)}
+.wrapper{max-width:1100px;margin:clamp(14px,3vw,26px) auto;padding:0 clamp(14px,3vw,24px);transition:opacity .4s ease}
+.wrapper.fading{opacity:.85}
 .skip-link{
   position:absolute;left:-9999px;top:0;z-index:1000;
   background:#ffe27a;color:#111;border-radius:.5rem;padding:.6rem .9rem
@@ -39,36 +45,11 @@ a:hover{color:#ccecff}
 header[role="banner"]{
   position:relative;overflow:hidden;border-radius:22px;min-height:130px;
   color:#fff;text-align:left;padding:clamp(1.1rem,2.4vw,1.6rem);
-  background:
-    radial-gradient(700px 480px at 78% 8%, rgba(0,70,127,.28), transparent 60%),
-    radial-gradient(520px 320px at 50% 92%, rgba(59,179,229,.20), transparent 65%),
-    linear-gradient(180deg, rgba(14,22,40,.96), rgba(10,16,32,.92));
+  background:rgba(0,0,0,.05);
   border:1px solid rgba(107,208,255,.35);
   box-shadow:0 22px 44px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06)
 }
-header[role="banner"]::before{
-  content:"";
-  position:absolute;inset:0;border-radius:22px;pointer-events:none;
-  padding:3px;
-  background:
-    linear-gradient(135deg,rgba(180,210,235,.8),rgba(140,185,220,.55),rgba(120,170,235,.75)),
-    repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0 1px, rgba(255,255,255,0) 1px 3px),
-    radial-gradient(60% 140% at 20% 0%, rgba(255,255,255,.22), transparent 60%),
-    radial-gradient(80% 120% at 100% 100%, rgba(255,255,255,.12), transparent 70%);
-  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude;opacity:.65
-}
-header[role="banner"]::after{
-  content:"";
-  position:absolute;inset:10px;border-radius:16px;pointer-events:none;
-  box-shadow:
-    inset 0 0 0 1px rgba(42,63,100,.95),
-    inset 0 0 26px rgba(160,190,220,.10),
-    inset 0 0 60px rgba(255,255,255,.05);
-  background:
-    radial-gradient(120% 60% at 0% 0%, rgba(255,255,255,.06), transparent 60%),
-    radial-gradient(120% 60% at 100% 100%, rgba(255,255,255,.05), transparent 60%)
-}
+header[role="banner"]::before,header[role="banner"]::after{content:"";display:none}
 header .inner{position:relative;z-index:2}
 h1{
   margin:0;font-weight:800;letter-spacing:.02em;
@@ -96,6 +77,18 @@ h1{
   0%,100%{transform:translateZ(0);opacity:.92;filter:brightness(1)}
   50%{opacity:1;filter:brightness(1.06)}
 }
+.circuits{
+  position:absolute;inset:12px;border-radius:14px;pointer-events:none;z-index:2;
+  background:
+    repeating-linear-gradient(135deg, rgba(125,211,252,.12) 0 2px, rgba(125,211,252,0) 2px 8px),
+    radial-gradient(12px 12px at 10% 20%, rgba(125,211,252,.25), transparent 60%),
+    radial-gradient(10px 10px at 80% 70%, rgba(167,139,250,.22), transparent 60%);
+  opacity:.6;
+  mix-blend-mode:screen;
+  transition:opacity .4s ease
+}
+.header-circuits{display:none}
+body.lights-off .circuits{opacity:0}
 main{margin-top:clamp(16px,2.4vw,24px)}
 .grid{display:grid;gap:clamp(14px,2.2vw,22px);grid-template-columns:repeat(12,1fr)}
 .card{
@@ -107,8 +100,11 @@ main{margin-top:clamp(16px,2.4vw,24px)}
     0 26px 46px rgba(3,11,22,.35),
     0 8px 18px rgba(3,11,22,.25),
     inset 0 1px 0 rgba(255,255,255,.06),
-    inset 0 -1px 0 rgba(0,0,0,.35)
+    inset 0 -1px 0 rgba(0,0,0,.35);
+  opacity:0;transform:translateY(16px);
+  transition:opacity .6s ease, transform .6s ease
 }
+.card.visible{opacity:1;transform:translateY(0)}
 .card::before{
   content:"";
   position:absolute;inset:0;border-radius:18px;pointer-events:none;
@@ -152,9 +148,10 @@ h2{margin:0}
 ul{margin:.4rem 0 0 0;padding:0 0 0 1.1rem}
 ul li{margin:.35rem 0}
 .controls{
-  position:absolute; left:12px; bottom:12px; z-index:5; pointer-events:auto
+  position:absolute; left:12px; bottom:12px; z-index:5; pointer-events:auto;
+  display:flex; gap:.5rem; align-items:center
 }
-.lights-toggle{
+.lights-toggle,.font-toggle{
   display:inline-flex; align-items:center; gap:.55rem;
   border:1px solid rgba(125,211,252,.35);
   background:linear-gradient(180deg,#13243a,#0e1726);
@@ -174,12 +171,14 @@ body.lights-off .lcars .seg{opacity:0 !important; animation:none !important}
 @media (prefers-reduced-motion: reduce){
   .lcars .seg{animation:none !important}
   .lights-toggle [data-dot]{animation:none}
+  .card{opacity:1 !important;transform:none !important;transition:none !important}
+  .wrapper{transition:none}
 }
 </style>
 </head>
-<body>
+<body class="font-exo2">
 <a class="skip-link" href="#main">Skip to main content</a>
-<div class="wrapper">
+<div class="wrapper" id="wrap">
   <header role="banner" aria-labelledby="page-title">
     <div class="inner">
       <h1 id="page-title">Week 1</h1>
@@ -189,6 +188,7 @@ body.lights-off .lcars .seg{opacity:0 !important; animation:none !important}
         <span aria-hidden="true" data-dot></span>
         <span id="lights-toggle-label" aria-live="polite">Lights: On</span>
       </button>
+      <button id="font-toggle" class="font-toggle" type="button" aria-pressed="false" aria-label="Toggle body font"><span id="font-toggle-label">Font: Exo 2</span></button>
     </div>
     <div class="lcars" aria-hidden="true">
       <div class="group">
@@ -198,6 +198,7 @@ body.lights-off .lcars .seg{opacity:0 !important; animation:none !important}
       </div>
       <div class="group"></div>
     </div>
+    <div class="circuits header-circuits" aria-hidden="true"></div>
     <svg class="stars" viewBox="0 0 1100 220" preserveAspectRatio="none" aria-hidden="true">
       <defs>
         <radialGradient id="gStar" cx="50%" cy="50%" r="50%">
@@ -252,8 +253,9 @@ body.lights-off .lcars .seg{opacity:0 !important; animation:none !important}
           <div class="group"><span class="seg a"></span><span class="seg b"></span></div>
           <div class="group"><span class="seg c"></span><span class="seg b"></span></div>
         </div>
+        <div class="circuits" aria-hidden="true"></div>
         <span class="kicker" id="overview-h" role="heading" aria-level="2">Module Overview</span>
-        <p>What makes a good design for a website? For a business a website is often the first impression a customer has for that business. There are a lot of factors that are involved in design. For this assignment we will consider color theory and design.</p>
+        <p>What makes a good design for a website? For a business a website is often the first impression s customer has for that business. There are a lot of factors that are involved in design. For this assignment we will consider color theory and design.</p>
       </section>
 
       <section class="card" aria-labelledby="matters-h">
@@ -261,6 +263,7 @@ body.lights-off .lcars .seg{opacity:0 !important; animation:none !important}
           <div class="group"><span class="seg a"></span><span class="seg b"></span></div>
           <div class="group"><span class="seg c"></span><span class="seg b"></span></div>
         </div>
+        <div class="circuits" aria-hidden="true"></div>
         <span class="kicker" id="matters-h" role="heading" aria-level="2">Why It Matters</span>
         <p>In today's digital age, a business's website often serves as the first point of contact for potential customers. Effective website design builds credibility and trust, making a strong first impression and encouraging users to explore further. Good design is more than just aesthetics; it enhances functionality, user experience, and brand consistency. A well-designed site with a thoughtful layout, clear navigation, and strategic use of color and typography ensures visitors can find information easily and feel confident in the business's professionalism.</p>
         <p>Color theory is crucial in web design, as colors evoke emotions, influence perceptions, and drive actions. For instance, blue often conveys trust, while red can create a sense of urgency. Understanding and applying color theory helps create a cohesive and compelling visual experience that aligns with the brand's message. By focusing on these design principles, you'll learn to create websites that not only look appealing but also deliver exceptional user experiences and drive engagement and conversions.</p>
@@ -271,6 +274,7 @@ body.lights-off .lcars .seg{opacity:0 !important; animation:none !important}
           <div class="group"><span class="seg a"></span><span class="seg b"></span></div>
           <div class="group"><span class="seg c"></span><span class="seg b"></span></div>
         </div>
+        <div class="circuits" aria-hidden="true"></div>
         <span class="kicker" id="activities-h" role="heading" aria-level="2">Module Activities</span>
         <ul>
           <li>Syllabus Quiz</li>
@@ -283,6 +287,7 @@ body.lights-off .lcars .seg{opacity:0 !important; animation:none !important}
           <div class="group"><span class="seg a"></span><span class="seg b"></span></div>
           <div class="group"><span class="seg c"></span><span class="seg b"></span></div>
         </div>
+        <div class="circuits" aria-hidden="true"></div>
         <span class="kicker" id="competency-h" role="heading" aria-level="2">Demonstrate Competency</span>
         <ul>
           <li>Demonstrate an understanding of color theory in web design</li>
@@ -297,6 +302,7 @@ body.lights-off .lcars .seg{opacity:0 !important; animation:none !important}
           <div class="group"><span class="seg a"></span><span class="seg b"></span></div>
           <div class="group"><span class="seg c"></span><span class="seg b"></span></div>
         </div>
+        <div class="circuits" aria-hidden="true"></div>
         <span class="kicker" id="resources-h" role="heading" aria-level="2">Resources</span>
         <ul>
           <li><a href="https://www.feelingpeaky.com/9-principles-of-good-web-design/" target="_blank">9 Principles of Good Web Design</a></li>
@@ -331,6 +337,54 @@ body.lights-off .lcars .seg{opacity:0 !important; animation:none !important}
       const enabled=btn.getAttribute('aria-pressed')!=='true';
       setState(enabled)
     })
+  }
+})();
+(function(){
+  if(!('IntersectionObserver'in window)) {
+    document.querySelectorAll('.card').forEach(function(c){c.classList.add('visible')});
+    return;
+  }
+  const io=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target);}
+    })
+  },{root:null,rootMargin:'0px 0px -10% 0px',threshold:0.1});
+  document.querySelectorAll('.card').forEach(function(card){io.observe(card)});
+})();
+(function(){
+  const wrap=document.getElementById('wrap');
+  const FONT_KEY='fontPref';
+  const btn=document.getElementById('font-toggle');
+  const label=document.getElementById('font-toggle-label');
+  const order=['Exo 2','Rajdhani','Titillium Web','Prompt'];
+  function applyFont(name){
+    document.body.classList.remove('font-exo2','font-rajdhani','font-titillium','font-prompt');
+    if(name==='Exo 2') document.body.classList.add('font-exo2');
+    if(name==='Rajdhani') document.body.classList.add('font-rajdhani');
+    if(name==='Titillium Web') document.body.classList.add('font-titillium');
+    if(name==='Prompt') document.body.classList.add('font-prompt');
+    if(label) label.textContent='Font: '+name;
+    if(btn) btn.setAttribute('aria-pressed',String(name!=='Exo 2'));
+  }
+  function fadeThen(fn){
+    if(!wrap) return fn();
+    wrap.classList.add('fading');
+    setTimeout(function(){ fn(); setTimeout(function(){wrap.classList.remove('fading')},180); },180);
+  }
+  let saved='Exo 2';
+  try{ saved = localStorage.getItem(FONT_KEY) || 'Exo 2'; }catch(e){}
+  if(order.indexOf(saved)===-1) saved='Exo 2';
+  applyFont(saved);
+  if(btn){
+    btn.addEventListener('click',function(){
+      const current=label?label.textContent.replace('Font: ',''):'Exo 2';
+      const idx=order.indexOf(current);
+      const next=order[(idx+1)%order.length]||'Exo 2';
+      fadeThen(function(){
+        applyFont(next);
+        try{localStorage.setItem(FONT_KEY,next)}catch(e){}
+      });
+    });
   }
 })();
 (function(){
