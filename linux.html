@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Linux Module Overview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #020617;
+      --accent: #22c55e;
+      --accent-soft: #4ade80;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #0f172a;
+      --focus: #f97316;
+      --radius-lg: 1.25rem;
+      --shadow-lg: 0 18px 45px rgba(0,0,0,0.7);
+      --max-width: 1040px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #1e293b 0, transparent 55%),
+        radial-gradient(circle at bottom right, #16a34a 0, transparent 60%),
+        radial-gradient(circle at top right, #0f172a 0, transparent 55%),
+        #020617;
+      display: flex;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .shell {
+      width: 99%;
+      max-width: var(--max-width);
+      background: rgba(15, 23, 42, 0.9);
+      border-radius: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      border-bottom: 1px solid rgba(148, 163, 184, 0.45);
+      background: linear-gradient(90deg, rgba(15,23,42,0.94), rgba(15,23,42,0.9));
+      padding: 0.9rem 1.5rem 0.85rem;
+    }
+
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .title-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .prompt-badge {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #bbf7d0, #16a34a);
+      box-shadow: 0 0 12px rgba(22, 163, 74, 0.9);
+    }
+
+    .title-text h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .title-text p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .meta-badges {
+      display: flex;
+      gap: 0.4rem;
+    }
+
+    .meta-pill {
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+      border: 1px solid rgba(148,163,184,0.45);
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .meta-pill.online {
+      border-color: var(--accent-soft);
+      color: var(--accent-soft);
+    }
+
+    .nav-bar {
+      border-bottom: 1px solid rgba(71, 85, 105, 0.8);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.95), rgba(15,23,42,0.92));
+      padding: 0.85rem 0.75rem;
+    }
+
+    nav[aria-label="Module sections"] {
+      display: flex;
+      gap: 0.6rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      overflow-x: auto;
+      scrollbar-width: thin;
+    }
+
+    .nav-link {
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      padding: 0.55rem 1rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      background: rgba(15,23,42,0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      white-space: nowrap;
+      text-decoration: none;
+      transition: background 0.18s, color 0.18s, border-color 0.18s, box-shadow 0.18s;
+    }
+
+    .nav-link .key {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.75rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.5rem;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.7);
+      color: var(--accent-soft);
+    }
+
+    .nav-link:hover {
+      background: rgba(15,23,42,1);
+      color: var(--text);
+      border-color: var(--accent-soft);
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.7);
+    }
+
+    .nav-link.active {
+      border-color: var(--accent);
+      color: var(--accent-soft);
+      box-shadow: 0 0 0 1px rgba(34,197,94,0.6);
+    }
+
+    main {
+      padding: 1.5rem 1.4rem 1.75rem;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.98), rgba(15,23,42,0.95));
+    }
+
+    .content-inner {
+      display: grid;
+      grid-template-columns: 1.6fr 1.15fr;
+      gap: 1.4rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .terminal-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148,163,184,0.6);
+      background: radial-gradient(circle at top left, rgba(15,23,42,1), rgba(15,23,42,0.97));
+      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.45rem 0.9rem;
+      background: linear-gradient(90deg, rgba(15,23,42,1), rgba(30,64,175,0.7));
+      border-bottom: 1px solid rgba(30, 64, 175, 0.7);
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 0.3rem;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(15,23,42,0.9);
+    }
+
+    .red {
+      background: #f97373;
+    }
+
+    .yellow {
+      background: #fbbf24;
+    }
+
+    .green {
+      background: #22c55e;
+    }
+
+    .terminal-title {
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.8rem;
+    }
+
+    .terminal-body {
+      padding: 1rem 1.1rem;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.92rem;
+      line-height: 1.5;
+      background:
+        repeating-linear-gradient(
+          to bottom,
+          rgba(15,23,42,1) 0,
+          rgba(15,23,42,1) 22px,
+          rgba(15,23,42,0.94) 22px,
+          rgba(15,23,42,0.94) 23px
+        );
+    }
+
+    .prompt-line {
+      display: flex;
+      align-items: baseline;
+      padding-left: 0.2rem;
+      font: inherit;
+      color: var(--accent-soft);
+    }
+
+    .prompt-path {
+      color: #38bdf8;
+    }
+
+    .prompt-branch {
+      color: #facc15;
+    }
+
+    .command-line {
+      margin-top: 0.35rem;
+    }
+
+    .command-line strong {
+      color: var(--accent-soft);
+      font-weight: 500;
+    }
+
+    .terminal-body p {
+      margin: 0.75rem 0 0;
+      color: #d1d5db;
+    }
+
+    .terminal-body ul {
+      margin: 0.6rem 0 0.4rem 1.1rem;
+      padding: 0;
+    }
+
+    .terminal-body li {
+      margin: 0.25rem 0;
+      color: #cbd5f5;
+    }
+
+    .terminal-body p + .prompt-line {
+      margin-top: 0.75rem;
+    }
+
+    .terminal-input {
+      flex: 1;
+      min-width: 4ch;
+      font: inherit;
+      color: inherit;
+      background: transparent;
+      border: none;
+      outline: none;
+      margin-left: 0.3rem;
+      white-space: nowrap;
+      overflow: hidden;
+      caret-color: var(--accent-soft);
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 0.6ch;
+      height: 1em;
+      margin-left: 0.08rem;
+      margin-right: 0.15rem;
+      background: var(--accent-soft);
+      opacity: 1;
+    }
+    .help-block {
+      margin-top: 0.5rem;
+      padding-left: 0.2rem;
+      color: #e5e7eb;
+      font-size: 0.9rem;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .cursor {
+        animation: blink 1s steps(2, start) infinite;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor {
+        animation: none;
+      }
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+
+    .error-line {
+      margin-top: 0.5rem;
+      padding-left: 0.2rem;
+      color: #f97373;
+    }
+
+    .error-hint {
+      padding-left: 0.2rem;
+      color: #fca5a5;
+      font-size: 0.9rem;
+    }
+
+    .section-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .section-card {
+      border-radius: 1rem;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.98), rgba(15,23,42,0.96));
+      padding: 0.9rem 1rem 1rem;
+      box-shadow: 0 14px 30px rgba(0,0,0,0.7);
+    }
+
+    .active-card {
+      border-color: var(--accent-soft);
+      box-shadow: 0 0 0 1px rgba(34,197,94,0.6), 0 14px 30px rgba(0,0,0,0.7);
+    }
+
+    .section-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+      margin: 0 0 0.15rem;
+    }
+
+    .section-card h2 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+    }
+
+    .section-tagline {
+      margin: 0 0 0.7rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .section-card p {
+      margin: 0 0 0.4rem;
+      font-size: 0.9rem;
+    }
+
+    .section-card ul {
+      margin: 0.35rem 0 0.1rem 1.1rem;
+      padding: 0;
+      font-size: 0.9rem;
+    }
+
+    .section-card li {
+      margin-bottom: 0.25rem;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      margin-top: 0.55rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.8);
+      color: var(--muted);
+      background: rgba(15,23,42,0.9);
+    }
+
+    .badge-accent {
+      color: var(--accent-soft);
+      border-color: var(--accent-soft);
+    }
+
+    .outcomes-list li::marker {
+      color: var(--accent-soft);
+    }
+
+    #man {
+      margin-top: 1rem;
+    }
+
+    .tux-card {
+      margin-top: 1rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(148,163,184,0.7);
+      background: radial-gradient(circle at top left, rgba(15,23,42,1), rgba(15,23,42,0.97));
+      padding: 0.9rem 1rem 1.1rem;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.85);
+      text-align: center;
+    }
+
+    .tux-sticker {
+      position: relative;
+      display: inline-flex;
+      padding: 0.75rem;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0, rgba(248,250,252,0.95), rgba(148,163,184,0.3));
+      box-shadow:
+        0 10px 22px rgba(0,0,0,0.75),
+        0 0 0 1px rgba(148,163,184,0.7),
+        0 0 0 3px rgba(15,23,42,0.9) inset;
+    }
+
+    .tux-sticker img {
+      display: block;
+      max-width: 140px;
+      height: auto;
+    }
+
+    .tux-caption {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .tux-caption span {
+      color: var(--accent-soft);
+      font-weight: 600;
+    }
+
+    a {
+      color: #38bdf8;
+      text-decoration: underline;
+    }
+
+    a:hover {
+      color: #e5e7eb;
+    }
+
+    .nav-link {
+      text-decoration: none !important;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 800px) {
+      body {
+        padding: 0.75rem;
+      }
+
+      .content-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .tux-card {
+        display: none;
+      }
+
+      nav[aria-label="Module sections"] {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-link {
+        padding: 0.4rem 0.75rem;
+        box-shadow: none;
+        justify-content: flex-start;
+      }
+
+      .nav-link:hover {
+        box-shadow: none;
+      }
+
+      header {
+        padding-inline: 1rem;
+      }
+
+      main {
+        padding-inline: 1rem;
+      }
+
+      .title-text h1,
+      .title-text p {
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div class="header-inner">
+        <div class="title-group">
+          <div class="prompt-badge"></div>
+          <div class="title-text">
+            <h1>Linux Essentials — Module Overview</h1>
+            <p>CIT 227 · Week 3 · Working in the Shell &amp; Managing Files</p>
+          </div>
+        </div>
+        <div class="meta-badges">
+          <div class="meta-pill online">
+            <span>Mode:</span>
+            <strong>Online</strong>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="nav-bar">
+      <nav aria-label="Module sections">
+        <a class="nav-link active" href="#overview"><span class="key">1</span><span>Module Overview</span></a>
+        <a class="nav-link" href="#why-it-matters"><span class="key">2</span><span>Why It Matters</span></a>
+        <a class="nav-link" href="#activities"><span class="key">3</span><span>Module Activities</span></a>
+        <a class="nav-link" href="#competency"><span class="key">4</span><span>Demonstrate Competency</span></a>
+      </nav>
+    </div>
+
+    <main id="main-content">
+      <div class="content-inner">
+        <div>
+          <section id="overview" class="terminal-card">
+            <div class="terminal-header">
+              <div class="window-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+              </div>
+              <div class="terminal-title">student@linux-lab: ~/modules/module-03</div>
+              <div>●</div>
+            </div>
+            <div class="terminal-body">
+              <div class="prompt-line">
+                student@linux-lab:<span class="prompt-path">~/CIT227</span>
+                (<span class="prompt-branch">module-03</span>)$ cat overview.txt
+              </div>
+              <div class="command-line"><strong>MODULE 3:</strong> Working in the Shell &amp; Managing Files</div>
+              <p>
+In the previous chapter, you learned about navigating the Linux filesystem as well as viewing and editing files. This chapter focuses on the organization of files on the Linux filesystem as well as their linking and security. First, you explore standard Linux directories using the Filesystem Hierarchy Standard. Next, you explore common commands used to manage files and directories as well as learn methods that are used to find files and directories on the filesystems. Finally, you learn about file and directory linking, permissions, special permissions, and attributes.
+              </p>
+              <br>
+              <div class="prompt-line">
+                student@linux-lab:<span class="prompt-path">~/CIT227</span>
+                (<span class="prompt-branch">module-03</span>)$
+                <span class="cursor" aria-hidden="true"></span>
+                <input type="text" class="terminal-input" aria-label="Type a module command such as ./overview, ./matters, ./activities, ./competency, or ./help">
+              </div>
+            </div>
+          </section>
+
+          <section id="man" class="section-card">
+            <p class="section-eyebrow">man module-03</p>
+            <h2>Module Command Reference</h2>
+            <p class="section-tagline">
+Type these commands at the prompt in the terminal above, then press Enter.
+            </p>
+            <ul>
+              <li><strong>./overview</strong> – Jump to the Module Overview terminal.</li>
+              <li><strong>./matters</strong> – Jump to the Why It Matters section.</li>
+              <li><strong>./activities</strong> – Jump to the Module Activities section.</li>
+              <li><strong>./competency</strong> – Jump to the Demonstrate Competency section.</li>
+              <li><strong>./help</strong> – Show this command reference.</li>
+              <li><strong>./man</strong> – Alias for ./help.</li>
+            </ul>
+          </section>
+
+          <section class="tux-card">
+            <div class="tux-sticker">
+              <img src="https://elearning.kctcs.edu/bbcswebdav/xid-476668139_4" alt="Tux, the Linux penguin mascot" />
+            </div>
+            <p class="tux-caption">
+              Something insightful here.
+            </p>
+          </section>
+        </div>
+
+        <div class="section-grid">
+          <section id="why-it-matters" class="section-card">
+            <p class="section-eyebrow">Why It Matters</p>
+            <h2>Why These Concepts Matter</h2>
+            <p>
+Building upon the foundational knowledge acquired in the previous chapter, this chapter delves deeper into the organization, management, and security of files within the Linux filesystem. You will gain a comprehensive understanding of file organization using the Filesystem Hierarchy Standard, exploring standard Linux directories and their significance.
+            </p>
+            <p>
+Through the exploration of common commands for managing files and directories, you will acquire practical skills for efficient file manipulation and navigation. Additionally, methods for locating files and directories on filesystems will be introduced, enhancing your ability to retrieve and manage data effectively.
+            </p>
+            <p>
+Furthermore, you will delve into file and directory linking, permissions, special permissions, and attributes, crucial aspects of file security and access control within Linux environments. By mastering these concepts and techniques, you will strengthen your ability to organize, manage, and secure files effectively, essential skills for navigating and operating within Linux computing environments.
+            </p>
+            <div class="badge-row">
+              <span class="badge badge-accent">Career: System Administrator</span>
+              <span class="badge">Career: Support Technician</span>
+              <span class="badge">Career: Cloud / DevOps</span>
+            </div>
+          </section>
+
+          <section id="activities" class="section-card">
+            <p class="section-eyebrow">Module Activities</p>
+            <h2>What You Will Do This Week</h2>
+            <p class="section-tagline">
+              Complete the activities below in order. Due dates are listed in the Weekly Schedule.
+            </p>
+            <ul>
+              <li>Test 1</li>
+              <li>Now What? Discussion Board</li>
+              <li>Read Chapter 4</li>
+              <li>Chapter 4 labs</li>
+              <li>Quiz 4</li>
+            </ul>
+            <div class="badge-row">
+              <span class="badge">Mix of reading, video, hands-on practice, quizzes and a test</span>
+            </div>
+          </section>
+
+          <section id="competency" class="section-card">
+            <p class="section-eyebrow">Demonstrate Competency</p>
+            <h2>How You Will Show Your Learning</h2>
+            <p class="section-tagline">
+By the end of this module, you should be able to:
+            </p>
+            <ul class="outcomes-list">
+              <li>Find files and directories on the filesystem</li>
+              <li>Understand and create linked files</li>
+              <li>Use standard Linux commands to manage files and directories</li>
+              <li>Modify file and directory ownership</li>
+              <li>Define and change Linux file and directory permissions</li>
+              <li>Identify the default permissions created on files and directories</li>
+              <li>Apply special file and directory permissions</li>
+              <li>Modify the default access control list (ACL)</li>
+              <li>View and set filesystem attributes</li>
+            </ul>
+            <div class="badge-row">
+              <span class="badge badge-accent">Graded work listed in Blackboard Grade Center</span>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var links = document.querySelectorAll('nav[aria-label="Module sections"] .nav-link');
+      var sectionCommands = {
+        "./overview": "overview",
+        "./matters": "why-it-matters",
+        "./activities": "activities",
+        "./competency": "competency",
+        "./man": "man",
+        "./help": "man"
+      };
+
+      function highlightCards(id) {
+        var ids = ["overview", "why-it-matters", "activities", "competency"];
+        ids.forEach(function (cardId) {
+          var card = document.getElementById(cardId);
+          if (!card) return;
+          if (cardId === id) {
+            card.classList.add("active-card");
+          } else {
+            card.classList.remove("active-card");
+          }
+        });
+      }
+
+      function activateSection(id) {
+        links.forEach(function (l) { l.classList.remove("active"); });
+        var navLink = document.querySelector('.nav-link[href="#' + id + '"]');
+        if (navLink) {
+          navLink.classList.add("active");
+        }
+        highlightCards(id);
+      }
+
+      function showError(cmd) {
+        var body = document.querySelector("#overview .terminal-body");
+        if (!body) return;
+        var errorLine = document.createElement("div");
+        errorLine.className = "error-line";
+        errorLine.textContent = "bash: " + cmd + ": command not found";
+        var hint = document.createElement("div");
+        hint.className = "error-hint";
+        hint.textContent = "Type ./help for a list of available commands.";
+        body.appendChild(errorLine);
+        body.appendChild(hint);
+      }
+
+function showHelp() {
+  var body = document.querySelector("#overview .terminal-body");
+  if (!body) return;
+
+  var oldHelps = body.querySelectorAll(".help-block");
+  oldHelps.forEach(function (el) { el.remove(); });
+
+  var help = document.createElement("div");
+  help.className = "help-block";
+  help.innerHTML =
+    "Available commands:<br>" +
+    "./overview - Module Overview<br>" +
+    "./matters - Why It Matters<br>" +
+    "./activities - Module Activities<br>" +
+    "./competency - Demonstrate Competency<br>" +
+    "./help - Show this help";
+  body.appendChild(help);
+}
+
+
+      links.forEach(function (link) {
+        link.addEventListener("click", function () {
+          var targetId = this.getAttribute("href").slice(1);
+          activateSection(targetId);
+        });
+      });
+
+      var input = document.querySelector(".terminal-input");
+      var cursor = document.querySelector(".cursor");
+
+      if (input) {
+        input.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            var cmd = input.value.trim();
+            if (!cmd) {
+              return;
+            }
+
+            if (cmd === "./help" || cmd === "./man") {
+              showHelp();
+              activateSection("man");
+              var manSection = document.getElementById("man");
+              if (manSection) {
+                manSection.scrollIntoView({ behavior: "smooth", block: "start" });
+              }
+            } else {
+              var targetId = sectionCommands[cmd];
+              if (targetId) {
+                activateSection(targetId);
+                var section = document.getElementById(targetId);
+                if (section) {
+                  section.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              } else {
+                showError(cmd);
+              }
+            }
+
+            input.value = "";
+          }
+        });
+
+        input.addEventListener("focus", function () {
+          if (cursor) {
+            cursor.style.display = "none";
+          }
+        });
+
+        input.addEventListener("blur", function () {
+          if (cursor) {
+            cursor.style.display = "inline-block";
+          }
+        });
+      }
+
+      activateSection("overview");
+    });
+  </script>
+
+</body>
+</html>
