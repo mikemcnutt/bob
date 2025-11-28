@@ -33,27 +33,28 @@
       min-height: 100vh;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at top left, #1e293b 0, transparent 55%),
-        radial-gradient(circle at bottom right, #16a34a 0, transparent 60%),
-        radial-gradient(circle at top right, #0f172a 0, transparent 55%),
-        #020617;
+    
       display: flex;
       justify-content: center;
       padding: 1.5rem;
     }
 
-    .shell {
-      width: 99%;
-      max-width: var(--max-width);
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 1.5rem;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      box-shadow: var(--shadow-lg);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
+.shell {
+  width: 99%;
+  max-width: var(--max-width);
+  background:
+    radial-gradient(circle at 20% 15%, rgba(52, 211, 153, 0.55), transparent 65%),
+    radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.40), transparent 75%),
+    linear-gradient(180deg, #0f172a, #020617);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+ 
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+
 
     header {
       border-bottom: 1px solid rgba(148, 163, 184, 0.45);
@@ -248,11 +249,14 @@
     }
 
     .prompt-line {
-      display: flex;
-      align-items: baseline;
       padding-left: 0.2rem;
       font: inherit;
       color: var(--accent-soft);
+    }
+
+    .prompt-line.interactive {
+      display: flex;
+      align-items: baseline;
     }
 
     .prompt-path {
@@ -314,12 +318,6 @@
       background: var(--accent-soft);
       opacity: 1;
     }
-    .help-block {
-      margin-top: 0.5rem;
-      padding-left: 0.2rem;
-      color: #e5e7eb;
-      font-size: 0.9rem;
-    }
 
     @media (prefers-reduced-motion: no-preference) {
       .cursor {
@@ -347,6 +345,13 @@
     .error-hint {
       padding-left: 0.2rem;
       color: #fca5a5;
+      font-size: 0.9rem;
+    }
+
+    .help-block {
+      margin-top: 0.5rem;
+      padding-left: 0.2rem;
+      color: #e5e7eb;
       font-size: 0.9rem;
     }
 
@@ -500,6 +505,10 @@
         display: none;
       }
 
+      #man {
+        display: none;
+      }
+
       nav[aria-label="Module sections"] {
         flex-direction: column;
         align-items: stretch;
@@ -528,6 +537,14 @@
         white-space: normal;
         overflow: visible;
         text-overflow: clip;
+      }
+
+      .prompt-line.interactive {
+        display: none !important;
+      }
+
+      #overview .terminal-body {
+        overflow-x: auto;
       }
     }
   </style>
@@ -584,7 +601,7 @@
 In the previous chapter, you learned about navigating the Linux filesystem as well as viewing and editing files. This chapter focuses on the organization of files on the Linux filesystem as well as their linking and security. First, you explore standard Linux directories using the Filesystem Hierarchy Standard. Next, you explore common commands used to manage files and directories as well as learn methods that are used to find files and directories on the filesystems. Finally, you learn about file and directory linking, permissions, special permissions, and attributes.
               </p>
               <br>
-              <div class="prompt-line">
+              <div class="prompt-line interactive">
                 student@linux-lab:<span class="prompt-path">~/CIT227</span>
                 (<span class="prompt-branch">module-03</span>)$
                 <span class="cursor" aria-hidden="true"></span>
@@ -683,7 +700,7 @@ By the end of this module, you should be able to:
     </main>
   </div>
 
-    <script>
+  <script>
     document.addEventListener("DOMContentLoaded", function () {
       var links = document.querySelectorAll('nav[aria-label="Module sections"] .nav-link');
       var sectionCommands = {
@@ -730,30 +747,34 @@ By the end of this module, you should be able to:
         body.appendChild(hint);
       }
 
-function showHelp() {
-  var body = document.querySelector("#overview .terminal-body");
-  if (!body) return;
+      function showHelp() {
+        var body = document.querySelector("#overview .terminal-body");
+        if (!body) return;
 
-  var oldHelps = body.querySelectorAll(".help-block");
-  oldHelps.forEach(function (el) { el.remove(); });
+        var oldHelps = body.querySelectorAll(".help-block");
+        oldHelps.forEach(function (el) { el.remove(); });
 
-  var help = document.createElement("div");
-  help.className = "help-block";
-  help.innerHTML =
-    "Available commands:<br>" +
-    "./overview - Module Overview<br>" +
-    "./matters - Why It Matters<br>" +
-    "./activities - Module Activities<br>" +
-    "./competency - Demonstrate Competency<br>" +
-    "./help - Show this help";
-  body.appendChild(help);
-}
-
+        var help = document.createElement("div");
+        help.className = "help-block";
+        help.innerHTML =
+          "Available commands:<br>" +
+          "./overview - Module Overview<br>" +
+          "./matters - Why It Matters<br>" +
+          "./activities - Module Activities<br>" +
+          "./competency - Demonstrate Competency<br>" +
+          "./help - Show this help";
+        body.appendChild(help);
+      }
 
       links.forEach(function (link) {
-        link.addEventListener("click", function () {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
           var targetId = this.getAttribute("href").slice(1);
           activateSection(targetId);
+          var section = document.getElementById(targetId);
+          if (section) {
+            section.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
         });
       });
 
@@ -808,6 +829,5 @@ function showHelp() {
       activateSection("overview");
     });
   </script>
-
 </body>
 </html>
