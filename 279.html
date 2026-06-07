@@ -1,0 +1,881 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Week 2 – AZ-801 Module Overview Dashboard</title>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<style>
+    :root{
+      --bg:#020617;
+      --tile:#020617;
+      --border:#1f2937;
+      --accent:#3b82f6;
+      --accent-soft:#60a5fa;
+      --accent-muted:#1d4ed8;
+      --text:#f9fafb;
+      --text-muted:#e5e7eb;
+      --radius-lg:16px;
+      --radius-md:12px;
+      --transition-fast:180ms;
+    }
+
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+      background:#020617;
+      color:var(--text);
+    }
+
+    header{
+      border-top-left-radius:16px;
+      border-top-right-radius:16px;
+      overflow:hidden;
+    }
+
+    .header-hero{
+      position:relative;
+      min-height:215px;
+      background-image:url('https://elearning.kctcs.edu/bbcswebdav/xid-566211267_4');
+      background-size:cover;
+      background-position:left center;
+      padding:1.7rem 1.25rem;
+      border-top-left-radius:16px;
+      border-top-right-radius:16px;
+    }
+
+    .hero-text{
+      display:inline-block;
+      padding:1.1rem 1.5rem;
+      border-radius:16px;
+      background:rgba(2, 6, 23, 0.72);
+      backdrop-filter:blur(4px);
+    }
+
+    .course-label{
+      font-size:.9rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:var(--accent-soft);
+      margin-bottom:.35rem;
+    }
+
+    .course-title{
+      margin:0 0 .45rem;
+      font-size:1.65rem;
+      font-weight:600;
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+    }
+
+    .course-title .icon{
+      width:28px;
+      height:28px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:8px;
+      background:radial-gradient(circle at 20% 0%,var(--accent-soft),var(--accent-muted));
+      border:1px solid #1f2937;
+      font-size:.9rem;
+    }
+
+    .course-subtitle{
+      margin:0;
+      font-size:1rem;
+      color:var(--text-muted);
+      max-width:40rem;
+      line-height:1.35;
+    }
+
+    .header-bar{
+      background:#020617;
+      border-bottom:1px solid #1e293b;
+      padding:.65rem 1.25rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:.75rem;
+    }
+
+    .header-bar-title{
+      font-size:.9rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--text-muted);
+    }
+
+    .status-chips{
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:.4rem;
+      padding:.35rem .7rem;
+      border-radius:999px;
+      background:#020617;
+      border:1px solid #1f2937;
+      font-size:.8rem;
+      color:var(--text-muted);
+    }
+
+    .chip strong{
+      color:var(--text);
+    }
+
+    .chip-dot{
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:#22c55e;
+    }
+
+    .chip-dot-warn{
+      background:#facc15;
+    }
+
+    .shell{
+      max-width:1100px;
+      margin:2rem auto;
+      padding:0 1.25rem;
+    }
+
+    .shell-inner{
+      background:#020617;
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:1.75rem 1.35rem;
+    }
+
+    .shell-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid #1f2937;
+      padding-bottom:1.25rem;
+      margin-bottom:1.25rem;
+      flex-wrap:wrap;
+      gap:1rem;
+    }
+
+    .shell-title{
+      font-size:.9rem;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:var(--text-muted);
+      display:flex;
+      align-items:center;
+      gap:.6rem;
+    }
+
+    .badge{
+      padding:.2rem .6rem;
+      border-radius:999px;
+      background:#020617;
+      border:1px solid #1f2937;
+      font-size:.75rem;
+      color:var(--accent-soft);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:2fr 1.5fr;
+      gap:1.5rem;
+      margin-bottom:1.5rem;
+    }
+
+    .grid-secondary{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1.25rem;
+    }
+
+    @media(max-width:960px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+      .grid-secondary{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:720px){
+      .grid-secondary{
+        grid-template-columns:1fr;
+      }
+    }
+
+    .tile{
+      background:#020617;
+      border-radius:16px;
+      border:1px solid var(--border);
+      padding:1.15rem 1rem;
+      display:flex;
+      flex-direction:column;
+      gap:.75rem;
+    }
+
+    .tile--primary{
+      background:radial-gradient(circle at top left,rgba(37,99,235,.27),#020617);
+      border-color:#1d4ed8;
+    }
+
+    .tile-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:.75rem;
+    }
+
+    .tile-heading{
+      display:flex;
+      gap:.65rem;
+      align-items:flex-start;
+    }
+
+    .tile-title{
+      font-size:1.05rem;
+      margin:0;
+      font-weight:600;
+    }
+
+    .tile-subtitle{
+      font-size:.95rem;
+      color:var(--text-muted);
+      margin:.1rem 0 0;
+    }
+
+    .tile-status{
+      font-size:.8rem;
+      color:var(--text-muted);
+      min-width:130px;
+      text-align:right;
+    }
+
+    .tile-status .label{
+      padding:.2rem .55rem;
+      border-radius:999px;
+      border:1px solid #1e293b;
+      display:inline-flex;
+      align-items:center;
+      gap:.25rem;
+      font-size:.78rem;
+      background:#020617;
+    }
+
+    .label-dot{
+      width:7px;
+      height:7px;
+      border-radius:999px;
+      background:#facc15;
+    }
+
+    .tile-body{
+      font-size:.92rem;
+      color:var(--text);
+      line-height:1.45;
+    }
+
+    .panel{
+      border-radius:10px;
+      border:1px solid #1f2937;
+      background:#020617;
+      padding:.9rem .85rem 1rem;
+      font-size:.9rem;
+      color:var(--text);
+      margin-top:.6rem;
+    }
+
+    .panel h3{
+      margin:0 0 .45rem;
+      font-size:.95rem;
+      color:var(--text);
+    }
+
+    ul{
+      margin:0 0 .4rem 1.1rem;
+      padding:0;
+    }
+
+    .tile-footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:.8rem;
+      color:var(--text-muted);
+      flex-wrap:wrap;
+      gap:.6rem;
+    }
+
+    .tile-actions{
+      display:flex;
+      gap:.4rem;
+      flex-wrap:wrap;
+    }
+
+    .tile-actions button{
+      border-radius:999px;
+      border:1px solid var(--accent-soft);
+      background:linear-gradient(135deg,var(--accent-soft),var(--accent-muted));
+      color:#eff6ff;
+      font-size:.78rem;
+      padding:.3rem .7rem;
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      gap:.3rem;
+      transition:
+        background var(--transition-fast),
+        color var(--transition-fast),
+        border-color var(--transition-fast),
+        transform var(--transition-fast);
+    }
+
+    .tile-actions button:hover{
+      background:linear-gradient(135deg,var(--accent-muted),var(--accent-soft));
+      transform:translateY(-1px);
+    }
+
+    .tile-actions button:focus-visible{
+      outline:2px solid var(--accent-soft);
+      outline-offset:2px;
+    }
+
+    .btn-icon{
+      font-size:.9rem;
+    }
+
+    .badge-pill{
+      padding:.18rem .6rem;
+      border-radius:999px;
+      border:1px solid #1f2937;
+      font-size:.78rem;
+      color:var(--text-muted);
+      display:flex;
+      align-items:center;
+      gap:.35rem;
+    }
+
+    .dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--accent-soft);
+    }
+
+    .launch-panel{
+      border-radius:10px;
+      border:1px solid #1f2937;
+      background:#020617;
+      padding:.9rem .85rem 1rem;
+      font-size:.9rem;
+      color:var(--text);
+      margin-top:.6rem;
+    }
+
+    .launch-map{
+      position:relative;
+      min-height:230px;
+      border-radius:12px;
+      border:1px solid #1f2937;
+      background:
+        radial-gradient(circle at center,rgba(37,99,235,.22),transparent 9rem),
+        linear-gradient(rgba(96,165,250,.04) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(96,165,250,.04) 1px,transparent 1px),
+        #020617;
+      background-size:auto,24px 24px,24px 24px;
+      margin-bottom:.8rem;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:.7rem;
+      align-items:center;
+      padding:.8rem;
+    }
+
+    .launch-map::before{
+      content:"";
+      position:absolute;
+      left:16%;
+      right:16%;
+      top:50%;
+      height:2px;
+      background:linear-gradient(90deg,transparent,rgba(96,165,250,.8),transparent);
+      z-index:1;
+    }
+
+    .launch-card{
+      position:relative;
+      z-index:2;
+      border:1px solid #1f2937;
+      background:#020617;
+      color:var(--text);
+      border-radius:12px;
+      padding:.75rem .6rem;
+      min-height:132px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      gap:.35rem;
+      cursor:pointer;
+      text-align:center;
+      font:inherit;
+      transition:
+        border-color var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-fast),
+        background var(--transition-fast);
+    }
+
+    .launch-card:hover{
+      border-color:var(--accent-soft);
+      transform:translateY(-2px);
+    }
+
+    .launch-card:focus-visible,
+    .launch-action:focus-visible{
+      outline:2px solid var(--accent-soft);
+      outline-offset:3px;
+    }
+
+    .launch-card[aria-pressed="true"]{
+      border-color:var(--accent-soft);
+      box-shadow:0 0 0 1px rgba(96,165,250,.45),0 0 22px rgba(37,99,235,.35);
+      background:radial-gradient(circle at top left,rgba(37,99,235,.28),#020617);
+    }
+
+    .launch-icon{
+      width:42px;
+      height:42px;
+      border:1px solid var(--accent-muted);
+      border-radius:12px;
+      background:linear-gradient(135deg,rgba(37,99,235,.28),rgba(14,165,233,.12));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:1.25rem;
+    }
+
+    .launch-title{
+      font-size:.86rem;
+      font-weight:700;
+      line-height:1.2;
+    }
+
+    .launch-status{
+      font-size:.76rem;
+      color:var(--text-muted);
+      line-height:1.25;
+    }
+
+    .launch-status strong{
+      color:#bbf7d0;
+      font-weight:700;
+    }
+
+    .launch-details{
+      border-radius:10px;
+      border:1px solid #1f2937;
+      background:#020617;
+      padding:.75rem .8rem;
+      min-height:118px;
+    }
+
+    .launch-details h3{
+      margin:0 0 .35rem;
+      font-size:.95rem;
+    }
+
+    .launch-details p{
+      margin:0;
+      color:var(--text-muted);
+      line-height:1.4;
+      font-size:.87rem;
+    }
+
+    .orientation-check{
+      border-radius:10px;
+      border:1px solid #1f2937;
+      background:#020617;
+      padding:.7rem .8rem;
+      margin-top:.75rem;
+    }
+
+    .orientation-check h3{
+      margin:0 0 .45rem;
+      font-size:.9rem;
+    }
+
+    .orientation-check ol{
+      margin:.15rem 0 0 1.25rem;
+      padding:0;
+      color:var(--text-muted);
+      font-size:.82rem;
+      line-height:1.4;
+    }
+
+    .orientation-check li{
+      margin:.25rem 0;
+    }
+
+    .orientation-check li.current-step{
+      color:var(--text);
+      font-weight:700;
+    }
+
+    .launch-actions{
+      display:flex;
+      gap:.5rem;
+      flex-wrap:wrap;
+      margin-top:.75rem;
+    }
+
+    .launch-action{
+      border-radius:999px;
+      border:1px solid var(--accent-soft);
+      background:linear-gradient(135deg,var(--accent-soft),var(--accent-muted));
+      color:#eff6ff;
+      font-size:.78rem;
+      padding:.35rem .75rem;
+      cursor:pointer;
+      transition:
+        background var(--transition-fast),
+        transform var(--transition-fast);
+    }
+
+    .launch-action:hover{
+      background:linear-gradient(135deg,var(--accent-muted),var(--accent-soft));
+      transform:translateY(-1px);
+    }
+
+    .launch-action.secondary{
+      background:#020617;
+      color:var(--text-muted);
+      border-color:#1f2937;
+    }
+
+    .launch-action.secondary:hover{
+      background:#0f172a;
+      color:var(--text);
+    }
+
+    @media(max-width:520px){
+      .launch-map{
+        grid-template-columns:1fr;
+        min-height:0;
+      }
+
+      .launch-map::before{
+        display:none;
+      }
+
+      .launch-card:hover{
+        transform:none;
+      }
+    }
+
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+  </style>
+</head>
+<body>
+<header>
+<div class="header-hero">
+<div class="hero-text">
+<div class="course-label">CIT 279 — Configuring Windows Server</div>
+<div class="course-title">
+<span class="icon">☰</span>
+<span>Week 2: Server Pro Advanced Introduction</span>
+</div>
+</div>
+</div>
+<div class="header-bar">
+<span class="header-bar-title">Week 2 Module Overview</span>
+<div class="status-chips">
+<div class="chip">
+<span class="chip-dot"></span>
+<span><strong>Status:</strong> Online</span>
+</div>
+<div class="chip">
+<span class="chip-dot"></span>
+<span><strong>Focus:</strong> AZ-801</span>
+</div>
+</div>
+</div>
+</header>
+<main class="shell" id="main-content">
+<div class="shell-inner">
+<div class="shell-header">
+<div class="shell-title">
+        Module dashboard
+        <span class="badge">AZ-801</span>
+</div>
+</div>
+<div class="grid">
+<section aria-labelledby="overview-heading" class="tile tile--primary">
+<h2 class="sr-only" id="overview-heading">Module Overview</h2>
+<div class="tile-header">
+<div class="tile-heading">
+<p class="tile-subtitle">Get started with TestOut Server Pro: Advanced and connect this module to the Microsoft AZ-801 exam focus.</p>
+</div>
+<div class="tile-status">
+<span class="label"><span class="chip-dot"></span> Week 2</span>
+</div>
+</div>
+<div class="tile-body"><p>In this module we will be introduced to Server Pro: Advanced by TestOut. This course will prepare you for the Microsoft AZ-801 exam which measures your ability to deploy, package, secure, update, and configure Windows Server workloads using on-premises, hybrid, and cloud technologies.</p><div class="panel" hidden="" id="panel-overview"><h3>Module overview: Server Pro Advanced and AZ-801 orientation</h3><p>In this module we will be introduced to Server Pro: Advanced by TestOut. This course will prepare you for the Microsoft AZ-801 exam which measures your ability to deploy, package, secure, update, and configure Windows Server workloads using on-premises, hybrid, and cloud technologies.</p><ul><li>Begin working with TestOut Server Pro: Advanced.</li><li>Connect the course work to the Microsoft AZ-801 exam.</li><li>Focus on Windows Server workloads across on-premises, hybrid, and cloud technologies.</li><li>Prepare for later topics involving deployment, security, updates, configuration, monitoring, and troubleshooting.</li></ul></div></div>
+<div class="tile-footer">
+<div class="tile-actions">
+<button aria-controls="panel-overview" aria-expanded="false" class="tile-toggle" type="button">
+<span aria-hidden="true" class="btn-icon">▸</span>
+<span>Show overview details</span>
+</button>
+</div>
+</div>
+</section>
+<section class="tile">
+<div class="tile-header">
+<div class="tile-heading">
+<div>
+<h2 class="tile-title">Why Does It Matter?</h2>
+<p class="tile-subtitle">Hybrid Windows Server skills support reliability, security, and mission-critical operations.</p>
+</div>
+</div>
+</div>
+<div class="tile-body"><p>Managing modern Windows Server environments requires a deep understanding of how to deploy, secure, and maintain systems across on-premises, hybrid, and cloud infrastructures. These environments are the backbone of most enterprise networks, and ensuring their proper configuration directly impacts performance, reliability, and security.</p><p>By developing skills to deploy, package, secure, update, and configure Windows Server workloads, you gain the ability to support mission-critical operations across diverse platforms. These capabilities enable you to optimize resources, maintain compliance, and strengthen your organization’s overall IT infrastructure in an increasingly hybrid world.</p><div class="panel" hidden="" id="panel-why"><h3>How this supports real-world administration</h3><ul><li>Builds the foundation for supporting enterprise Windows Server environments.</li><li>Connects server deployment and configuration to performance, reliability, and security.</li><li>Emphasizes hybrid infrastructure skills that apply across on-premises and cloud-connected systems.</li><li>Supports operational goals such as compliance, resource optimization, and service continuity.</li></ul></div></div>
+<div class="tile-footer">
+<span>Deployment + security + hybrid infrastructure</span>
+<div class="tile-actions">
+<button aria-controls="panel-why" aria-expanded="false" class="tile-toggle" type="button">
+<span aria-hidden="true" class="btn-icon">▸</span>
+<span>Show why it matters</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<div class="grid-secondary">
+<section class="tile">
+<div class="tile-header">
+<div class="tile-heading">
+<div>
+<h2 class="tile-title">Module Activities</h2>
+<p class="tile-subtitle">Complete the assigned TestOut Chapter 1 work.</p>
+</div>
+</div>
+</div>
+<div class="tile-body"><p>This week focuses on getting started with TestOut Server Pro: Advanced and preparing for the AZ-801 course path.</p><div class="panel" hidden="" id="panel-activities"><h3>This week, complete the following:</h3><ul><li>TestOut Reading and Assignments for Chapter 1</li></ul></div></div>
+<div class="tile-footer">
+<span>TestOut Reading and Assignments for Chapter 1</span>
+<div class="tile-actions">
+<button aria-controls="panel-activities" aria-expanded="false" class="tile-toggle" type="button">
+<span aria-hidden="true" class="btn-icon">▸</span>
+<span>Show activity checklist</span>
+</button>
+</div>
+</div>
+</section>
+<section class="tile">
+<div class="tile-header">
+<div class="tile-heading">
+<div>
+<h2 class="tile-title">Demonstrate Competencies</h2>
+<p class="tile-subtitle">Show that you can navigate the main environments used in this course.</p>
+</div>
+</div>
+</div>
+<div class="tile-body"><p>By completing this module, you demonstrate that you can navigate the core interfaces needed for Windows Server Hybrid Advanced Services coursework.</p><div class="panel" hidden="" id="panel-competency"><h3>Evidence of competency for Week 2</h3><p>By the end of this module, you should be able to:</p><ul><li>Navigate the Azure Interface</li><li>Navigate Windows 11</li><li>Navigate the Windows Server Interface</li></ul></div></div>
+<div class="tile-footer">
+<span>Azure + Windows 11 + Windows Server navigation</span>
+<div class="tile-actions">
+<button aria-controls="panel-competency" aria-expanded="false" class="tile-toggle" type="button">
+<span aria-hidden="true" class="btn-icon">▸</span>
+<span>Show competency details</span>
+</button>
+</div>
+</div>
+</section>
+<section aria-labelledby="launch-heading" class="tile">
+<div class="tile-header">
+<div class="tile-heading">
+<div>
+<h2 class="tile-title" id="launch-heading">Hybrid Admin Launch Pad</h2>
+<p class="tile-subtitle">Explore the three core environments students will use throughout this AZ-801 course.</p>
+</div>
+</div>
+</div>
+<div class="tile-body">
+<div class="launch-panel">
+<div aria-label="Interactive hybrid administration launch pad" class="launch-map" role="group">
+<button aria-pressed="true" class="launch-card" data-launch-part="azure" type="button">
+<span aria-hidden="true" class="launch-icon">☁</span>
+<span class="launch-title">Azure Portal</span>
+<span class="launch-status">Role: <strong>Cloud Console</strong></span>
+</button>
+<button aria-pressed="false" class="launch-card" data-launch-part="windows11" type="button">
+<span aria-hidden="true" class="launch-icon">▣</span>
+<span class="launch-title">Windows 11</span>
+<span class="launch-status">Role: <strong>Admin Workstation</strong></span>
+</button>
+<button aria-pressed="false" class="launch-card" data-launch-part="server" type="button">
+<span aria-hidden="true" class="launch-icon">▤</span>
+<span class="launch-title">Windows Server</span>
+<span class="launch-status">Role: <strong>Server Console</strong></span>
+</button>
+</div>
+<div aria-live="polite" class="launch-details">
+<h3 id="launch-detail-title">Azure Portal: Cloud console</h3>
+<p id="launch-detail-text">Use the Azure interface to locate services, manage resources, and understand where hybrid Windows Server tools appear. This environment connects the course to cloud-based administration and AZ-801 hybrid skills.</p>
+</div>
+<div class="orientation-check">
+<h3>Orientation Check</h3>
+<ol id="orientation-steps">
+<li class="current-step" aria-current="step">Locate the Azure portal and identify where services are managed.</li>
+<li>Identify the Windows 11 administrative workstation.</li>
+<li>Open the Windows Server interface and locate server tools.</li>
+<li>Connect all three environments to AZ-801 hybrid administration tasks.</li>
+</ol>
+</div>
+<div aria-label="Hybrid launch pad controls" class="launch-actions">
+<button class="launch-action" id="start-orientation" type="button">Start orientation check</button>
+<button class="launch-action secondary" id="reset-orientation" type="button">Reset launch pad</button>
+</div>
+</div>
+</div>
+<div class="tile-footer">
+<span>Azure Portal • Windows 11 • Windows Server</span>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var toggles = document.querySelectorAll('.tile-toggle');
+
+    toggles.forEach(function(button){
+      button.addEventListener('click', function(){
+        var controls = button.getAttribute('aria-controls');
+        if(!controls) return;
+
+        var panel = document.getElementById(controls);
+        if(!panel) return;
+
+        var expanded = button.getAttribute('aria-expanded') === 'true';
+        var newState = !expanded;
+        button.setAttribute('aria-expanded', String(newState));
+        panel.hidden = !newState;
+
+        var icon = button.querySelector('.btn-icon');
+        var textSpan = button.querySelector('span:nth-of-type(2)');
+
+        if(icon){
+          icon.textContent = newState ? '▾' : '▸';
+        }
+
+        if(textSpan){
+          if(controls === 'panel-overview'){
+            textSpan.textContent = newState ? 'Hide overview details' : 'Show overview details';
+          }else if(controls === 'panel-why'){
+            textSpan.textContent = newState ? 'Hide why it matters' : 'Show why it matters';
+          }else if(controls === 'panel-activities'){
+            textSpan.textContent = newState ? 'Hide activity checklist' : 'Show activity checklist';
+          }else if(controls === 'panel-competency'){
+            textSpan.textContent = newState ? 'Hide competency details' : 'Show competency details';
+          }
+        }
+      });
+    });
+
+    var launchButtons = document.querySelectorAll('[data-launch-part]');
+    var launchTitle = document.getElementById('launch-detail-title');
+    var launchText = document.getElementById('launch-detail-text');
+    var startOrientation = document.getElementById('start-orientation');
+    var resetOrientation = document.getElementById('reset-orientation');
+    var orientationSteps = document.querySelectorAll('#orientation-steps li');
+    var orientationIndex = 0;
+
+    var launchContent = {
+      azure: {
+        title: 'Azure Portal: Cloud console',
+        text: 'Use the Azure interface to locate services, manage resources, and understand where hybrid Windows Server tools appear. This environment connects the course to cloud-based administration and AZ-801 hybrid skills.'
+      },
+      windows11: {
+        title: 'Windows 11: Admin workstation',
+        text: 'Use Windows 11 as the administrative workstation for accessing browsers, remote connections, documentation, course resources, and management tools used throughout the module.'
+      },
+      server: {
+        title: 'Windows Server: Server console',
+        text: 'Use the Windows Server interface to manage server settings, roles, services, administrative consoles, and the local tools that support hybrid server administration.'
+      },
+      orientation: {
+        title: 'Orientation Check: Connect the environments',
+        text: 'Work through the launch pad from Azure Portal to Windows 11 to Windows Server. The goal is to understand where each environment fits before moving into deeper AZ-801 topics.'
+      }
+    };
+
+    function setLaunchPart(part){
+      launchButtons.forEach(function(button){
+        var selected = button.getAttribute('data-launch-part') === part;
+        button.setAttribute('aria-pressed', String(selected));
+      });
+
+      var content = launchContent[part];
+      if(!content || !launchTitle || !launchText) return;
+      launchTitle.textContent = content.title;
+      launchText.textContent = content.text;
+    }
+
+    function setOrientationStep(index){
+      orientationSteps.forEach(function(step, stepIndex){
+        if(stepIndex === index){
+          step.classList.add('current-step');
+          step.setAttribute('aria-current','step');
+        }else{
+          step.classList.remove('current-step');
+          step.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    launchButtons.forEach(function(button){
+      button.addEventListener('click', function(){
+        setLaunchPart(button.getAttribute('data-launch-part'));
+      });
+    });
+
+    if(startOrientation){
+      startOrientation.addEventListener('click', function(){
+        setLaunchPart('orientation');
+        setOrientationStep(orientationIndex);
+        orientationIndex = (orientationIndex + 1) % orientationSteps.length;
+      });
+    }
+
+    if(resetOrientation){
+      resetOrientation.addEventListener('click', function(){
+        orientationIndex = 0;
+        setOrientationStep(0);
+        setLaunchPart('azure');
+      });
+    }
+  });
+</script>
+</body>
+</html>
