@@ -1,0 +1,1540 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CIT 160 Module 4 - Switch Troubleshooting, IPv4 Addressing &amp; Subnetting</title>
+<style>
+  .eb-module {
+    --bg-1: #00051a;
+    --bg-2: #011f55;
+    --bg-3: #03408f;
+    --orb-1: rgba(30, 64, 175, 0.56);
+    --orb-2: rgba(37, 99, 235, 0.38);
+    --orb-3: rgba(14, 116, 224, 0.24);
+    --orb-1-x: 18%;
+    --orb-1-y: 20%;
+    --orb-2-x: 82%;
+    --orb-2-y: 18%;
+    --orb-3-x: 50%;
+    --orb-3-y: 80%;
+    --text: #f8fbff;
+    --muted: #c9d9ee;
+    --glass: rgba(2, 12, 27, 0.58);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --card-border: rgba(255, 255, 255, 0.2);
+    --accent: #67e8f9;
+    --shadow: rgba(0, 0, 0, 0.42);
+    --focus-ring: rgba(103, 232, 249, 0.35);
+    container-type: inline-size;
+    position: relative;
+    isolation: isolate;
+    width: min(100%, 980px);
+    margin: 0 auto;
+    color: var(--text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    background:
+      radial-gradient(circle at var(--orb-1-x) var(--orb-1-y), var(--orb-1), transparent 28%),
+      radial-gradient(circle at var(--orb-2-x) var(--orb-2-y), var(--orb-2), transparent 31%),
+      radial-gradient(circle at var(--orb-3-x) var(--orb-3-y), var(--orb-3), transparent 34%),
+      linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
+    background-size: 160% 160%, 150% 150%, 170% 170%, 220% 220%;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.25);
+    animation: eb-gradient-drift 22s ease-in-out infinite;
+  }
+
+  .eb-module,
+  .eb-module * {
+    box-sizing: border-box;
+  }
+
+  .eb-module::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle, rgba(255, 255, 255, 0.18) 1px, transparent 1.8px),
+      linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 26%, rgba(255, 255, 255, 0.06) 52%, transparent 76%);
+    background-size: 42px 42px, 100% 100%;
+    opacity: 0.35;
+  }
+
+  .eb-skip-link {
+    position: absolute;
+    left: 1rem;
+    top: 0.5rem;
+    transform: translateY(-160%);
+    z-index: 20;
+    background: #ffffff;
+    color: #03111f;
+    padding: 0.7rem 1rem;
+    border-radius: 0.75rem;
+    font-weight: 900;
+  }
+
+  .eb-skip-link:focus {
+    transform: translateY(0);
+  }
+
+  .eb-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem clamp(1rem, 4vw, 2rem);
+    background: var(--glass);
+    border-bottom: 1px solid var(--glass-border);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 14px 40px var(--shadow);
+  }
+
+  .eb-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text);
+    font-size: 1.05rem;
+    font-weight: 850;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .eb-brand-mark {
+    width: 2.35rem;
+    height: 2.35rem;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: radial-gradient(circle at 35% 30%, #ffffff, var(--accent) 32%, #1d4ed8 68%, #0f172a 100%);
+    box-shadow: 0 0 26px rgba(103, 232, 249, 0.62);
+  }
+
+  .eb-nav-list {
+    position: relative;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+  }
+
+  .eb-nav-list button {
+    position: relative;
+    z-index: 70;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    border: 0;
+    font: inherit;
+    font-weight: 750;
+    font-size: 0.95rem;
+    padding: 0.55rem 0.8rem;
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+  }
+
+  .eb-nav-list button:hover,
+  .eb-nav-list button:focus-visible,
+  .eb-nav-list button[aria-expanded="true"],
+  .eb-nav-list button[aria-current="page"] {
+    color: var(--text);
+    background: rgba(255, 255, 255, 0.12);
+    outline: none;
+    transform: translateY(-1px);
+  }
+
+  .eb-module a:focus-visible,
+  .eb-module button:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 4px;
+    box-shadow: 0 0 0 6px var(--focus-ring);
+  }
+
+  .eb-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .eb-section {
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      max-height 0.6s ease-out,
+      padding-top 0.6s ease-out,
+      padding-bottom 0.6s ease-out;
+  }
+
+  .eb-section.eb-active-section {
+    transition:
+      max-height 2.5s ease-in,
+      padding-top 2.5s ease-in,
+      padding-bottom 2.5s ease-in;
+  }
+
+  .eb-section[aria-hidden="true"] {
+    visibility: hidden;
+  }
+
+  .eb-section[aria-hidden="false"] {
+    visibility: visible;
+  }
+
+  .eb-section {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
+    padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 5vw, 3rem);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .eb-section:last-child {
+    border-bottom: 0;
+  }
+.eb-section-full {
+    grid-template-columns: 1fr;
+  }
+
+  .eb-eyebrow {
+    display: inline-flex;
+    width: fit-content;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent);
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid var(--glass-border);
+    border-radius: 999px;
+    padding: 0.45rem 0.8rem;
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+  }
+
+  .eb-module h1,
+  .eb-module h2,
+  .eb-module h3 {
+    margin: 1rem 0;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    text-wrap: balance;
+  }
+
+  .eb-module h1,
+  .eb-module h2 {
+    font-size: clamp(2.25rem, 7vw, 5.4rem);
+    max-width: 12ch;
+  }
+
+  #eb-introduction .eb-intro-title-block {
+    grid-column: 1 / -1;
+  }
+
+  #eb-introduction .eb-intro-title-block h1 {
+    max-width: none;
+    width: 100%;
+  }
+
+
+  .eb-module h3 {
+    font-size: clamp(1.45rem, 4vw, 2.3rem);
+  }
+
+  .eb-lead {
+    max-width: 64ch;
+    color: var(--muted);
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.7;
+    margin: 0 0 1.6rem;
+  }
+
+  .eb-section-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1.4rem;
+  }
+.eb-panel {
+    position: relative;
+    border: 1px solid var(--card-border);
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05));
+    border-radius: 2rem;
+    padding: clamp(1rem, 3vw, 1.6rem);
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    overflow: hidden;
+  }
+
+  .eb-panel::before {
+    content: "";
+    position: absolute;
+    inset: -40% -20% auto;
+    height: 70%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 60%);
+    transform: rotate(-8deg);
+    pointer-events: none;
+  }
+
+  .eb-panel > * {
+    position: relative;
+  }
+
+  .eb-command-center {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .eb-command-header {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1rem;
+    border-radius: 1.35rem;
+    background: rgba(2, 12, 27, 0.42);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .eb-command-light {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: radial-gradient(circle at 35% 30%, #ffffff, var(--accent) 32%, #1d4ed8 68%, #0f172a 100%);
+    box-shadow: 0 0 26px rgba(103, 232, 249, 0.62);
+    animation: eb-command-pulse 2.8s ease-in-out infinite;
+    flex: 0 0 auto;
+  }
+
+  .eb-command-header strong,
+  .eb-status-row strong,
+  .eb-mode-panel strong {
+    display: block;
+    color: var(--text);
+  }
+
+  .eb-mode-panel div {
+    min-width: 0;
+  }
+
+  .eb-mode-panel strong {
+    font-size: clamp(1.05rem, 2.1cqw, 1.35rem);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    word-spacing: 0.04em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+  }
+
+
+  .eb-command-header span:last-child {
+    display: block;
+    color: var(--muted);
+    font-weight: 700;
+    margin-top: 0.2rem;
+  }
+
+  .eb-status-grid {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .eb-status-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.8rem 0.95rem;
+    border-radius: 1rem;
+    background: rgba(2, 12, 27, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .eb-status-row span {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    color: var(--muted);
+    font-weight: 750;
+  }
+
+  .eb-status-dot {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 14px rgba(103, 232, 249, 0.65);
+    animation: eb-status-pulse 2.1s ease-in-out infinite;
+    flex: 0 0 auto;
+  }
+
+  .eb-status-row:nth-child(2) .eb-status-dot { animation-delay: -0.35s; }
+  .eb-status-row:nth-child(3) .eb-status-dot { animation-delay: -0.7s; }
+  .eb-status-row:nth-child(4) .eb-status-dot { animation-delay: -1.05s; }
+  .eb-status-row:nth-child(5) .eb-status-dot { animation-delay: -1.4s; }
+
+  .eb-status-row strong {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.78rem;
+  }
+
+  .eb-mode-panel {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.7rem;
+  }
+
+  .eb-mode-panel div {
+    padding: 0.85rem;
+    border-radius: 1rem;
+    background: rgba(2, 12, 27, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .eb-mode-panel span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 850;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.35rem;
+  }
+
+  .eb-terminal-card {
+    padding: 1rem;
+    border-radius: 1.25rem;
+    background: rgba(0, 5, 20, 0.68);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    box-shadow: inset 0 0 28px rgba(59, 130, 246, 0.12);
+  }
+
+  .eb-terminal-card p {
+    margin: 0.35rem 0;
+    color: var(--muted);
+    line-height: 1.5;
+    font-size: 0.9rem;
+  }
+
+  .eb-terminal-card span {
+    color: var(--accent);
+    font-weight: 900;
+  }
+
+  .eb-network-graphic {
+    position: relative;
+    height: 12rem;
+    width: min(100%, 28rem);
+    margin-bottom: 1.1rem;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .eb-network-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .eb-network-line {
+    stroke: rgba(103, 232, 249, 0.16);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 4px rgba(103, 232, 249, 0.18));
+    opacity: 1;
+  }
+
+  .eb-network-node {
+    fill: url(#ebNetworkNodeGradient);
+    stroke: rgba(255, 255, 255, 0.92);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 10px rgba(103, 232, 249, 0.65));
+  }
+
+  .eb-network-packet {
+    fill: rgba(190, 242, 255, 0.98);
+    filter: drop-shadow(0 0 8px rgba(103, 232, 249, 0.88));
+  }
+
+  .eb-panel .eb-network-graphic {
+    width: 100%;
+    height: 13rem;
+    margin: 0 0 1.2rem;
+  }
+
+  .eb-card-list {
+    display: grid;
+    gap: 0.9rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .eb-card-list li {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.9rem;
+    align-items: start;
+    padding: 1rem;
+    border-radius: 1.25rem;
+    background: rgba(2, 12, 27, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--muted);
+    line-height: 1.55;
+    font-weight: 650;
+  }
+
+  .eb-dot {
+    width: 0.85rem;
+    height: 0.85rem;
+    margin-top: 0.35rem;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 18px var(--accent);
+  }
+
+  .eb-energy-gate {
+    position: relative;
+    width: 100%;
+    height: 12rem;
+    min-height: 12rem;
+    margin: 0 0 0.75rem;
+    border-radius: 1.5rem;
+    background: transparent;
+    border: 0;
+    overflow: hidden;
+  }
+
+  .eb-energy-gate svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 12rem;
+  }
+
+  .eb-energy-grid-dot {
+    fill: rgba(255, 255, 255, 0.14);
+  }
+
+  .eb-energy-track {
+    stroke: rgba(103, 232, 249, 0.28);
+    stroke-width: 4;
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 8px rgba(103, 232, 249, 0.35));
+  }
+
+  .eb-energy-gate-shape {
+    fill: rgba(103, 232, 249, 0.08);
+    stroke: rgba(103, 232, 249, 0.65);
+    stroke-width: 2;
+    filter: drop-shadow(0 0 10px rgba(103, 232, 249, 0.45));
+    transform-origin: center;
+    animation: eb-gate-glow 3.8s ease-in-out infinite;
+  }
+
+  .eb-energy-gate-shape:nth-of-type(2) {
+    animation-delay: -1.2s;
+  }
+
+  .eb-energy-gate-shape:nth-of-type(3) {
+    animation-delay: -2.4s;
+  }
+
+  .eb-energy-core {
+    fill: url(#ebEnergyCoreGradient);
+    stroke: rgba(255, 255, 255, 0.85);
+    stroke-width: 1.5;
+    filter: drop-shadow(0 0 12px rgba(103, 232, 249, 0.9));
+  }
+
+  .eb-energy-particle {
+    fill: rgba(190, 242, 255, 0.98);
+    filter: drop-shadow(0 0 8px rgba(103, 232, 249, 0.88));
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: eb-particle-flow 4.6s linear infinite;
+  }
+
+  .eb-energy-particle.eb-p2 { animation-delay: -1.15s; }
+  .eb-energy-particle.eb-p3 { animation-delay: -2.3s; }
+  .eb-energy-particle.eb-p4 { animation-delay: -3.45s; }
+
+  #eb-activities {
+    align-items: start;
+  }
+
+  #eb-activities .eb-panel {
+    display: block;
+    padding: clamp(0.75rem, 2vw, 1rem);
+  }
+
+  #eb-activities .eb-project-path {
+    gap: 0.7rem;
+  }
+
+  #eb-activities .eb-project-toggle {
+    min-height: 2.75rem;
+    padding: 0.7rem 0.85rem;
+  }
+
+  #eb-activities .eb-project-panel-content {
+    padding: 0 0.85rem 0.75rem;
+  }
+
+  #eb-activities .eb-project-panel-content p {
+    margin-bottom: 0;
+  }
+
+  @keyframes eb-gate-glow {
+    0%, 100% { opacity: 0.58; transform: scaleY(0.94); }
+    50% { opacity: 1; transform: scaleY(1.04); }
+  }
+
+  @keyframes eb-particle-flow {
+    0% { transform: translateX(0); opacity: 0; }
+    8% { opacity: 1; }
+    92% { opacity: 1; }
+    100% { transform: translateX(250px); opacity: 0; }
+  }
+
+  .eb-project-path {
+    display: grid;
+    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .eb-project-item {
+    --orb-size: 1.35rem;
+    --orb-left: 0.38rem;
+    --orb-top: 1.05rem;
+    position: relative;
+    display: grid;
+    grid-template-columns: 2.1rem 1fr;
+    gap: 0.9rem;
+    align-items: start;
+  }
+
+  .eb-project-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: calc(var(--orb-left) + (var(--orb-size) / 2) - 2px);
+    top: calc(var(--orb-top) + (var(--orb-size) / 2));
+    height: calc(100% + 1rem);
+    width: 4px;
+    z-index: 0;
+    border-radius: 999px;
+    background: linear-gradient(to bottom, var(--accent), rgba(255, 255, 255, 0.22));
+  }
+
+  .eb-path-orb {
+    position: relative;
+    z-index: 2;
+    width: var(--orb-size);
+    height: var(--orb-size);
+    margin-top: var(--orb-top);
+    margin-left: var(--orb-left);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 999px;
+    align-self: start;
+    background: radial-gradient(circle at 35% 30%, #222222, #050505 58%, #000000 100%);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+    transition: background 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+  }
+
+  .eb-project-item.eb-open .eb-path-orb {
+    background: radial-gradient(circle at 35% 30%, #ffffff, var(--accent) 32%, #1d4ed8 68%, #0f172a 100%);
+    box-shadow: 0 0 18px rgba(103, 232, 249, 0.62);
+    transform: scale(1.08);
+  }
+
+  .eb-project-card {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    border-radius: 1.25rem;
+    background: rgba(2, 12, 27, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+  }
+
+  .eb-project-toggle {
+    width: 100%;
+    min-height: 3.45rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--text);
+    background: transparent;
+    border: 0;
+    padding: 1rem;
+    font: inherit;
+    font-weight: 900;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .eb-project-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 360ms ease;
+  }
+
+  .eb-project-item.eb-open .eb-project-panel {
+    grid-template-rows: 1fr;
+  }
+
+  .eb-project-panel-inner {
+    overflow: hidden;
+  }
+
+  .eb-project-panel-content {
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 650;
+    padding: 0 1rem 1rem;
+  }
+
+  .eb-project-panel-content p {
+    margin: 0 0 0.85rem;
+  }
+
+  .eb-project-panel-content a {
+    color: var(--accent);
+    font-weight: 900;
+  }
+.eb-wave {
+    position: absolute;
+    inset: auto -5% 4% -5%;
+    z-index: -1;
+    opacity: 0.22;
+    height: 18rem;
+    pointer-events: none;
+    background: radial-gradient(circle at 10px 10px, rgba(255, 255, 255, 0.35) 1.3px, transparent 1.9px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.75), transparent 72%);
+    transform: rotate(-2deg);
+    animation: eb-wave-slide 18s linear infinite;
+  }
+
+  @keyframes eb-gradient-drift {
+    0%, 100% { background-position: 0% 50%, 100% 30%, 40% 90%, 0% 50%; }
+    50% { background-position: 100% 50%, 0% 70%, 70% 10%, 100% 50%; }
+  }
+
+  @keyframes eb-command-pulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 0 20px rgba(103, 232, 249, 0.4);
+    }
+    50% {
+      transform: scale(1.08);
+      box-shadow: 0 0 34px rgba(103, 232, 249, 0.75);
+    }
+  }
+
+  @keyframes eb-status-pulse {
+    0%, 100% { opacity: 0.55; transform: scale(0.9); }
+    50% { opacity: 1; transform: scale(1.18); }
+  }
+
+  @keyframes eb-wave-slide {
+    from { background-position: 0 0; }
+    to { background-position: 280px 120px; }
+  }
+@media (max-width: 900px) {
+    .eb-section {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .eb-mode-panel {
+      grid-template-columns: 1fr;
+    }
+
+    .eb-network-graphic {
+      width: min(100%, 24rem);
+      height: 10.5rem;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .eb-nav {
+      align-items: stretch;
+      flex-direction: column;
+      padding: 0.75rem 1rem;
+      gap: 0.7rem;
+    }
+
+    .eb-brand {
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .eb-brand-mark {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .eb-nav-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.35rem;
+    }
+
+    .eb-nav-list button {
+      text-align: center;
+      font-size: 0.88rem;
+      padding: 0.6rem 0.4rem;
+    }
+
+    .eb-section {
+      padding: 2.5rem 1rem;
+    }
+
+    .eb-module h1,
+    .eb-module h2 {
+      font-size: clamp(2.2rem, 12vw, 4rem);
+      max-width: 13ch;
+    }
+.eb-status-row {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .eb-card-list li {
+      grid-template-columns: 1fr;
+    }
+
+    .eb-dot {
+      margin-top: 0;
+    }
+
+    .eb-project-item {
+      grid-template-columns: 1.8rem 1fr;
+      gap: 0.65rem;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .eb-module {
+      border-radius: 1rem;
+    }
+
+    .eb-panel {
+      border-radius: 1.35rem;
+      padding: 1rem;
+    }
+
+    .eb-command-header,
+    .eb-status-row,
+    .eb-mode-panel div,
+    .eb-terminal-card,
+    .eb-card-list li,
+    .eb-project-card {
+      border-radius: 1rem;
+    }
+
+    .eb-network-graphic {
+      height: 8rem;
+      width: 100%;
+    }
+
+    .eb-energy-gate {
+      height: 8rem;
+      min-height: 8rem;
+    }
+
+    .eb-energy-gate svg {
+      min-height: 8rem;
+    }
+  }
+@container (max-width: 900px) {
+    .eb-section {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .eb-mode-panel {
+      grid-template-columns: 1fr;
+    }
+
+    .eb-network-graphic {
+      width: min(100%, 24rem);
+      height: 10.5rem;
+    }
+  }
+
+  @container (max-width: 720px) {
+    .eb-nav {
+      align-items: stretch;
+      flex-direction: column;
+      padding: 0.75rem 1rem;
+      gap: 0.7rem;
+    }
+
+    .eb-brand {
+      justify-content: center;
+      font-size: 1rem;
+    }
+
+    .eb-brand-mark {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .eb-nav-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.35rem;
+    }
+
+    .eb-nav-list button {
+      width: 100%;
+      text-align: center;
+      font-size: 0.88rem;
+      padding: 0.6rem 0.4rem;
+    }
+
+    .eb-section {
+      padding: 2.5rem 1rem;
+    }
+
+    .eb-module h1,
+    .eb-module h2 {
+      font-size: clamp(2.2rem, 12vw, 4rem);
+      max-width: 13ch;
+    }
+
+    .eb-status-row {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .eb-card-list li {
+      grid-template-columns: 1fr;
+    }
+
+    .eb-dot {
+      margin-top: 0;
+    }
+
+    .eb-project-item {
+      grid-template-columns: 1.8rem 1fr;
+      gap: 0.65rem;
+    }
+  }
+
+  @container (max-width: 520px) {
+    .eb-module {
+      border-radius: 1rem;
+    }
+
+    .eb-panel {
+      border-radius: 1.35rem;
+      padding: 1rem;
+    }
+
+    .eb-command-header,
+    .eb-status-row,
+    .eb-mode-panel div,
+    .eb-terminal-card,
+    .eb-card-list li,
+    .eb-project-card {
+      border-radius: 1rem;
+    }
+
+    .eb-network-graphic {
+      height: 8rem;
+      width: 100%;
+    }
+
+    .eb-energy-gate {
+      height: 8rem;
+      min-height: 8rem;
+    }
+
+    .eb-energy-gate svg {
+      min-height: 8rem;
+    }
+
+    .eb-nav-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .eb-module,
+    .eb-module *,
+    .eb-module *::before,
+    .eb-module *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.001ms !important;
+    }
+
+    .eb-energy-particle {
+      display: none;
+    }
+  }
+
+  #eb-introduction .eb-intro-title-block h1 {
+    max-width: none;
+    width: 100%;
+  }
+
+
+  .eb-section {
+    max-height: none !important;
+    overflow: visible;
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+    transition: opacity 900ms ease-in-out, visibility 900ms ease-in-out;
+  }
+
+  .eb-section.eb-active-section {
+    display: grid;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .eb-section[aria-hidden="true"] {
+    visibility: hidden;
+  }
+
+  .eb-section[aria-hidden="false"] {
+    visibility: visible;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .eb-section {
+      transition: none !important;
+    }
+  }
+
+</style>
+</head>
+<body>
+<div class="eb-module" id="evilbob-module">
+  <a class="eb-skip-link" href="#eb-main-content">Skip to module content</a>
+
+  <nav class="eb-nav" aria-label="Module navigation">
+    <div class="eb-brand">
+      <span class="eb-brand-mark" aria-hidden="true"></span>
+      CIT 160 Module 4
+    </div>
+
+    <ul class="eb-nav-list" aria-label="Select one module section to display">
+      <li><button type="button" class="eb-nav-link" data-target="eb-introduction" aria-controls="eb-introduction" aria-expanded="true" aria-current="page">Module Overview</button></li>
+      <li><button type="button" class="eb-nav-link" data-target="eb-concepts" aria-controls="eb-concepts" aria-expanded="false">Why It Matters</button></li>
+      <li><button type="button" class="eb-nav-link" data-target="eb-activities" aria-controls="eb-activities" aria-expanded="false">Module Activities</button></li>
+      <li><button type="button" class="eb-nav-link" data-target="eb-competencies" aria-controls="eb-competencies" aria-expanded="false">Demonstrate Competencies</button></li>
+    </ul>
+  </nav>
+
+  <main class="eb-content" id="eb-main-content">
+    <span class="eb-wave" aria-hidden="true"></span>
+
+    <section class="eb-section eb-active-section" id="eb-introduction" aria-labelledby="eb-introduction-title" aria-hidden="false">
+      <div class="eb-intro-title-block">
+        <span class="eb-eyebrow">Module Overview</span>
+        <h1 id="eb-introduction-title">Switch Troubleshooting, IPv4 Addressing & Subnetting</h1>
+      </div>
+
+      <div>
+        <p class="eb-lead">This module delves into essential networking concepts and skills, focusing on switch troubleshooting, Internet Protocol (IP) basics, IPv4 addressing, and subnetting. You will learn how to diagnose and resolve common issues with network switches, understand the foundational principles of IP, and explore the structure and function of IPv4 addresses. Additionally, the module covers subnetting, a critical skill for network segmentation and efficient IP address management. By the end of this module, you will be equipped with the knowledge and tools necessary to manage and troubleshoot network switches, configure IP addresses, and implement subnetting strategies in various networking environments.</p>
+      </div>
+
+      <aside class="eb-panel eb-command-center" aria-label="Module status dashboard">
+        <div class="eb-command-header">
+          <span class="eb-command-light" aria-hidden="true"></span>
+          <div>
+            <strong>Module Command Center</strong>
+            <span>Learning dashboard</span>
+          </div>
+        </div>
+
+        <div class="eb-status-grid">
+          <div class="eb-status-row"><span><i class="eb-status-dot" aria-hidden="true"></i>Module Status</span><strong>Online</strong></div>
+          <div class="eb-status-row"><span><i class="eb-status-dot" aria-hidden="true"></i>Reading</span><strong>Ready</strong></div>
+          <div class="eb-status-row"><span><i class="eb-status-dot" aria-hidden="true"></i>Activities</span><strong>Queued</strong></div>
+          <div class="eb-status-row"><span><i class="eb-status-dot" aria-hidden="true"></i>Assessment</span><strong>Pending</strong></div>
+          <div class="eb-status-row"><span><i class="eb-status-dot" aria-hidden="true"></i>Support</span><strong>Available</strong></div>
+        </div>
+
+    
+
+        <div class="eb-terminal-card" aria-label="Module activity log">
+          <p><span>&gt;</span> Loading switch troubleshooting...</p>
+          <p><span>&gt;</span> Checking IPv4 objectives...</p>
+          <p><span>&gt;</span> Preparing subnetting practice...</p>
+          <p><span>&gt;</span> Student success systems online...</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="eb-section" id="eb-concepts" aria-labelledby="eb-concepts-title" aria-hidden="true" inert>
+      <div>
+<span class="eb-eyebrow">Why It Matters</span>
+        <h2 id="eb-concepts-title">Why It Matters</h2>
+        <p class="eb-lead">As networks become increasingly complex, the ability to effectively manage and troubleshoot network devices is crucial. Switches play a pivotal role in directing data traffic within a network, and ensuring their proper operation is vital for maintaining network efficiency. Understanding Internet Protocol is foundational for all networking activities, as it governs how data is transmitted across the internet and local networks. Mastery of IPv4 addressing is essential for network configuration and device communication, while subnetting is key to optimizing network performance, enhancing security, and conserving IP address space. These skills are indispensable for network administrators and IT professionals tasked with designing, maintaining, and troubleshooting modern networks.</p>
+      </div>
+
+      <aside class="eb-panel" aria-label="Why it matters highlights">
+
+        <div class="eb-network-graphic" aria-hidden="true">
+          <svg class="eb-network-svg" viewBox="0 0 320 180" focusable="false" aria-hidden="true">
+            <defs>
+              <radialGradient id="ebNetworkNodeGradient" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#ffffff"></stop>
+                <stop offset="32%" stop-color="var(--accent)"></stop>
+                <stop offset="68%" stop-color="#1d4ed8"></stop>
+                <stop offset="100%" stop-color="#0f172a"></stop>
+              </radialGradient>
+            </defs>
+            <g class="eb-line-layer"></g>
+            <g class="eb-packet-layer"></g>
+            <g class="eb-node-layer">
+              <circle id="eb-node-a" class="eb-network-node" data-cx="42" data-cy="58" data-dx="8" data-dy="-6" data-speed="0.88" r="8"></circle>
+              <circle id="eb-node-b" class="eb-network-node" data-cx="96" data-cy="26" data-dx="-7" data-dy="8" data-speed="1.03" r="8"></circle>
+              <circle id="eb-node-c" class="eb-network-node" data-cx="176" data-cy="22" data-dx="7" data-dy="6" data-speed="0.95" r="8"></circle>
+              <circle id="eb-node-d" class="eb-network-node" data-cx="268" data-cy="54" data-dx="-8" data-dy="5" data-speed="0.92" r="8"></circle>
+              <circle id="eb-node-e" class="eb-network-node" data-cx="38" data-cy="136" data-dx="6" data-dy="-7" data-speed="0.86" r="8"></circle>
+              <circle id="eb-node-f" class="eb-network-node" data-cx="116" data-cy="156" data-dx="-8" data-dy="-5" data-speed="1.07" r="8"></circle>
+              <circle id="eb-node-g" class="eb-network-node" data-cx="214" data-cy="146" data-dx="8" data-dy="-6" data-speed="0.9" r="8"></circle>
+              <circle id="eb-node-h" class="eb-network-node" data-cx="280" data-cy="106" data-dx="-6" data-dy="7" data-speed="1.12" r="8"></circle>
+            </g>
+          </svg>
+        </div>
+
+        <ul class="eb-card-list">
+          <li><span class="eb-dot" aria-hidden="true"></span><span><strong>Switch Troubleshooting:</strong> helps identify and resolve connectivity, port, VLAN, and performance issues that affect network reliability.</span></li>
+          <li><span class="eb-dot" aria-hidden="true"></span><span><strong>Internet Protocol:</strong> provides the foundation for how devices communicate across local networks and the internet.</span></li>
+          <li><span class="eb-dot" aria-hidden="true"></span><span><strong>IPv4 Addressing:</strong> helps administrators identify networks, hosts, and communication boundaries within an IP-based environment.</span></li>
+          <li><span class="eb-dot" aria-hidden="true"></span><span><strong>Subnetting:</strong> supports network segmentation, stronger organization, improved performance, and more efficient address management.</span></li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="eb-section" id="eb-activities" aria-labelledby="eb-activities-title" aria-hidden="true" inert>
+      <div>
+        <span class="eb-eyebrow">Module Activities</span>
+        <h2 id="eb-activities-title">Module Activities</h2>
+        <p class="eb-lead">Click on an activity for more information.</p>
+      </div>
+
+      <aside class="eb-panel" aria-label="Module activity accordion">
+
+        <div class="eb-energy-gate" aria-hidden="true">
+          <svg viewBox="0 0 320 150" focusable="false" aria-hidden="true">
+            <defs>
+              <radialGradient id="ebEnergyCoreGradient" cx="35%" cy="30%" r="70%">
+                <stop offset="0%" stop-color="#ffffff"></stop>
+                <stop offset="32%" stop-color="var(--accent)"></stop>
+                <stop offset="70%" stop-color="#1d4ed8"></stop>
+                <stop offset="100%" stop-color="#0f172a"></stop>
+              </radialGradient>
+            </defs>
+
+            <g opacity="0.7">
+              <circle class="eb-energy-grid-dot" cx="28" cy="28" r="1.6"></circle>
+              <circle class="eb-energy-grid-dot" cx="76" cy="28" r="1.6"></circle>
+              <circle class="eb-energy-grid-dot" cx="124" cy="28" r="1.6"></circle>
+              <circle class="eb-energy-grid-dot" cx="172" cy="28" r="1.6"></circle>
+              <circle class="eb-energy-grid-dot" cx="220" cy="28" r="1.6"></circle>
+              <circle class="eb-energy-grid-dot" cx="268" cy="28" r="1.6"></circle>
+              <circle class="eb-energy-grid-dot" cx="52" cy="122" r="1.6"></circle>
+              <circle class="eb-energy-grid-dot" cx="100" cy="122" r="1.6"></circle>
+              <circle class="eb-energy-grid-dot" cx="148" cy="122" r="1.6"></circle>
+              <circle class="eb-energy-grid-dot" cx="196" cy="122" r="1.6"></circle>
+              <circle class="eb-energy-grid-dot" cx="244" cy="122" r="1.6"></circle>
+              <circle class="eb-energy-grid-dot" cx="292" cy="122" r="1.6"></circle>
+            </g>
+
+            <line class="eb-energy-track" x1="34" y1="75" x2="286" y2="75"></line>
+            <ellipse class="eb-energy-gate-shape" cx="94" cy="75" rx="16" ry="46"></ellipse>
+            <ellipse class="eb-energy-gate-shape" cx="160" cy="75" rx="18" ry="54"></ellipse>
+            <ellipse class="eb-energy-gate-shape" cx="226" cy="75" rx="16" ry="46"></ellipse>
+            <circle class="eb-energy-core" cx="34" cy="75" r="9"></circle>
+            <circle class="eb-energy-core" cx="286" cy="75" r="9"></circle>
+            <circle class="eb-energy-particle eb-p1" cx="36" cy="75" r="4"></circle>
+            <circle class="eb-energy-particle eb-p2" cx="36" cy="68" r="2.8"></circle>
+            <circle class="eb-energy-particle eb-p3" cx="36" cy="82" r="3.3"></circle>
+            <circle class="eb-energy-particle eb-p4" cx="36" cy="75" r="2.4"></circle>
+          </svg>
+        </div>
+
+        <ul class="eb-project-path">
+          <li class="eb-project-item">
+            <button class="eb-path-orb eb-project-orb" type="button" aria-label="Open CompTIA assignment" aria-expanded="false" aria-controls="eb-activity-comptia"></button>
+            <div class="eb-project-card">
+              <h3><button class="eb-project-toggle" type="button" aria-expanded="false" aria-controls="eb-activity-comptia">CompTIA</button></h3>
+              <div class="eb-project-panel" id="eb-activity-comptia">
+                <div class="eb-project-panel-inner">
+                  <div class="eb-project-panel-content">
+                    <p>Complete CompTIA chapter 3.4–4.3.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="eb-project-item">
+            <button class="eb-path-orb eb-project-orb" type="button" aria-label="Open test assignment" aria-expanded="false" aria-controls="eb-activity-test"></button>
+            <div class="eb-project-card">
+              <h3><button class="eb-project-toggle" type="button" aria-expanded="false" aria-controls="eb-activity-test">Test 1</button></h3>
+              <div class="eb-project-panel" id="eb-activity-test">
+                <div class="eb-project-panel-inner">
+                  <div class="eb-project-panel-content">
+                    <p>Complete Test 1 which covers material from chapters 1-3.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          </ul>
+      </aside>
+    </section>
+
+    <section class="eb-section eb-section-full" id="eb-competencies" aria-labelledby="eb-competencies-title" aria-hidden="true" inert>
+      <div>
+        <span class="eb-eyebrow">Demonstrate Competencies</span>
+        <h2 id="eb-competencies-title">Demonstrate Competencies</h2>
+        <p class="eb-lead">By the end of this module, you should be able to:</p>
+       
+      </div>
+
+      <div class="eb-panel" aria-label="Module competencies">
+        <ul class="eb-card-list">
+          <li><span class="eb-dot" aria-hidden="true"></span><span>Perform switch troubleshooting to identify and resolve connectivity and performance issues.</span></li>
+          <li><span class="eb-dot" aria-hidden="true"></span><span>Understand the basic principles of the Internet Protocol and its role in data communication.</span></li>
+          <li><span class="eb-dot" aria-hidden="true"></span><span>Describe the structure and purpose of IPv4 addresses, including network and host identification.</span></li>
+          <li><span class="eb-dot" aria-hidden="true"></span><span>Apply subnetting techniques to divide an IP network into smaller, more manageable subnets.</span></li>
+          <li><span class="eb-dot" aria-hidden="true"></span><span>Configure and manage IP addressing schemes to support efficient and secure network operations.</span></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  (function () {
+    const module = document.getElementById('evilbob-module');
+    if (!module) return;
+
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const sectionButtons = Array.from(module.querySelectorAll('.eb-nav-link'));
+    const sections = Array.from(module.querySelectorAll('.eb-section'));
+    const fadeDuration = 900;
+    let activeSectionId = 'eb-introduction';
+    let fadeTimer = null;
+
+    function clearFadeTimer() {
+      if (fadeTimer) {
+        window.clearTimeout(fadeTimer);
+        fadeTimer = null;
+      }
+    }
+
+    function updateSectionButtons(targetId) {
+      sectionButtons.forEach(button => {
+        const isActive = button.dataset.target === targetId;
+        button.setAttribute('aria-expanded', String(isActive));
+
+        if (isActive) {
+          button.setAttribute('aria-current', 'page');
+        } else {
+          button.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    function focusSectionHeading(section) {
+      const heading = section ? section.querySelector('h1, h2, h3') : null;
+      if (heading) {
+        heading.setAttribute('tabindex', '-1');
+        heading.focus({ preventScroll: true });
+      }
+    }
+
+    function setSectionAccessibleState(section, isOpen) {
+      section.setAttribute('aria-hidden', String(!isOpen));
+
+      if (isOpen) {
+        section.removeAttribute('inert');
+      } else {
+        section.setAttribute('inert', '');
+      }
+    }
+
+    function showOnlySection(targetSection, shouldFocus) {
+      sections.forEach(section => {
+        const isActive = section === targetSection;
+        section.classList.toggle('eb-active-section', isActive);
+        section.style.display = isActive ? 'grid' : 'none';
+        section.style.opacity = isActive ? '1' : '0';
+        section.style.visibility = isActive ? 'visible' : 'hidden';
+        setSectionAccessibleState(section, isActive);
+      });
+
+      activeSectionId = targetSection.id;
+      updateSectionButtons(activeSectionId);
+
+      if (shouldFocus) {
+        focusSectionHeading(targetSection);
+      }
+    }
+
+    function showSection(targetId, shouldFocus = false) {
+      const targetSection = module.querySelector(`#${targetId}`);
+      const currentSection = module.querySelector(`#${activeSectionId}`);
+
+      if (!targetSection || targetId === activeSectionId) return;
+
+      clearFadeTimer();
+      updateSectionButtons(targetId);
+
+      if (motionQuery.matches || !currentSection) {
+        showOnlySection(targetSection, shouldFocus);
+        return;
+      }
+
+      currentSection.classList.remove('eb-active-section');
+      currentSection.style.display = 'grid';
+      currentSection.style.visibility = 'visible';
+      currentSection.style.opacity = '0';
+
+      fadeTimer = window.setTimeout(() => {
+        setSectionAccessibleState(currentSection, false);
+        currentSection.style.display = 'none';
+        currentSection.style.visibility = 'hidden';
+
+        targetSection.classList.add('eb-active-section');
+        targetSection.style.display = 'grid';
+        targetSection.style.visibility = 'visible';
+        targetSection.style.opacity = '0';
+        setSectionAccessibleState(targetSection, true);
+
+        window.requestAnimationFrame(() => {
+          window.requestAnimationFrame(() => {
+            targetSection.style.opacity = '1';
+
+            activeSectionId = targetId;
+
+            if (shouldFocus) {
+              window.setTimeout(() => {
+                focusSectionHeading(targetSection);
+              }, fadeDuration);
+            }
+          });
+        });
+      }, fadeDuration);
+    }
+
+    sectionButtons.forEach(button => {
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        showSection(button.dataset.target, true);
+      });
+    });
+
+    const nav = module.querySelector('.eb-nav');
+    if (nav) {
+      nav.addEventListener('pointerup', event => {
+        const button = event.target.closest('.eb-nav-link');
+        if (!button || !module.contains(button)) return;
+        event.preventDefault();
+        showSection(button.dataset.target, true);
+      });
+    }
+
+    sections.forEach(section => {
+      const isActive = section.id === activeSectionId;
+      section.classList.toggle('eb-active-section', isActive);
+      section.style.display = isActive ? 'grid' : 'none';
+      section.style.opacity = isActive ? '1' : '0';
+      section.style.visibility = isActive ? 'visible' : 'hidden';
+      setSectionAccessibleState(section, isActive);
+    });
+
+    updateSectionButtons(activeSectionId);
+
+    const networkSvg = module.querySelector('.eb-network-svg');
+    const nodeLayer = networkSvg ? networkSvg.querySelector('.eb-node-layer') : null;
+    const lineLayer = networkSvg ? networkSvg.querySelector('.eb-line-layer') : null;
+    const packetLayer = networkSvg ? networkSvg.querySelector('.eb-packet-layer') : null;
+    const networkNodes = nodeLayer ? Array.from(nodeLayer.querySelectorAll('.eb-network-node')) : [];
+    const networkLines = [];
+    const networkPackets = [];
+
+    function seededValue(seed) {
+      return Math.abs(Math.sin(seed * 999.73) * 10000) % 1;
+    }
+
+    if (networkSvg && lineLayer && packetLayer && networkNodes.length) {
+      const pairList = [];
+
+      for (let i = 0; i < networkNodes.length; i += 1) {
+        for (let j = i + 1; j < networkNodes.length; j += 1) {
+          pairList.push([networkNodes[i].id, networkNodes[j].id]);
+        }
+      }
+
+      pairList.forEach(([fromId, toId], pairIndex) => {
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.classList.add('eb-network-line');
+        line.dataset.from = fromId;
+        line.dataset.to = toId;
+        lineLayer.appendChild(line);
+        networkLines.push(line);
+
+        const packetCount = pairIndex % 4 === 0 ? 3 : 2;
+
+        for (let packetIndex = 0; packetIndex < packetCount; packetIndex += 1) {
+          const packet = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          packet.classList.add('eb-network-packet');
+          packet.setAttribute('r', String(2.2 + seededValue(pairIndex + packetIndex + 1) * 1.5));
+          packetLayer.appendChild(packet);
+
+          networkPackets.push({
+            packet,
+            from: fromId,
+            to: toId,
+            phase: seededValue((pairIndex + 1) * (packetIndex + 2)),
+            speed: 0.08 + seededValue((pairIndex + 3) * (packetIndex + 5)) * 0.16,
+            reverse: seededValue(pairIndex * 17 + packetIndex * 13 + 1) > 0.5
+          });
+        }
+      });
+    }
+
+    function setNetworkPositions(time = 0) {
+      if (!networkSvg) return;
+
+      const positions = {};
+      const seconds = time / 1000;
+      const reduceMotion = motionQuery.matches;
+
+      networkNodes.forEach((node, index) => {
+        const baseX = Number(node.dataset.cx);
+        const baseY = Number(node.dataset.cy);
+        const offsetX = reduceMotion ? 0 : Number(node.dataset.dx);
+        const offsetY = reduceMotion ? 0 : Number(node.dataset.dy);
+        const speed = Number(node.dataset.speed);
+        const phase = index * 0.85;
+        const cx = baseX + Math.sin(seconds * speed + phase) * offsetX;
+        const cy = baseY + Math.cos(seconds * speed + phase) * offsetY;
+
+        node.setAttribute('cx', cx.toFixed(2));
+        node.setAttribute('cy', cy.toFixed(2));
+        positions[node.id] = { cx, cy };
+      });
+
+      networkLines.forEach(line => {
+        const from = positions[line.dataset.from];
+        const to = positions[line.dataset.to];
+        if (!from || !to) return;
+        line.setAttribute('x1', from.cx.toFixed(2));
+        line.setAttribute('y1', from.cy.toFixed(2));
+        line.setAttribute('x2', to.cx.toFixed(2));
+        line.setAttribute('y2', to.cy.toFixed(2));
+      });
+
+      networkPackets.forEach(({ packet, from, to, phase, speed, reverse }) => {
+        const start = positions[from];
+        const end = positions[to];
+        if (!start || !end) return;
+
+        if (reduceMotion) {
+          packet.setAttribute('opacity', '0');
+          return;
+        }
+
+        packet.removeAttribute('opacity');
+        let progress = (seconds * speed + phase) % 1;
+        if (reverse) progress = 1 - progress;
+
+        const eased = progress < 0.5
+          ? 2 * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        const cx = start.cx + (end.cx - start.cx) * eased;
+        const cy = start.cy + (end.cy - start.cy) * eased;
+
+        packet.setAttribute('cx', cx.toFixed(2));
+        packet.setAttribute('cy', cy.toFixed(2));
+      });
+    }
+
+    function animateNetwork(time) {
+      setNetworkPositions(time);
+      window.requestAnimationFrame(animateNetwork);
+    }
+
+    setNetworkPositions();
+    window.requestAnimationFrame(animateNetwork);
+
+
+    function setProjectOpen(item, shouldOpen) {
+      module.querySelectorAll('.eb-project-item').forEach(project => {
+        project.classList.remove('eb-open');
+        project.querySelectorAll('.eb-project-toggle, .eb-project-orb').forEach(control => {
+          control.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      if (shouldOpen) {
+        item.classList.add('eb-open');
+        item.querySelectorAll('.eb-project-toggle, .eb-project-orb').forEach(control => {
+          control.setAttribute('aria-expanded', 'true');
+        });
+      }
+    }
+
+    module.querySelectorAll('.eb-project-toggle, .eb-project-orb').forEach(control => {
+      control.addEventListener('click', () => {
+        const item = control.closest('.eb-project-item');
+        if (!item) return;
+        const isOpen = item.classList.contains('eb-open');
+        setProjectOpen(item, !isOpen);
+      });
+    });
+  }());
+</script>
+</body>
+</html>
