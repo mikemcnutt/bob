@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hiragana Slideshow</title>
+<style>
+  :root{
+    --bg1:#1d0543;
+    --bg2:#32106f;
+    --bg3:#1759b8;
+    --bg4:#0c2f75;
+    --panel:rgba(5,10,28,.82);
+    --text:#f7f9ff;
+    --muted:#cbd5f5;
+    --accent:#8bdcff;
+    --border:rgba(255,255,255,.16);
+    --focus:#fff2a8;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP","Yu Gothic",Meiryo,sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(circle at 78% 55%, #00bfff 0%, #159fe8 22%, transparent 48%),
+      radial-gradient(circle at 38% 35%, #7c16dc 0%, #5f0bb4 28%, transparent 52%),
+      linear-gradient(to bottom right, var(--bg1) 0%, var(--bg2) 35%, var(--bg3) 72%, var(--bg4) 100%);
+    background-attachment:fixed;
+  }
+  .skip-link{
+    position:absolute;
+    left:-9999px;
+    top:0;
+    background:#fff;
+    color:#000;
+    padding:.75rem 1rem;
+    z-index:100;
+  }
+  .skip-link:focus{left:.75rem;top:.75rem}
+  .wrap{
+    width:min(960px,calc(100% - 2rem));
+    margin:auto;
+    padding:2rem 0 3rem;
+  }
+  header{text-align:center;margin-bottom:1.25rem}
+  h1{margin:0 0 .4rem;font-size:clamp(2rem,5vw,3.4rem)}
+  header p{margin:0;color:var(--muted)}
+  .panel{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:20px;
+    box-shadow:0 18px 50px rgba(0,0,0,.28);
+    backdrop-filter:blur(10px);
+  }
+  .controls{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:.8rem;
+    padding:1rem;
+    margin-bottom:1rem;
+  }
+  .field{display:flex;flex-direction:column;gap:.35rem}
+  label{font-size:.85rem;font-weight:700;color:var(--muted)}
+  select,button{
+    min-height:44px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    font:inherit;
+  }
+  select{
+    padding:.65rem .75rem;
+    background:#151b38;
+    color:var(--text);
+  }
+  button{
+    cursor:pointer;
+    padding:.7rem 1rem;
+    color:var(--text);
+    background:rgba(255,255,255,.1);
+    font-weight:700;
+  }
+  button:hover{background:rgba(255,255,255,.17)}
+  button:focus-visible,select:focus-visible{
+    outline:3px solid var(--focus);
+    outline-offset:2px;
+  }
+  .slide{
+    min-height:480px;
+    padding:2rem;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+  }
+  .category,.counter{
+    position:absolute;
+    top:1.2rem;
+    color:var(--muted);
+    font-size:.9rem;
+  }
+  .category{left:1.2rem}
+  .counter{right:1.2rem}
+  .kana{
+    font-size:clamp(7rem,24vw,13rem);
+    line-height:1;
+    font-weight:700;
+    margin-bottom:1rem;
+  }
+  .romaji{
+    font-size:clamp(2rem,6vw,3.4rem);
+    font-weight:800;
+    color:var(--accent);
+  }
+  .note{
+    min-height:1.5em;
+    margin-top:.5rem;
+    color:var(--muted);
+  }
+  .nav{
+    display:grid;
+    grid-template-columns:1fr 1.3fr 1fr;
+    gap:.8rem;
+    padding:1rem;
+    margin-top:1rem;
+  }
+  .primary{
+    background:linear-gradient(135deg,rgba(139,220,255,.3),rgba(190,145,255,.3));
+  }
+  .auto-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:.8rem;
+    margin-top:1rem;
+  }
+  .status{
+    text-align:center;
+    min-height:1.5rem;
+    color:var(--muted);
+    margin-top:.75rem;
+  }
+  .tips{
+    margin-top:1rem;
+    padding:1rem 1.2rem;
+    color:var(--muted);
+    line-height:1.55;
+  }
+  .tips strong{color:var(--text)}
+  @media(max-width:700px){
+    .controls{grid-template-columns:1fr}
+    .slide{min-height:390px}
+  }
+  @media(max-width:480px){
+    .wrap{width:min(100% - 1rem,960px);padding-top:1rem}
+    .nav{grid-template-columns:1fr 1fr}
+    .nav .primary{grid-column:1/-1;grid-row:1}
+    .auto-row{grid-template-columns:1fr}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#slideshow">Skip to slideshow</a>
+<main class="wrap">
+  <header>
+    <h1>Hiragana Slideshow</h1>
+    <p>Review one hiragana character at a time, in order or randomly.</p>
+  </header>
+
+  <section class="panel controls" aria-label="Slideshow settings">
+    <div class="field">
+      <label for="orderMode">Order</label>
+      <select id="orderMode">
+        <option value="ordered">In order</option>
+        <option value="random">Random</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="setMode">Hiragana set</label>
+      <select id="setMode">
+        <option value="all">All hiragana</option>
+        <option value="basic">Basic hiragana</option>
+        <option value="voiced">Dakuten / handakuten</option>
+        <option value="yoon">Combination sounds</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="speed">Auto-play speed</label>
+      <select id="speed">
+        <option value="2500">2.5 seconds</option>
+        <option value="4000" selected>4 seconds</option>
+        <option value="6000">6 seconds</option>
+        <option value="8000">8 seconds</option>
+      </select>
+    </div>
+  </section>
+
+  <section id="slideshow" class="panel slide" tabindex="-1" aria-live="polite">
+    <div id="category" class="category"></div>
+    <div id="counter" class="counter"></div>
+    <div id="kana" class="kana" lang="ja"></div>
+    <div id="romaji" class="romaji"></div>
+    <div id="note" class="note"></div>
+  </section>
+
+  <nav class="panel nav" aria-label="Slideshow navigation">
+    <button id="prevBtn" type="button">← Previous</button>
+    <button id="nextBtn" class="primary" type="button">Next →</button>
+    <button id="restartBtn" type="button">Restart</button>
+  </nav>
+
+  <div class="auto-row">
+    <button id="autoBtn" class="panel" type="button" aria-pressed="false">Start Auto Slideshow</button>
+    <button id="reshuffleBtn" class="panel" type="button">Reshuffle</button>
+  </div>
+
+  <div id="status" class="status" aria-live="polite"></div>
+
+  <section class="panel tips">
+    <strong>Keyboard:</strong> Right Arrow or Space = next, Left Arrow = previous,
+    P = start/pause auto slideshow, R = restart.
+  </section>
+</main>
+
+<script>
+const basic = [
+["あ","a"],["い","i"],["う","u"],["え","e"],["お","o"],
+["か","ka"],["き","ki"],["く","ku"],["け","ke"],["こ","ko"],
+["さ","sa"],["し","shi"],["す","su"],["せ","se"],["そ","so"],
+["た","ta"],["ち","chi"],["つ","tsu"],["て","te"],["と","to"],
+["な","na"],["に","ni"],["ぬ","nu"],["ね","ne"],["の","no"],
+["は","ha"],["ひ","hi"],["ふ","fu"],["へ","he"],["ほ","ho"],
+["ま","ma"],["み","mi"],["む","mu"],["め","me"],["も","mo"],
+["や","ya"],["ゆ","yu"],["よ","yo"],
+["ら","ra"],["り","ri"],["る","ru"],["れ","re"],["ろ","ro"],
+["わ","wa"],["を","wo"],["ん","n"]
+].map(x=>({kana:x[0],romaji:x[1],category:"Basic Hiragana"}));
+
+const voiced = [
+["が","ga"],["ぎ","gi"],["ぐ","gu"],["げ","ge"],["ご","go"],
+["ざ","za"],["じ","ji"],["ず","zu"],["ぜ","ze"],["ぞ","zo"],
+["だ","da"],["ぢ","ji","IME: di"],["づ","zu","IME: du"],["で","de"],["ど","do"],
+["ば","ba"],["び","bi"],["ぶ","bu"],["べ","be"],["ぼ","bo"],
+["ぱ","pa"],["ぴ","pi"],["ぷ","pu"],["ぺ","pe"],["ぽ","po"]
+].map(x=>({kana:x[0],romaji:x[1],note:x[2]||"",category:"Dakuten / Handakuten"}));
+
+const yoon = [
+["きゃ","kya"],["きゅ","kyu"],["きょ","kyo"],
+["しゃ","sha"],["しゅ","shu"],["しょ","sho"],
+["ちゃ","cha"],["ちゅ","chu"],["ちょ","cho"],
+["にゃ","nya"],["にゅ","nyu"],["にょ","nyo"],
+["ひゃ","hya"],["ひゅ","hyu"],["ひょ","hyo"],
+["みゃ","mya"],["みゅ","myu"],["みょ","myo"],
+["りゃ","rya"],["りゅ","ryu"],["りょ","ryo"],
+["ぎゃ","gya"],["ぎゅ","gyu"],["ぎょ","gyo"],
+["じゃ","ja"],["じゅ","ju"],["じょ","jo"],
+["ぢゃ","ja","IME: dya"],["ぢゅ","ju","IME: dyu"],["ぢょ","jo","IME: dyo"],
+["びゃ","bya"],["びゅ","byu"],["びょ","byo"],
+["ぴゃ","pya"],["ぴゅ","pyu"],["ぴょ","pyo"]
+].map(x=>({kana:x[0],romaji:x[1],note:x[2]||"",category:"Combination Sounds"}));
+
+const sets={basic,voiced,yoon,all:[...basic,...voiced,...yoon]};
+
+const kanaEl=document.getElementById("kana");
+const romajiEl=document.getElementById("romaji");
+const categoryEl=document.getElementById("category");
+const counterEl=document.getElementById("counter");
+const noteEl=document.getElementById("note");
+const orderMode=document.getElementById("orderMode");
+const setMode=document.getElementById("setMode");
+const speed=document.getElementById("speed");
+const autoBtn=document.getElementById("autoBtn");
+const statusEl=document.getElementById("status");
+
+let deck=[];
+let index=0;
+let timer=null;
+
+function shuffle(items){
+  const a=[...items];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function makeDeck(){
+  const base=sets[setMode.value];
+  deck=orderMode.value==="random"?shuffle(base):[...base];
+  index=0;
+  render();
+}
+
+function render(){
+  const item=deck[index];
+  kanaEl.textContent=item.kana;
+  romajiEl.textContent=item.romaji;
+  categoryEl.textContent=item.category;
+  counterEl.textContent=`${index+1} / ${deck.length}`;
+  noteEl.textContent=item.note||"";
+}
+
+function next(){
+  if(index<deck.length-1){
+    index++;
+  }else{
+    if(orderMode.value==="random") deck=shuffle(sets[setMode.value]);
+    index=0;
+    statusEl.textContent="Starting again.";
+  }
+  render();
+}
+
+function previous(){
+  index=(index-1+deck.length)%deck.length;
+  render();
+}
+
+function restart(){
+  makeDeck();
+  statusEl.textContent="Slideshow restarted.";
+}
+
+function stopAuto(){
+  if(timer) clearInterval(timer);
+  timer=null;
+  autoBtn.textContent="Start Auto Slideshow";
+  autoBtn.setAttribute("aria-pressed","false");
+}
+
+function startAuto(){
+  stopAuto();
+  timer=setInterval(next,Number(speed.value));
+  autoBtn.textContent="Pause Auto Slideshow";
+  autoBtn.setAttribute("aria-pressed","true");
+  statusEl.textContent="Automatic slideshow running.";
+}
+
+function toggleAuto(){
+  if(timer){
+    stopAuto();
+    statusEl.textContent="Automatic slideshow paused.";
+  }else{
+    startAuto();
+  }
+}
+
+document.getElementById("nextBtn").addEventListener("click",next);
+document.getElementById("prevBtn").addEventListener("click",previous);
+document.getElementById("restartBtn").addEventListener("click",restart);
+document.getElementById("reshuffleBtn").addEventListener("click",()=>{
+  deck=shuffle(sets[setMode.value]);
+  index=0;
+  orderMode.value="random";
+  render();
+  statusEl.textContent="Hiragana reshuffled.";
+});
+autoBtn.addEventListener("click",toggleAuto);
+
+orderMode.addEventListener("change",()=>{stopAuto();makeDeck();});
+setMode.addEventListener("change",()=>{stopAuto();makeDeck();});
+speed.addEventListener("change",()=>{if(timer) startAuto();});
+
+document.addEventListener("keydown",e=>{
+  if(e.target.matches("select,button")) return;
+  if(e.key==="ArrowRight"||e.key===" "){
+    e.preventDefault();
+    next();
+  }else if(e.key==="ArrowLeft"){
+    e.preventDefault();
+    previous();
+  }else if(e.key.toLowerCase()==="p"){
+    toggleAuto();
+  }else if(e.key.toLowerCase()==="r"){
+    restart();
+  }
+});
+
+makeDeck();
+</script>
+</body>
+</html>
