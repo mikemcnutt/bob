@@ -4,7 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <title>CIT 275 - Administering Windows Server — Module 4</title>
+  <title>CIT 275 - Administering Windows Server — Module 13</title>
+  <script>document.documentElement.classList.add('js-enabled');</script>
   <style>
     :root {
       --background: #030914;
@@ -109,9 +110,19 @@
       text-align: center;
     }
 
+    .header-tools {
+      position: relative;
+      display: flex;
+      max-width: 930px;
+      margin: 0 auto 0.85rem;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
     .course-code {
       display: inline-block;
-      margin: 0 0 0.85rem;
+      margin: 0;
       padding: 0.55rem 1rem;
       border: 1px solid #3d6f8e;
       border-radius: 999px;
@@ -122,6 +133,51 @@
       font-weight: 800;
       letter-spacing: 0.16em;
       text-transform: uppercase;
+    }
+
+    .display-options {
+      position: relative;
+      z-index: 20;
+      text-align: left;
+    }
+
+    .display-options summary {
+      padding: 0.55rem 0.85rem;
+      border: 2px solid #235979;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #10243a;
+      font-weight: 800;
+      cursor: pointer;
+      list-style-position: inside;
+    }
+
+    .display-options summary:hover {
+      background: #eaf7ff;
+    }
+
+    .display-options summary:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .display-options-panel {
+      position: absolute;
+      top: calc(100% + 0.55rem);
+      right: 0;
+      width: min(280px, calc(100vw - 3rem));
+      padding: 1rem;
+      border: 1px solid #8aa5ba;
+      border-radius: 10px;
+      background: #ffffff;
+      box-shadow: 0 12px 30px rgba(16, 36, 58, 0.22);
+    }
+
+    .display-options-panel p {
+      margin: 0 0 0.75rem;
+      color: #263f58;
+      font-size: 0.92rem;
+      line-height: 1.45;
     }
 
     h1 {
@@ -138,10 +194,36 @@
       font-size: 1.04rem;
     }
 
+    .view-toggle {
+      width: 100%;
+      padding: 0.65rem 1rem;
+      border: 2px solid #235979;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #10243a;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .view-toggle:hover {
+      background: #eaf7ff;
+    }
+
+    .view-toggle:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
     .workstation {
       position: relative;
       max-width: 930px;
       margin: 0 auto;
+    }
+
+    .workstation:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 5px;
     }
 
     .workstation::before {
@@ -274,7 +356,7 @@
 
     .screen-saver {
       position: relative;
-      display: grid;
+      display: none;
       min-height: 0;
       overflow: hidden;
       flex: 1;
@@ -282,6 +364,16 @@
       background:
         radial-gradient(circle at 50% 50%, rgba(79, 145, 255, 0.17), transparent 58%),
         linear-gradient(180deg, #020914, #061726 72%, #020914);
+    }
+
+    .js-enabled .screen-saver {
+      display: grid;
+    }
+
+    .js-enabled .screen-saver.is-hidden,
+    .js-enabled .console-layout.is-inactive,
+    .js-enabled .module-panel:not(.is-active) {
+      display: none;
     }
 
     .screen-saver::before,
@@ -388,6 +480,24 @@
       overflow-y: auto;
       scrollbar-color: var(--cyan) rgba(3, 14, 24, 0.8);
       scrollbar-width: thin;
+    }
+
+    .screen-content:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: -4px;
+    }
+
+    .module-panel {
+      min-width: 0;
+    }
+
+    .module-panel + .module-panel {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(103, 226, 255, 0.3);
+    }
+
+    .module-panel.is-active {
       animation: content-in 340ms ease both;
     }
 
@@ -578,18 +688,40 @@
       transition: border-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease;
     }
 
-    .power-button:hover {
-      color: var(--cyan-soft);
-      transform: scale(1.06);
+    @media (hover: hover) {
+      .power-button:hover {
+        color: var(--cyan-soft);
+        transform: scale(1.06);
+      }
     }
 
-    .power-button[aria-selected="true"] {
+    .power-button[aria-current="true"] {
       border-color: var(--cyan);
       color: var(--cyan);
       box-shadow:
         0 0 8px var(--cyan),
         0 0 22px rgba(103, 226, 255, 0.7),
         inset 0 0 10px rgba(103, 226, 255, 0.32);
+    }
+
+    .workstation.has-selection .screen::after,
+    .workstation.has-selection .online::before,
+    .workstation.has-selection .drive::before,
+    .workstation.has-selection .drive::after {
+      animation: none;
+    }
+
+    @media (forced-colors: active) {
+      .power-button {
+        border: 2px solid ButtonText;
+        forced-color-adjust: auto;
+      }
+
+      .power-button[aria-current="true"] {
+        border: 4px solid Highlight;
+        color: Highlight;
+        box-shadow: none;
+      }
     }
 
     .power-symbol {
@@ -733,8 +865,9 @@
     .rack-instruction {
       position: relative;
       margin: 0.65rem 0 0;
-      color: #40566e;
-      font-size: 0.9rem;
+      color: #10243a;
+      font-size: 1rem;
+      font-weight: 700;
       text-align: center;
     }
 
@@ -749,6 +882,66 @@
       background: rgba(13, 35, 55, 0.28);
       filter: blur(12px);
       content: "";
+    }
+
+    body.text-only .workstation {
+      max-width: 860px;
+    }
+
+    body.text-only .workstation::before,
+    body.text-only .screen-topbar,
+    body.text-only .screen-saver,
+    body.text-only .console-sidebar,
+    body.text-only .monitor-controls,
+    body.text-only .monitor-neck,
+    body.text-only .monitor-base,
+    body.text-only .rack-shell,
+    body.text-only .rack-instruction {
+      display: none;
+    }
+
+    body.text-only .monitor,
+    body.text-only .screen {
+      height: auto;
+      min-height: 0;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    body.text-only .console-layout,
+    html.js-enabled body.text-only .console-layout.is-inactive {
+      display: block;
+    }
+
+    body.text-only .screen-content {
+      padding: 0;
+      overflow: visible;
+      color: #10243a;
+    }
+
+    body.text-only .module-panel,
+    html.js-enabled body.text-only .module-panel:not(.is-active) {
+      display: block;
+      margin: 0 0 1rem;
+      padding: 1.25rem 1.4rem;
+      border: 1px solid #b9cada;
+      border-radius: 10px;
+      background: #ffffff;
+      box-shadow: 0 6px 18px rgba(16, 36, 58, 0.08);
+      animation: none;
+    }
+
+    body.text-only .screen h2,
+    body.text-only .screen p,
+    body.text-only .screen li {
+      color: #10243a;
+    }
+
+    body.text-only .screen-kicker {
+      color: #145f7d;
     }
 
     .screen-reader-text {
@@ -948,6 +1141,20 @@
     }
 
     @media (max-width: 760px) {
+      .header-tools {
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .display-options {
+        align-self: center;
+      }
+
+      .display-options-panel {
+        right: 50%;
+        transform: translateX(50%);
+      }
+
       .page-shell {
         width: min(100% - 1rem, 1120px);
       }
@@ -1104,7 +1311,8 @@
       .monitor-base,
       .rack-shell,
       .rack-instruction,
-      .monitor-controls {
+      .monitor-controls,
+      .display-options {
         display: none;
       }
 
@@ -1139,7 +1347,24 @@
         overflow: visible;
       }
 
+      .js-enabled .console-layout.is-inactive,
+      .js-enabled .module-panel:not(.is-active),
+      .module-panel {
+        display: block;
+      }
+
+      .module-panel {
+        break-inside: avoid;
+        margin: 0 0 1.5rem;
+        padding: 0 0 1.5rem;
+        border-bottom: 1px solid #777777;
+      }
+
       .screen p,
+      .screen li,
+      .screen h2,
+      .screen h3,
+      .screen-kicker,
       .screen-callout {
         color: #111111;
       }
@@ -1147,29 +1372,38 @@
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#server-screen">Skip to module content</a>
+  <a class="skip-link" href="#module-content">Skip to module content</a>
 
   <div class="page-shell">
     <header class="course-header">
-      <p class="course-code">CIT 275 - Administering Windows Server · Module 4</p>
-      <h1>IP Addressing, DHCP, and DNS</h1>
-      <p class="course-intro">Press the power button on a server below to display that part of the module on the workstation monitor.</p>
+      <div class="header-tools">
+        <p class="course-code">CIT 275 - Administering Windows Server · Module 13</p>
+        <details class="display-options" id="display-options">
+          <summary>Display options</summary>
+          <div class="display-options-panel">
+            <p>Choose how the module content is displayed.</p>
+            <button class="view-toggle" id="view-toggle" type="button" role="switch" aria-checked="false">Use text-only view</button>
+          </div>
+        </details>
+      </div>
+      <h1>Virtualization Deployment, Storage, and Networking</h1>
+      <p class="course-intro" id="course-intro">Press the power button on a server below to display that part of the module on the workstation monitor.</p>
     </header>
 
-    <main class="workstation">
+    <main class="workstation" id="module-content" tabindex="-1">
       <section class="monitor" aria-label="Module content monitor">
-        <div class="screen" id="server-screen" role="region" aria-label="CIT 275 - Administering Windows Server screensaver" tabindex="0">
-          <div class="screen-topbar">
+        <div class="screen" id="server-screen">
+          <div class="screen-topbar" aria-hidden="true">
             <span>Windows Server Learning Console</span>
             <span class="online">System online</span>
           </div>
 
-          <div class="screen-saver" id="screen-saver">
+          <div class="screen-saver" id="screen-saver" aria-hidden="false">
             <div class="screen-saver-text">CIT 275 - Administering Windows Server<span>Select a server to begin</span></div>
           </div>
 
-          <div class="console-layout" id="console-layout" hidden>
-            <aside class="console-sidebar" aria-label="Windows Server service status">
+          <div class="console-layout is-inactive" id="console-layout" aria-hidden="true">
+            <aside class="console-sidebar" aria-hidden="true">
               <p class="console-sidebar-title">Server Manager</p>
               <ul class="console-status-list">
                 <li class="console-status"><strong>DHCP Service</strong><span>Running</span></li>
@@ -1179,10 +1413,38 @@
               </ul>
             </aside>
 
-            <div class="screen-content" id="screen-content" tabindex="0" aria-live="polite">
-              <p class="screen-kicker">Module Overview</p>
-              <h2>What You Will Learn</h2>
-              <p>In this module, we will learn about APIPA addressing, troubleshooting DHCP, configuring DHCPv6 servers and addresses, managing DHCP servers and scopes with IPAM, configuring NIC Teaming, and configuring DNS addressing and zones.</p>
+            <div class="screen-content" id="screen-content" tabindex="0" aria-label="Module content">
+              <section class="module-panel" id="panel-overview">
+                <p class="screen-kicker">Module Overview</p>
+                <h2>What You Will Learn</h2>
+                <p>In this module, we will learn about virtualization deployment, virtual machines, virtual machine storage, virtual networks, and virtual network optimization.</p>
+              </section>
+
+              <section class="module-panel" id="panel-matters">
+                <p class="screen-kicker">Why It Matters</p>
+                <h2>Efficient and Flexible Infrastructure</h2>
+                <p>Virtualization is the foundation of modern IT infrastructure, enabling efficient resource use and flexible deployment across environments. In this module, you’ll learn how to deploy and manage virtual machines, configure virtual storage, and design virtual networks that support scalable and secure operations. These skills are essential for optimizing performance, reducing costs, and preparing for advanced hybrid and cloud-based solutions.</p>
+              </section>
+
+              <section class="module-panel" id="panel-activities">
+                <p class="screen-kicker">Module Activities</p>
+                <h2>Complete These Activities</h2>
+                <ul>
+                  <li>CompTIA reading and assignments for Chapter 12.1–12.5</li>
+                </ul>
+              </section>
+
+              <section class="module-panel" id="panel-competency">
+                <p class="screen-kicker">Demonstrate Competency</p>
+                <h2>Module Skills</h2>
+                <ul>
+                  <li>Install and configure Hyper-V</li>
+                  <li>Create Windows virtual machines on Windows Server</li>
+                  <li>Create virtual hard disks</li>
+                  <li>Create virtual switches and add virtual network adapters</li>
+                  <li>Optimize virtual network performance</li>
+                </ul>
+              </section>
             </div>
           </div>
         </div>
@@ -1198,9 +1460,10 @@
 
       <section class="rack-shell" aria-labelledby="rack-title">
         <h2 class="screen-reader-text" id="rack-title">Choose a module section</h2>
-        <div class="server-stack" role="tablist" aria-label="Module sections" aria-orientation="vertical">
-          <article class="server-unit" data-server="overview">
-            <button class="power-button" id="power-overview" type="button" role="tab" aria-selected="false" aria-controls="server-screen" data-section="overview">
+        <p class="screen-reader-text" id="server-instructions">Choose one of four module sections. Use the arrow keys to move between sections.</p>
+        <div class="server-stack" role="group" aria-label="Module sections" aria-describedby="server-instructions">
+          <article class="server-unit" data-server="overview" role="presentation">
+            <button class="power-button" id="power-overview" type="button" aria-controls="panel-overview" data-section="overview">
               <span class="power-symbol" aria-hidden="true"></span>
               <span class="screen-reader-text">Display Module Overview</span>
             </button>
@@ -1209,8 +1472,8 @@
             <span class="server-label">Module Overview</span>
           </article>
 
-          <article class="server-unit" data-server="matters">
-            <button class="power-button" id="power-matters" type="button" role="tab" aria-selected="false" aria-controls="server-screen" data-section="matters">
+          <article class="server-unit" data-server="matters" role="presentation">
+            <button class="power-button" id="power-matters" type="button" aria-controls="panel-matters" data-section="matters">
               <span class="power-symbol" aria-hidden="true"></span>
               <span class="screen-reader-text">Display Why It Matters</span>
             </button>
@@ -1219,8 +1482,8 @@
             <span class="server-label">Why It Matters</span>
           </article>
 
-          <article class="server-unit" data-server="activities">
-            <button class="power-button" id="power-activities" type="button" role="tab" aria-selected="false" aria-controls="server-screen" data-section="activities">
+          <article class="server-unit" data-server="activities" role="presentation">
+            <button class="power-button" id="power-activities" type="button" aria-controls="panel-activities" data-section="activities">
               <span class="power-symbol" aria-hidden="true"></span>
               <span class="screen-reader-text">Display Module Activities</span>
             </button>
@@ -1229,8 +1492,8 @@
             <span class="server-label">Module Activities</span>
           </article>
 
-          <article class="server-unit" data-server="competency">
-            <button class="power-button" id="power-competency" type="button" role="tab" aria-selected="false" aria-controls="server-screen" data-section="competency">
+          <article class="server-unit" data-server="competency" role="presentation">
+            <button class="power-button" id="power-competency" type="button" aria-controls="panel-competency" data-section="competency">
               <span class="power-symbol" aria-hidden="true"></span>
               <span class="screen-reader-text">Display Demonstrate Competency</span>
             </button>
@@ -1246,88 +1509,91 @@
 
   </div>
 
-  <template id="template-overview">
-    <p class="screen-kicker">Module Overview</p>
-    <h2>What You Will Learn</h2>
-    <p>In this module, we will learn about APIPA addressing, troubleshooting DHCP, configuring DHCPv6 servers and addresses, managing DHCP servers and scopes with IPAM, configuring NIC Teaming, and configuring DNS addressing and zones.</p>
-  </template>
-
-  <template id="template-matters">
-    <p class="screen-kicker">Why It Matters</p>
-    <h2>Reliable Network Communication</h2>
-    <p>Understanding how to configure and manage IP addressing, DHCP, and DNS services is essential to maintaining reliable network communication. In this module, you’ll learn how to troubleshoot DHCP issues, configure DHCPv6 servers, manage scopes with IPAM, and implement NIC Teaming for redundancy and performance. Mastering these skills ensures that servers and clients can connect efficiently, resolve names correctly, and remain resilient against network failures.</p>
-  </template>
-
-  <template id="template-activities">
-    <p class="screen-kicker">Module Activities</p>
-    <h2>Complete This Module</h2>
-    <ul>
-      <li>CompTIA reading and assignments for Chapters 4.7–5.2</li>
-      <li>Test 1</li>
-    </ul>
-  </template>
-
-  <template id="template-competency">
-    <p class="screen-kicker">Demonstrate Competency</p>
-    <h2>Module Skills</h2>
-    <ul>
-      <li>Configure alternate addressing</li>
-      <li>Troubleshoot DHCP</li>
-      <li>Configure DHCPv6 servers</li>
-      <li>Configure an IPv6 address</li>
-      <li>Use IPAM to manage DHCP and DNS</li>
-      <li>Configure NIC Teaming</li>
-      <li>Create standard DNS zones</li>
-      <li>Create CNAME records</li>
-      <li>Configure forwarders</li>
-    </ul>
-  </template>
-
   <script>
     (() => {
       const tabs = [...document.querySelectorAll('.power-button')];
-      const screen = document.getElementById('server-screen');
+      const workstation = document.querySelector('.workstation');
       const content = document.getElementById('screen-content');
       const screenSaver = document.getElementById('screen-saver');
       const consoleLayout = document.getElementById('console-layout');
+      const panels = [...document.querySelectorAll('.module-panel')];
+      const viewToggle = document.getElementById('view-toggle');
+      const displayOptions = document.getElementById('display-options');
+      const courseIntro = document.getElementById('course-intro');
+      let selectedTab = null;
 
       function activate(tab, moveFocus = false) {
         const section = tab.dataset.section;
-        const template = document.getElementById(`template-${section}`);
+        selectedTab = tab;
 
         tabs.forEach((item) => {
           const selected = item === tab;
-          item.setAttribute('aria-selected', String(selected));
-          item.tabIndex = 0;
+          const accessibleLabel = item.querySelector('.screen-reader-text');
+          const baseLabel = accessibleLabel.dataset.baseLabel || accessibleLabel.textContent;
+          accessibleLabel.dataset.baseLabel = baseLabel;
+          accessibleLabel.textContent = selected ? `${baseLabel}, current section` : baseLabel;
+          if (selected) {
+            item.setAttribute('aria-current', 'true');
+          } else {
+            item.removeAttribute('aria-current');
+          }
           item.closest('.server-unit').classList.toggle('is-active', selected);
         });
 
-        screenSaver.hidden = true;
-        consoleLayout.hidden = false;
-        screen.setAttribute('role', 'tabpanel');
-        screen.removeAttribute('aria-label');
-        screen.setAttribute('aria-labelledby', tab.id);
-        content.replaceChildren(template.content.cloneNode(true));
-        content.style.animation = 'none';
-        void content.offsetWidth;
-        content.style.animation = '';
+        panels.forEach((panel) => {
+          const selected = panel.id === `panel-${section}`;
+          panel.classList.toggle('is-active', selected);
+          panel.setAttribute('aria-hidden', String(!selected));
+        });
+
+        workstation.classList.add('has-selection');
+        screenSaver.classList.add('is-hidden');
+        screenSaver.setAttribute('aria-hidden', 'true');
+        consoleLayout.classList.remove('is-inactive');
+        consoleLayout.setAttribute('aria-hidden', 'false');
+        content.removeAttribute('aria-label');
+        content.setAttribute('aria-labelledby', tab.id);
+        content.scrollTop = 0;
 
         if (moveFocus) {
           tab.focus();
         }
       }
 
+      viewToggle.addEventListener('click', () => {
+        const textOnly = document.body.classList.toggle('text-only');
+        viewToggle.setAttribute('aria-checked', String(textOnly));
+        viewToggle.textContent = textOnly ? 'Use graphical view' : 'Use text-only view';
+        courseIntro.textContent = textOnly
+          ? 'All module sections are displayed below in a text-only layout.'
+          : 'Press the power button on a server below to display that part of the module on the workstation monitor.';
+        displayOptions.open = false;
+
+        if (textOnly) {
+          screenSaver.classList.add('is-hidden');
+          screenSaver.setAttribute('aria-hidden', 'true');
+          consoleLayout.classList.remove('is-inactive');
+          consoleLayout.setAttribute('aria-hidden', 'false');
+          panels.forEach((panel) => panel.setAttribute('aria-hidden', 'false'));
+          content.removeAttribute('tabindex');
+          content.removeAttribute('aria-labelledby');
+          content.setAttribute('aria-label', 'Module content');
+        } else if (selectedTab) {
+          content.setAttribute('tabindex', '0');
+          activate(selectedTab);
+        } else {
+          screenSaver.classList.remove('is-hidden');
+          screenSaver.setAttribute('aria-hidden', 'false');
+          consoleLayout.classList.add('is-inactive');
+          consoleLayout.setAttribute('aria-hidden', 'true');
+          content.setAttribute('tabindex', '0');
+        }
+      });
+
       tabs.forEach((tab, index) => {
         tab.addEventListener('click', () => activate(tab));
         tab.addEventListener('keydown', (event) => {
           let nextIndex = null;
-
-          if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar' || event.code === 'Space') {
-            event.preventDefault();
-            event.stopPropagation();
-            activate(tab);
-            return;
-          }
 
           if (event.key === 'ArrowDown' || event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
           if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
