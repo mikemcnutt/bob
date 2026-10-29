@@ -1,0 +1,1346 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>CIT 275 - Administering Windows Server — Module 4</title>
+  <style>
+    :root {
+      --background: #030914;
+      --background-soft: #071323;
+      --rack-dark: #111b29;
+      --rack-mid: #26384c;
+      --rack-light: #4b6076;
+      --screen: #061a28;
+      --screen-line: rgba(103, 226, 255, 0.12);
+      --cyan: #67e2ff;
+      --cyan-soft: #b8f3ff;
+      --blue: #4f91ff;
+      --green: #70ffb2;
+      --amber: #ffc857;
+      --white: #f5f9ff;
+      --muted: #c0cee0;
+      --focus: #ffd166;
+      --border: #38526d;
+      --shadow: 0 30px 85px rgba(0, 0, 0, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    html {
+      max-width: 100%;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      max-width: 100%;
+      margin: 0;
+      overflow-x: hidden;
+      background:
+        radial-gradient(ellipse at 50% 32%, rgba(117, 207, 238, 0.16), transparent 38rem),
+        #f7f9fc;
+      color: #10243a;
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    body::before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: min(1180px, 100%);
+      height: 100%;
+      z-index: -1;
+      content: "";
+      opacity: 0.2;
+      background-image:
+        linear-gradient(rgba(103, 226, 255, 0.16) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(103, 226, 255, 0.16) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at 50% 42%, #000 0 34%, transparent 76%);
+      transform: translateX(-50%);
+    }
+
+    a {
+      color: var(--cyan-soft);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 0.75rem;
+      left: 0.75rem;
+      z-index: 100;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      background: var(--focus);
+      color: #111827;
+      font-weight: 800;
+      transform: translateY(-180%);
+      transition: transform 160ms ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .page-shell {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 1rem auto 0;
+    }
+
+    .course-header {
+      margin-bottom: 1.1rem;
+      color: #10243a;
+      text-align: center;
+    }
+
+    .course-code {
+      display: inline-block;
+      margin: 0 0 0.85rem;
+      padding: 0.55rem 1rem;
+      border: 1px solid #3d6f8e;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #17314a, #0b1c2d);
+      color: var(--cyan-soft);
+      box-shadow: 0 8px 22px rgba(20, 50, 75, 0.2);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5.5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .course-intro {
+      max-width: 760px;
+      margin: 0.65rem auto 0;
+      color: #40566e;
+      font-size: 1.04rem;
+    }
+
+    .workstation {
+      position: relative;
+      max-width: 930px;
+      margin: 0 auto;
+    }
+
+    .workstation::before {
+      position: absolute;
+      top: -4rem;
+      right: 0;
+      bottom: 2rem;
+      left: 0;
+      z-index: -1;
+      content: "";
+      background: radial-gradient(ellipse at 50% 36%, rgba(55, 165, 218, 0.2), rgba(55, 165, 218, 0.06) 43%, transparent 72%);
+      pointer-events: none;
+    }
+
+    .monitor {
+      position: relative;
+      z-index: 2;
+      width: 84%;
+      margin: 0 auto;
+      padding: 16px 16px 22px;
+      border: 1px solid #60768b;
+      border-radius: 24px;
+      background: linear-gradient(145deg, #354b62, #111d2c 55%, #293d51);
+      box-shadow:
+        var(--shadow),
+        inset 0 1px 1px rgba(255, 255, 255, 0.22),
+        inset 0 -2px 5px rgba(0, 0, 0, 0.65);
+    }
+
+    .monitor::before {
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #030914;
+      content: "";
+      transform: translateX(-50%);
+      box-shadow: inset 0 0 2px #000000;
+    }
+
+    .screen {
+      position: relative;
+      display: flex;
+      height: 460px;
+      overflow: hidden;
+      border: 2px solid #050b12;
+      border-radius: 12px;
+      background:
+        linear-gradient(90deg, rgba(11, 36, 55, 0.95), transparent 27%),
+        radial-gradient(circle at 82% 20%, rgba(79, 145, 255, 0.19), transparent 18rem),
+        var(--screen);
+      color: var(--white);
+      flex-direction: column;
+      box-shadow:
+        inset 0 0 50px rgba(0, 0, 0, 0.65),
+        0 0 22px rgba(103, 226, 255, 0.1);
+    }
+
+    .screen::after {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.055) 48%, transparent 60%);
+      content: "";
+      transform: translateX(-100%);
+      animation: screen-sweep 9s ease-in-out infinite;
+    }
+
+    .screen-topbar {
+      display: flex;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.7rem 1rem;
+      padding: 0.85rem 1.1rem;
+      border-bottom: 1px solid rgba(103, 226, 255, 0.35);
+      background: rgba(3, 14, 24, 0.88);
+      color: var(--cyan-soft);
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .online {
+      display: inline-flex;
+      gap: 0.45rem;
+      align-items: center;
+    }
+
+    .online::before {
+      width: 0.55rem;
+      height: 0.55rem;
+      border-radius: 50%;
+      background: var(--green);
+      content: "";
+      box-shadow: 0 0 11px var(--green);
+      animation: status-pulse 2.4s ease-in-out infinite;
+    }
+
+    .console-layout {
+      display: grid;
+      position: relative;
+      z-index: 1;
+      grid-template-columns: 190px minmax(0, 1fr);
+      min-height: 0;
+      flex: 1;
+    }
+
+    .console-sidebar {
+      padding: 1rem 0.8rem;
+      overflow: hidden;
+      border-right: 1px solid rgba(103, 226, 255, 0.28);
+      background: rgba(4, 19, 31, 0.78);
+    }
+
+    .console-sidebar-title {
+      margin: 0 0 0.75rem;
+      color: #8ea6ba;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.69rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .screen-saver {
+      position: relative;
+      display: grid;
+      min-height: 0;
+      overflow: hidden;
+      flex: 1;
+      place-items: center;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(79, 145, 255, 0.17), transparent 58%),
+        linear-gradient(180deg, #020914, #061726 72%, #020914);
+    }
+
+    .screen-saver::before,
+    .screen-saver::after {
+      position: absolute;
+      inset: -20%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .screen-saver::before {
+      opacity: 0.92;
+      background-image:
+        radial-gradient(circle, rgba(184, 243, 255, 0.95) 0 1px, transparent 1.8px),
+        radial-gradient(circle, rgba(112, 255, 178, 0.8) 0 1.2px, transparent 2px),
+        radial-gradient(circle, rgba(79, 145, 255, 0.9) 0 1.4px, transparent 2.2px),
+        radial-gradient(circle, rgba(255, 255, 255, 0.85) 0 0.8px, transparent 1.6px);
+      background-position: 12px 18px, 74px 91px, 138px 42px, 194px 127px;
+      background-size: 210px 160px, 260px 210px, 320px 240px, 170px 190px;
+      animation: starfield-drift 18s linear infinite;
+    }
+
+    .screen-saver::after {
+      opacity: 0.34;
+      background-image:
+        linear-gradient(28deg, transparent 48.8%, rgba(103, 226, 255, 0.34) 49.2% 49.7%, transparent 50.1%),
+        linear-gradient(147deg, transparent 49%, rgba(79, 145, 255, 0.28) 49.3% 49.7%, transparent 50%),
+        radial-gradient(circle at 20% 30%, rgba(103, 226, 255, 0.95) 0 2px, transparent 4px),
+        radial-gradient(circle at 72% 62%, rgba(112, 255, 178, 0.9) 0 2px, transparent 4px);
+      background-size: 260px 210px, 330px 250px, 290px 220px, 350px 260px;
+      animation: network-pulse 6s ease-in-out infinite alternate;
+    }
+
+    .screen-saver-text {
+      position: relative;
+      z-index: 2;
+      max-width: min(80%, 36rem);
+      padding: 1rem 1.35rem;
+      border: 1px solid rgba(103, 226, 255, 0.42);
+      border-radius: 10px;
+      color: var(--cyan-soft);
+      font-family: Consolas, "Courier New", monospace;
+      font-size: clamp(1rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      line-height: 1.35;
+      text-align: center;
+      text-shadow: 0 0 8px rgba(103, 226, 255, 0.8), 0 0 24px rgba(79, 145, 255, 0.58);
+      text-transform: uppercase;
+      animation: screensaver-float 7s ease-in-out infinite alternate;
+    }
+
+    .screen-saver-text span {
+      display: block;
+      margin-top: 0.5rem;
+      color: #8ea6ba;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-shadow: none;
+    }
+
+    .console-status-list {
+      display: grid;
+      gap: 0.55rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .console-status {
+      padding: 0.65rem 0.7rem;
+      border: 1px solid rgba(79, 145, 255, 0.24);
+      border-radius: 6px;
+      background: rgba(17, 47, 69, 0.66);
+      box-shadow: inset 3px 0 0 var(--cyan);
+    }
+
+    .console-status strong,
+    .console-status span {
+      display: block;
+    }
+
+    .console-status strong {
+      color: #dcecff;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+    }
+
+    .console-status span {
+      margin-top: 0.1rem;
+      color: var(--green);
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.66rem;
+      text-transform: uppercase;
+    }
+
+    .screen-content {
+      position: relative;
+      z-index: 1;
+      min-width: 0;
+      min-height: 0;
+      padding: clamp(1.35rem, 3.5vw, 2.6rem);
+      overflow-y: auto;
+      scrollbar-color: var(--cyan) rgba(3, 14, 24, 0.8);
+      scrollbar-width: thin;
+      animation: content-in 340ms ease both;
+    }
+
+    .screen-content::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    .screen-content::-webkit-scrollbar-track {
+      background: rgba(3, 14, 24, 0.8);
+    }
+
+    .screen-content::-webkit-scrollbar-thumb {
+      border: 2px solid rgba(3, 14, 24, 0.8);
+      border-radius: 10px;
+      background: var(--cyan);
+    }
+
+    .screen-kicker {
+      margin: 0 0 0.4rem;
+      color: var(--cyan);
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .screen h2 {
+      margin: 0 0 1rem;
+      font-size: clamp(1.75rem, 5vw, 3.15rem);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+    }
+
+    .screen h3 {
+      margin: 1.35rem 0 0.45rem;
+      color: var(--cyan-soft);
+      font-size: 1rem;
+    }
+
+    .screen p {
+      max-width: 76ch;
+      margin: 0.75rem 0;
+      color: #e2ebf7;
+    }
+
+    .screen ul {
+      display: grid;
+      gap: 0.45rem;
+      max-width: 76ch;
+      padding-left: 1.3rem;
+    }
+
+    .screen li::marker {
+      color: var(--cyan);
+    }
+
+    .screen-callout {
+      max-width: 76ch;
+      margin-top: 1.25rem;
+      padding: 0.9rem 1rem;
+      border: 1px solid rgba(79, 145, 255, 0.45);
+      border-left: 4px solid var(--blue);
+      border-radius: 4px 10px 10px 4px;
+      background: rgba(79, 145, 255, 0.11);
+      color: var(--muted);
+    }
+
+    .monitor-controls {
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.35rem;
+      padding: 10px 8px 0;
+    }
+
+    .monitor-control {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #71859a;
+      box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.8);
+    }
+
+    .monitor-control:last-child {
+      background: var(--green);
+      box-shadow: 0 0 8px rgba(112, 255, 178, 0.8);
+    }
+
+    .monitor-neck {
+      position: relative;
+      z-index: 1;
+      width: 16%;
+      height: 46px;
+      margin: -2px auto 0;
+      border-right: 1px solid #536a80;
+      border-left: 1px solid #536a80;
+      background: linear-gradient(90deg, #172535, #3c5065 50%, #172535);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .monitor-base {
+      position: relative;
+      z-index: 2;
+      width: 34%;
+      height: 17px;
+      margin: -1px auto 16px;
+      border: 1px solid #536a80;
+      border-radius: 60% 60% 10px 10px;
+      background: linear-gradient(180deg, #40556a, #142131);
+      box-shadow: 0 12px 22px rgba(0, 0, 0, 0.4);
+    }
+
+    .rack-shell {
+      position: relative;
+      width: 88%;
+      margin: 0 auto;
+      padding: 10px;
+      border: 1px solid #536a80;
+      border-radius: 16px;
+      background:
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05), transparent 8%, transparent 92%, rgba(255, 255, 255, 0.05)),
+        #0d1723;
+      box-shadow: var(--shadow), inset 0 0 24px rgba(0, 0, 0, 0.65);
+    }
+
+    .rack-shell::before,
+    .rack-shell::after {
+      position: absolute;
+      top: 14px;
+      bottom: 14px;
+      width: 7px;
+      border: 1px solid #3d5268;
+      background: repeating-linear-gradient(to bottom, #52677b 0 4px, #111b29 4px 17px);
+      content: "";
+    }
+
+    .rack-shell::before {
+      left: 4px;
+    }
+
+    .rack-shell::after {
+      right: 4px;
+    }
+
+    .server-stack {
+      display: grid;
+      gap: 7px;
+    }
+
+    .server-unit {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: clamp(0.75rem, 3vw, 1.5rem);
+      min-height: 84px;
+      padding: 11px clamp(1rem, 3vw, 1.5rem) 23px;
+      border: 1px solid #536a80;
+      border-radius: 9px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.075), transparent 20%),
+        linear-gradient(90deg, #182637, #263a4e 50%, #162434);
+      box-shadow:
+        inset 0 1px 1px rgba(255, 255, 255, 0.13),
+        inset 0 -3px 5px rgba(0, 0, 0, 0.45),
+        0 4px 10px rgba(0, 0, 0, 0.35);
+      align-items: center;
+    }
+
+    .server-unit.is-active {
+      border-color: var(--cyan);
+      box-shadow:
+        inset 0 0 20px rgba(103, 226, 255, 0.06),
+        0 0 20px rgba(103, 226, 255, 0.22);
+    }
+
+    .power-button {
+      position: relative;
+      display: grid;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      border: 2px solid #657b91;
+      border-radius: 50%;
+      background: radial-gradient(circle, #263a4e 35%, #101923 68%);
+      color: #9db0c4;
+      cursor: pointer;
+      place-items: center;
+      transition: border-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease;
+    }
+
+    .power-button:hover {
+      color: var(--cyan-soft);
+      transform: scale(1.06);
+    }
+
+    .power-button[aria-selected="true"] {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow:
+        0 0 8px var(--cyan),
+        0 0 22px rgba(103, 226, 255, 0.7),
+        inset 0 0 10px rgba(103, 226, 255, 0.32);
+    }
+
+    .power-symbol {
+      width: 20px;
+      height: 20px;
+      border: 3px solid currentColor;
+      border-top-color: transparent;
+      border-radius: 50%;
+    }
+
+    .power-symbol::before {
+      display: block;
+      width: 3px;
+      height: 11px;
+      margin: -5px auto 0;
+      border-radius: 2px;
+      background: currentColor;
+      content: "";
+    }
+
+    .drive-bank {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(35px, 1fr));
+      gap: 8px;
+    }
+
+    .drive {
+      position: relative;
+      height: 38px;
+      border: 1px solid #52687f;
+      border-radius: 5px;
+      background:
+        repeating-linear-gradient(90deg, transparent 0 8px, rgba(255, 255, 255, 0.035) 8px 9px),
+        #101a26;
+      box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.65);
+    }
+
+    .drive::before,
+    .drive::after {
+      position: absolute;
+      bottom: 6px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      content: "";
+    }
+
+    .drive::before {
+      right: 16px;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+      animation: drive-light var(--green-speed, 2.1s) steps(2, end) var(--green-delay, 0s) infinite;
+    }
+
+    .drive::after {
+      right: 7px;
+      background: var(--amber);
+      animation: drive-light var(--amber-speed, 3.3s) steps(2, end) var(--amber-delay, 0s) infinite reverse;
+    }
+
+    .server-unit:nth-child(1) {
+      --green-speed: 1.35s;
+      --amber-speed: 2.8s;
+      --green-delay: -0.25s;
+      --amber-delay: -1.1s;
+    }
+
+    .server-unit:nth-child(2) {
+      --green-speed: 2.15s;
+      --amber-speed: 1.7s;
+      --green-delay: -1.3s;
+      --amber-delay: -0.4s;
+    }
+
+    .server-unit:nth-child(3) {
+      --green-speed: 1.75s;
+      --amber-speed: 3.6s;
+      --green-delay: -0.8s;
+      --amber-delay: -2.2s;
+    }
+
+    .server-unit:nth-child(4) {
+      --green-speed: 2.7s;
+      --amber-speed: 2.25s;
+      --green-delay: -1.9s;
+      --amber-delay: -0.75s;
+    }
+
+    .server-unit .drive:nth-child(2)::before {
+      animation-delay: -0.6s;
+    }
+
+    .server-unit .drive:nth-child(3)::after {
+      animation-delay: -1.45s;
+    }
+
+    .server-unit .drive:nth-child(4)::before {
+      animation-delay: -2.1s;
+    }
+
+    .unit-meter {
+      display: grid;
+      gap: 5px;
+      width: 88px;
+    }
+
+    .meter-line {
+      height: 5px;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #0b121b;
+    }
+
+    .meter-line::before {
+      display: block;
+      width: var(--meter, 68%);
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      content: "";
+      box-shadow: 0 0 8px rgba(103, 226, 255, 0.7);
+    }
+
+    .server-label {
+      position: absolute;
+      right: 18%;
+      bottom: -1px;
+      left: 18%;
+      overflow: hidden;
+      color: #d8e6f6;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-align: center;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .rack-instruction {
+      position: relative;
+      margin: 0.65rem 0 0;
+      color: #40566e;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .rack-instruction::before {
+      position: absolute;
+      top: -2.75rem;
+      right: 18%;
+      left: 18%;
+      z-index: -1;
+      height: 2rem;
+      border-radius: 50%;
+      background: rgba(13, 35, 55, 0.28);
+      filter: blur(12px);
+      content: "";
+    }
+
+    .screen-reader-text {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @keyframes screen-sweep {
+      0%, 58% {
+        transform: translateX(-110%);
+      }
+      78%, 100% {
+        transform: translateX(110%);
+      }
+    }
+
+    @keyframes status-pulse {
+      0%, 100% {
+        opacity: 0.55;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes content-in {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+        filter: blur(2px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes screensaver-float {
+      0% {
+        transform: translate(-18%, -25%);
+      }
+      33% {
+        transform: translate(16%, -10%);
+      }
+      66% {
+        transform: translate(-10%, 20%);
+      }
+      100% {
+        transform: translate(18%, 25%);
+      }
+    }
+
+    @keyframes starfield-drift {
+      from {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      to {
+        transform: translate3d(-9%, 8%, 0) scale(1.08);
+      }
+    }
+
+    @keyframes network-pulse {
+      from {
+        opacity: 0.18;
+        transform: translate3d(-2%, 1%, 0);
+      }
+      to {
+        opacity: 0.46;
+        transform: translate3d(2%, -1%, 0);
+      }
+    }
+
+    @keyframes drive-light {
+      0%, 65% {
+        opacity: 0.25;
+      }
+      66%, 100% {
+        opacity: 1;
+      }
+    }
+
+    @media (min-width: 561px) and (max-width: 1000px) {
+      .page-shell {
+        width: min(100% - 1rem, 1120px);
+      }
+
+      .rack-shell {
+        width: 92%;
+      }
+
+      .monitor {
+        max-width: 780px;
+        margin: 0 auto 24px;
+        padding: 18px;
+        border-radius: 34px;
+      }
+
+      .screen {
+        height: 500px;
+        border-radius: 22px;
+      }
+
+      .monitor-controls,
+      .monitor-neck,
+      .monitor-base {
+        display: none;
+      }
+
+      .console-layout {
+        grid-template-columns: 170px minmax(0, 1fr);
+      }
+    }
+
+    @media screen and (min-width: 1001px) and (max-height: 950px) {
+      .page-shell {
+        margin-top: 0.6rem;
+      }
+
+      .course-header {
+        margin-bottom: 0.5rem;
+      }
+
+      .course-code {
+        margin-bottom: 0.35rem;
+        padding: 0.38rem 0.85rem;
+      }
+
+      h1 {
+        font-size: clamp(2rem, 4.5vw, 3.25rem);
+      }
+
+      .course-intro {
+        margin-top: 0.4rem;
+      }
+
+      .screen {
+        height: 335px;
+      }
+
+      .monitor {
+        padding: 10px 10px 14px;
+      }
+
+      .screen-topbar {
+        padding: 0.55rem 0.9rem;
+      }
+
+      .console-sidebar {
+        padding: 0.6rem 0.65rem;
+      }
+
+      .console-sidebar-title {
+        margin-bottom: 0.35rem;
+      }
+
+      .console-status-list {
+        gap: 0.25rem;
+      }
+
+      .console-status {
+        padding: 0.32rem 0.5rem;
+      }
+
+      .monitor-neck {
+        height: 28px;
+      }
+
+      .monitor-base {
+        height: 12px;
+        margin-bottom: 7px;
+      }
+
+      .rack-shell {
+        padding: 8px;
+      }
+
+      .server-stack {
+        gap: 5px;
+      }
+
+      .server-unit {
+        min-height: 60px;
+        padding-top: 5px;
+        padding-bottom: 18px;
+      }
+
+      .rack-instruction {
+        margin-top: 0.4rem;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page-shell {
+        width: min(100% - 1rem, 1120px);
+      }
+
+      .server-unit {
+        grid-template-columns: auto 1fr;
+      }
+
+      .unit-meter {
+        display: none;
+      }
+
+      .drive-bank {
+        grid-template-columns: repeat(3, minmax(28px, 1fr));
+      }
+
+      .drive:last-child {
+        display: none;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .course-header {
+        text-align: left;
+      }
+
+      .rack-shell {
+        width: 100%;
+      }
+
+      .monitor {
+        width: min(100%, 430px);
+        margin: 0 auto 24px;
+        padding: 12px;
+        border-radius: 40px;
+      }
+
+      .monitor::before {
+        top: 5px;
+        width: 42px;
+        height: 5px;
+        border-radius: 5px;
+      }
+
+      .screen {
+        height: 650px;
+        border-radius: 30px;
+      }
+
+      .screen-topbar {
+        display: grid;
+        padding: 1.1rem 1rem 0.75rem;
+      }
+
+      .console-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto minmax(0, 1fr);
+      }
+
+      .console-sidebar {
+        padding: 0.6rem;
+        border-right: 0;
+        border-bottom: 1px solid rgba(103, 226, 255, 0.28);
+      }
+
+      .console-sidebar-title {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+      }
+
+      .console-status-list {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.4rem;
+      }
+
+      .console-status {
+        padding: 0.42rem 0.5rem;
+      }
+
+      .console-status strong,
+      .console-status span {
+        font-size: 0.61rem;
+      }
+
+      .screen-content {
+        padding: 1.2rem;
+      }
+
+      .screen h2 {
+        font-size: clamp(1.55rem, 8vw, 2.25rem);
+      }
+
+      .monitor-controls,
+      .monitor-neck,
+      .monitor-base {
+        display: none;
+      }
+
+      .server-unit {
+        min-height: 92px;
+        padding-inline: 0.8rem;
+      }
+
+      .power-button {
+        width: 43px;
+        height: 43px;
+      }
+
+      .drive-bank {
+        grid-template-columns: repeat(2, minmax(28px, 1fr));
+      }
+
+      .drive:nth-child(n+3) {
+        display: none;
+      }
+
+      .server-label {
+        right: 8%;
+        left: 8%;
+        font-size: 0.66rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .screen-saver-text {
+        transform: none !important;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        color: #000000;
+      }
+
+      body::before,
+      .monitor-neck,
+      .monitor-base,
+      .rack-shell,
+      .rack-instruction,
+      .monitor-controls {
+        display: none;
+      }
+
+      .monitor {
+        padding: 0;
+        border: 0;
+        background: #ffffff;
+        box-shadow: none;
+      }
+
+      .screen {
+        height: auto;
+        padding: 0;
+        border: 0;
+        background: #ffffff;
+        color: #000000;
+        box-shadow: none;
+      }
+
+      .screen-topbar,
+      .screen-saver,
+      .console-sidebar {
+        display: none;
+      }
+
+      .console-layout {
+        display: block;
+      }
+
+      .screen-content {
+        padding: 0;
+        overflow: visible;
+      }
+
+      .screen p,
+      .screen-callout {
+        color: #111111;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#server-screen">Skip to module content</a>
+
+  <div class="page-shell">
+    <header class="course-header">
+      <p class="course-code">CIT 275 - Administering Windows Server · Module 4</p>
+      <h1>IP Addressing, DHCP, and DNS</h1>
+      <p class="course-intro">Press the power vutton on a server below to display that part of the module on the workstation monitor.</p>
+    </header>
+
+    <main class="workstation">
+      <section class="monitor" aria-label="Module content monitor">
+        <div class="screen" id="server-screen" role="region" aria-label="CIT 275 - Administering Windows Server screensaver" tabindex="0">
+          <div class="screen-topbar">
+            <span>Windows Server Learning Console</span>
+            <span class="online">System online</span>
+          </div>
+
+          <div class="screen-saver" id="screen-saver">
+            <div class="screen-saver-text">CIT 275 - Administering Windows Server<span>Select a server to begin</span></div>
+          </div>
+
+          <div class="console-layout" id="console-layout" hidden>
+            <aside class="console-sidebar" aria-label="Windows Server service status">
+              <p class="console-sidebar-title">Server Manager</p>
+              <ul class="console-status-list">
+                <li class="console-status"><strong>DHCP Service</strong><span>Running</span></li>
+                <li class="console-status"><strong>DNS Status</strong><span>Healthy</span></li>
+                <li class="console-status"><strong>IPAM</strong><span>Connected</span></li>
+                <li class="console-status"><strong>NIC Team</strong><span>Active</span></li>
+              </ul>
+            </aside>
+
+            <div class="screen-content" id="screen-content" tabindex="0" aria-live="polite">
+              <p class="screen-kicker">Module Overview</p>
+              <h2>What You Will Learn</h2>
+              <p>In this module, we will learn about APIPA addressing, troubleshooting DHCP, configuring DHCPv6 servers and addresses, managing DHCP servers and scopes with IPAM, configuring NIC Teaming, and configuring DNS addressing and zones.</p>
+            </div>
+          </div>
+        </div>
+        <div class="monitor-controls" aria-hidden="true">
+          <span class="monitor-control"></span>
+          <span class="monitor-control"></span>
+          <span class="monitor-control"></span>
+        </div>
+      </section>
+
+      <div class="monitor-neck" aria-hidden="true"></div>
+      <div class="monitor-base" aria-hidden="true"></div>
+
+      <section class="rack-shell" aria-labelledby="rack-title">
+        <h2 class="screen-reader-text" id="rack-title">Choose a module section</h2>
+        <div class="server-stack" role="tablist" aria-label="Module sections" aria-orientation="vertical">
+          <article class="server-unit" data-server="overview">
+            <button class="power-button" id="power-overview" type="button" role="tab" aria-selected="false" aria-controls="server-screen" data-section="overview">
+              <span class="power-symbol" aria-hidden="true"></span>
+              <span class="screen-reader-text">Display Module Overview</span>
+            </button>
+            <div class="drive-bank" aria-hidden="true"><span class="drive"></span><span class="drive"></span><span class="drive"></span><span class="drive"></span></div>
+            <div class="unit-meter" aria-hidden="true"><span class="meter-line" style="--meter:78%"></span><span class="meter-line" style="--meter:54%"></span><span class="meter-line" style="--meter:87%"></span></div>
+            <span class="server-label">Module Overview</span>
+          </article>
+
+          <article class="server-unit" data-server="matters">
+            <button class="power-button" id="power-matters" type="button" role="tab" aria-selected="false" aria-controls="server-screen" data-section="matters">
+              <span class="power-symbol" aria-hidden="true"></span>
+              <span class="screen-reader-text">Display Why It Matters</span>
+            </button>
+            <div class="drive-bank" aria-hidden="true"><span class="drive"></span><span class="drive"></span><span class="drive"></span><span class="drive"></span></div>
+            <div class="unit-meter" aria-hidden="true"><span class="meter-line" style="--meter:63%"></span><span class="meter-line" style="--meter:84%"></span><span class="meter-line" style="--meter:48%"></span></div>
+            <span class="server-label">Why It Matters</span>
+          </article>
+
+          <article class="server-unit" data-server="activities">
+            <button class="power-button" id="power-activities" type="button" role="tab" aria-selected="false" aria-controls="server-screen" data-section="activities">
+              <span class="power-symbol" aria-hidden="true"></span>
+              <span class="screen-reader-text">Display Module Activities</span>
+            </button>
+            <div class="drive-bank" aria-hidden="true"><span class="drive"></span><span class="drive"></span><span class="drive"></span><span class="drive"></span></div>
+            <div class="unit-meter" aria-hidden="true"><span class="meter-line" style="--meter:91%"></span><span class="meter-line" style="--meter:61%"></span><span class="meter-line" style="--meter:73%"></span></div>
+            <span class="server-label">Module Activities</span>
+          </article>
+
+          <article class="server-unit" data-server="competency">
+            <button class="power-button" id="power-competency" type="button" role="tab" aria-selected="false" aria-controls="server-screen" data-section="competency">
+              <span class="power-symbol" aria-hidden="true"></span>
+              <span class="screen-reader-text">Display Demonstrate Competency</span>
+            </button>
+            <div class="drive-bank" aria-hidden="true"><span class="drive"></span><span class="drive"></span><span class="drive"></span><span class="drive"></span></div>
+            <div class="unit-meter" aria-hidden="true"><span class="meter-line" style="--meter:70%"></span><span class="meter-line" style="--meter:89%"></span><span class="meter-line" style="--meter:57%"></span></div>
+            <span class="server-label">Demonstrate Competency</span>
+          </article>
+        </div>
+      </section>
+
+      <p class="rack-instruction">Press a server’s power button to change the content on the monitor. Use the Up and Down Arrow keys to move between servers.</p>
+    </main>
+
+  </div>
+
+  <template id="template-overview">
+    <p class="screen-kicker">Module Overview</p>
+    <h2>What You Will Learn</h2>
+    <p>In this module, we will learn about APIPA addressing, troubleshooting DHCP, configuring DHCPv6 servers and addresses, managing DHCP servers and scopes with IPAM, configuring NIC Teaming, and configuring DNS addressing and zones.</p>
+  </template>
+
+  <template id="template-matters">
+    <p class="screen-kicker">Why It Matters</p>
+    <h2>Reliable Network Communication</h2>
+    <p>Understanding how to configure and manage IP addressing, DHCP, and DNS services is essential to maintaining reliable network communication. In this module, you’ll learn how to troubleshoot DHCP issues, configure DHCPv6 servers, manage scopes with IPAM, and implement NIC Teaming for redundancy and performance. Mastering these skills ensures that servers and clients can connect efficiently, resolve names correctly, and remain resilient against network failures.</p>
+  </template>
+
+  <template id="template-activities">
+    <p class="screen-kicker">Module Activities</p>
+    <h2>Complete This Module</h2>
+    <ul>
+      <li>CompTIA reading and assignments for Chapters 4.7–5.2</li>
+      <li>Test 1</li>
+    </ul>
+  </template>
+
+  <template id="template-competency">
+    <p class="screen-kicker">Demonstrate Competency</p>
+    <h2>Module Skills</h2>
+    <ul>
+      <li>Configure alternate addressing</li>
+      <li>Troubleshoot DHCP</li>
+      <li>Configure DHCPv6 servers</li>
+      <li>Configure an IPv6 address</li>
+      <li>Use IPAM to manage DHCP and DNS</li>
+      <li>Configure NIC Teaming</li>
+      <li>Create standard DNS zones</li>
+      <li>Create CNAME records</li>
+      <li>Configure forwarders</li>
+    </ul>
+  </template>
+
+  <script>
+    (() => {
+      const tabs = [...document.querySelectorAll('.power-button')];
+      const screen = document.getElementById('server-screen');
+      const content = document.getElementById('screen-content');
+      const screenSaver = document.getElementById('screen-saver');
+      const consoleLayout = document.getElementById('console-layout');
+
+      function activate(tab, moveFocus = false) {
+        const section = tab.dataset.section;
+        const template = document.getElementById(`template-${section}`);
+
+        tabs.forEach((item) => {
+          const selected = item === tab;
+          item.setAttribute('aria-selected', String(selected));
+          item.tabIndex = 0;
+          item.closest('.server-unit').classList.toggle('is-active', selected);
+        });
+
+        screenSaver.hidden = true;
+        consoleLayout.hidden = false;
+        screen.setAttribute('role', 'tabpanel');
+        screen.removeAttribute('aria-label');
+        screen.setAttribute('aria-labelledby', tab.id);
+        content.replaceChildren(template.content.cloneNode(true));
+        content.style.animation = 'none';
+        void content.offsetWidth;
+        content.style.animation = '';
+
+        if (moveFocus) {
+          tab.focus();
+        }
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activate(tab));
+        tab.addEventListener('keydown', (event) => {
+          let nextIndex = null;
+
+          if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar' || event.code === 'Space') {
+            event.preventDefault();
+            event.stopPropagation();
+            activate(tab);
+            return;
+          }
+
+          if (event.key === 'ArrowDown' || event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+          if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+          if (event.key === 'Home') nextIndex = 0;
+          if (event.key === 'End') nextIndex = tabs.length - 1;
+
+          if (nextIndex !== null) {
+            event.preventDefault();
+            activate(tabs[nextIndex], true);
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
