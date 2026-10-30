@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>CIT 275 — Student Expectations and Academic Integrity</title>
+  <script>document.documentElement.classList.add('js-enabled');</script>
+  <style>
+    :root {
+      --page: #f7f9fc;
+      --ink: #10243a;
+      --muted-ink: #40566e;
+      --navy: #071827;
+      --navy-2: #0d263a;
+      --navy-3: #16354e;
+      --cyan: #67e2ff;
+      --cyan-soft: #b8f3ff;
+      --blue: #4f91ff;
+      --green: #70ffb2;
+      --amber: #ffd166;
+      --white: #f5f9ff;
+      --muted: #c8d7e8;
+      --line: #31506a;
+      --danger: #ff9a9a;
+      --shadow: 0 24px 65px rgba(13, 35, 55, 0.24);
+    }
+
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+
+    html {
+      max-width: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-width: 320px;
+      margin: 0;
+      background:
+        radial-gradient(circle at 50% 8%, rgba(103, 226, 255, 0.16), transparent 30rem),
+        var(--page);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      line-height: 1.65;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      content: "";
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(40, 112, 148, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(40, 112, 148, 0.2) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse at 50% 22%, #000 0 25%, transparent 72%);
+      pointer-events: none;
+    }
+
+    a { color: #86dfff; }
+    a:visited { color: #d0c5ff; }
+    a:hover { color: #ffffff; }
+
+    a:focus-visible,
+    button:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid var(--amber);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 0.75rem;
+      left: 0.75rem;
+      z-index: 100;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      background: var(--amber);
+      color: #111827;
+      font-weight: 800;
+      transform: translateY(-180%);
+      transition: transform 160ms ease;
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .page-shell {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 1rem auto 2.5rem;
+    }
+
+    .course-header {
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+
+    .header-tools {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .course-code {
+      display: inline-block;
+      margin: 0;
+      padding: 0.55rem 1rem;
+      border: 1px solid #3d6f8e;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #17314a, #0b1c2d);
+      color: var(--cyan-soft);
+      box-shadow: 0 8px 22px rgba(20, 50, 75, 0.2);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .display-options {
+      position: relative;
+      color: var(--ink);
+      text-align: left;
+    }
+
+    .display-options summary {
+      min-height: 44px;
+      padding: 0.52rem 0.9rem;
+      border: 1px solid #7190a9;
+      border-radius: 999px;
+      background: #ffffff;
+      color: #19364f;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .display-options-panel {
+      position: absolute;
+      top: calc(100% + 0.55rem);
+      right: 0;
+      z-index: 20;
+      width: min(300px, calc(100vw - 2rem));
+      padding: 1rem;
+      border: 1px solid #7691a7;
+      border-radius: 14px;
+      background: #ffffff;
+      box-shadow: 0 16px 38px rgba(13, 35, 55, 0.2);
+    }
+
+    .display-options-panel p { margin: 0 0 0.75rem; }
+
+    .view-toggle {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid #2f6485;
+      border-radius: 10px;
+      background: #eaf7fc;
+      color: #12344d;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0.8rem auto 0;
+      font-size: clamp(2.15rem, 6vw, 4.4rem);
+      line-height: 1.03;
+      letter-spacing: -0.045em;
+    }
+
+    .course-intro {
+      max-width: 780px;
+      margin: 0.75rem auto 0;
+      color: var(--muted-ink);
+      font-size: 1.06rem;
+    }
+
+    .security-console {
+      overflow: hidden;
+      border: 1px solid #4c6a83;
+      border-radius: 26px;
+      background: linear-gradient(145deg, #1e354b, #081521 55%, #172b3d);
+      box-shadow: var(--shadow), inset 0 1px 1px rgba(255,255,255,0.18);
+    }
+
+    .console-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.8rem 1.15rem;
+      border-bottom: 1px solid #2d6076;
+      background: #06141f;
+      color: var(--cyan-soft);
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .system-state::before {
+      display: inline-block;
+      width: 0.65rem;
+      height: 0.65rem;
+      margin-right: 0.45rem;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(112,255,178,0.8);
+      content: "";
+      animation: status-pulse 2.8s ease-in-out infinite;
+    }
+
+    .console-body { padding: clamp(1rem, 3vw, 1.6rem); }
+
+    .protocol-summary {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.2rem;
+      padding: clamp(1rem, 3vw, 1.45rem);
+      border: 1px solid #2c617b;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 90% 25%, rgba(79,145,255,0.2), transparent 13rem),
+        linear-gradient(135deg, #0b2638, #071a28);
+      color: var(--white);
+    }
+
+    .protocol-summary p { margin: 0.3rem 0 0; color: var(--muted); }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--cyan-soft);
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.82rem;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .protocol-summary h2 {
+      margin: 0.25rem 0 0;
+      color: var(--white);
+      font-size: clamp(1.55rem, 4vw, 2.4rem);
+      line-height: 1.15;
+    }
+
+    .integrity-seal {
+      display: grid;
+      width: 104px;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 2px solid var(--cyan);
+      border-radius: 50%;
+      color: var(--cyan-soft);
+      box-shadow: inset 0 0 28px rgba(103,226,255,0.14), 0 0 20px rgba(103,226,255,0.16);
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-align: center;
+      text-transform: uppercase;
+      animation: seal-float 5s ease-in-out infinite;
+    }
+
+    .dashboard-title {
+      margin: 0 0 0.65rem;
+      color: var(--cyan-soft);
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .policy-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin: 0;
+    }
+
+    .policy-tab {
+      position: relative;
+      min-height: 118px;
+      padding: 1rem;
+      border: 1px solid #3e5c75;
+      border-radius: 15px;
+      background: linear-gradient(180deg, #172d42, #0d2030);
+      color: var(--white);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .policy-tab strong,
+    .policy-tab span { display: block; }
+
+    .policy-tab strong { font-size: 1rem; line-height: 1.25; }
+
+    .policy-tab span {
+      margin-top: 0.5rem;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .policy-tab::after {
+      position: absolute;
+      right: 0.9rem;
+      bottom: 0.9rem;
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 50%;
+      background: #597187;
+      content: "";
+    }
+
+    .policy-tab[aria-selected="true"] {
+      border-color: var(--cyan);
+      background: linear-gradient(180deg, #1a425b, #0b2a3d);
+      box-shadow: inset 0 0 0 2px rgba(103,226,255,0.22), 0 0 22px rgba(103,226,255,0.16);
+    }
+
+    .policy-tab[aria-selected="true"]::after {
+      background: var(--green);
+      box-shadow: 0 0 10px rgba(112,255,178,0.8);
+    }
+
+    @media (hover: hover) {
+      .policy-tab:hover { transform: translateY(-3px); border-color: #78cce8; }
+    }
+
+    .policy-viewer {
+      margin-top: 0.9rem;
+      min-height: 390px;
+      padding: clamp(1rem, 3vw, 1.6rem);
+      border: 1px solid #2e566e;
+      border-radius: 18px;
+      background:
+        linear-gradient(rgba(103,226,255,0.025) 1px, transparent 1px),
+        #061a28;
+      background-size: 100% 28px;
+      color: var(--white);
+      box-shadow: inset 0 0 36px rgba(0,0,0,0.42);
+    }
+
+    .policy-panel { max-width: 880px; }
+
+    .js-enabled .policy-panel:not(.is-active) { display: none; }
+
+    .policy-panel h2 {
+      margin: 0.2rem 0 0.8rem;
+      color: var(--white);
+      font-size: clamp(1.65rem, 4vw, 2.55rem);
+      line-height: 1.15;
+    }
+
+    .policy-panel p { color: #e0ebf7; }
+    .policy-panel ul { padding-left: 1.3rem; }
+    .policy-panel li { margin: 0.5rem 0; }
+
+    .resource-list {
+      display: grid;
+      gap: 0.65rem;
+      margin: 1rem 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .resource-list a {
+      display: block;
+      padding: 0.8rem 0.95rem;
+      border: 1px solid #37627b;
+      border-radius: 10px;
+      background: rgba(20, 55, 78, 0.66);
+      font-weight: 750;
+    }
+
+    .policy-note {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-left: 4px solid var(--cyan);
+      border-radius: 0 10px 10px 0;
+      background: rgba(25, 70, 96, 0.55);
+    }
+
+    .keyboard-help {
+      margin: 0.85rem 0 0;
+      color: #d6e3f1;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    .text-only .security-console {
+      overflow: visible;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .text-only .console-topbar,
+    .text-only .protocol-summary,
+    .text-only .dashboard-title,
+    .text-only .policy-tabs,
+    .text-only .keyboard-help { display: none; }
+
+    .text-only .console-body { padding: 0; }
+
+    .text-only .policy-viewer {
+      display: grid;
+      gap: 1rem;
+      margin: 0;
+      min-height: 0;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+      color: var(--ink);
+    }
+
+    .text-only .policy-panel,
+    .text-only .js-enabled .policy-panel {
+      display: block;
+      max-width: none;
+      padding: clamp(1rem, 3vw, 1.4rem);
+      border: 1px solid #b4c6d5;
+      border-radius: 14px;
+      background: #ffffff;
+      color: var(--ink);
+      box-shadow: 0 10px 26px rgba(13,35,55,0.08);
+    }
+
+    .text-only .policy-panel h2,
+    .text-only .policy-panel p { color: var(--ink); }
+    .text-only .policy-panel .eyebrow { color: #185a7a; }
+    .text-only .resource-list a { color: #075985; background: #f1f8fc; }
+
+    @keyframes status-pulse {
+      0%, 100% { opacity: 0.55; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes seal-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    @media (max-width: 820px) {
+      .page-shell { width: min(100% - 1rem, 720px); }
+      .display-options-panel { right: 50%; transform: translateX(50%); }
+      .protocol-summary { grid-template-columns: 1fr; }
+      .integrity-seal { display: none; }
+      .policy-tabs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .policy-viewer { min-height: 470px; }
+    }
+
+    @media (max-width: 500px) {
+      .console-topbar { align-items: flex-start; flex-direction: column; }
+      .policy-tabs { grid-template-columns: 1fr; }
+      .policy-tab { min-height: 88px; }
+      .policy-viewer { min-height: 580px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+
+    @media (forced-colors: active) {
+      .policy-tab[aria-selected="true"] {
+        border: 4px solid Highlight;
+      }
+      .policy-note { border-left-color: Highlight; }
+      .system-state::before,
+      .policy-tab::after { forced-color-adjust: none; }
+    }
+
+    @media print {
+      body { background: #ffffff; color: #111111; }
+      body::before,
+      .display-options,
+      .console-topbar,
+      .protocol-summary,
+      .dashboard-title,
+      .policy-tabs,
+      .keyboard-help { display: none !important; }
+      .page-shell { width: 100%; margin: 0; }
+      .course-header { text-align: left; }
+      .course-code { padding: 0; border: 0; background: none; color: #111111; box-shadow: none; }
+      .security-console,
+      .policy-viewer { overflow: visible; border: 0; background: none; box-shadow: none; }
+      .console-body,
+      .policy-viewer { padding: 0; }
+      .policy-panel,
+      .js-enabled .policy-panel {
+        display: block !important;
+        max-width: none;
+        break-inside: avoid;
+        margin: 0 0 1rem;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #777777;
+        color: #111111;
+      }
+      .policy-panel h2,
+      .policy-panel p,
+      .policy-panel .eyebrow,
+      .policy-panel a { color: #111111; }
+      .resource-list a { padding: 0; border: 0; background: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#policy-content">Skip to policy content</a>
+
+  <div class="page-shell">
+    <header class="course-header">
+      <div class="header-tools">
+        <p class="course-code">CIT 275 · Student Success Protocol</p>
+        <details class="display-options" id="display-options">
+          <summary>Display options</summary>
+          <div class="display-options-panel">
+            <p>Choose how the policy content is displayed.</p>
+            <button class="view-toggle" id="view-toggle" type="button" role="switch" aria-checked="false">Use text-only view</button>
+          </div>
+        </details>
+      </div>
+      <h1>Student Expectations &amp; Academic Integrity</h1>
+      <p class="course-intro">Review the standards that protect respectful communication, honest work, and a successful learning environment.</p>
+    </header>
+
+    <main id="policy-content" tabindex="-1">
+      <section class="security-console" aria-label="Student expectations security console">
+        <div class="console-topbar" aria-hidden="true">
+          <span>Course Policy Operations Center</span>
+          <span class="system-state">Standards active</span>
+        </div>
+
+        <div class="console-body">
+          <section class="protocol-summary" aria-labelledby="protocol-title">
+            <div>
+              <p class="eyebrow">Student Success Protocol</p>
+              <h2 id="protocol-title">Community, communication, and integrity</h2>
+              <p>Your responsibilities help maintain a respectful, secure, and academically honest learning environment.</p>
+            </div>
+            <div class="integrity-seal" aria-hidden="true">Integrity<br>Verified</div>
+          </section>
+
+          <h2 class="dashboard-title" id="dashboard-title">Policy dashboard</h2>
+          <div class="policy-tabs" role="tablist" aria-labelledby="dashboard-title">
+            <button class="policy-tab" id="tab-expectations" type="button" role="tab" aria-selected="true" aria-controls="panel-expectations" tabindex="0">
+              <strong>Student Expectations</strong>
+              <span>Community access · Active</span>
+            </button>
+            <button class="policy-tab" id="tab-netiquette" type="button" role="tab" aria-selected="false" aria-controls="panel-netiquette" tabindex="0">
+              <strong>Netiquette</strong>
+              <span>Communication · Online</span>
+            </button>
+            <button class="policy-tab" id="tab-cheating" type="button" role="tab" aria-selected="false" aria-controls="panel-cheating" tabindex="0">
+              <strong>Cheating</strong>
+              <span>Assessment rules · Enforced</span>
+            </button>
+            <button class="policy-tab" id="tab-plagiarism" type="button" role="tab" aria-selected="false" aria-controls="panel-plagiarism" tabindex="0">
+              <strong>Plagiarism</strong>
+              <span>Document integrity · Verified</span>
+            </button>
+          </div>
+
+          <div class="policy-viewer" id="policy-viewer" aria-live="off">
+            <section class="policy-panel is-active" id="panel-expectations" role="tabpanel" aria-labelledby="tab-expectations">
+              <p class="eyebrow">Community Standards</p>
+              <h2>Student Expectations</h2>
+              <p>The colleges of KCTCS are more than just educational institutions—they are vibrant and diverse communities. Therefore, KCTCS strives to maintain an atmosphere of academic freedom and personal respect that creates an environment in which all can be successful.</p>
+              <p>As part of this commitment, KCTCS has developed the following resources that serve as a guide for the student’s responsibilities and rights within our academic community.</p>
+              <ul class="resource-list">
+                <li><a href="https://policies.kctcs.edu/code-of-conduct/" target="_blank" rel="noopener">Code of Student Conduct</a></li>
+                <li><a href="https://policies.kctcs.edu/code-of-conduct/article-ii.aspx" target="_blank" rel="noopener">KCTCS Student Bill of Rights</a></li>
+                <li><a href="https://policies.kctcs.edu/code-of-conduct/article-iii/section-4.aspx" target="_blank" rel="noopener">KCTCS Student Grievances and Appeals</a></li>
+              </ul>
+              <p class="policy-note">Information on student rights, academic offenses, and a student’s right to appeal is also available from <a href="https://maysville.kctcs.edu/current-students/policies-procedures.aspx" target="_blank" rel="noopener">MCTC Student Policies and Procedures</a>.</p>
+            </section>
+
+            <section class="policy-panel" id="panel-netiquette" role="tabpanel" aria-labelledby="tab-netiquette">
+              <p class="eyebrow">Communication Standards</p>
+              <h2>Netiquette</h2>
+              <p>Netiquette is etiquette for the internet: guidelines and good practices for online communication in email, discussion forums, and chat rooms.</p>
+              <p>One of the biggest challenges of communicating online is being clear and effective. Review the resources below to learn more about netiquette expectations and what you can do to communicate clearly in this course.</p>
+              <ul class="resource-list">
+                <li><a href="https://rise.articulate.com/share/5kx8nnyHAfQ1XHVlELYwSwvDP50fvc51#/" target="_blank" rel="noopener">Rules of Netiquette</a></li>
+                <li><a href="https://rise.articulate.com/share/RgbeCN7OkLXIhhR6iLOTvNuAry75lX-Q#/" target="_blank" rel="noopener">Email Etiquette</a></li>
+              </ul>
+            </section>
+
+            <section class="policy-panel" id="panel-cheating" role="tabpanel" aria-labelledby="tab-cheating">
+              <p class="eyebrow">Assessment Security</p>
+              <h2>Cheating</h2>
+              <p>Using an electronic device or other materials without permission during an exam will be considered cheating regardless of intent.</p>
+              <p>Other forms of cheating include, but are not limited to:</p>
+              <ul>
+                <li>Having information available in any non-approved form, including papers, books, or notes.</li>
+                <li>Using materials hidden in apparel or written on oneself or a desk.</li>
+                <li>Tabbing out to another computer screen during an assessment.</li>
+                <li>Looking at another student’s work.</li>
+                <li>Communicating with other students in any manner during an assessment.</li>
+              </ul>
+            </section>
+
+            <section class="policy-panel" id="panel-plagiarism" role="tabpanel" aria-labelledby="tab-plagiarism">
+              <p class="eyebrow">Document Integrity</p>
+              <h2>Plagiarism</h2>
+              <p>At MCTC, plagiarism is a serious academic offense that can result in a student failing an assignment, failing a course, or being dismissed from the college. Students are expected to exhibit honesty in all work. Students caught plagiarizing or cheating will be subject to the disciplinary policy stated in the KCTCS Student Code of Conduct.</p>
+              <p class="policy-note">Additional information about avoiding plagiarism is available in the <a href="https://libguides.maysville.kctcs.edu/c.php?g=109056&amp;p=705551" target="_blank" rel="noopener">MCTC Student Guide: Plagiarism</a>.</p>
+            </section>
+          </div>
+
+          <p class="keyboard-help">Use Tab to move through each policy section. Press Enter or Space to open a section. You can also use the Arrow keys, Home, or End.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (() => {
+      const tabs = [...document.querySelectorAll('[role="tab"]')];
+      const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+      const viewToggle = document.getElementById('view-toggle');
+      const displayOptions = document.getElementById('display-options');
+      let textOnly = false;
+
+      function activate(tab, moveFocus = false) {
+        tabs.forEach((item) => {
+          const selected = item === tab;
+          item.setAttribute('aria-selected', String(selected));
+          item.tabIndex = 0;
+        });
+
+        panels.forEach((panel) => {
+          const selected = panel.id === tab.getAttribute('aria-controls');
+          panel.classList.toggle('is-active', selected);
+          panel.hidden = !selected && !textOnly;
+        });
+
+        if (moveFocus) tab.focus();
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activate(tab));
+        tab.addEventListener('keydown', (event) => {
+          let next = index;
+          if (event.key === 'ArrowRight' || event.key === 'ArrowDown') next = (index + 1) % tabs.length;
+          else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') next = (index - 1 + tabs.length) % tabs.length;
+          else if (event.key === 'Home') next = 0;
+          else if (event.key === 'End') next = tabs.length - 1;
+          else return;
+          event.preventDefault();
+          activate(tabs[next], true);
+        });
+      });
+
+      viewToggle.addEventListener('click', () => {
+        textOnly = !textOnly;
+        document.body.classList.toggle('text-only', textOnly);
+        viewToggle.setAttribute('aria-checked', String(textOnly));
+        viewToggle.textContent = textOnly ? 'Use graphical view' : 'Use text-only view';
+        const selected = tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || tabs[0];
+        panels.forEach((panel) => { panel.hidden = textOnly ? false : panel.id !== selected.getAttribute('aria-controls'); });
+        displayOptions.open = false;
+      });
+
+      const selected = tabs.find((tab) => tab.getAttribute('aria-selected') === 'true') || tabs[0];
+      activate(selected);
+    })();
+  </script>
+</body>
+</html>
