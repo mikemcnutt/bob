@@ -20,45 +20,81 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 1024px;
+  max-width: 1100px;
   margin: 0 auto;
   text-align: center;
+}
+
+.top-wrapper header {
+  width: 100%;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   padding: 0 20px;
 }
 
     h1 {
-      margin-top: 30px;
-      font-size: 2em;
-      color: #333;
+      width: min(94%, 980px);
+      margin: 28px auto 20px;
+      padding: 18px clamp(22px, 5vw, 64px);
+      box-sizing: border-box;
+      color: #35200f;
+      font-family: 'Noto Serif SC', Georgia, serif;
+      font-size: clamp(1.45rem, 3vw, 2.25rem);
+      line-height: 1.3;
+      border: 3px solid #8a5a21;
+      border-radius: 10px;
+      background:
+        linear-gradient(90deg, rgba(113,72,23,.14), transparent 8%, transparent 92%, rgba(113,72,23,.14)),
+        linear-gradient(180deg, #f7e8b8 0%, #ead296 52%, #d9b96f 100%);
+      box-shadow:
+        0 8px 18px rgba(66, 40, 14, .24),
+        inset 0 0 0 2px rgba(255, 248, 213, .65),
+        inset 0 0 22px rgba(104, 58, 12, .16);
     }
 
    
 
     .button {
       position: relative;
-      width: 160px;
-      height: 60px;
-      color: #000;
+      min-width: 210px;
+      min-height: 56px;
+      padding: 10px 20px;
+      color: #fffdf2;
       cursor: pointer;
       font-size: 16px;
       font-weight: bold;
-      border: none;
+      border: 2px solid #214c2d;
       text-align: center;
-      border-radius: 30px;
-      background-color: rgba(46, 139, 87); 
-      
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: cover;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-	  overflow: hidden;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #43875a 0%, #24613a 100%);
+      box-shadow:
+        0 5px 10px rgba(24, 67, 39, .22),
+        inset 0 1px 0 rgba(255, 255, 255, .24);
+      transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+	    overflow: hidden;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 8px 15px rgba(24, 67, 39, .28),
+        inset 0 1px 0 rgba(255, 255, 255, .24);
+    }
+
+    .button:focus-visible {
+      outline: 3px solid #7b3f00;
+      outline-offset: 3px;
+    }
+
+    .button[aria-expanded="true"] {
+      color: #243017;
+      border-color: #7b541e;
+      background: linear-gradient(180deg, #f2dda1 0%, #dcb86e 100%);
     }
 
 	.particle
@@ -71,7 +107,7 @@
 	pointer-events: none;
 	opacity: 1;
 	transform: translate(0, 0);
-	animation: particleAnim 1s ease-out forwards;
+	animation: particleAnim .55s ease-out forwards;
 }
 @keyframes particleAnim {
 	to
@@ -88,6 +124,10 @@
       overflow: hidden;
       width: 1024px;
       height: 1024px;
+    }
+
+    main {
+      position: relative;
     }
 
     .image-container img.backback,
@@ -190,26 +230,32 @@
     }
 
     .textbox {
-      display: none;
-      position: fixed;
-      top: 60%;
+      display: block;
+      position: absolute;
+      top: 20px;
       left: 50%;
-      transform: translate(-50%, -50%);
-      width: 350px;
-      height: 500px;
+      transform: translateX(-50%) translateY(-8px) scale(.98);
+      width: min(600px, calc(100vw - 40px));
+      max-height: 82vh;
       background: url('https://elearning.kctcs.edu/bbcswebdav/xid-524184273_4') no-repeat center;
-      background-size: contain;
-background-repeat: no-repeat;
-background-position: center top;
-      padding: 20px;
-      color: #333;
-      font-size: 16px;
-      border-radius: 10px;
-      overflow-y: scroll;
+      background-size: 100% 100%;
+      padding: 58px 64px 48px;
+      box-sizing: border-box;
+      color: #2f2115;
+      font: 17px/1.65 Georgia, 'Times New Roman', serif;
+      border-radius: 8px;
+      overflow: hidden;
       scrollbar-width: none;
       -ms-overflow-style: none;
       z-index: 1000;
       text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity .35s ease,
+        transform .35s ease,
+        visibility 0s linear .35s;
     }
 
     .textbox::-webkit-scrollbar {
@@ -217,19 +263,75 @@ background-position: center top;
     }
 
     .textbox.active {
-      display: block;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0) scale(1);
+      transition-delay: 0s;
+    }
+
+    .textbox.closing {
+      pointer-events: none;
+      transform-origin: center;
+      animation: rollUpDesktop .45s cubic-bezier(.55, 0, .8, .2) forwards;
+    }
+
+    @keyframes rollUpDesktop {
+      0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scaleX(1) scaleY(1);
+        filter: brightness(1);
+      }
+      65% {
+        opacity: .92;
+        transform: translateX(-50%) translateY(0) scaleX(.98) scaleY(.32);
+        filter: brightness(.96);
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0) scaleX(.9) scaleY(.06);
+        filter: brightness(.82);
+      }
     }
 
     #textboxContent {
-      max-width: 280px;
-      height: 340px;
-      margin: 2px auto;
-      padding-top: 0px;
-      padding-bottom: 40px;
+      max-width: 470px;
+      max-height: calc(82vh - 220px);
+      margin: 12px auto;
+      padding: 20px 26px;
+      box-sizing: border-box;
       text-align: left;
       overflow-y: auto;
+      border: 1px solid rgba(111, 74, 31, .38);
+      border-radius: 4px;
+      background: rgba(255, 248, 218, .82);
+      box-shadow: inset 0 0 24px rgba(111, 74, 31, .12);
       scrollbar-width: none;
       -ms-overflow-style: none;
+    }
+
+    #textboxContent h2 {
+      margin: 0 0 14px;
+      padding-bottom: 10px;
+      color: #4b2d16;
+      font-family: 'Noto Serif SC', Georgia, serif;
+      font-size: 1.55rem;
+      line-height: 1.25;
+      text-align: center;
+      border-bottom: 2px solid rgba(123, 84, 30, .55);
+    }
+
+    #textboxContent p {
+      margin: 0 0 1rem;
+    }
+
+    #textboxContent ul {
+      margin: .75rem 0 1rem;
+      padding-left: 1.35rem;
+    }
+
+    #textboxContent li + li {
+      margin-top: .55rem;
     }
 
     #textboxContent::-webkit-scrollbar {
@@ -238,35 +340,112 @@ background-position: center top;
 
     .close-btn {
       cursor: pointer;
-      background-color: #2e8b57;
-      border: none;
-      font-size: 14px;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      margin-bottom: 10px;
+      min-height: 44px;
+      padding: 8px 18px;
+      border: 2px solid #6f461c;
+      border-radius: 8px;
+      background: linear-gradient(180deg, #8b5b27 0%, #5e3515 100%);
+      color: #fff9df;
+      font: 700 15px/1.2 Arial, sans-serif;
+      box-shadow: 0 4px 8px rgba(55, 31, 12, .25), inset 0 1px 0 rgba(255,255,255,.22);
+    }
+
+    .close-btn:hover {
+      background: linear-gradient(180deg, #9b6a32 0%, #6c401d 100%);
+    }
+
+    .close-btn:focus-visible {
+      outline: 3px solid #174f2d;
+      outline-offset: 3px;
+    }
+
+    .close-btn-bottom {
+      display: block;
+      margin: 16px auto 0;
     }
 
 	  	@media (max-width: 600px) {
+
+ .button-container {
+   width: 100%;
+   padding: 0 12px;
+   box-sizing: border-box;
+   justify-content: center;
+ }
+
+ .button {
+   flex: 0 1 360px;
+   width: 88%;
+   min-width: 0;
+   max-width: 360px;
+   margin-inline: auto;
+ }
 
  .image-container {
    display:none;
  }
 
   .textbox {
-    width: 90%; 
-    height: auto; 
-    max-height: 80%; 
-    padding: 15px; 
+    display: none;
+    position: static;
+    width: 88%;
+    max-width: 520px;
+    max-height: none;
+    margin: 22px auto 40px;
+    padding: 48px clamp(24px, 8vw, 48px) 38px;
+    transform: none;
+    overflow: visible;
   }
 
-  .close-btn {
-    font-size: 12px; 
-    padding: 5px 8px;
+  .textbox.active {
+    display: block;
+    transform: none;
+  }
+
+  .textbox.closing {
+    transform-origin: center;
+    animation-name: rollUpMobile;
+  }
+
+  @keyframes rollUpMobile {
+    0% {
+      opacity: 1;
+      transform: scaleX(1) scaleY(1);
+      filter: brightness(1);
+    }
+    65% {
+      opacity: .92;
+      transform: scaleX(.98) scaleY(.32);
+      filter: brightness(.96);
+    }
+    100% {
+      opacity: 0;
+      transform: scaleX(.9) scaleY(.06);
+      filter: brightness(.82);
+    }
   }
 
   #textboxContent {
-    font-size: 14px; 
+    width: 100%;
+    max-width: none;
+    max-height: none;
+    margin: 10px auto;
+    padding: 18px;
+    overflow: visible;
+    font-size: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  .particle {
+    display: none;
   }
 }
   </style>
@@ -276,23 +455,23 @@ background-position: center top;
    <header> <h1>Module 11 - Creating Interactivity with CSS and JavaScript</h1></header>
   <nav>
 <div class="button-container">
-  <button class="button" onclick="showTextbox(`
+  <button class="button" type="button" aria-expanded="false" aria-controls="infoTextbox" onclick="showTextbox(this, `
     <h2>Module Overview</h2>
-    <p>Most modern websites include some form of interactivity. Interactivity is commonly integrated within a website using CSS and JavaScript, a web programming language used to enhance a website and create interactivity. An effective way to create interesting and useful webpages is to include dynamic content to make the webpage interactive. One way to engage and interact with customers on a webpage is to use JavaScript code to display messages.</p><br>
-        <p>In this chapter, you will explore how to integrate animation on a webpage using CSS and JavaScript. You will learn how to use the CSS transform property to make elements move on a webpage. You will also use CSS to create an animation using keyframes. Next, you will learn how to create an external JavaScript file and write several functions. Finally, you will learn how to reference the external JavaScript file within an HTML webpage.</p><br>
+    <p>Most modern websites include some form of interactivity. Interactivity is commonly integrated within a website using CSS and JavaScript, a web programming language used to enhance a website and create interactivity. An effective way to create interesting and useful webpages is to include dynamic content to make the webpage interactive. One way to engage and interact with customers on a webpage is to use JavaScript code to display messages.</p>
+        <p>In this chapter, you will explore how to integrate animation on a webpage using CSS and JavaScript. You will learn how to use the CSS transform property to make elements move on a webpage. You will also use CSS to create an animation using keyframes. Next, you will learn how to create an external JavaScript file and write several functions. Finally, you will learn how to reference the external JavaScript file within an HTML webpage.</p>
         <p>We will also be taking Test 3 this module which covers the material from the chapters 7, 8 and 9 of the book. The test consists of 25 multiple choice questions and has no time limit. There is only 1 attempt allowed. </p>
       
   `)">Module Overview</button>
 
-  <button class="button" onclick="showTextbox(`
+  <button class="button" type="button" aria-expanded="false" aria-controls="infoTextbox" onclick="showTextbox(this, `
   <h2>Why It Matters</h2>
-    <p>Interactivity is a cornerstone of modern website design, enhancing user engagement and enriching the browsing experience. By leveraging CSS and JavaScript, web developers can infuse websites with dynamic content and interactive elements, fostering deeper connections with visitors. Incorporating animation adds visual interest and liveliness to webpages, capturing attention and encouraging exploration.</p><br>
-        <p>In this chapter, you'll discover techniques for integrating animation using CSS and JavaScript. You'll learn how to use CSS transform properties to animate webpage elements, creating captivating visual effects. Additionally, you'll explore CSS keyframes to craft complex animations with precise control. By creating external JavaScript files and writing functions, you'll enhance website interactivity and functionality, enabling seamless user interactions.</p><br>
+    <p>Interactivity is a cornerstone of modern website design, enhancing user engagement and enriching the browsing experience. By leveraging CSS and JavaScript, web developers can infuse websites with dynamic content and interactive elements, fostering deeper connections with visitors. Incorporating animation adds visual interest and liveliness to webpages, capturing attention and encouraging exploration.</p>
+        <p>In this chapter, you'll discover techniques for integrating animation using CSS and JavaScript. You'll learn how to use CSS transform properties to animate webpage elements, creating captivating visual effects. Additionally, you'll explore CSS keyframes to craft complex animations with precise control. By creating external JavaScript files and writing functions, you'll enhance website interactivity and functionality, enabling seamless user interactions.</p>
         <p>Mastering these techniques empowers you to create compelling and interactive web experiences that keep visitors engaged and entertained. Whether you're animating elements or adding dynamic functionality, CSS and JavaScript are powerful tools for elevating website design and delivering memorable user experiences.</p>
    
   `)">Why It Matters</button>
 
-  <button class="button" onclick="showTextbox(`
+  <button class="button" type="button" aria-expanded="false" aria-controls="infoTextbox" onclick="showTextbox(this, `
     <h2>Module Activities</h2>
     <ul>
           <li>Test 3 - This test covers the material from chapters 7-9. Test questions may be in the form of fill in the blank, multiple answer, multiple choice, short answer and/or true/false.</li>
@@ -302,7 +481,7 @@ background-position: center top;
         </ul>
   `)">Module Activities</button>
 
-  <button class="button" onclick="showTextbox(`
+  <button class="button" type="button" aria-expanded="false" aria-controls="infoTextbox" onclick="showTextbox(this, `
 <h2>Demonstrate Competency</h2>
 <ul>
           <li>Use the CSS transform property</li>
@@ -321,6 +500,12 @@ background-position: center top;
 
   </nav></div>
 <main>
+  <div class="textbox" id="infoTextbox">
+    <button class="close-btn" type="button" onclick="hideTextbox()">Roll Up Scroll</button>
+    <div id="textboxContent">Content goes here.</div>
+    <button class="close-btn close-btn-bottom" type="button" onclick="hideTextbox()">Roll Up Scroll</button>
+  </div>
+
   <div class="image-container">
     <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124446_4" alt="" class="backback">
     <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524124447_4" alt="" class="backfront">
@@ -331,34 +516,79 @@ background-position: center top;
     <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524269578_4" alt="" class="dragon">
 	    <img src="https://elearning.kctcs.edu/bbcswebdav/xid-524789327_4" alt="" class="girl">
   </div>
-
-  <div class="textbox" id="infoTextbox">
-    <button class="close-btn" onclick="hideTextbox()">✖</button>
-    <p id="textboxContent">Content goes here.</p>
-  </div>
 </main>
  <script>
-  function showTextbox(content) {
+  let lastActiveButton = null;
+  let closeTimer = null;
+
+  function showTextbox(button, content) {
     const textbox = document.getElementById('infoTextbox');
     const textboxContent = document.getElementById('textboxContent');
+
+    if (button.getAttribute('aria-expanded') === 'true' && textbox.classList.contains('active')) {
+      hideTextbox(false);
+      return;
+    }
+
+    window.clearTimeout(closeTimer);
+    textbox.classList.remove('closing');
+    buttons.forEach(item => item.setAttribute('aria-expanded', 'false'));
+    button.setAttribute('aria-expanded', 'true');
+    lastActiveButton = button;
     textboxContent.innerHTML = content;
     textbox.classList.add('active');
+
+    if (window.matchMedia('(max-width: 600px)').matches) {
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.setTimeout(() => {
+        textbox.scrollIntoView({
+          behavior: reducedMotion ? 'auto' : 'smooth',
+          block: 'start'
+        });
+      }, reducedMotion ? 0 : 80);
+    }
   }
 
-  function hideTextbox() {
+  function hideTextbox(returnFocus = true) {
     const textbox = document.getElementById('infoTextbox');
-    textbox.classList.remove('active');
+
+    if (!textbox.classList.contains('active') || textbox.classList.contains('closing')) {
+      return;
+    }
+
+    buttons.forEach(item => item.setAttribute('aria-expanded', 'false'));
+
+    const finishClose = () => {
+      textbox.classList.remove('active', 'closing');
+      if (returnFocus && lastActiveButton) {
+        lastActiveButton.focus();
+      }
+    };
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      finishClose();
+      return;
+    }
+
+    textbox.classList.add('closing');
+    closeTimer = window.setTimeout(finishClose, 460);
   }
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && document.getElementById('infoTextbox').classList.contains('active')) {
+      hideTextbox();
+    }
+  });
 
   
   const buttons = document.querySelectorAll('.button');
   buttons.forEach(button => {
-    button.addEventListener('mousemove', function (e) {
+    button.addEventListener('click', function (e) {
       const rect = button.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      for (let i = 0; i < 10; i++) { 
+      for (let i = 0; i < 6; i++) { 
         createParticle(x, y, button);
       }
     });
@@ -381,7 +611,7 @@ background-position: center top;
 
     button.appendChild(particle);
 
-    setTimeout(() => particle.remove(), 1000); 
+    setTimeout(() => particle.remove(), 550); 
   }
 </script>
 
