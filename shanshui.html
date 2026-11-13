@@ -34,7 +34,9 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 12px;
+  width: 100%;
   padding: 0 20px;
+  box-sizing: border-box;
 }
 
     h1 {
@@ -362,6 +364,52 @@
     .close-btn-bottom {
       display: block;
       margin: 16px auto 0;
+    }
+
+    @media (min-width: 601px) and (max-width: 1100px) {
+      body {
+        overflow-x: hidden;
+      }
+
+      .top-wrapper,
+      main {
+        width: 100%;
+        max-width: 100%;
+        margin-inline: auto;
+      }
+
+      .top-wrapper header,
+      nav,
+      .button-container {
+        width: 100%;
+        margin-inline: auto;
+      }
+
+      .button-container {
+        max-width: 900px;
+        padding-inline: 24px;
+      }
+
+      .image-container {
+        display: block;
+        width: 100%;
+        max-width: 1024px;
+        height: auto;
+        aspect-ratio: 1 / 1;
+        margin: 20px auto 0;
+      }
+
+      .image-container img.backback,
+      .image-container img.backfront {
+        width: 100%;
+        height: 100%;
+      }
+
+      .textbox {
+        left: 50%;
+        width: min(600px, calc(100% - 48px));
+        margin-inline: auto;
+      }
     }
 
 	  	@media (max-width: 600px) {
